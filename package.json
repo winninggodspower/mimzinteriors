@@ -1,0 +1,30 @@
+{
+  "name": "dg-report",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "date-fns": "^4.1.0",
+    "lucide-react": "^0.535.0",
+    "mongoose": "^8.17.0",
+    "next": "15.4.10",
+    "next-auth": "^4.24.11",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "react-hook-form": "^7.62.0",
+    "react-toastify": "^11.0.5",
+    "yup": "^1.6.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "24.1.0",
+    "@types/react": "19.1.9",
+    "tailwindcss": "^4",
+    "typescript": "5.9.2"
+  }
+}
