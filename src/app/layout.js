@@ -2,6 +2,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { ToastContainer, toast } from 'react-toastify';
 import "./globals.css";
 import NextSessionProviders from "./session-provider";
+import Navbar from "./components/navbar";
+import Footer from "./components/footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -23,10 +25,12 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}
       >
         <NextSessionProviders>
-          {children}
+          <Navbar />
+          <main className="flex-1">{children}</main>
+          <Footer />
         </NextSessionProviders>
          <ToastContainer />
       </body>
