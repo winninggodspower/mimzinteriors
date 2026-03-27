@@ -482,3 +482,474 @@ body {
     justify-content: center;
   }
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   SERVICES PAGE — globals.css
+   Paste this entire block into your existing globals.css file.
+   Palette: cream #F5F0E8 · dark #1C1C1A · gold #C9A96E · amber #B8860B
+═══════════════════════════════════════════════════════════════ */
+
+/* ── SCROLL ANIMATION ENGINE ─────────────────────────────────── */
+.svc-animate {
+  opacity: 0;
+  transform: translateY(32px);
+  transition:
+    opacity 0.72s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.72s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.svc-in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* stagger children inside a revealed parent */
+.svc-in-view .svc-process-card:nth-child(1) {
+  transition-delay: 0s;
+}
+.svc-in-view .svc-process-card:nth-child(2) {
+  transition-delay: 0.08s;
+}
+.svc-in-view .svc-process-card:nth-child(3) {
+  transition-delay: 0.16s;
+}
+.svc-in-view .svc-process-card:nth-child(4) {
+  transition-delay: 0.24s;
+}
+.svc-in-view .svc-process-card:nth-child(5) {
+  transition-delay: 0.32s;
+}
+.svc-in-view .svc-process-card:nth-child(6) {
+  transition-delay: 0.4s;
+}
+
+/* ── BASE ────────────────────────────────────────────────────── */
+.svc-main {
+  width: 100%;
+  overflow-x: hidden;
+  background-color: #f5f0e8;
+  color: #2d2d2b;
+}
+
+/* ── HERO ────────────────────────────────────────────────────── */
+.svc-hero {
+  position: relative;
+  width: 100%;
+  height: clamp(320px, 55vw, 680px);
+  overflow: hidden;
+  background: #1c1c1a;
+}
+
+.svc-hero-img-wrap {
+  position: absolute;
+  inset: 0;
+}
+
+.svc-hero-img {
+  object-fit: cover;
+  object-position: center 30%;
+  transition: transform 8s ease-out;
+}
+
+.svc-hero:hover .svc-hero-img {
+  transform: scale(1.04);
+}
+
+.svc-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(28, 28, 26, 0.05) 0%,
+    rgba(28, 28, 26, 0.15) 100%
+  );
+  pointer-events: none;
+}
+
+.svc-hero-caption {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.6);
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  z-index: 2;
+}
+
+/* ── HEADLINE ────────────────────────────────────────────────── */
+.svc-headline {
+  padding: clamp(3rem, 6vw, 5.5rem) clamp(1.5rem, 8vw, 10rem);
+  background: #f5f0e8;
+  text-align: center;
+}
+
+.svc-headline-inner {
+  max-width: 820px;
+  margin: 0 auto;
+}
+
+.svc-headline-title {
+  font-family: var(--font-caterina, Georgia, serif);
+  font-size: clamp(1.6rem, 4vw, 3rem);
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.25;
+  color: #1c1c1a;
+  margin-bottom: 1.25rem;
+  letter-spacing: -0.01em;
+}
+
+.svc-headline-sub {
+  font-size: clamp(0.82rem, 1.2vw, 0.95rem);
+  line-height: 1.75;
+  color: #5a5855;
+  max-width: 620px;
+  margin: 0 auto;
+}
+
+/* ── SERVICES WE OFFER ───────────────────────────────────────── */
+.svc-offer {
+  background: #c9a96e;
+  padding: clamp(3rem, 6vw, 5rem) clamp(1.5rem, 6vw, 6rem);
+  position: relative;
+}
+
+.svc-offer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.svc-offer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.svc-offer-title {
+  font-family: var(--font-caterina, Georgia, serif);
+  font-size: clamp(1rem, 2vw, 1.3rem);
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  color: #fff;
+  text-align: center;
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+  text-transform: uppercase;
+}
+
+.svc-offer-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.svc-offer-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+}
+
+.svc-offer-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: clamp(0.78rem, 1.1vw, 0.9rem);
+  color: rgba(255, 255, 255, 0.92);
+  padding: 0.35rem 0;
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.svc-offer-item:hover {
+  color: #fff;
+  transform: translateX(4px);
+}
+
+.svc-offer-empty {
+  visibility: hidden;
+}
+
+.svc-offer-bullet {
+  font-size: 0.45rem;
+  color: rgba(255, 255, 255, 0.6);
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* ── PHILOSOPHY QUOTE ────────────────────────────────────────── */
+.svc-philosophy {
+  padding: clamp(4rem, 9vw, 8rem) clamp(1.5rem, 8vw, 12rem);
+  background: #f5f0e8;
+  text-align: center;
+}
+
+.svc-philosophy-inner {
+  max-width: 820px;
+  margin: 0 auto;
+}
+
+.svc-philosophy-quote {
+  font-family: var(--font-caterina, Georgia, serif);
+  font-size: clamp(1.4rem, 3.2vw, 2.4rem);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.45;
+  color: #1c1c1a;
+  border: none;
+  background: none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+.svc-philosophy-quote::before {
+  content: '';
+  display: block;
+  width: 40px;
+  height: 2px;
+  background: #c9a96e;
+  margin: 0 auto 2rem;
+}
+
+.svc-philosophy-quote::after {
+  content: '';
+  display: block;
+  width: 40px;
+  height: 2px;
+  background: #c9a96e;
+  margin: 2rem auto 0;
+}
+
+/* ── GALLERY ─────────────────────────────────────────────────── */
+.svc-gallery {
+  background: #1c1c1a;
+}
+
+.svc-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3px;
+  height: clamp(280px, 40vw, 520px);
+}
+
+.svc-gallery-item {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.svc-gallery-img {
+  object-fit: cover;
+  transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.svc-gallery-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(28, 28, 26, 0);
+  transition: background 0.4s ease;
+  pointer-events: none;
+}
+
+.svc-gallery-item:hover .svc-gallery-img {
+  transform: scale(1.07);
+}
+
+.svc-gallery-item:hover .svc-gallery-overlay {
+  background: rgba(28, 28, 26, 0.15);
+}
+
+/* ── DESIGN PROCESS ──────────────────────────────────────────── */
+.svc-process {
+  padding: clamp(4rem, 8vw, 7rem) clamp(1.5rem, 6vw, 7rem);
+  background: #f5f0e8;
+}
+
+.svc-process-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.svc-process-title {
+  font-family: var(--font-caterina, Georgia, serif);
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  color: #1c1c1a;
+  text-transform: uppercase;
+  margin-bottom: clamp(2rem, 4vw, 3.5rem);
+}
+
+.svc-process-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1.5rem, 3vw, 2.5rem) clamp(2rem, 4vw, 4rem);
+}
+
+.svc-process-card {
+  position: relative;
+  padding-top: 1rem;
+  border-top: 1.5px solid rgba(201, 169, 110, 0.35);
+  transition:
+    opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.svc-process-card::before {
+  content: '';
+  position: absolute;
+  top: -1.5px;
+  left: 0;
+  width: 0;
+  height: 1.5px;
+  background: #c9a96e;
+  transition: width 0.5s ease;
+}
+
+.svc-process-card:hover::before {
+  width: 100%;
+}
+
+.svc-process-header {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.svc-process-num {
+  font-family: var(--font-caterina, Georgia, serif);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #c9a96e;
+}
+
+.svc-process-sep {
+  color: rgba(201, 169, 110, 0.5);
+  font-size: 0.8rem;
+}
+
+.svc-process-icon {
+  font-size: 0.9rem;
+}
+
+.svc-process-step-title {
+  font-size: clamp(0.7rem, 1vw, 0.78rem);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #1c1c1a;
+  text-transform: uppercase;
+}
+
+.svc-process-desc {
+  font-size: clamp(0.78rem, 1.1vw, 0.88rem);
+  line-height: 1.75;
+  color: #5a5855;
+}
+
+/* ── FOOTER STRIP ────────────────────────────────────────────── */
+.svc-footer {
+  background: #f5f0e8;
+  border-top: 1px solid rgba(201, 169, 110, 0.3);
+  padding: 1.5rem clamp(1.5rem, 6vw, 7rem);
+}
+
+.svc-footer-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.svc-footer-socials {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.svc-social-icon {
+  color: #4a4843;
+  display: flex;
+  align-items: center;
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.svc-social-icon:hover {
+  color: #c9a96e;
+  transform: translateY(-2px);
+}
+
+.svc-footer-copy {
+  font-size: 0.78rem;
+  color: #8a8785;
+  letter-spacing: 0.02em;
+}
+
+/* ── RESPONSIVE ──────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .svc-process-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .svc-offer-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .svc-gallery-grid {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+
+  .svc-gallery-item {
+    height: 260px;
+  }
+
+  .svc-process-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .svc-offer-row {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.35rem;
+  }
+
+  .svc-footer-inner {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.75rem;
+  }
+
+  .svc-philosophy {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .svc-offer-row {
+    grid-template-columns: 1fr;
+  }
+
+  .svc-process-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .svc-gallery-item {
+    height: 220px;
+  }
+}
