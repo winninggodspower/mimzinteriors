@@ -1,19 +1,26 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import localFont, { Geist, Geist_Mono } from "next/font/local";
 import { ToastContainer, toast } from 'react-toastify';
 import "./globals.css";
 import NextSessionProviders from "./session-provider";
 import Navbar from "./components/navbar";
 import Footer from "./components/footer";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+
+const caterina = localFont({
+  src: '../assets/fonts/Caterina.woff2',
+  variable: '--font-caterina',
+})
+
+const arefRuqaa = localFont({
+  src: '../assets/fonts/ArefRuqaa-Regular.woff2',
+  variable: '--font-aref-ruqaa',
+})
+
+const bdMegalona = localFont({ 
+  src: '../assets/fonts/BDMegalona.woff2',
+  variable: '--font-bd-megalona',
+})
 
 export const metadata = {
   title: "Mimz Interiors",
@@ -23,9 +30,9 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${caterina.variable} ${arefRuqaa.variable} ${bdMegalona.variable}`} >
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}
+        className={` ${arefRuqaa.className} } antialiased min-h-screen flex flex-col`}
       >
         <NextSessionProviders>
           <Navbar />

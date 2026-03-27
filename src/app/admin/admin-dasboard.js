@@ -3,8 +3,7 @@
 import { useState, useEffect, useTransition } from "react"
 import { getReports, downloadDailyReport, deleteReport } from "./actions"
 import { List, Grid, Download, Loader2, CalendarDays, CheckCircle, AlertCircle, LogOut, Copy } from "lucide-react"
-import ReportTable from "@/components/report-table"
-import ReportCards from "@/components/report-cards"
+
 import { useRouter } from "next/navigation"
 import { signOut } from "next-auth/react"
 import { formatReportForCopy } from "@/utils"
