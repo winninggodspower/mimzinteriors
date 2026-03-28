@@ -629,7 +629,7 @@ body {
 .svc-main {
   width: 100%;
   overflow-x: hidden;
-  background-color: #f5f0e8;
+  background-color: #ffffff;
   color: #2d2d2b;
 }
 
@@ -639,7 +639,7 @@ body {
   width: 100%;
   height: clamp(320px, 55vw, 680px);
   overflow: hidden;
-  background: #1c1c1a;
+  background: #ffffff;
 }
 
 .svc-hero-img-wrap {
@@ -683,7 +683,7 @@ body {
 /* ── HEADLINE ────────────────────────────────────────────────── */
 .svc-headline {
   padding: clamp(3rem, 6vw, 5.5rem) clamp(1.5rem, 8vw, 10rem);
-  background: #f5f0e8;
+  background: #ffffff;
   text-align: center;
 }
 
@@ -787,7 +787,7 @@ body {
 /* ── PHILOSOPHY QUOTE ────────────────────────────────────────── */
 .svc-philosophy {
   padding: clamp(4rem, 9vw, 8rem) clamp(1.5rem, 8vw, 12rem);
-  background: #f5f0e8;
+  background: #ffffff;
   text-align: center;
 }
 
@@ -830,7 +830,7 @@ body {
 
 /* ── GALLERY ─────────────────────────────────────────────────── */
 .svc-gallery {
-  background: #1c1c1a;
+  background: #ffffff;
 }
 
 .svc-gallery-grid {
