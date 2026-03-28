@@ -3,6 +3,8 @@ import roots from "@assets/images/roots.png";
 import aboutgallerya from "@assets/images/aboutgallerya.png";
 import aboutgalleryb from "@assets/images/aboutgalleryb.png";
 import aboutgalleryc from "@assets/images/aboutgalleryc.png";
+import ivision from "@assets/images/ivision.png";
+import imission from "@assets/images/imission.png";
 import patterns from "@assets/images/patterns.png";
 import seperator from "@assets/images/seperator.png"
 import visiona from "@assets/images/visiona.png";
@@ -106,7 +108,9 @@ export default function AboutPage() {
             <p className="about-vision-text">
               To provide the best solution for customers who look for originality and unparalleled quality, through our continuous effort in innovation and creativity.
             </p>
-            <span className="about-vision-leaf">🌿</span>
+            <span className="about-vision-leaf">
+              <Image src={ivision} alt="vision icon"/>
+            </span>
           </div>
 
           <div className="about-vision-card">
@@ -117,7 +121,9 @@ export default function AboutPage() {
             <p className="about-vision-text">
               To design and create spaces that generate positive vibes, be it the warmth of a home, or the professional ambience of a workspace.
             </p>
-            <span className="about-vision-leaf">🌿</span>
+            <span className="about-vision-leaf">
+              <Image src={imission} alt="mission icon" />
+            </span>
           </div>
         </div>
       </section>
