@@ -207,7 +207,13 @@ export default function Service() {
           </div>
         </div>
         <div className="svc-gallery-pattern-wrap">
-          <Image src={patterns} alt="patterns" className="svc-gallery-pattern"/>
+          <Image
+            src={patterns}
+            alt=""
+            fill
+            className="svc-gallery-pattern"
+            sizes="100vw"
+          />
         </div>
       </section>
 
