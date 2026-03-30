@@ -1,6 +1,7 @@
-import localFont, { Geist, Geist_Mono } from "next/font/local";
+import localFont from "next/font/local";
 import { ToastContainer, toast } from 'react-toastify';
 import "./globals.css";
+import NextTopLoader from "nextjs-toploader";
 import NextSessionProviders from "./session-provider";
 import Navbar from "./components/navbar";
 import Footer from "./components/footer";
@@ -34,6 +35,7 @@ export default function RootLayout({ children }) {
       <body
         className={` ${arefRuqaa.className} } antialiased min-h-screen flex flex-col`}
       >
+        <NextTopLoader color="#B8924E" showSpinner={false} />
         <NextSessionProviders>
           <Navbar />
           <main className="flex-1">{children}</main>

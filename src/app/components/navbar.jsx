@@ -29,7 +29,7 @@ export default function Navbar() {
   }, [isMenuOpen]);
 
   return (
-    <div className="sticky top-0 z-40 w-full bg-mimz-cream">
+    <div className="sticky top-0 z-40 w-full bg-mimz-cream text-[#2a2a2a]">
       <FlowbiteNavbar
         fluid
         className="!rounded-none !bg-mimz-cream !px-8 !py-4 sm:!px-12"
@@ -50,7 +50,7 @@ export default function Navbar() {
           onClick={() => setIsMenuOpen((prev) => !prev)}
           aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
           aria-expanded={isMenuOpen}
-          className="group relative flex h-14 w-12 flex-col items-center justify-start pt-3 text-[#2a2a2a]"
+          className="group relative flex h-14 w-12 flex-col items-center justify-start pt-3 text-[#2a2a2a] "
         >
           <span
             className={`absolute top-4 block h-[2px] w-8 bg-current transition-all duration-300 ${
@@ -67,9 +67,10 @@ export default function Navbar() {
               isMenuOpen ? "-rotate-45" : "translate-y-2"
             }`}
           />
-          <span
+          
+           <span
             className={`mt-6 text-[12px] tracking-[0.18em] transition-all duration-300 ${
-              isMenuOpen ? "translate-y-0 opacity-100" : "translate-y-0 opacity-100"
+              isMenuOpen ? "opacity-0" : "translate-y-0 opacity-100"
             }`}
           >
             MENU
@@ -82,7 +83,7 @@ export default function Navbar() {
           isMenuOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
         }`}
       >
-        <nav className="relative h-full w-full px-8 py-8 sm:px-12 sm:py-12">
+        <nav className="relative h-full w-full px-8 py-8 sm:px-12 sm:py-12 ">
           <div className="flex h-full flex-col items-end justify-start gap-5 pt-4 sm:hidden">
             {navItems.map((item, index) => (
               <Link
