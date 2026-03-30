@@ -35,7 +35,7 @@ export default function RootLayout({ children }) {
       <body
         className={` ${arefRuqaa.className} } antialiased min-h-screen flex flex-col`}
       >
-        <NextTopLoader color="#B8924E" showSpinner={false} />
+        <NextTopLoader color="#C9A96E" showSpinner={false} />
         <NextSessionProviders>
           <Navbar />
           <main className="flex-1">{children}</main>
