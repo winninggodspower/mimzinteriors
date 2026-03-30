@@ -3,7 +3,6 @@
 import { getServerSession } from "next-auth/next"
 import { redirect } from "next/navigation"
 import { authOptions } from "@/api/auth/[...nextauth]/route"
-import AdminDashboard from "./admin-dasboard"
 
 export default async function AdminPage() {
   const session = await getServerSession(authOptions)
@@ -12,5 +11,9 @@ export default async function AdminPage() {
     redirect("/admin/login")
   }
 
-  return <AdminDashboard />
+  return (
+    <div className="min-h-screen flex items-center justify-center">
+      <h1 className="text-3xl font-bold">Welcome to the Admin Dashboard</h1>
+    </div>
+  )
 }
