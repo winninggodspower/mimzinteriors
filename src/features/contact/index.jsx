@@ -5,9 +5,11 @@ import { useEffect } from "react";
 import mapImage from "@assets/images/contact/map.png";
 import patterns from "@assets/images/patterns.png";
 
+
+
 const ContactInfo = [
   {
-    icon: "📍",
+    icon: ,
     label: "ADDRESS",
     content: (
       <>
@@ -17,7 +19,7 @@ const ContactInfo = [
     ),
   },
   {
-    icon: "📞",
+    icon: ,
     label: "GET IN TOUCH",
     content: (
       <>
@@ -28,7 +30,7 @@ const ContactInfo = [
     ),
   },
   {
-    icon: "🕐",
+    icon: ,
     label: "Visiting Days",
     content: (
       <>
@@ -38,7 +40,7 @@ const ContactInfo = [
     ),
   },
   {
-    icon: "✉️",
+    icon: ,
     label: "BOOK AN APPOINTMENT",
     content: (
       <>
@@ -74,16 +76,6 @@ export default function Contact() {
 
   return (
     <main className="contact-main">
-      {/* ── HERO ────────────────────────────────────────── */}
-      <section className="contact-hero contact-animate">
-        <div className="contact-hero-inner">
-          <h1 className="contact-hero-title">Get In Touch</h1>
-          <p className="contact-hero-subtitle">
-            Have a project in mind? We'd love to hear from you. Reach out to discuss your design aspirations.
-          </p>
-        </div>
-      </section>
-
       {/* ── INFO GRID ───────────────────────────────────── */}
       <section className="contact-info-section contact-animate">
         <div className="contact-info-inner">
@@ -106,23 +98,6 @@ export default function Contact() {
               sizes="(min-width: 1024px) 50vw, 100vw"
             />
           </div>
-        </div>
-      </section>
-
-      {/* ── DIVIDER ─────────────────────────────────────── */}
-      <div className="contact-divider" />
-
-      {/* ── CTA SECTION ─────────────────────────────────── */}
-      <section className="contact-cta contact-animate">
-        <div className="contact-cta-pattern" aria-hidden="true">
-          <Image src={patterns} alt="" fill className="contact-cta-pattern-img" sizes="100vw" />
-        </div>
-        <div className="contact-cta-inner">
-          <h2>Ready To Transform Your Space?</h2>
-          <p>Our team is ready to bring your vision to life with thoughtful design and expert execution.</p>
-          <a href="mailto:inquiries@mimzinteriors.com" className="contact-cta-btn">
-            Start Your Project
-          </a>
         </div>
       </section>
     </main>
