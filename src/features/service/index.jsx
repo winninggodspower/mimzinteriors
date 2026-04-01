@@ -26,7 +26,7 @@ export default function Service() {
           }
         });
       },
-      { threshold: 0.12 }
+      { threshold: 0.28, rootMargin: "0px 0px -10% 0px" }
     );
 
     const targets = document.querySelectorAll(".svc-animate");

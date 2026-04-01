@@ -610,8 +610,8 @@ body {
   opacity: 0;
   transform: translateY(32px);
   transition:
-    opacity 0.72s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 0.72s cubic-bezier(0.22, 1, 0.36, 1);
+    opacity 1.2s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .svc-in-view {
@@ -624,19 +624,19 @@ body {
   transition-delay: 0s;
 }
 .svc-in-view .svc-process-card:nth-child(2) {
-  transition-delay: 0.08s;
+  transition-delay: 0.14s;
 }
 .svc-in-view .svc-process-card:nth-child(3) {
-  transition-delay: 0.16s;
+  transition-delay: 0.28s;
 }
 .svc-in-view .svc-process-card:nth-child(4) {
-  transition-delay: 0.24s;
+  transition-delay: 0.42s;
 }
 .svc-in-view .svc-process-card:nth-child(5) {
-  transition-delay: 0.32s;
+  transition-delay: 0.56s;
 }
 .svc-in-view .svc-process-card:nth-child(6) {
-  transition-delay: 0.4s;
+  transition-delay: 0.7s;
 }
 
 /* ── BASE ────────────────────────────────────────────────────── */
@@ -918,8 +918,8 @@ body {
   position: relative;
   padding-top: 1rem;
   transition:
-    opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+    opacity 1.05s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 1.05s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .svc-process-header {
