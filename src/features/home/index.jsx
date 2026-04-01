@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import homeHero from "@assets/images/home/homehero.png";
 import quoteImage from "@assets/images/home/quoteimage.png";
 import patterns from "@assets/images/patterns.png";
+import seperator from "@assets/images/seperator.png";
 
 export default function HomeFeature() {
   useEffect(() => {
@@ -44,10 +45,10 @@ export default function HomeFeature() {
         <p className="home-img-credit">-All Images belongs to Mimz interiors-</p>
         <div className="home-intro-copy">
           <p>
-            Mimz Interior is a company specialized in architectural interior and exterior projects from start to finish, we handle both local and international project that require our design, management skills and furniture fixings for both real estate developers and personal property owners.
+           Mimz interior is a company specialized in architectural interior and exterior projects from start to finish, we handle both local and international project that require our design, management skills and furniture fixings for both real estate developers and personal property owners.
           </p>
           <p>
-            Mimz interior was founded in the year 2018 by Miracle Godsent Nwachukwu (Creative director). Amongst other wonderful achievement as a model, actor and fashion enthusiast, Miracle has been awarded over the years for his innovative Creation when it comes to interior design and space management. All his efforts has made mimz interior to be awarded best interior design company in the year 2021. Over the years he has made remarkable trailblazing top notch designs ideas that are universally accepted for both homes, office spaces, restaurant etc.
+            Mimz interior was founded in the year 2018 by Miracle Godsent Nwachukwu (Creative director). Amongst other wonderful achievement as a model, actor and fashion enthusiast , Miracle has been awarded over the years for his innovative Creation when it comes to interior design and space management. All his efforts has made mimz interior to be awarded best interior design company in the year 2021. Over the years he has made remarkable trailblazing top notch designs ideas that are universally accepted for both homes, office spaces, restaurant etc.
           </p>
           <p>
             At mimz interior, we see through the mind of our clients, by paying attention to details, providing comfort, poise and class putting cost optimization as a great excellent value: enjoying comfort with less cost.
@@ -77,6 +78,12 @@ export default function HomeFeature() {
             "Interior design is my canvas, where every detail is styled to reflect my client's dreams and personality."
           </blockquote>
           <p className="home-quote-author">-Miracle Godsent Nwachukwu-</p>
+        </div>
+      </section>
+
+      <section className="home-quote-separator home-animate" aria-hidden="true">
+        <div className="home-quote-separator-wrap">
+          <Image src={seperator} alt="" fill className="home-quote-separator-img" sizes="(min-width: 1024px) 520px, 55vw" />
         </div>
       </section>
     </main>

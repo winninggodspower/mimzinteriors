@@ -21,6 +21,20 @@ body {
   color: var(--foreground);
 }
 
+/* ── FOOTER PATTERN ─────────────────────────────────────────── */
+.footer-pattern {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1440 / 98;
+  min-height: clamp(42px, 4.6vw, 74px);
+  overflow: hidden;
+  background: #ffffff;
+}
+
+.footer-pattern-img {
+  object-fit: cover;
+}
+
 /* ── BASE ────────────────────────────────────────────────────── */
 .about-main {
   width: 100%;
@@ -1110,7 +1124,7 @@ body {
 .home-main {
   width: 100%;
   overflow-x: hidden;
-  color: #1c1c1a;
+  color: #000;
   background: #ffffff;
 }
 
@@ -1144,7 +1158,7 @@ body {
 
 /* ── INTRO COPY ──────────────────────────────────────────────── */
 .home-intro {
-  background: #efefef;
+  background: #fff;
   padding: clamp(1.25rem, 2.2vw, 1.8rem) clamp(1rem, 5vw, 5rem)
     clamp(2.4rem, 5vw, 4.5rem);
 }
@@ -1152,8 +1166,8 @@ body {
 .home-img-credit {
   margin: 0;
   text-align: center;
-  font-size: clamp(0.72rem, 1vw, 0.95rem);
-  color: #7b7b78;
+  font-size: 16px;
+  color: #545453;
   letter-spacing: 0.03em;
 }
 
@@ -1164,9 +1178,9 @@ body {
 
 .home-intro-copy p {
   margin: 0;
-  font-size: clamp(0.86rem, 1.05vw, 1.02rem);
+  font-size: 16px;
   line-height: 1.72;
-  color: #1e1e1b;
+  color: #000;
 }
 
 .home-intro-copy p + p {
@@ -1179,8 +1193,9 @@ body {
   width: 100%;
   aspect-ratio: 1440 / 98;
   min-height: clamp(48px, 6vw, 96px);
-  background: #efefef;
+  background: #fff;
   overflow: hidden;
+  margin-bottom: 10px;
 }
 
 .home-pattern-img {
@@ -1212,7 +1227,7 @@ body {
 
 /* ── QUOTE ───────────────────────────────────────────────────── */
 .home-quote {
-  background: #efefef;
+  background: #fff;
   padding: clamp(2.2rem, 5vw, 4rem) clamp(1rem, 4vw, 3rem)
     clamp(3.8rem, 7vw, 6rem);
 }
@@ -1229,19 +1244,36 @@ body {
   padding: 0;
   background: none;
   font-family: var(--font-bd-megalona, Georgia, serif);
-  font-size: clamp(1.9rem, 4.4vw, 3.6rem);
+  font-size: 48px;
   font-weight: 400;
   font-style: italic;
   line-height: 1.2;
-  color: #0f0f0e;
+  color: #000;
   text-wrap: balance;
 }
 
 .home-quote-author {
   margin: clamp(1rem, 2vw, 1.8rem) 0 0;
-  font-size: clamp(1.15rem, 2vw, 2.1rem);
-  color: #131311;
+  font-size: 32px;
+  color: #000;
   letter-spacing: 0.01em;
+}
+
+/* ── QUOTE SEPARATOR ────────────────────────────────────────── */
+.home-quote-separator {
+  display: flex;
+  justify-content: center;
+  margin-top: -150px;
+}
+
+.home-quote-separator-wrap {
+  position: relative;
+  width: min(520px, 55vw);
+  aspect-ratio: 273 / 178;
+}
+
+.home-quote-separator-img {
+  object-fit: contain;
 }
 
 /* ── RESPONSIVE ──────────────────────────────────────────────── */
@@ -1272,6 +1304,13 @@ body {
   .home-feature-image-wrap {
     aspect-ratio: 780 / 720;
   }
+
+  .home-quote-text {
+    font-size: clamp(1.9rem, 4.4vw, 3.6rem);
+  }
+  .home-quote-author {
+    font-size: clamp(1.15rem, 2vw, 2.1rem);
+  }
 }
 
 @media (max-width: 480px) {
@@ -1293,6 +1332,13 @@ body {
 
   .home-quote {
     padding-bottom: 3.2rem;
+  }
+
+  .home-quote-separator {
+    margin-top: -70px;
+  }
+  .home-quote-separator-wrap {
+    width: min(460px, 68vw);
   }
 }
 
@@ -1320,7 +1366,7 @@ body {
   width: 100%;
   overflow-x: hidden;
   background: #ffffff;
-  color: #1c1c1a;
+  color: #000;
 }
 
 /* ── INFO SECTION ────────────────────────────────────────────── */

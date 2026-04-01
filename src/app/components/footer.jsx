@@ -1,4 +1,6 @@
 import Link from "next/link";
+import Image from "next/image";
+import patterns from "@assets/images/patterns.png";
 import { Instagram, Linkedin, Facebook, Youtube } from "lucide-react";
 
 const socialLinks = [
@@ -34,14 +36,9 @@ export default function Footer() {
         </p>
       </div>
 
-      <div
-        className="h-12 w-full bg-repeat-x"
-        style={{
-          backgroundImage: "url('/patterns.png')",
-          backgroundPosition: "top center",
-          backgroundSize: "auto 200%",
-        }}
-      />
+      <div className="footer-pattern" aria-hidden="true">
+        <Image src={patterns} alt="" fill className="footer-pattern-img" sizes="100vw" />
+      </div>
     </footer>
   );
 }
