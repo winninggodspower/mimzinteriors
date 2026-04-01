@@ -1,12 +1,11 @@
-"use client"
+import HomeFeature from "@features/home";
 
-export default function Home() {
-
+const page = () => {
   return (
-    <div className="flex flex-col items-center justify-center py-20">
-      <h1 className="text-4xl font-bold mb-4">Welcome to the Equipment Daily Report</h1>
-      <p className="text-lg text-gray-600">Please navigate to the admin dashboard to manage reports.</p>
-    </div>
-  )
+    <>
+      <HomeFeature />
+    </>
+  );
+};
 
-}
+export default page;

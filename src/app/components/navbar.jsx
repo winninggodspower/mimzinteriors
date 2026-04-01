@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Navbar as FlowbiteNavbar, NavbarBrand } from "flowbite-react";
+import seperator from "@assets/images/seperator.png";
 
 const navItems = [
   { label: "Home", href: "/" },
@@ -83,13 +84,24 @@ export default function Navbar() {
         }`}
       >
         <nav className="relative h-full w-full px-8 py-8 sm:px-12 sm:py-12">
-          <div className="flex h-full flex-col items-end justify-start gap-5 pt-4 sm:hidden">
+          <div className="relative flex h-full flex-col items-end justify-start gap-5 overflow-hidden pt-4 sm:hidden">
+            <div className="pointer-events-none absolute inset-0 z-0 flex items-start justify-center pt-8">
+              <div className="relative h-[44vh] w-[92vw] max-w-[460px] opacity-25">
+                <Image
+                  src={seperator}
+                  alt=""
+                  fill
+                  sizes="88vw"
+                  className="object-contain object-center"
+                />
+              </div>
+            </div>
             {navItems.map((item, index) => (
               <Link
                 key={item.label}
                 href={item.href}
                 onClick={() => setIsMenuOpen(false)}
-                className={`text-5xl leading-none transition-all duration-500 hover:opacity-70 ${
+                className={`relative z-10 text-5xl leading-none transition-all duration-500 hover:opacity-70 ${
                   isMenuOpen ? "translate-y-0 opacity-100" : "translate-y-2 opacity-0"
                 }`}
                 style={{ transitionDelay: `${isMenuOpen ? index * 70 : 0}ms` }}
@@ -99,27 +111,37 @@ export default function Navbar() {
             ))}
           </div>
 
-          <div className="relative hidden h-full w-full sm:block">
-            {navItems.map((item, index) => {
-              const topOffsets = ["8%", "26%", "44%", "62%", "80%"];
+          <div className="relative hidden h-full w-full items-start gap-8 pt-6 sm:flex lg:gap-14">
+            <div className="relative h-full flex-1 overflow-hidden">
+              <div className="relative mx-auto h-full w-full max-w-[1080px]">
+                <Image
+                  src={seperator}
+                  alt=""
+                  fill
+                  priority={isMenuOpen}
+                  sizes="(min-width: 1024px) 70vw, 60vw"
+                  className={`object-contain object-center transition-all duration-700 ${
+                    isMenuOpen ? "scale-100 opacity-100" : "scale-95 opacity-0"
+                  }`}
+                />
+              </div>
+            </div>
 
-              return (
+            <div className="flex w-[190px] shrink-0 flex-col items-start justify-start gap-8 lg:w-[220px] lg:gap-12">
+              {navItems.map((item, index) => (
                 <Link
                   key={item.label}
                   href={item.href}
                   onClick={() => setIsMenuOpen(false)}
-                  className={`absolute right-10 text-6xl leading-none transition-all duration-500 hover:right-14 hover:opacity-70 ${
+                  className={`text-5xl leading-none transition-all duration-500 hover:translate-x-2 hover:opacity-70 lg:text-6xl ${
                     isMenuOpen ? "translate-x-0 opacity-100" : "translate-x-8 opacity-0"
                   }`}
-                  style={{
-                    top: topOffsets[index],
-                    transitionDelay: `${isMenuOpen ? index * 90 : 0}ms`,
-                  }}
+                  style={{ transitionDelay: `${isMenuOpen ? index * 90 : 0}ms` }}
                 >
                   {item.label}
                 </Link>
-              );
-            })}
+              ))}
+            </div>
           </div>
         </nav>
       </div>
