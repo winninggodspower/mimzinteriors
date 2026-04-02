@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.94.5",
     "date-fns": "^4.1.0",
     "flowbite-react": "^0.12.17",
     "lucide-react": "^0.535.0",

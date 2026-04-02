@@ -1,8 +1,10 @@
-import React from 'react'
+import ProjectsCatalogue from "../../../features/projects/pages/ProjectsCatalogue";
 
 const ProjectCatalogue = () => {
   return (
-    <div>ProjectCatalogue</div>
+    <div>
+      <ProjectsCatalogue />
+    </div>
   )
 }
 
