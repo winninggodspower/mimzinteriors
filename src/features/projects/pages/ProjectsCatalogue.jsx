@@ -2,67 +2,32 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
-import {
-  keepPreviousData,
-  QueryClient,
-  QueryClientProvider,
-  useQuery,
-} from "@tanstack/react-query";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useMemo, useRef } from "react";
+import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import projectHero from "@assets/images/projects/projectsCatalogue/projectscataloguehero.png";
-import projectA from "@assets/images/projects/projectsCatalogue/projecta.png";
-import projectB from "@assets/images/projects/projectsCatalogue/projectb.png";
-import projectC from "@assets/images/projects/projectsCatalogue/projectc.png";
 import seperator from "@assets/images/seperator.png";
+import { getProjectsCataloguePage } from "../../../app/projects/projectCatalogue/actions";
+import {
+  PROJECTS_CATALOGUE_PAGE_SIZE,
+  projectsCatalogueQueryKey,
+} from "@features/projects/lib/projectsCatalogueQuery";
 
-const PAGE_SIZE = 12;
-const API_URL = "REPLACE_WITH_BACKEND_URL";
+export default function ProjectsCatalogue() {
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const catalogueSectionRef = useRef(null);
 
-const mockPool = [
-  {
-    profileImage: projectA,
-    title: "Project Pearl",
-  },
-  {
-    profileImage: projectB,
-    title: "Project Ivory",
-  },
-  {
-    profileImage: projectC,
-    title: "Project Aura",
-  },
-];
+  const page = useMemo(() => {
+    const rawPage = Number.parseInt(searchParams.get("page") || "1", 10);
 
-const mockProjects = Array.from({ length: 24 }, (_, index) => {
-  const source = mockPool[index % mockPool.length];
-  return {
-    id: `project-${index + 1}`,
-    title: `${source.title} ${index + 1}`,
-    profileImage: source.profileImage,
-  };
-});
+    if (Number.isNaN(rawPage) || rawPage < 1) {
+      return 1;
+    }
 
-async function fetchProjects({ page, limit }) {
-  const offset = (page - 1) * limit;
-
-  // Replace this block with your backend call when API is ready.
-  // Example:
-  // const res = await fetch(`${API_URL}?offset=${offset}&limit=${limit}`);
-  // return res.json();
-  await new Promise((resolve) => setTimeout(resolve, 320));
-
-  const pageItems = mockProjects.slice(offset, offset + limit);
-
-  return {
-    projects: pageItems,
-    total: mockProjects.length,
-    limit,
-    offset,
-  };
-}
-
-function ProjectsCatalogueContent() {
-  const [page, setPage] = useState(1);
+    return rawPage;
+  }, [searchParams]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -85,17 +50,55 @@ function ProjectsCatalogueContent() {
     return () => observer.disconnect();
   }, []);
 
+  const scrollToCatalogueTop = () => {
+    if (!catalogueSectionRef.current) {
+      return;
+    }
+
+    catalogueSectionRef.current.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  };
+
+  const updatePageInUrl = (nextPage, totalPages) => {
+    const boundedPage = Math.max(1, Math.min(nextPage, totalPages));
+
+    if (boundedPage === page) {
+      return;
+    }
+
+    const params = new URLSearchParams(searchParams.toString());
+
+    if (boundedPage === 1) {
+      params.delete("page");
+    } else {
+      params.set("page", String(boundedPage));
+    }
+
+    const query = params.toString();
+    const nextUrl = query ? `${pathname}?${query}` : pathname;
+
+    router.replace(nextUrl, { scroll: false });
+    scrollToCatalogueTop();
+  };
+
   const { data, isLoading, isFetching } = useQuery({
-    queryKey: ["projectsCatalogue", page, PAGE_SIZE],
-    queryFn: () => fetchProjects({ page, limit: PAGE_SIZE, apiUrl: API_URL }),
+    queryKey: projectsCatalogueQueryKey(page, PROJECTS_CATALOGUE_PAGE_SIZE),
+    queryFn: () =>
+      getProjectsCataloguePage({
+        page,
+        limit: PROJECTS_CATALOGUE_PAGE_SIZE,
+      }),
     placeholderData: keepPreviousData,
+    throwOnError: true,
   });
 
   const totalPages = useMemo(() => {
     if (!data?.total) {
       return 1;
     }
-    return Math.ceil(data.total / PAGE_SIZE);
+    return Math.ceil(data.total / PROJECTS_CATALOGUE_PAGE_SIZE);
   }, [data?.total]);
 
   const canGoPrev = page > 1;
@@ -124,7 +127,7 @@ function ProjectsCatalogueContent() {
         </p>
       </section>
 
-      <section className="prjc-gallery-section prjc-animate">
+      <section className="prjc-gallery-section prjc-animate" ref={catalogueSectionRef}>
         {isLoading ? (
           <div className="prjc-loading">Loading projects...</div>
         ) : (
@@ -159,7 +162,7 @@ function ProjectsCatalogueContent() {
             type="button"
             className="prjc-page-btn"
             disabled={!canGoPrev || isFetching}
-            onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
+            onClick={() => updatePageInUrl(page - 1, totalPages)}
           >
             &lt; Previous
           </button>
@@ -168,7 +171,7 @@ function ProjectsCatalogueContent() {
             type="button"
             className="prjc-page-btn"
             disabled={!canGoNext || isFetching}
-            onClick={() => setPage((prev) => Math.min(prev + 1, totalPages))}
+            onClick={() => updatePageInUrl(page + 1, totalPages)}
           >
             Next &gt;
           </button>
@@ -192,15 +195,5 @@ function ProjectsCatalogueContent() {
         </div>
       </section>
     </main>
-  );
-}
-
-export default function ProjectsCatalogue() {
-  const [queryClient] = useState(() => new QueryClient());
-
-  return (
-    <QueryClientProvider client={queryClient}>
-      <ProjectsCatalogueContent />
-    </QueryClientProvider>
   );
 }

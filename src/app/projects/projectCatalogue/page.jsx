@@ -1,11 +1,36 @@
+import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
+import { PROJECTS_CATALOGUE_PAGE_SIZE, projectsCatalogueQueryKey } from "@features/projects/lib/projectsCatalogueQuery";
 import ProjectsCatalogue from "../../../features/projects/pages/ProjectsCatalogue";
+import { getProjectsCataloguePage } from "./actions";
 
-const ProjectCatalogue = () => {
+const ProjectCatalogue = async ({ searchParams }) => {
+  const resolvedSearchParams = await searchParams;
+  const requestedPage = Math.max(
+    1,
+    Number.parseInt(resolvedSearchParams?.page || "1", 10) || 1
+  );
+
+  const queryClient = new QueryClient();
+
+  await queryClient.prefetchQuery({
+    queryKey: projectsCatalogueQueryKey(
+      requestedPage,
+      PROJECTS_CATALOGUE_PAGE_SIZE
+    ),
+    queryFn: () =>
+      getProjectsCataloguePage({
+        page: requestedPage,
+        limit: PROJECTS_CATALOGUE_PAGE_SIZE,
+      }),
+  });
+
   return (
-    <div>
-      <ProjectsCatalogue />
-    </div>
-  )
-}
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <div>
+        <ProjectsCatalogue />
+      </div>
+    </HydrationBoundary>
+  );
+};
 
-export default ProjectCatalogue
+export default ProjectCatalogue;
