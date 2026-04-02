@@ -1562,3 +1562,322 @@ body {
     border-radius: 12px;
   }
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   PROJECTS PAGE — globals.css
+   Palette: cream #F6F4EE · dark #1C1C1A · bronze #C28831
+═══════════════════════════════════════════════════════════════ */
+
+/* ── SCROLL ANIMATION ENGINE ─────────────────────────────────── */
+.prj-animate {
+  opacity: 0;
+  transform: translateY(34px);
+  transition:
+    opacity 1.05s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 1.05s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.prj-in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── BASE ────────────────────────────────────────────────────── */
+.prj-main {
+  width: 100%;
+  overflow-x: hidden;
+  background: #ffffff;
+  color: #000;
+}
+
+/* ── HERO ────────────────────────────────────────────────────── */
+.prj-hero {
+  width: 100%;
+}
+
+.prj-hero-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1440 / 935;
+  overflow: hidden;
+}
+
+.prj-hero-img {
+  object-fit: cover;
+  object-position: center;
+  animation: prjHeroScale 14s ease-in-out infinite alternate;
+}
+
+.prj-hero-title {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  font-family: var(--font-caterina, Georgia, serif);
+  font-size: 300px;
+  font-weight: 300;
+  letter-spacing: -0.01em;
+  color: #fff;
+  text-transform: uppercase;
+  text-shadow: 0 6px 28px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes prjHeroScale {
+  0% {
+    transform: scale(1);
+  }
+
+  100% {
+    transform: scale(1.05);
+  }
+}
+
+/* ── INTRO ───────────────────────────────────────────────────── */
+.prj-intro {
+  background: #ffffff;
+  padding: clamp(1.1rem, 2.3vw, 2rem) clamp(1rem, 6vw, 4.6rem)
+    clamp(2.8rem, 7vw, 5.4rem);
+}
+
+.prj-img-credit {
+  margin: 0;
+  text-align: center;
+  font-size: 16px;
+  color: #545453;
+  letter-spacing: 0.03em;
+}
+
+.prj-intro-copy {
+  max-width: 1220px;
+  margin: clamp(2.2rem, 4.5vw, 3.5rem) auto 0;
+  font-size: 16px;
+  line-height: 1.72;
+  color: #000;
+}
+
+/* ── PROJECT GRID ────────────────────────────────────────────── */
+.prj-grid-section {
+  background: #ffffff;
+  padding: 0 clamp(1rem, 3.2vw, 1.6rem) clamp(3.2rem, 6vw, 5rem);
+}
+
+.prj-grid {
+  width: min(1420px, 100%);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(0.65rem, 1.1vw, 1.15rem);
+}
+
+.prj-card {
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  transform: translateY(26px);
+  transition:
+    opacity 1.05s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 1.05s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.prj-in-view .prj-card {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.prj-card-image-wrap {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 467 / 618;
+  overflow: hidden;
+  background: #f4f4f4;
+}
+
+.prj-card-image {
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.prj-card-image-wrap:hover .prj-card-image {
+  transform: scale(1.06);
+}
+
+.prj-card-copy {
+  padding-top: clamp(1rem, 1.6vw, 1.3rem);
+  width: 70%;
+}
+
+.prj-card-copy h2 {
+  margin: 0;
+  font-family: var(--font-caterina, Georgia, serif);
+  font-size: 36px;
+  line-height: 1;
+  font-weight: 300;
+  color: #000;
+  text-transform: uppercase;
+}
+
+.prj-card-copy p {
+  margin: 0.55rem 0 0;
+  font-weight: 300;
+  color: #000;
+  line-height: 1.6;
+  font-size: 20px;
+}
+
+/* ── QUOTE + CTA ─────────────────────────────────────────────── */
+.prj-quote {
+  background: #fff;
+  padding: clamp(3.8rem, 8vw, 6.8rem) clamp(1rem, 6vw, 4rem)
+    clamp(4.6rem, 9vw, 8rem);
+}
+
+.prj-quote-inner {
+  max-width: 920px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.prj-quote blockquote {
+  margin: 0;
+  border: 0;
+  padding: 0;
+  background: none;
+  font-family: var(--font-bd-megalona, Georgia, serif);
+  font-size: 40px;
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.26;
+  color: #000;
+  text-wrap: balance;
+}
+
+.prj-quote-separator {
+  position: relative;
+  width: min(190px, 42vw);
+  aspect-ratio: 273 / 178;
+  margin: clamp(1.6rem, 3vw, 2.4rem) auto 0;
+}
+
+.prj-quote-separator-img {
+  object-fit: contain;
+}
+
+.prj-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 56px;
+  padding: 0.9rem 2.4rem;
+  margin-top: clamp(1.6rem, 3vw, 2.3rem);
+  border-radius: 8px;
+  border: 1px solid #c28831;
+  background: #c28831;
+  color: #fff;
+  text-decoration: none;
+  letter-spacing: 0.08em;
+  font-size: 32px;
+  text-transform: uppercase;
+  transition:
+    background-color 0.24s ease,
+    border-color 0.24s ease,
+    transform 0.24s ease,
+    box-shadow 0.24s ease;
+}
+
+.prj-cta-btn:hover {
+  background: #ab7424;
+  border-color: #ab7424;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 26px rgba(171, 116, 36, 0.28);
+}
+
+/* ── RESPONSIVE ──────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .prj-hero-wrap {
+    aspect-ratio: 1280 / 900;
+  }
+
+  .prj-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .prj-card:last-child {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 768px) {
+  .prj-hero-wrap {
+    aspect-ratio: 820 / 690;
+  }
+
+  .prj-hero-title {
+    font-size: clamp(2.5rem, 14vw, 5.8rem);
+  }
+
+  .prj-intro {
+    padding-top: 1rem;
+  }
+
+  .prj-intro-copy,
+  .prj-card-copy p {
+    font-size: 0.9rem;
+    line-height: 1.66;
+  }
+
+  .prj-grid {
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+  }
+
+  .prj-card:last-child {
+    grid-column: span 1;
+  }
+
+  .prj-card-copy h2 {
+    font-size: clamp(1.55rem, 6.5vw, 2.15rem);
+  }
+
+  .prj-quote blockquote {
+    font-size: clamp(1.85rem, 6vw, 2.6rem);
+  }
+
+  .prj-cta-btn {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .prj-hero-wrap {
+    aspect-ratio: 390 / 430;
+  }
+
+  .prj-img-credit {
+    font-size: 0.7rem;
+  }
+
+  .prj-intro-copy,
+  .prj-card-copy p {
+    font-size: 0.84rem;
+  }
+
+  .prj-card-image-wrap {
+    aspect-ratio: 390 / 470;
+  }
+
+  .prj-cta-btn {
+    width: 100%;
+    max-width: 300px;
+    min-height: 50px;
+    font-size: 0.85rem;
+    padding-inline: 1.25rem;
+  }
+
+  .prj-card-copy {
+    width: 100%;
+  }
+}
