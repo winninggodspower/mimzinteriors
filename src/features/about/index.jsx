@@ -1,4 +1,8 @@
+"use client";
+
 import Image from "next/image";
+import { motion } from "motion/react";
+import { aosReveal, sectionReveal } from "@features/lib/motion";
 import roots from "@assets/images/roots.png";
 import aboutgallerya from "@assets/images/aboutgallerya.png";
 import aboutgalleryb from "@assets/images/aboutgalleryb.png";
@@ -18,17 +22,14 @@ import sawardb from "@assets/images/sawardb.png";
 import sawardc from "@assets/images/sawardc.png";
 import aboutteam from "@assets/images/aboutteam.png";
 
-export const metadata = {
-  title: "About — Mimz Interiors",
-  description: "Award-winning interior design studio",
-};
-
 export default function AboutPage() {
+  const sectionMotion = sectionReveal({ y: 28 });
+
   return (
     <main className="about-main">
 
       {/* ── ROOTS SECTION ───────────────────────────────── */}
-      <section className="about-roots">
+      <motion.section className="about-roots" {...sectionMotion}>
         <div className="about-roots-inner">
           <div className="about-roots-image">
             <div className="about-roots-img-wrap">
@@ -42,9 +43,11 @@ export default function AboutPage() {
             </div>
           </div>
 
-          <div className="about-roots-content">
-            <h2 className="about-section-label">ROOTS.</h2>
-            <div className="about-roots-body">
+          <motion.div className="about-roots-content" {...aosReveal({ direction: "right", distance: 42 })}>
+            <motion.h2 className="about-section-label" {...aosReveal({ direction: "right", distance: 30 })}>
+              ROOTS.
+            </motion.h2>
+            <motion.div className="about-roots-body" {...aosReveal({ direction: "left", distance: 34, delay: 0.06 })}>
               <p>
                 Miracle Nwachukwu is an award-winning interior decorator, fashion enthusiast, and a dedicated mentor. As the founder and visionary behind a multiple award-winning interior design company, Miracle has established a reputation for excellence in the industry. His work has garnered significant recognition, including a recent prestigious accolade from the Africa Property Awards for Interior Design. Known for his creative flair and commitment to inspiring the next generation, Miracle continues to redefine interior design and mentorship with each project he undertakes.              
               </p>
@@ -60,20 +63,20 @@ export default function AboutPage() {
               <p>
                 "Having successfully completed over 200 projects and earned the trust of more than 64,000 followers across Nigeria and globally, Mimz has built a reputation for excellence and unwavering client satisfaction.
               </p>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
 
       {/* ── QUOTE SECTION ───────────────────────────────── */}
-      <section className="about-quote-section">
+      <motion.section className="about-quote-section" {...sectionMotion}>
         <div className="about-quote-inner">
-          <blockquote className="about-quote">
+          <motion.blockquote className="about-quote" {...aosReveal({ direction: "up", distance: 32 })}>
             <span className="about-quote-mark about-quote-open">"</span>
             Seeing the genuine satisfaction on my clients' faces after every
             project is my greatest source of motivation.
             <span className="about-quote-mark about-quote-close">"</span>
-          </blockquote>
+          </motion.blockquote>
           <div className=" seperator">
             <Image
               src={seperator}
@@ -84,11 +87,11 @@ export default function AboutPage() {
             />
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* ── GALLERY ROW ─────────────────────────────────── */}
       {/* will make this a carousel later, for now just a grid of images */}
-      <section className="about-gallery-row">
+      <motion.section className="about-gallery-row" {...sectionMotion}>
         <div className="about-gallery-grid">
           <div className="about-gallery-item">
             <Image
@@ -127,41 +130,41 @@ export default function AboutPage() {
             />
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* ── VISION SECTION ──────────────────────────────── */}
-      <section className="about-vision">
+      <motion.section className="about-vision" {...sectionMotion}>
         <div className="about-vision-inner">
           <div className="about-vision-card">
-            <div className="about-vision-label"> 
+            <motion.div className="about-vision-label" {...aosReveal({ direction: "right", distance: 28 })}>
               VISION
-            </div>
-            <p className="about-vision-text">
+            </motion.div>
+            <motion.p className="about-vision-text" {...aosReveal({ direction: "left", distance: 26, delay: 0.05 })}>
               To provide the best solution for customers who look for originality and unparalleled quality, through our continuous effort in innovation and creativity.
-            </p>
+            </motion.p>
             <span className="about-vision-leaf">
               <Image src={ivision} alt="vision icon"/>
             </span>
           </div>
 
           <div className="about-vision-card">
-            <div className="about-vision-label">
+            <motion.div className="about-vision-label" {...aosReveal({ direction: "left", distance: 28 })}>
              
               MISION
-            </div>
-            <p className="about-vision-text">
+            </motion.div>
+            <motion.p className="about-vision-text" {...aosReveal({ direction: "right", distance: 26, delay: 0.05 })}>
               To design and create spaces that generate positive vibes, be it the warmth of a home, or the professional ambience of a workspace.
-            </p>
+            </motion.p>
             <span className="about-vision-leaf">
               <Image src={imission} alt="mission icon" />
             </span>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* ── VISION GALLERY ──────────────────────────────── */}
       {/* convert to a carousel later */}
-      <section className="about-vision-gallery">
+      <motion.section className="about-vision-gallery" {...sectionMotion}>
         <div className="about-vision-gallery-grid">
           <div className="about-vision-gallery-item">
             <Image
@@ -191,14 +194,16 @@ export default function AboutPage() {
             />
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* ── THE FIRM SECTION ────────────────────────────── */}
-      <section className="about-firm">
+      <motion.section className="about-firm" {...sectionMotion}>
         <div className="about-firm-inner">
-          <div className="about-firm-content">
-            <h2 className="about-section-label">THE FIRM</h2>
-            <div className="about-firm-body">
+          <motion.div className="about-firm-content" {...aosReveal({ direction: "left", distance: 36 })}>
+            <motion.h2 className="about-section-label" {...aosReveal({ direction: "left", distance: 28 })}>
+              THE FIRM
+            </motion.h2>
+            <motion.div className="about-firm-body" {...aosReveal({ direction: "right", distance: 30, delay: 0.06 })}>
               <p>
                 Mimz Interiors was founded in 2018 with a vision to provide comprehensive turnkey solutions in the design, fabrication, and installation of premium interior furnishings and furniture. We are dedicated to enhancing the interiors of both homes and offices, creating spaces that inspire and reflect the aspirations of our clients.
               </p>
@@ -212,8 +217,8 @@ export default function AboutPage() {
               <p>
                 Our mission is to deliver inspired designs and décor that meet and exceed our clients’ expectations through collaborative efforts and exceptional service. We pride ourselves on tailoring each project to suit our clients' unique personal styles and practical needs. Much of our business is built on repeat clients and referrals—when people choose us once, they return, and they’re happy to recommend us to others.
               </p>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
 
           <div className="about-firm-image">
             <div className="about-firm-img-wrap">
@@ -227,10 +232,10 @@ export default function AboutPage() {
             </div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* ── TEAM PHOTO ──────────────────────────────────── */}
-      <section className="about-team">
+      <motion.section className="about-team" {...sectionMotion}>
         <div className="about-team-pattern-wrap" aria-hidden="true">
           <Image
             src={patterns}
@@ -250,10 +255,10 @@ export default function AboutPage() {
           />
           <div className="about-team-overlay" />
         </div>
-      </section>
+      </motion.section>
 
       {/* ── AWARDS SECTION ──────────────────────────────── */}
-      <section className="about-awards">
+      <motion.section className="about-awards" {...sectionMotion}>
         <div className="about-awards-inner">
           <div className="about-awards-badges">
             <div className="about-awards-badges-top">
@@ -312,9 +317,11 @@ export default function AboutPage() {
             </div>
           </div>
 
-          <div className="about-awards-content">
-            <h2 className="about-section-label">AWARDS</h2>
-            <div className="about-awards-body">
+          <motion.div className="about-awards-content" {...aosReveal({ direction: "right", distance: 34 })}>
+            <motion.h2 className="about-section-label" {...aosReveal({ direction: "right", distance: 26 })}>
+              AWARDS
+            </motion.h2>
+            <motion.div className="about-awards-body" {...aosReveal({ direction: "left", distance: 30, delay: 0.06 })}>
               <p >
                 In the past Year Mimz Interior has grown to be a worthy award winning interior design brand. 
                 Leadership Award? And how these awards impact your work and motivation?
@@ -326,13 +333,13 @@ export default function AboutPage() {
               <p>
               It’s a great motivation for us to continue striving for excellence. Every award is a reflection of the collective effort of the entire team, reminding us that our work is making a difference.
               </p>
-            </div>
-            <blockquote className="about-awards-quote">
+            </motion.div>
+            <motion.blockquote className="about-awards-quote" {...aosReveal({ direction: "up", distance: 24, delay: 0.08 })}>
               "When it comes to interiors, uniqueness is the ultimate luxury."
-            </blockquote>
-          </div>
+            </motion.blockquote>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
     </main>
   );
 }

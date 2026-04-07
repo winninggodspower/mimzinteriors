@@ -9,6 +9,7 @@ import { motion } from "motion/react";
 import projectHero from "@assets/images/projects/projectsCatalogue/projectscataloguehero.png";
 import seperator from "@assets/images/seperator.png";
 import {
+  aosReveal,
   MOTION_STAGGER,
   MOTION_VIEWPORT,
   MOTION_DURATIONS,
@@ -118,11 +119,11 @@ export default function Apartments() {
       </motion.section>
 
       <motion.section className="aptc-intro" {...sectionMotion}>
-        <p className="aptc-img-credit">-All images belongs to Mimz interiors-</p>
-        <h1 className="aptc-title">APARTMENTS CATALOG</h1>
-        <p className="aptc-intro-copy">
+        <motion.p className="aptc-img-credit" {...aosReveal({ direction: "left", distance: 30, duration: 0.48 })}>-All images belongs to Mimz interiors-</motion.p>
+        <motion.h1 className="aptc-title" {...aosReveal({ direction: "right", distance: 52, duration: 0.62 })}>APARTMENTS CATALOG</motion.h1>
+        <motion.p className="aptc-intro-copy" {...aosReveal({ direction: "left", distance: 44, duration: 0.62 })}>
           Our project speaks loudly for itself as we handle them with the highest form of professionalism from field workers to our customer care services. All process documentation and alignments are done with modern tools to give a remarkable impression at the beginning and end of every project. At Mimz interior, we give every client a reason to come back.
-        </p>
+        </motion.p>
       </motion.section>
 
       <motion.section className="aptc-gallery-section" ref={apartmentsSectionRef} {...sectionMotion}>
@@ -184,9 +185,9 @@ export default function Apartments() {
 
       <motion.section className="aptc-quote" {...sectionMotion}>
         <div className="aptc-quote-inner">
-          <blockquote>
+          <motion.blockquote {...aosReveal({ direction: "right", distance: 56, duration: 0.66 })}>
             We design and create spaces from residential homes to office spaces with a focus on functionality and aesthetic appeal. We are never out of style.
-          </blockquote>
+          </motion.blockquote>
           <div className="aptc-separator-wrap" aria-hidden="true">
             <Image
               src={seperator}

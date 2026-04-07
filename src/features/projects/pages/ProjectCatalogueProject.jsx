@@ -6,7 +6,7 @@ import { useMemo, useRef } from "react";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { motion } from "motion/react";
 import seperator from "@assets/images/seperator.png";
-import { heroScaleLoop, sectionReveal } from "@features/lib/motion";
+import { aosReveal, heroScaleLoop, sectionReveal } from "@features/lib/motion";
 import ivoryHero from "@assets/images/projects/projectsCatalogue/projects/ivoryhero.png";
 import ivoryHeroB from "@assets/images/projects/projectsCatalogue/projects/ivoryherob.png";
 import ivoryHeroC from "@assets/images/projects/projectsCatalogue/projects/ivoryheroc.png";
@@ -131,9 +131,15 @@ export default function ProjectCatalogueProject({ projectId }) {
       </motion.section>
 
       <motion.section className="prjdp-meta" {...sectionMotion}>
-        <h1 className="prjdp-title">{data?.title || "PROJECT"}</h1>
-        <p className="prjdp-period">{data?.period || ""}</p>
-        <p className="prjdp-description">{data?.subtitle || ""}</p>
+        <motion.h1 className="prjdp-title" {...aosReveal({ direction: "right", distance: 38 })}>
+          {data?.title || "PROJECT"}
+        </motion.h1>
+        <motion.p className="prjdp-period" {...aosReveal({ direction: "left", distance: 28, delay: 0.04 })}>
+          {data?.period || ""}
+        </motion.p>
+        <motion.p className="prjdp-description" {...aosReveal({ direction: "up", distance: 26, delay: 0.08 })}>
+          {data?.subtitle || ""}
+        </motion.p>
       </motion.section>
 
       <motion.section className="prjdp-gallery" ref={gallerySectionRef} {...sectionMotion}>
@@ -246,30 +252,32 @@ export default function ProjectCatalogueProject({ projectId }) {
         )}
 
         <div className="prjdp-pagination-wrap">
-          <button
+          <motion.button
             type="button"
             className="prjdp-page-btn"
             disabled={!canGoPrev || isFetching}
             onClick={() => updatePageInUrl(page - 1)}
+            {...aosReveal({ direction: "left", distance: 18 })}
           >
             &lt; Previous
-          </button>
-          <button
+          </motion.button>
+          <motion.button
             type="button"
             className="prjdp-page-btn"
             disabled={!canGoNext || isFetching}
             onClick={() => updatePageInUrl(page + 1)}
+            {...aosReveal({ direction: "right", distance: 18, delay: 0.03 })}
           >
             Next &gt;
-          </button>
+          </motion.button>
         </div>
       </motion.section>
 
       <motion.section className="prjdp-quote" {...sectionMotion}>
         <div className="prjdp-quote-inner">
-          <blockquote>
+          <motion.blockquote {...aosReveal({ direction: "up", distance: 30 })}>
             We design and create spaces from residential homes to office spaces with a focus on functionality and aesthetic appeal. We are never out of style.
-          </blockquote>
+          </motion.blockquote>
           <div className="prjdp-separator-wrap" aria-hidden="true">
             <Image
               src={seperator}

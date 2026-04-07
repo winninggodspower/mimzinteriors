@@ -4,6 +4,7 @@ import Image from "next/image";
 import { motion } from "motion/react";
 import mapImage from "@assets/images/contact/map.png";
 import {
+  aosReveal,
   MOTION_STAGGER,
   MOTION_VIEWPORT,
   fadeUpItem,
@@ -120,8 +121,18 @@ export default function Contact() {
               >
                 <span className="contact-info-icon">{item.icon}</span>
                 <div className="contact-info-text">
-                  <h3 className="contact-info-label">{item.label}</h3>
-                  <div className="contact-info-content">{item.content}</div>
+                  <motion.h3
+                    className="contact-info-label"
+                    {...aosReveal({ direction: i % 2 === 0 ? "right" : "left", distance: 26 })}
+                  >
+                    {item.label}
+                  </motion.h3>
+                  <motion.div
+                    className="contact-info-content"
+                    {...aosReveal({ direction: i % 2 === 0 ? "left" : "right", distance: 22, delay: 0.04 })}
+                  >
+                    {item.content}
+                  </motion.div>
                 </div>
               </motion.div>
             ))}

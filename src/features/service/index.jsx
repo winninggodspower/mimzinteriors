@@ -9,6 +9,7 @@ import dprocessc from "@assets/images/service/dprocessc.png";
 import seperator from "@assets/images/seperator.png"
 import patterns  from "@assets/images/patterns.svg"
 import {
+  aosReveal,
   MOTION_STAGGER,
   MOTION_VIEWPORT,
   fadeUpItem,
@@ -149,25 +150,38 @@ export default function Service() {
       {/* ── HEADLINE ─────────────────────────────────────── */}
       <motion.section className="svc-headline" {...sectionMotion}>
         <div className="svc-headline-inner">
-          <h1 className="svc-headline-title">
+          <motion.h1 className="svc-headline-title" {...aosReveal({ direction: "right", distance: 38 })}>
             Your Space Designed For Now And The Future.
-          </h1>
-          <p className="svc-headline-sub">
+          </motion.h1>
+          <motion.p
+            className="svc-headline-sub"
+            {...aosReveal({ direction: "left", distance: 34, delay: 0.06 })}
+          >
             Our complete package of services ranges from high quality and specialized services both interior and exterior works to maintenance for both commercial and residential properties.
-          </p>
+          </motion.p>
         </div>
       </motion.section>
 
       {/* ── SERVICES WE OFFER ────────────────────────────── */}
       <motion.section className="svc-offer" {...sectionMotion}>
         <div className="svc-offer-inner">
-          <h2 className="svc-offer-title">SERVICES WE OFFER.</h2>
+          <motion.h2 className="svc-offer-title" {...aosReveal({ direction: "right", distance: 34 })}>
+            SERVICES WE OFFER.
+          </motion.h2>
           <div className="svc-offer-grid">
             {services.map((item, i) => (
-              <div key={i} className="svc-offer-item">
+              <motion.div
+                key={i}
+                className="svc-offer-item"
+                {...aosReveal({
+                  direction: i % 2 === 0 ? "left" : "right",
+                  distance: 26,
+                  delay: (i % 6) * 0.02,
+                })}
+              >
                 <span className="svc-offer-bullet">◆</span>
                 {item}
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -176,9 +190,9 @@ export default function Service() {
       {/* ── PHILOSOPHY QUOTE ─────────────────────────────── */}
       <motion.section className="svc-philosophy" {...sectionMotion}>
         <div className="svc-philosophy-inner">
-          <blockquote className="svc-philosophy-quote">
+          <motion.blockquote className="svc-philosophy-quote" {...aosReveal({ direction: "up", distance: 32 })}>
             Patience in dealing with clients, staff, and artisans is crucial for a smooth workflow and successful outcomes.
-          </blockquote>
+          </motion.blockquote>
           <Image src={seperator} alt="seperator" className="svcquote-seperator"/>
         </div>
       </motion.section>
@@ -213,7 +227,9 @@ export default function Service() {
       {/* ── DESIGN PROCESS ───────────────────────────────── */}
       <motion.section className="svc-process" {...sectionMotion}>
         <div className="svc-process-inner">
-          <h2 className="svc-process-title">OUR DESIGN PROCESS</h2>
+          <motion.h2 className="svc-process-title" {...aosReveal({ direction: "right", distance: 34 })}>
+            OUR DESIGN PROCESS
+          </motion.h2>
           <motion.div
             className="svc-process-grid"
             variants={cardContainer}

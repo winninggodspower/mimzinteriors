@@ -9,6 +9,7 @@ import apartments from "@assets/images/projects/apartments.png";
 import accessories from "@assets/images/projects/accessories.png";
 import seperator from "@assets/images/seperator.png";
 import {
+  aosReveal,
   MOTION_STAGGER,
   MOTION_VIEWPORT,
   fadeUpItem,
@@ -68,10 +69,10 @@ export default function ProjectsFeature() {
       </motion.section>
 
       <motion.section className="prj-intro" {...sectionMotion}>
-        <p className="prj-img-credit">-All images belongs to Mimz interiors-</p>
-        <p className="prj-intro-copy">
+        <motion.p className="prj-img-credit" {...aosReveal({ direction: "left", distance: 30, duration: 0.48 })}>-All images belongs to Mimz interiors-</motion.p>
+        <motion.p className="prj-intro-copy" {...aosReveal({ direction: "right", distance: 46, duration: 0.62 })}>
           Our project speaks loudly for itself as we handle them with the highest form of professionalism, from field workers to our customer care services. All process documentation and alignments are done with modern tools to give a remarkable impression at the beginning and end of every project. At Mimz interior, we give every client a reason to come back.
-        </p>
+        </motion.p>
       </motion.section>
 
       <motion.section className="prj-grid-section" {...sectionMotion}>
@@ -88,8 +89,8 @@ export default function ProjectsFeature() {
                 <Image src={item.image} alt={item.alt} fill className="prj-card-image" sizes="(min-width: 1200px) 33vw, (min-width: 768px) 50vw, 100vw" />
               </Link>
               <div className="prj-card-copy">
-                <h2>{item.title}</h2>
-                <p>{item.desc}</p>
+                <motion.h2 {...aosReveal({ direction: index % 2 === 0 ? "left" : "right", distance: 34, duration: 0.5 })}>{item.title}</motion.h2>
+                <motion.p {...aosReveal({ direction: index % 2 === 0 ? "right" : "left", distance: 34, duration: 0.56 })}>{item.desc}</motion.p>
               </div>
             </motion.article>
           ))}
@@ -104,9 +105,11 @@ export default function ProjectsFeature() {
           <div className="prj-quote-separator" aria-hidden="true">
             <Image src={seperator} alt="" fill className="prj-quote-separator-img" sizes="(min-width: 1024px) 180px, 42vw" />
           </div>
+          <motion.div {...aosReveal({ direction: "up", distance: 32, duration: 0.5 })}>
           <Link href="/contact" className="prj-cta-btn">
             GET IN TOUCH
           </Link>
+          </motion.div>
         </div>
       </motion.section>
     </main>

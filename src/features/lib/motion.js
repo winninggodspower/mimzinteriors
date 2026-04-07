@@ -2,13 +2,13 @@ export const MOTION_EASE = [0.22, 1, 0.36, 1];
 
 export const MOTION_VIEWPORT = {
   once: true,
-  amount: 0.2,
+  amount: 0.28,
 };
 
 export const MOTION_DURATIONS = {
-  section: 0.6,
-  card: 0.5,
-  cardFast: 0.45,
+  section: 1.05,
+  card: 0.85,
+  cardFast: 0.75,
   heroLoop: 12,
 };
 
@@ -58,5 +58,27 @@ export function heroScaleLoop({ scale = 1.05, duration = MOTION_DURATIONS.heroLo
       repeatType: "reverse",
       ease: "easeInOut",
     },
+  };
+}
+
+export function aosReveal({
+  direction = "up",
+  distance = 42,
+  duration = MOTION_DURATIONS.section,
+  delay = 0,
+  amount = 0.32,
+} = {}) {
+  const from = {
+    left: { x: -distance, y: 0 },
+    right: { x: distance, y: 0 },
+    down: { x: 0, y: -distance },
+    up: { x: 0, y: distance },
+  }[direction] || { x: 0, y: distance };
+
+  return {
+    initial: { opacity: 0, x: from.x, y: from.y },
+    whileInView: { opacity: 1, x: 0, y: 0 },
+    viewport: { ...MOTION_VIEWPORT, amount },
+    transition: { duration, delay, ease: MOTION_EASE },
   };
 }
