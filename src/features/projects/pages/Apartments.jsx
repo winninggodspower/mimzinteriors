@@ -23,7 +23,7 @@ import {
   PROJECT_DETAIL_HEROES_PER_PAGE,
 } from "@features/projects/lib/projectsCatalogueQuery";
 
-export default function ProjectCatalogueProject({ projectId }) {
+export default function PojectCatalogueProjectr({ projectId }) {
   const fallbackHeroes = [ivoryHero.src, ivoryHeroB.src, ivoryHeroC.src];
   const fallbackColumns = [
     ivoryColumnA.src,

@@ -3,10 +3,20 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useMemo, useRef } from "react";
+import { useMemo, useRef } from "react";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
+import { motion } from "motion/react";
 import projectHero from "@assets/images/projects/projectsCatalogue/projectscataloguehero.png";
 import seperator from "@assets/images/seperator.png";
+import {
+  MOTION_STAGGER,
+  MOTION_VIEWPORT,
+  MOTION_DURATIONS,
+  fadeUpItem,
+  heroScaleLoop,
+  sectionReveal,
+  staggerContainer,
+} from "@features/lib/motion";
 import { getProjectsCataloguePage } from "../../../app/projects/projectCatalogue/actions";
 import {
   PROJECTS_CATALOGUE_PAGE_SIZE,
@@ -29,26 +39,9 @@ export default function ProjectsCatalogue() {
     return rawPage;
   }, [searchParams]);
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("prjc-in-view");
-          }
-        });
-      },
-      {
-        threshold: 0.2,
-        rootMargin: "0px 0px -10% 0px",
-      }
-    );
-
-    const targets = document.querySelectorAll(".prjc-animate");
-    targets.forEach((el) => observer.observe(el));
-
-    return () => observer.disconnect();
-  }, []);
+  const sectionMotion = sectionReveal();
+  const cardContainer = staggerContainer(MOTION_STAGGER.tight);
+  const cardItem = fadeUpItem({ duration: MOTION_DURATIONS.cardFast });
 
   const scrollToCatalogueTop = () => {
     if (!catalogueSectionRef.current) {
@@ -106,37 +99,48 @@ export default function ProjectsCatalogue() {
 
   return (
     <main className="prjc-main">
-      <section className="prjc-hero prjc-animate">
+      <motion.section className="prjc-hero" {...sectionMotion}>
         <div className="prjc-hero-wrap">
-          <Image
-            src={projectHero}
-            alt="Project catalogue hero"
-            fill
-            priority
-            className="prjc-hero-img"
-            sizes="100vw"
-          />
+          <motion.div
+            {...heroScaleLoop({ scale: 1.04 })}
+            className="h-full w-full"
+          >
+            <Image
+              src={projectHero}
+              alt="Project catalogue hero"
+              fill
+              priority
+              className="prjc-hero-img"
+              sizes="100vw"
+            />
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
 
-      <section className="prjc-intro prjc-animate">
+      <motion.section className="prjc-intro" {...sectionMotion}>
         <p className="prjc-img-credit">-All images belongs to Mimz interiors-</p>
         <h1 className="prjc-title">PROJECT CATALOG</h1>
         <p className="prjc-intro-copy">
           Our project speaks loudly for itself as we handle them with the highest form of professionalism from field workers to our customer care services. All process documentation and alignments are done with modern tools to give a remarkable impression at the beginning and end of every project. At Mimz interior, we give every client a reason to come back.
         </p>
-      </section>
+      </motion.section>
 
-      <section className="prjc-gallery-section prjc-animate" ref={catalogueSectionRef}>
+      <motion.section className="prjc-gallery-section" ref={catalogueSectionRef} {...sectionMotion}>
         {isLoading ? (
           <div className="prjc-loading">Loading projects...</div>
         ) : (
-          <div className="prjc-gallery-grid">
+          <motion.div
+            className="prjc-gallery-grid"
+            variants={cardContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={MOTION_VIEWPORT}
+          >
             {data?.projects?.map((project, index) => (
-              <article
+              <motion.article
                 key={project.id}
                 className="prjc-card"
-                style={{ transitionDelay: `${index * 0.05}s` }}
+                variants={cardItem}
               >
                 <Link
                   href={`/projects/projectCatalogue/${project.id}`}
@@ -152,9 +156,9 @@ export default function ProjectsCatalogue() {
                   />
                   <span className="prjc-card-overlay-title">{project.title}</span>
                 </Link>
-              </article>
+                </motion.article>
             ))}
-          </div>
+            </motion.div>
         )}
 
         <div className="prjc-pagination-wrap">
@@ -176,9 +180,9 @@ export default function ProjectsCatalogue() {
             Next &gt;
           </button>
         </div>
-      </section>
+      </motion.section>
 
-      <section className="prjc-quote prjc-animate">
+      <motion.section className="prjc-quote" {...sectionMotion}>
         <div className="prjc-quote-inner">
           <blockquote>
             We design and create spaces from residential homes to office spaces with a focus on functionality and aesthetic appeal. We are never out of style.
@@ -193,7 +197,7 @@ export default function ProjectsCatalogue() {
             />
           </div>
         </div>
-      </section>
+      </motion.section>
     </main>
   );
 }

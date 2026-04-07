@@ -2,12 +2,20 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect } from "react";
+import { motion } from "motion/react";
 import projectHero from "@assets/images/projects/projecthero.png";
 import projectCatalogue from "@assets/images/projects/projectcatalogue.png";
 import apartments from "@assets/images/projects/apartments.png";
 import accessories from "@assets/images/projects/accessories.png";
 import seperator from "@assets/images/seperator.png";
+import {
+  MOTION_STAGGER,
+  MOTION_VIEWPORT,
+  fadeUpItem,
+  heroScaleLoop,
+  sectionReveal,
+  staggerContainer,
+} from "@features/lib/motion";
 
 const projectItems = [
   {
@@ -34,54 +42,48 @@ const projectItems = [
 ];
 
 export default function ProjectsFeature() {
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("prj-in-view");
-          }
-        });
-      },
-      {
-        threshold: 0.2,
-        rootMargin: "0px 0px -8% 0px",
-      }
-    );
-
-    const targets = document.querySelectorAll(".prj-animate");
-    targets.forEach((el) => observer.observe(el));
-
-    return () => observer.disconnect();
-  }, []);
+  const sectionMotion = sectionReveal({ y: 30 });
+  const cardContainer = staggerContainer(MOTION_STAGGER.wide);
+  const cardItem = fadeUpItem({ y: 24 });
 
   return (
     <main className="prj-main">
-      <section className="prj-hero prj-animate">
+      <motion.section className="prj-hero" {...sectionMotion}>
         <div className="prj-hero-wrap">
-          <Image
-            src={projectHero}
-            alt="Luxury projects by Mimz Interiors"
-            fill
-            priority
-            className="prj-hero-img"
-            sizes="100vw"
-          />
+          <motion.div
+            {...heroScaleLoop({ scale: 1.05 })}
+            className="h-full w-full"
+          >
+            <Image
+              src={projectHero}
+              alt="Luxury projects by Mimz Interiors"
+              fill
+              priority
+              className="prj-hero-img"
+              sizes="100vw"
+            />
+          </motion.div>
           <h1 className="prj-hero-title">PROJECTS</h1>
         </div>
-      </section>
+      </motion.section>
 
-      <section className="prj-intro prj-animate">
+      <motion.section className="prj-intro" {...sectionMotion}>
         <p className="prj-img-credit">-All images belongs to Mimz interiors-</p>
         <p className="prj-intro-copy">
           Our project speaks loudly for itself as we handle them with the highest form of professionalism, from field workers to our customer care services. All process documentation and alignments are done with modern tools to give a remarkable impression at the beginning and end of every project. At Mimz interior, we give every client a reason to come back.
         </p>
-      </section>
+      </motion.section>
 
-      <section className="prj-grid-section prj-animate">
-        <div className="prj-grid">
+      <motion.section className="prj-grid-section" {...sectionMotion}>
+        <motion.div
+          className="prj-grid"
+          variants={cardContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={MOTION_VIEWPORT}
+        >
           {projectItems.map((item, index) => (
-            <article className="prj-card" key={item.title} style={{ transitionDelay: `${index * 0.12}s` }}>
+            <motion.article className="prj-card" key={item.title} variants={cardItem}>
               <Link href={item.href} className="prj-card-image-wrap" aria-label={item.title}>
                 <Image src={item.image} alt={item.alt} fill className="prj-card-image" sizes="(min-width: 1200px) 33vw, (min-width: 768px) 50vw, 100vw" />
               </Link>
@@ -89,12 +91,12 @@ export default function ProjectsFeature() {
                 <h2>{item.title}</h2>
                 <p>{item.desc}</p>
               </div>
-            </article>
+            </motion.article>
           ))}
-        </div>
-      </section>
+        </motion.div>
+      </motion.section>
 
-      <section className="prj-quote prj-animate">
+      <motion.section className="prj-quote" {...sectionMotion}>
         <div className="prj-quote-inner">
           <blockquote>
             We design and create spaces from residential homes to office spaces with a focus on functionality and aesthetic appeal. We are never out of style.
@@ -106,7 +108,7 @@ export default function ProjectsFeature() {
             GET IN TOUCH
           </Link>
         </div>
-      </section>
+      </motion.section>
     </main>
   );
 }

@@ -33,13 +33,15 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${caterina.variable} ${arefRuqaa.variable} ${bdMegalona.variable}`} >
       <body
-        className={` ${arefRuqaa.className} } antialiased min-h-screen flex flex-col`}
+        className={`${arefRuqaa.className} antialiased`}
       >
         <NextTopLoader color="#C9A96E" showSpinner={false} />
         <NextSessionProviders>
-          <Navbar />
-          <main className="flex-1">{children}</main>
-          <Footer />
+          <div className="min-h-screen flex flex-col">
+            <Navbar />
+            <main className="flex-1">{children}</main>
+            <Footer />
+          </div>
         </NextSessionProviders>
          <ToastContainer />
       </body>

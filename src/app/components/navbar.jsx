@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Navbar as FlowbiteNavbar, NavbarBrand } from "flowbite-react";
 import seperator from "@assets/images/seperator.png";
@@ -16,18 +17,30 @@ const navItems = [
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const pathname = usePathname();
+
+  const unlockPageScroll = () => {
+    document.documentElement.style.overflow = "";
+    document.body.style.overflow = "";
+  };
 
   useEffect(() => {
     if (!isMenuOpen) {
-      document.body.style.overflow = "";
+      unlockPageScroll();
       return;
     }
 
-    document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
+
     return () => {
-      document.body.style.overflow = "";
+      unlockPageScroll();
     };
   }, [isMenuOpen]);
+
+  useEffect(() => {
+    setIsMenuOpen(false);
+    unlockPageScroll();
+  }, [pathname]);
 
   return (
     <div className="sticky top-0 z-40 w-full bg-mimz-cream text-[#2a2a2a]">
@@ -79,10 +92,9 @@ export default function Navbar() {
         </button>
       </FlowbiteNavbar>
 
+      {isMenuOpen ? (
       <div
-        className={`fixed inset-x-0 bottom-0 top-[86px] bg-mimz-cream transition-opacity duration-300 sm:top-[92px] ${
-          isMenuOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
-        }`}
+        className="fixed inset-x-0 bottom-0 top-[86px] bg-mimz-cream transition-opacity duration-300 pointer-events-auto opacity-100 sm:top-[92px]"
       >
         <nav className="relative h-full w-full px-8 py-8 sm:px-12 sm:py-12">
           <div className="relative flex h-full flex-col items-end justify-start gap-5 overflow-hidden pt-4 sm:hidden">
@@ -146,6 +158,7 @@ export default function Navbar() {
           </div>
         </nav>
       </div>
+      ) : null}
     </div>
   );
 }

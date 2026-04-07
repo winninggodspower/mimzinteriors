@@ -2,9 +2,17 @@
 
 import Image from "next/image";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useMemo, useRef } from "react";
+import { useMemo, useRef } from "react";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
+import { motion } from "motion/react";
 import { getAccessoriesPage } from "../../../app/projects/accessories/actions";
+import {
+  MOTION_STAGGER,
+  MOTION_VIEWPORT,
+  fadeUpItem,
+  sectionReveal,
+  staggerContainer,
+} from "@features/lib/motion";
 import {
   ACCESSORIES_PAGE_SIZE,
   accessoriesQueryKey,
@@ -26,26 +34,9 @@ export default function AccessoriesPage() {
     return rawPage;
   }, [searchParams]);
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("accs-in-view");
-          }
-        });
-      },
-      {
-        threshold: 0.2,
-        rootMargin: "0px 0px -10% 0px",
-      }
-    );
-
-    const targets = document.querySelectorAll(".accs-animate");
-    targets.forEach((el) => observer.observe(el));
-
-    return () => observer.disconnect();
-  }, []);
+  const sectionMotion = sectionReveal({ y: 24 });
+  const cardContainer = staggerContainer(MOTION_STAGGER.micro);
+  const cardItem = fadeUpItem({ y: 16 });
 
   const { data, isLoading, isFetching } = useQuery({
     queryKey: accessoriesQueryKey(page, ACCESSORIES_PAGE_SIZE),
@@ -104,25 +95,31 @@ export default function AccessoriesPage() {
 
   return (
     <main className="accs-main">
-      <section className="accs-head accs-animate">
+      <motion.section className="accs-head" {...sectionMotion}>
         <h1 className="accs-title">ACCESSORIES</h1>
         <p className="accs-subtitle">
           "Accessories are the punctuation marks of a room
           <br />
           — They complete the sentence and give it personality."
         </p>
-      </section>
+      </motion.section>
 
-      <section className="accs-grid-section accs-animate" ref={galleryRef}>
+      <motion.section className="accs-grid-section" ref={galleryRef} {...sectionMotion}>
         {isLoading ? (
           <div className="accs-loading">Loading accessories...</div>
         ) : (
-          <div className="accs-grid">
+          <motion.div
+            className="accs-grid"
+            variants={cardContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={MOTION_VIEWPORT}
+          >
             {data?.items?.map((item, index) => (
-              <article
+              <motion.article
                 key={item.id}
                 className="accs-card"
-                style={{ transitionDelay: `${index * 0.03}s` }}
+                variants={cardItem}
               >
                 <div className="accs-card-img-wrap">
                   <Image
@@ -133,9 +130,9 @@ export default function AccessoriesPage() {
                     sizes="(min-width: 1200px) 25vw, (min-width: 768px) 33vw, 50vw"
                   />
                 </div>
-              </article>
+              </motion.article>
             ))}
-          </div>
+          </motion.div>
         )}
 
         <div className="accs-pagination-wrap">
@@ -157,7 +154,7 @@ export default function AccessoriesPage() {
             &gt;
           </button>
         </div>
-      </section>
+      </motion.section>
     </main>
   );
 }

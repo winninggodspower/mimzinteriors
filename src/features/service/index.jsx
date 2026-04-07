@@ -1,39 +1,27 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef } from "react";
+import { motion } from "motion/react";
 import servicehero from "@assets/images/service/servicehero.png";
 import dprocessa from "@assets/images/service/dprocessa.png";
 import dprocessb from "@assets/images/service/dprocessb.png";
 import dprocessc from "@assets/images/service/dprocessc.png";
 import seperator from "@assets/images/seperator.png"
 import patterns  from "@assets/images/patterns.png"
+import {
+  MOTION_STAGGER,
+  MOTION_VIEWPORT,
+  fadeUpItem,
+  heroScaleLoop,
+  sectionReveal,
+  staggerContainer,
+} from "@features/lib/motion";
 
 
 export default function Service() {
-  const processRef = useRef(null);
-  const heroRef = useRef(null);
-  const servicesRef = useRef(null);
-  const quoteRef = useRef(null);
-  const galleryRef = useRef(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("svc-in-view");
-          }
-        });
-      },
-      { threshold: 0.28, rootMargin: "0px 0px -10% 0px" }
-    );
-
-    const targets = document.querySelectorAll(".svc-animate");
-    targets.forEach((el) => observer.observe(el));
-
-    return () => observer.disconnect();
-  }, []);
+  const sectionMotion = sectionReveal({ y: 30 });
+  const cardContainer = staggerContainer(MOTION_STAGGER.medium);
+  const cardItem = fadeUpItem({ y: 22 });
 
   const services = [ 
     "Consultation Services", 
@@ -139,22 +127,27 @@ export default function Service() {
     <main className="svc-main">
 
       {/* ── HERO ─────────────────────────────────────────── */}
-      <section className="svc-hero" ref={heroRef}>
+      <motion.section className="svc-hero" {...sectionMotion}>
         <div className="svc-hero-img-wrap">
-          <Image
-            src={servicehero}
-            alt="Luxury interior design by Mimz Interiors"
-            fill
-            priority
-            className="svc-hero-img"
-          />
+          <motion.div
+            {...heroScaleLoop({ scale: 1.08 })}
+            className="h-full w-full"
+          >
+            <Image
+              src={servicehero}
+              alt="Luxury interior design by Mimz Interiors"
+              fill
+              priority
+              className="svc-hero-img"
+            />
+          </motion.div>
           <div className="svc-hero-overlay" />
         </div>
-      </section>
+      </motion.section>
       <p className="svc-hero-caption">All images belongs to Mimz Interiors</p>
 
       {/* ── HEADLINE ─────────────────────────────────────── */}
-      <section className="svc-headline svc-animate">
+      <motion.section className="svc-headline" {...sectionMotion}>
         <div className="svc-headline-inner">
           <h1 className="svc-headline-title">
             Your Space Designed For Now And The Future.
@@ -163,13 +156,13 @@ export default function Service() {
             Our complete package of services ranges from high quality and specialized services both interior and exterior works to maintenance for both commercial and residential properties.
           </p>
         </div>
-      </section>
+      </motion.section>
 
       {/* ── SERVICES WE OFFER ────────────────────────────── */}
-      <section className="svc-offer" ref={servicesRef}>
+      <motion.section className="svc-offer" {...sectionMotion}>
         <div className="svc-offer-inner">
-          <h2 className="svc-offer-title svc-animate">SERVICES WE OFFER.</h2>
-          <div className="svc-offer-grid svc-animate">
+          <h2 className="svc-offer-title">SERVICES WE OFFER.</h2>
+          <div className="svc-offer-grid">
             {services.map((item, i) => (
               <div key={i} className="svc-offer-item">
                 <span className="svc-offer-bullet">◆</span>
@@ -178,20 +171,20 @@ export default function Service() {
             ))}
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* ── PHILOSOPHY QUOTE ─────────────────────────────── */}
-      <section className="svc-philosophy svc-animate" ref={quoteRef}>
+      <motion.section className="svc-philosophy" {...sectionMotion}>
         <div className="svc-philosophy-inner">
           <blockquote className="svc-philosophy-quote">
             Patience in dealing with clients, staff, and artisans is crucial for a smooth workflow and successful outcomes.
           </blockquote>
           <Image src={seperator} alt="seperator" className="svcquote-seperator"/>
         </div>
-      </section>
+      </motion.section>
 
       {/* ── GALLERY ──────────────────────────────────────── */}
-      <section className="svc-gallery svc-animate" ref={galleryRef}>
+      <motion.section className="svc-gallery" {...sectionMotion}>
         <div className="svc-gallery-grid">
           <div className="svc-gallery-item">
             <Image src={dprocessa} alt="Interior design project" fill className="svc-gallery-img" />
@@ -215,18 +208,24 @@ export default function Service() {
             sizes="100vw"
           />
         </div>
-      </section>
+      </motion.section>
 
       {/* ── DESIGN PROCESS ───────────────────────────────── */}
-      <section className="svc-process" ref={processRef}>
+      <motion.section className="svc-process" {...sectionMotion}>
         <div className="svc-process-inner">
-          <h2 className="svc-process-title svc-animate">OUR DESIGN PROCESS</h2>
-          <div className="svc-process-grid">
+          <h2 className="svc-process-title">OUR DESIGN PROCESS</h2>
+          <motion.div
+            className="svc-process-grid"
+            variants={cardContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={MOTION_VIEWPORT}
+          >
             {processSteps.map((step, i) => (
-              <div
+              <motion.div
                 key={i}
-                className="svc-process-card svc-animate"
-                style={{ animationDelay: `${i * 0.1}s` }}
+                className="svc-process-card"
+                variants={cardItem}
               >
                 <div className="svc-process-header">
                   <span className="svc-process-num">{step.num}</span>
@@ -237,11 +236,11 @@ export default function Service() {
                   <span className="svc-process-step-title">{step.title}</span>
                 </div>
                 <p className="svc-process-desc">{step.desc}</p>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
     </main>
   );
 }

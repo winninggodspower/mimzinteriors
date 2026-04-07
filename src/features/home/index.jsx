@@ -1,34 +1,15 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect } from "react";
 import homeHero from "@assets/images/home/homehero.png";
 import quoteImage from "@assets/images/home/quoteimage.png";
 import patterns from "@assets/images/patterns.png";
 import seperator from "@assets/images/seperator.png";
 
 export default function HomeFeature() {
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("home-in-view");
-          }
-        });
-      },
-      { threshold: 0.14 }
-    );
-
-    const targets = document.querySelectorAll(".home-animate");
-    targets.forEach((el) => observer.observe(el));
-
-    return () => observer.disconnect();
-  }, []);
-
   return (
     <main className="home-main">
-      <section className="home-hero home-animate">
+      <section className="home-hero">
         <div className="home-hero-wrap">
           <Image
             src={homeHero}
@@ -41,7 +22,7 @@ export default function HomeFeature() {
         </div>
       </section>
 
-      <section className="home-intro home-animate">
+      <section className="home-intro">
         <p className="home-img-credit">-All Images belongs to Mimz interiors-</p>
         <div className="home-intro-copy">
           <p>
@@ -56,11 +37,11 @@ export default function HomeFeature() {
         </div>
       </section>
 
-      <section className="home-pattern home-animate" aria-hidden="true">
+      <section className="home-pattern" aria-hidden="true">
         <Image src={patterns} alt="" fill className="home-pattern-img" sizes="100vw" />
       </section>
 
-      <section className="home-feature-image home-animate">
+      <section className="home-feature-image">
         <div className="home-feature-image-wrap">
           <Image
             src={quoteImage}
@@ -72,7 +53,7 @@ export default function HomeFeature() {
         </div>
       </section>
 
-      <section className="home-quote home-animate">
+      <section className="home-quote">
         <div className="home-quote-inner">
           <blockquote className="home-quote-text">
             "Interior design is my canvas, where every detail is styled to reflect my client's dreams and personality."
@@ -81,7 +62,7 @@ export default function HomeFeature() {
         </div>
       </section>
 
-      <section className="home-quote-separator home-animate" aria-hidden="true">
+      <section className="home-quote-separator" aria-hidden="true">
         <div className="home-quote-separator-wrap">
           <Image src={seperator} alt="" fill className="home-quote-separator-img" sizes="(min-width: 1024px) 520px, 55vw" />
         </div>

@@ -1,9 +1,14 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect } from "react";
+import { motion } from "motion/react";
 import mapImage from "@assets/images/contact/map.png";
-import patterns from "@assets/images/patterns.png";
+import {
+  MOTION_STAGGER,
+  MOTION_VIEWPORT,
+  fadeUpItem,
+  sectionReveal,
+} from "@features/lib/motion";
 
 const locationIcon = (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -96,38 +101,29 @@ const ContactInfo = [
 ];
 
 export default function Contact() {
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("contact-in-view");
-          }
-        });
-      },
-      { threshold: 0.12 }
-    );
-
-    const targets = document.querySelectorAll(".contact-animate");
-    targets.forEach((el) => observer.observe(el));
-
-    return () => observer.disconnect();
-  }, []);
+  const sectionMotion = sectionReveal({ y: 24 });
 
   return (
     <main className="contact-main">
       {/* ── INFO GRID ───────────────────────────────────── */}
-      <section className="contact-info-section contact-animate">
+      <motion.section className="contact-info-section" {...sectionMotion}>
         <div className="contact-info-inner">
           <div className="contact-info-grid">
             {ContactInfo.map((item, i) => (
-              <div key={i} className="contact-info-card">
+              <motion.div
+                key={i}
+                className="contact-info-card"
+                variants={fadeUpItem({ delay: i * MOTION_STAGGER.tight })}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ ...MOTION_VIEWPORT, amount: 0.25 }}
+              >
                 <span className="contact-info-icon">{item.icon}</span>
                 <div className="contact-info-text">
                   <h3 className="contact-info-label">{item.label}</h3>
                   <div className="contact-info-content">{item.content}</div>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
 
@@ -141,7 +137,7 @@ export default function Contact() {
             />
           </div>
         </div>
-      </section>
+      </motion.section>
     </main>
   );
 }
