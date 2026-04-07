@@ -37,6 +37,7 @@ export default function AboutPage() {
                 alt="Mimz Ferunmise — Interior Designer"
                 fill
                 className="about-img"
+                sizes="(min-width: 1200px) 33vw, (min-width: 768px) 45vw, 100vw"
               />
             </div>
           </div>
@@ -74,7 +75,13 @@ export default function AboutPage() {
             <span className="about-quote-mark about-quote-close">"</span>
           </blockquote>
           <div className=" seperator">
-            <Image src={seperator} alt="seperator image" height={1780} width={273} />
+            <Image
+              src={seperator}
+              alt="seperator image"
+              height={178}
+              width={273}
+              style={{ width: "auto", height: "auto" }}
+            />
           </div>
         </div>
       </section>
@@ -84,16 +91,40 @@ export default function AboutPage() {
       <section className="about-gallery-row">
         <div className="about-gallery-grid">
           <div className="about-gallery-item">
-            <Image src={aboutgallerya} alt="Interior project" fill className="about-img" />
+            <Image
+              src={aboutgallerya}
+              alt="Interior project"
+              fill
+              className="about-img"
+              sizes="(min-width: 1200px) 25vw, (min-width: 768px) 50vw, 100vw"
+            />
           </div>
           <div className="about-gallery-item">
-            <Image src={aboutgalleryb} alt="Interior project" fill className="about-img" />
+            <Image
+              src={aboutgalleryb}
+              alt="Interior project"
+              fill
+              className="about-img"
+              sizes="(min-width: 1200px) 25vw, (min-width: 768px) 50vw, 100vw"
+            />
           </div>
           <div className="about-gallery-item">
-            <Image src={aboutgalleryc} alt="Interior project" fill className="about-img" />
+            <Image
+              src={aboutgalleryc}
+              alt="Interior project"
+              fill
+              className="about-img"
+              sizes="(min-width: 1200px) 25vw, (min-width: 768px) 50vw, 100vw"
+            />
           </div>
           <div className="about-gallery-item">
-            <Image src={aboutgallerya} alt="Interior project" fill className="about-img" />
+            <Image
+              src={aboutgallerya}
+              alt="Interior project"
+              fill
+              className="about-img"
+              sizes="(min-width: 1200px) 25vw, (min-width: 768px) 50vw, 100vw"
+            />
           </div>
         </div>
       </section>
@@ -133,13 +164,31 @@ export default function AboutPage() {
       <section className="about-vision-gallery">
         <div className="about-vision-gallery-grid">
           <div className="about-vision-gallery-item">
-            <Image src={visiona} alt="Design vision" fill className="about-img" />
+            <Image
+              src={visiona}
+              alt="Design vision"
+              fill
+              className="about-img"
+              sizes="(min-width: 1200px) 33vw, (min-width: 768px) 50vw, 100vw"
+            />
           </div>
           <div className="about-vision-gallery-item">
-            <Image src={visionb} alt="Design vision" fill className="about-img" />
+            <Image
+              src={visionb}
+              alt="Design vision"
+              fill
+              className="about-img"
+              sizes="(min-width: 1200px) 33vw, (min-width: 768px) 50vw, 100vw"
+            />
           </div>
           <div className="about-vision-gallery-item">
-            <Image src={visionc} alt="Design vision" fill className="about-img" />
+            <Image
+              src={visionc}
+              alt="Design vision"
+              fill
+              className="about-img"
+              sizes="(min-width: 1200px) 33vw, (min-width: 768px) 50vw, 100vw"
+            />
           </div>
         </div>
       </section>
@@ -173,6 +222,7 @@ export default function AboutPage() {
                 alt="Mimz Interiors showroom"
                 fill
                 className="about-img"
+                sizes="(min-width: 1200px) 34vw, (min-width: 768px) 45vw, 100vw"
               />
             </div>
           </div>
@@ -196,6 +246,7 @@ export default function AboutPage() {
             alt="Mimz Interiors team"
             fill
             className="about-img about-team-img"
+            sizes="100vw"
           />
           <div className="about-team-overlay" />
         </div>
@@ -213,6 +264,7 @@ export default function AboutPage() {
                   width={140}
                   height={180}
                   className="about-award-badge-img"
+                  style={{ width: "auto", height: "auto" }}
                 />
               </div>
               <div className="about-award-badge">
@@ -222,6 +274,7 @@ export default function AboutPage() {
                   width={140}
                   height={180}
                   className="about-award-badge-img"
+                  style={{ width: "auto", height: "auto" }}
                 />
               </div>
             </div>
@@ -233,6 +286,7 @@ export default function AboutPage() {
                   width={100}
                   height={100}
                   className="about-award-badge-img award-small"
+                  style={{ width: "auto", height: "auto" }}
                 />
               </div>
               <div className="about-award-badge-small">
@@ -242,6 +296,7 @@ export default function AboutPage() {
                   width={100}
                   height={100}
                   className="about-award-badge-img award-small"
+                  style={{ width: "auto", height: "auto" }}
                 />
               </div>
               <div className="about-award-badge-small">
@@ -251,6 +306,7 @@ export default function AboutPage() {
                   width={100}
                   height={100}
                   className="about-award-badge-img award-small"
+                  style={{ width: "auto", height: "auto" }}
                 />
               </div>
             </div>

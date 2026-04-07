@@ -56,6 +56,7 @@ export default function Navbar() {
             height={44}
             priority
             className="h-auto w-[138px]"
+            style={{ height: "auto" }}
           />
         </NavbarBrand>
 
