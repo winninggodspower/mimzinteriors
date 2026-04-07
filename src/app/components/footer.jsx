@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import patterns from "@assets/images/patterns.png";
+import patterns from "@assets/images/patterns.svg";
 import { Instagram, Linkedin, Facebook, Youtube } from "lucide-react";
 
 const socialLinks = [

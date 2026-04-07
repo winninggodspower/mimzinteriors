@@ -7,7 +7,7 @@ import dprocessa from "@assets/images/service/dprocessa.png";
 import dprocessb from "@assets/images/service/dprocessb.png";
 import dprocessc from "@assets/images/service/dprocessc.png";
 import seperator from "@assets/images/seperator.png"
-import patterns  from "@assets/images/patterns.png"
+import patterns  from "@assets/images/patterns.svg"
 import {
   MOTION_STAGGER,
   MOTION_VIEWPORT,

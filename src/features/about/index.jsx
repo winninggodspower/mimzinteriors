@@ -5,7 +5,7 @@ import aboutgalleryb from "@assets/images/aboutgalleryb.png";
 import aboutgalleryc from "@assets/images/aboutgalleryc.png";
 import ivision from "@assets/images/ivision.png";
 import imission from "@assets/images/imission.png";
-import patterns from "@assets/images/patterns.png";
+import patterns from "@assets/images/patterns.svg";
 import seperator from "@assets/images/seperator.png"
 import visiona from "@assets/images/visiona.png";
 import visionb from "@assets/images/visionb.png";

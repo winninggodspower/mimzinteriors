@@ -3,7 +3,7 @@
 import Image from "next/image";
 import homeHero from "@assets/images/home/homehero.png";
 import quoteImage from "@assets/images/home/quoteimage.png";
-import patterns from "@assets/images/patterns.png";
+import patterns from "@assets/images/patterns.svg";
 import seperator from "@assets/images/seperator.png";
 
 export default function HomeFeature() {

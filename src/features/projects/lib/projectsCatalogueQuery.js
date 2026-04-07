@@ -2,6 +2,7 @@ export const PROJECTS_CATALOGUE_PAGE_SIZE = 12;
 export const ACCESSORIES_PAGE_SIZE = 32;
 export const PROJECT_DETAIL_HEROES_PER_PAGE = 3;
 export const PROJECT_DETAIL_COLUMNS_PER_PAGE = 6;
+export const APARTMENTS_CATALOGUE_PAGE_SIZE = 12;
 
 // Backward-compatible aliases
 export const PROJECT_DETAIL_HERO_PAGE_SIZE = PROJECT_DETAIL_HEROES_PER_PAGE;
@@ -12,6 +13,11 @@ export const projectsCatalogueQueryKey = (page, pageSize = PROJECTS_CATALOGUE_PA
   page,
   pageSize,
 ];
+
+export const apartmentsCatalogueQueryKey = (
+  page,
+  pageSize = APARTMENTS_CATALOGUE_PAGE_SIZE
+) => ["apartmentsCatalogue", page, pageSize];
 
 export const accessoriesQueryKey = (
   page,
@@ -26,6 +32,19 @@ export const projectDetailQueryKey = (
 ) => [
   "projectDetail",
   projectId,
+  page,
+  heroPageSize,
+  columnPageSize,
+];
+
+export const apartmentDetailQueryKey = (
+  apartmentId,
+  page,
+  heroPageSize = PROJECT_DETAIL_HEROES_PER_PAGE,
+  columnPageSize = PROJECT_DETAIL_COLUMNS_PER_PAGE
+) => [
+  "apartmentDetail",
+  apartmentId,
   page,
   heroPageSize,
   columnPageSize,
