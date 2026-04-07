@@ -11,7 +11,6 @@ import seperator from "@assets/images/seperator.png";
 import {
   aosReveal,
   MOTION_STAGGER,
-  MOTION_VIEWPORT,
   MOTION_DURATIONS,
   fadeUpItem,
   heroScaleLoop,
@@ -134,8 +133,7 @@ export default function ProjectsCatalogue() {
             className="prjc-gallery-grid"
             variants={cardContainer}
             initial="hidden"
-            whileInView="visible"
-            viewport={MOTION_VIEWPORT}
+            animate="visible"
           >
             {data?.projects?.map((project, index) => (
               <motion.article

@@ -8,7 +8,6 @@ import { motion } from "motion/react";
 import { getAccessoriesPage } from "../../../app/projects/accessories/actions";
 import {
   MOTION_STAGGER,
-  MOTION_VIEWPORT,
   fadeUpItem,
   sectionReveal,
   staggerContainer,
@@ -112,8 +111,7 @@ export default function AccessoriesPage() {
             className="accs-grid"
             variants={cardContainer}
             initial="hidden"
-            whileInView="visible"
-            viewport={MOTION_VIEWPORT}
+            animate="visible"
           >
             {data?.items?.map((item, index) => (
               <motion.article
