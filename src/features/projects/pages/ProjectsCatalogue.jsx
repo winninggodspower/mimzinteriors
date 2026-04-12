@@ -142,7 +142,7 @@ export default function ProjectsCatalogue() {
                 variants={cardItem}
               >
                 <Link
-                  href={`/projects/projectCatalogue/${project.id}`}
+                  href={`/projects/project_catalogue/${project.id}`}
                   className="prjc-card-image-wrap"
                   aria-label={project.title}
                 >
