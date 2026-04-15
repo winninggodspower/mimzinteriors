@@ -16,6 +16,39 @@
   --color-mimz-gold: var(--mimz-gold);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-caterina: var(--font-caterina);
+  --font-aref-ruqaa: var(--font-aref-ruqaa);
+  --font-bd-megalona: var(--font-bd-megalona);
+}
+
+@layer components {
+  .about-vision {
+    @apply px-6 py-[clamp(3.5rem,7vw,6rem)] sm:px-12 lg:px-[clamp(1.5rem,6vw,7rem)];
+  }
+
+  .about-vision-inner {
+    @apply mx-auto grid max-w-[1280px] grid-cols-1 items-start gap-[clamp(2rem,5vw,5rem)] md:grid-cols-2;
+  }
+
+  .about-vision-card {
+    @apply flex flex-col pb-6;
+  }
+
+  .about-vision-head {
+    @apply mb-2 flex items-center gap-3;
+  }
+
+  .about-vision-icon {
+    @apply h-8 w-8 shrink-0 opacity-70 sm:h-10 sm:w-10;
+  }
+
+  .about-vision-label {
+    @apply font-caterina text-[40px] font-light uppercase leading-none tracking-[0] text-[#1c1c1a];
+  }
+
+  .about-vision-text {
+    @apply text-[16px] leading-[1.45] text-[#4a4843];
+  }
 }
 
 body {
@@ -33,7 +66,7 @@ html {
 }
 
 body {
-  overflow-y: visible;
+  overflow-y: auto;
 }
 
 /* ── FOOTER PATTERN ─────────────────────────────────────────── */
@@ -193,53 +226,6 @@ body {
   transform: scale(1.06);
 }
 
-/* ── VISION ──────────────────────────────────────────────────── */
-.about-vision {
-  padding: clamp(3.5rem, 7vw, 6rem) clamp(1.5rem, 6vw, 7rem);
-}
-
-.about-vision-inner {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: clamp(2rem, 5vw, 5rem);
-  max-width: 1280px;
-  margin: 0 auto;
-  align-items: start;
-}
-
-.about-vision-card {
-  position: relative;
-  padding-bottom: 1.5rem;
-}
-
-.about-vision-label {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-family: var(--font-caterina, Georgia, serif);
-  font-size: 40px;
-  font-weight: 300;
-  letter-spacing: 0%;
-  color: #1c1c1a;
-  text-transform: uppercase;
-  margin-left: 40px;
-}
-
-.about-vision-text {
-  font-size: 16px;
-  line-height: 1;
-  color: #4a4843;
-  margin-top: -10px;
-}
-
-.about-vision-leaf {
-  position: absolute;
-  bottom: 20;
-  right: 0;
-  font-size: 1.25rem;
-  opacity: 0.7;
-}
-
 /* ── VISION GALLERY ──────────────────────────────────────────── */
 /* .about-vision-gallery {
   background: #1c1c1a;
@@ -336,7 +322,7 @@ body {
 .about-team-img-wrap {
   position: relative;
   width: 100%;
-  aspect-ratio: 1331 / 845;
+  height: 550px;
   margin: clamp(-1.75rem, -3.5vw, -3rem) auto 0;
   overflow: hidden;
   z-index: 1;
@@ -1084,29 +1070,6 @@ body {
   background: #ffffff;
 }
 
-/* ── HERO ────────────────────────────────────────────────────── */
-.home-hero {
-  width: 100%;
-  background: #fff;
-  overflow: clip;
-}
-
-.home-hero-wrap {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 1520 / 940;
-  overflow: clip;
-  isolation: isolate;
-}
-
-.home-hero-img {
-  display: block;
-  object-fit: cover;
-  object-position: center;
-  animation: homeHeroFloat 12s ease-in-out infinite alternate;
-  will-change: transform;
-}
-
 @keyframes homeHeroFloat {
   0% {
     transform: scale(1);
@@ -1114,6 +1077,18 @@ body {
 
   100% {
     transform: scale(1.06);
+  }
+}
+
+@keyframes awardRibbonDrop {
+  0% {
+    opacity: 0;
+    transform: translateY(-26px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
@@ -1238,71 +1213,6 @@ body {
 }
 
 /* ── RESPONSIVE ──────────────────────────────────────────────── */
-@media (max-width: 1024px) {
-  .home-hero-wrap {
-    aspect-ratio: 1400 / 900;
-  }
-
-  .home-feature-image-wrap {
-    aspect-ratio: 1300 / 790;
-  }
-}
-
-@media (max-width: 768px) {
-  .home-hero-wrap {
-    aspect-ratio: 820 / 700;
-  }
-
-  .home-intro {
-    padding-top: 1rem;
-  }
-
-  .home-intro-copy p {
-    font-size: 0.9rem;
-    line-height: 1.66;
-  }
-
-  .home-feature-image-wrap {
-    aspect-ratio: 780 / 720;
-  }
-
-  .home-quote-text {
-    font-size: clamp(1.9rem, 4.4vw, 3.6rem);
-  }
-  .home-quote-author {
-    font-size: clamp(1.15rem, 2vw, 2.1rem);
-  }
-}
-
-@media (max-width: 480px) {
-  .home-hero-wrap {
-    aspect-ratio: 390 / 430;
-  }
-
-  .home-img-credit {
-    font-size: 0.7rem;
-  }
-
-  .home-intro-copy p {
-    font-size: 0.84rem;
-  }
-
-  .home-feature-image-wrap {
-    aspect-ratio: 390 / 470;
-  }
-
-  .home-quote {
-    padding-bottom: 3.2rem;
-  }
-
-  .home-quote-separator {
-    margin-top: -70px;
-  }
-  .home-quote-separator-wrap {
-    width: min(460px, 68vw);
-  }
-}
-
 /* ═══════════════════════════════════════════════════════════════
    CONTACT PAGE — globals.css
    Palette: cream #F6F4EE · dark #1C1C1A · bronze #C28831

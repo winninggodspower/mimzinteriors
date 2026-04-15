@@ -133,32 +133,27 @@ export default function AboutPage() {
       </motion.section>
 
       {/* ── VISION SECTION ──────────────────────────────── */}
-      <motion.section className="about-vision" {...sectionMotion}>
-        <div className="about-vision-inner">
-          <div className="about-vision-card">
-            <motion.div className="about-vision-label" {...aosReveal({ direction: "right", distance: 28 })}>
-              VISION
-            </motion.div>
-            <motion.p className="about-vision-text" {...aosReveal({ direction: "left", distance: 26, delay: 0.05 })}>
+      <motion.section className="px-6 py-[clamp(3.5rem,7vw,6rem)] sm:px-12 lg:px-[clamp(1.5rem,6vw,7rem)]" {...sectionMotion}>
+        <div className="mx-auto grid max-w-7xl grid-cols-1 items-start gap-[clamp(2rem,5vw,5rem)] md:grid-cols-2">
+          <motion.div className="about-vision-card" {...aosReveal({ direction: "up", distance: 30, delay: 0.1 })}>
+            <div className="about-vision-head">
+              <Image src={ivision} alt="vision icon" className="about-vision-icon" />
+              <h3 className="about-vision-label">VISION</h3>
+            </div>
+            <p className="about-vision-text">
               To provide the best solution for customers who look for originality and unparalleled quality, through our continuous effort in innovation and creativity.
-            </motion.p>
-            <span className="about-vision-leaf">
-              <Image src={ivision} alt="vision icon"/>
-            </span>
-          </div>
+            </p>
+          </motion.div>
 
-          <div className="about-vision-card">
-            <motion.div className="about-vision-label" {...aosReveal({ direction: "left", distance: 28 })}>
-             
-              MISION
-            </motion.div>
-            <motion.p className="about-vision-text" {...aosReveal({ direction: "right", distance: 26, delay: 0.05 })}>
+          <motion.div className="about-vision-card" {...aosReveal({ direction: "up", distance: 30, delay: 0.25 })}>
+            <div className="about-vision-head">
+              <Image src={imission} alt="mission icon" className="about-vision-icon" />
+              <h3 className="about-vision-label">MISION</h3>
+            </div>
+            <p className="about-vision-text">
               To design and create spaces that generate positive vibes, be it the warmth of a home, or the professional ambience of a workspace.
-            </motion.p>
-            <span className="about-vision-leaf">
-              <Image src={imission} alt="mission icon" />
-            </span>
-          </div>
+            </p>
+          </motion.div>
         </div>
       </motion.section>
 
@@ -251,7 +246,6 @@ export default function AboutPage() {
             alt="Mimz Interiors team"
             fill
             className="about-img about-team-img"
-            sizes="100vw"
           />
           <div className="about-team-overlay" />
         </div>
@@ -262,55 +256,55 @@ export default function AboutPage() {
         <div className="about-awards-inner">
           <div className="about-awards-badges">
             <div className="about-awards-badges-top">
-              <div className="about-award-badge">
+              <div className="group flex items-center justify-center">
                 <Image
                   src={mimza}
                   alt="African Property Awards — Best Interior Design"
-                  width={140}
-                  height={180}
-                  className="about-award-badge-img"
+                  width={180}
+                  height={750}
+                  className="h-auto w-auto object-contain transition-transform duration-300 ease-in-out group-hover:scale-[1.04]"
                   style={{ width: "auto", height: "auto" }}
                 />
               </div>
-              <div className="about-award-badge">
+              <div className="group flex items-center justify-center">
                 <Image
                   src={mimzb}
                   alt="African Property Awards — Interior Design"
-                  width={140}
-                  height={180}
-                  className="about-award-badge-img"
+                  width={180}
+                  height={750}
+                  className="h-auto w-auto object-contain transition-transform duration-300 ease-in-out group-hover:scale-[1.04]"
                   style={{ width: "auto", height: "auto" }}
                 />
               </div>
             </div>
             <div className="about-awards-badges-bottom">
-              <div className="about-award-badge-small">
+              <div className="group flex items-center justify-center">
                 <Image
                   src={sawarda}
                   alt="Laufen Award"
                   width={100}
                   height={100}
-                  className="about-award-badge-img award-small"
+                  className="h-auto w-auto object-contain drop-shadow-[0_4px_12px_rgba(0,0,0,0.12)] transition-transform duration-300 ease-in-out group-hover:scale-[1.04]"
                   style={{ width: "auto", height: "auto" }}
                 />
               </div>
-              <div className="about-award-badge-small">
+              <div className="group flex items-center justify-center">
                 <Image
                   src={sawardb}
                   alt="Roca Award"
                   width={100}
                   height={100}
-                  className="about-award-badge-img award-small"
+                  className="h-auto w-auto object-contain drop-shadow-[0_4px_12px_rgba(0,0,0,0.12)] transition-transform duration-300 ease-in-out group-hover:scale-[1.04]"
                   style={{ width: "auto", height: "auto" }}
                 />
               </div>
-              <div className="about-award-badge-small">
+              <div className="group flex items-center justify-center">
                 <Image
                   src={sawardc}
                   alt="Roca Award"
                   width={100}
                   height={100}
-                  className="about-award-badge-img award-small"
+                  className="h-auto w-auto object-contain drop-shadow-[0_4px_12px_rgba(0,0,0,0.12)] transition-transform duration-300 ease-in-out group-hover:scale-[1.04]"
                   style={{ width: "auto", height: "auto" }}
                 />
               </div>
