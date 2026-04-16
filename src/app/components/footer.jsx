@@ -1,12 +1,12 @@
 import Link from "next/link";
 import Image from "next/image";
 import patterns from "@assets/images/patterns.svg";
-import { Instagram, Linkedin, Facebook, Youtube } from "lucide-react";
+import { Instagram, Linkedin, Music, Youtube } from "lucide-react";
 
 const socialLinks = [
   { name: "Instagram", href: "#", icon: Instagram },
   { name: "LinkedIn", href: "#", icon: Linkedin },
-  { name: "Facebook", href: "#", icon: Facebook },
+  { name: "TikTok", href: "#", icon: Music },
   { name: "YouTube", href: "#", icon: Youtube },
 ];
 
@@ -23,9 +23,9 @@ export default function Footer() {
                 key={social.name}
                 href={social.href}
                 aria-label={social.name}
-                className="transition-opacity hover:opacity-70"
+                className="flex items-center justify-center rounded border border-black p-2 transition-all hover:bg-black hover:text-white"
               >
-                <Icon size={14} strokeWidth={1.8} />
+                <Icon size={18} strokeWidth={1.5} />
               </Link>
             );
           })}
