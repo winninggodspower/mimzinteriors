@@ -43,16 +43,16 @@ export default function AboutPage() {
             </div>
           </div>
 
-          <motion.div className="about-roots-content" {...aosReveal({ direction: "right", distance: 42 })}>
-            <motion.h2 className="about-section-label" {...aosReveal({ direction: "right", distance: 30 })}>
+          <div className="about-roots-content" >
+            <motion.h2 className="about-section-label" {...aosReveal({ direction: "left", distance: 30 })}>
               {aboutContent.roots.title}
             </motion.h2>
-            <motion.div className="about-roots-body" {...aosReveal({ direction: "left", distance: 34, delay: 0.06 })}>
+            <motion.div className="about-roots-body" {...aosReveal({ direction: "right", distance: 34, delay: 0.06 })}>
               {aboutContent.roots.paragraphs.map((paragraph) => (
                 <p key={paragraph}>{paragraph}</p>
               ))}
             </motion.div>
-          </motion.div>
+          </div>
         </div>
       </motion.section>
 
@@ -60,7 +60,7 @@ export default function AboutPage() {
       <motion.section className="py-[clamp(3rem,6vw,5rem)] px-[clamp(1.5rem,8vw,10rem)] border-b border-[rgba(201,169,110,0.25)]" {...sectionMotion}>
         <div className="mx-auto max-w-225 text-center">
           <div className="flex flex-col items-center">
-            <motion.blockquote className="m-0 border-none bg-none p-0 font-bd-megalona text-[48px] font-normal italic leading-none text-black max-[1024px]:text-[40px] max-[768px]:text-[32px] max-[480px]:text-[26px]" {...aosReveal({ direction: "up", distance: 32 })}>
+            <motion.blockquote className="m-0 border-none bg-none p-0 font-bd-megalona text-[48px] font-normal italic leading-none text-black max-lg:text-[40px] max-md:text-[32px] max-sm:text-[26px]" {...aosReveal({ direction: "up", distance: 32 })}>
               <span className="mr-[0.1em] align-[-0.1em] text-[clamp(2rem,5vw,3.5rem)] font-normal leading-0 text-black">"</span>
               {aboutContent.quoteSection.text}
               <span className="ml-[0.1em] align-[-0.1em] text-[clamp(2rem,5vw,3.5rem)] font-normal leading-0 text-black">"</span>
@@ -71,7 +71,7 @@ export default function AboutPage() {
                 alt="seperator image"
                 height={178}
                 width={273}
-                className="h-44.5 w-68.25 max-[768px]:h-auto max-[768px]:w-56 max-[480px]:w-44"
+                className="h-44.5 w-68.25 max-md:h-auto max-md:w-56 max-sm:w-44"
               />
             </motion.div>
           </div>
@@ -113,7 +113,7 @@ export default function AboutPage() {
       </motion.section>
 
       {/* ── VISION SECTION ──────────────────────────────── */}
-      <motion.section className="px-6 py-[clamp(3.5rem,7vw,6rem)] sm:px-12 lg:px-[clamp(1.5rem,6vw,7rem)]" {...sectionMotion}>
+      <motion.section className="px-6 my-20 md:mt-36 md:mb-32 sm:px-12 lg:px-[clamp(1.5rem,6vw,7rem)]" {...sectionMotion}>
         <div className="mx-auto grid max-w-7xl grid-cols-1 items-start gap-[clamp(2rem,5vw,5rem)] md:grid-cols-2">
           <motion.div className="about-vision-card" {...aosReveal({ direction: "up", distance: 30, delay: 0.1 })}>
             <div className="about-vision-head">
@@ -140,7 +140,7 @@ export default function AboutPage() {
       {/* ── VISION GALLERY ──────────────────────────────── */}
       {/* convert to a carousel later */}
       <motion.section className="about-vision-gallery" {...sectionMotion}>
-        <div className="about-vision-gallery-grid">
+        <div className="grid grid-cols-3 gap-[clamp(3px,0.35vw,6px)] max-md:grid-cols-1">
           <motion.div className="about-vision-gallery-item" {...aosReveal({ direction: "up", distance: 24, delay: 0.06 })}>
             <Image
               src={visiona}
@@ -172,7 +172,7 @@ export default function AboutPage() {
       </motion.section>
 
       {/* ── THE FIRM SECTION ────────────────────────────── */}
-      <motion.section className="about-firm" {...sectionMotion}>
+      <section className="about-firm">
         <div className="about-firm-inner">
           <motion.div className="about-firm-content" {...aosReveal({ direction: "left", distance: 36 })}>
             <motion.h2 className="about-section-label" {...aosReveal({ direction: "left", distance: 28 })}>
@@ -197,7 +197,7 @@ export default function AboutPage() {
             </div>
           </div>
         </div>
-      </motion.section>
+      </section>
 
       {/* ── TEAM PHOTO ──────────────────────────────────── */}
       <motion.section className="about-team" {...sectionMotion}>
@@ -210,52 +210,54 @@ export default function AboutPage() {
             sizes="100vw"
           />
         </div>
-        <div className="about-team-img-wrap">
+        <div className="relative z-1 mt-[clamp(-1.75rem,-3.5vw,-3rem)] h-145 w-full overflow-hidden mx-auto max-md:-mt-6 max-sm:-mt-4">
           <Image
             src={aboutteam}
             alt="Mimz Interiors team"
             fill
-            className="about-img about-team-img"
+            className="about-img object-top"
           />
           <div className="about-team-overlay" />
         </div>
       </motion.section>
 
       {/* ── AWARDS SECTION ──────────────────────────────── */}
-      <motion.section className="about-awards" {...sectionMotion}>
-        <div className="about-awards-inner">
-          <div className="about-awards-badges">
-            <div className="about-awards-badges-top">
-              <div className="group flex items-center justify-center">
+      <motion.section className="px-[clamp(1.5rem,6vw,7rem)] py-[clamp(4rem,8vw,7rem)]" {...sectionMotion}>
+        <div className="mx-40 grid max-w-7xl grid-cols-[auto_1fr] items-start gap-10 max-lg:mx-auto max-lg:grid-cols-1 max-md:gap-4">
+
+          <div className="flex flex-col items-center gap-4 max-lg:order-2 max-lg:justify-start max-md:w-full justify-center">
+            
+            {/* two awards badges */}
+            <div className="grid w-83 grid-cols-2 gap-3 max-md:gap-0 items-start justify-center mt-10 md:mt-0">
+              <div className="group flex items-center justify-center w-fit">
                 <Image
                   src={mimza}
                   alt="African Property Awards — Best Interior Design"
-                  width={180}
+                  width={186}
                   height={750}
-                  className="h-auto w-auto object-contain transition-transform duration-300 ease-in-out group-hover:scale-[1.04]"
-                  style={{ width: "auto", height: "auto" }}
+                  className="about-award-primary-badge"
                 />
               </div>
-              <div className="group flex items-center justify-center">
+              <div className="group flex items-center justify-center w-fit">
                 <Image
                   src={mimzb}
                   alt="African Property Awards — Interior Design"
-                  width={180}
+                  width={186}
                   height={750}
-                  className="h-auto w-auto object-contain transition-transform duration-300 ease-in-out group-hover:scale-[1.04]"
-                  style={{ width: "auto", height: "auto" }}
+                  className="about-award-primary-badge"
                 />
               </div>
             </div>
-            <div className="about-awards-badges-bottom">
+
+            {/* three certificate badges */}
+            <div className="flex w-83 items-center justify-center -space-x-3 max-sm:-space-x-2">
               <div className="group flex items-center justify-center">
                 <Image
                   src={sawarda}
                   alt="Laufen Award"
                   width={100}
                   height={100}
-                  className="h-auto w-auto object-contain drop-shadow-[0_4px_12px_rgba(0,0,0,0.12)] transition-transform duration-300 ease-in-out group-hover:scale-[1.04]"
-                  style={{ width: "auto", height: "auto" }}
+                  className="h-auto w-25 object-contain drop-shadow-[0_4px_12px_rgba(0,0,0,0.12)] transition-transform duration-300 ease-in-out group-hover:scale-[1.04]"
                 />
               </div>
               <div className="group flex items-center justify-center">
@@ -264,8 +266,7 @@ export default function AboutPage() {
                   alt="Roca Award"
                   width={100}
                   height={100}
-                  className="h-auto w-auto object-contain drop-shadow-[0_4px_12px_rgba(0,0,0,0.12)] transition-transform duration-300 ease-in-out group-hover:scale-[1.04]"
-                  style={{ width: "auto", height: "auto" }}
+                  className="h-auto w-25 object-contain drop-shadow-[0_4px_12px_rgba(0,0,0,0.12)] transition-transform duration-300 ease-in-out group-hover:scale-[1.04]"
                 />
               </div>
               <div className="group flex items-center justify-center">
@@ -274,14 +275,13 @@ export default function AboutPage() {
                   alt="Roca Award"
                   width={100}
                   height={100}
-                  className="h-auto w-auto object-contain drop-shadow-[0_4px_12px_rgba(0,0,0,0.12)] transition-transform duration-300 ease-in-out group-hover:scale-[1.04]"
-                  style={{ width: "auto", height: "auto" }}
+                  className="h-auto w-25 object-contain drop-shadow-[0_4px_12px_rgba(0,0,0,0.12)] transition-transform duration-300 ease-in-out group-hover:scale-[1.04]"
                 />
               </div>
             </div>
           </div>
 
-          <motion.div className="about-awards-content" {...aosReveal({ direction: "right", distance: 34 })}>
+          <div className="about-awards-content">
             <motion.h2 className="about-section-label" {...aosReveal({ direction: "right", distance: 26 })}>
               {aboutContent.awards.title}
             </motion.h2>
@@ -293,7 +293,7 @@ export default function AboutPage() {
             <motion.blockquote className="about-awards-quote" {...aosReveal({ direction: "up", distance: 24, delay: 0.08 })}>
               "{aboutContent.awards.quote}"
             </motion.blockquote>
-          </motion.div>
+          </div>
         </div>
       </motion.section>
     </main>
