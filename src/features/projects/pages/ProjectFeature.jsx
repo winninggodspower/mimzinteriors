@@ -10,12 +10,7 @@ import accessories from "@assets/images/projects/accessories.png";
 import seperator from "@assets/images/seperator.png";
 import {
   aosReveal,
-  MOTION_STAGGER,
-  MOTION_VIEWPORT,
-  fadeUpItem,
-  heroScaleLoop,
   sectionReveal,
-  staggerContainer,
 } from "@features/lib/motion";
 
 const projectItems = [
@@ -44,57 +39,50 @@ const projectItems = [
 
 export default function ProjectsFeature() {
   const sectionMotion = sectionReveal({ y: 30 });
-  const cardContainer = staggerContainer(MOTION_STAGGER.wide);
-  const cardItem = fadeUpItem({ y: 24 });
 
   return (
     <main className="prj-main">
-      <motion.section className="prj-hero" {...sectionMotion}>
-        <div className="prj-hero-wrap">
-          <motion.div
-            {...heroScaleLoop({ scale: 1.05 })}
-            className="h-full w-full"
-          >
+      <motion.section className="w-full" {...sectionMotion}>
+        <div className="relative h-200 w-full overflow-hidden max-md:h-172.5 max-sm:h-107.5">
+          <div className="h-full w-full">
             <Image
               src={projectHero}
               alt="Luxury projects by Mimz Interiors"
               fill
               priority
-              className="prj-hero-img"
-              sizes="100vw"
+              className="object-cover object-center"
+              sizes="800px"
             />
-          </motion.div>
-          <h1 className="prj-hero-title">PROJECTS</h1>
+          </div>
+          <h1 className="absolute inset-x-0 top-[40%] m-0 flex -translate-y-1/2 justify-center font-caterina text-[220px] leading-none font-light tracking-[-0.01em] text-white uppercase drop-shadow-[0_6px_28px_rgba(0,0,0,0.2)] max-md:text-[110px]">
+            PROJECTS
+          </h1>
         </div>
       </motion.section>
 
       <motion.section className="prj-intro" {...sectionMotion}>
-        <motion.p className="prj-img-credit" {...aosReveal({ direction: "left", distance: 30, duration: 0.48 })}>-All images belongs to Mimz interiors-</motion.p>
-        <motion.p className="prj-intro-copy" {...aosReveal({ direction: "right", distance: 46, duration: 0.62 })}>
+        <motion.p className="prj-img-credit" {...aosReveal({ direction: "up", distance: 20, duration: 0.5 })}>-All images belongs to Mimz interiors-</motion.p>
+        <motion.p className="prj-intro-copy" {...aosReveal({ direction: "up", distance: 24, duration: 0.55, delay: 0.06 })}>
           Our project speaks loudly for itself as we handle them with the highest form of professionalism, from field workers to our customer care services. All process documentation and alignments are done with modern tools to give a remarkable impression at the beginning and end of every project. At Mimz interior, we give every client a reason to come back.
         </motion.p>
       </motion.section>
 
       <motion.section className="prj-grid-section" {...sectionMotion}>
-        <motion.div
-          className="prj-grid"
-          variants={cardContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={MOTION_VIEWPORT}
-        >
+        <div className="prj-grid">
           {projectItems.map((item, index) => (
-            <motion.article className="prj-card" key={item.title} variants={cardItem}>
-              <Link href={item.href} className="prj-card-image-wrap" aria-label={item.title}>
-                <Image src={item.image} alt={item.alt} fill className="prj-card-image" sizes="(min-width: 1200px) 33vw, (min-width: 768px) 50vw, 100vw" />
-              </Link>
+            <article className="prj-card" key={item.title}>
+              <motion.div {...aosReveal({ direction: "up", distance: 24, delay: 0.06 + index * 0.07 })}>
+                <Link href={item.href} className="prj-card-image-wrap" aria-label={item.title}>
+                  <Image src={item.image} alt={item.alt} fill className="prj-card-image" sizes="(min-width: 1200px) 33vw, (min-width: 768px) 50vw, 100vw" />
+                </Link>
+              </motion.div>
               <div className="prj-card-copy">
-                <motion.h2 {...aosReveal({ direction: index % 2 === 0 ? "left" : "right", distance: 34, duration: 0.5 })}>{item.title}</motion.h2>
-                <motion.p {...aosReveal({ direction: index % 2 === 0 ? "right" : "left", distance: 34, duration: 0.56 })}>{item.desc}</motion.p>
+                <h2>{item.title}</h2>
+                <p>{item.desc}</p>
               </div>
-            </motion.article>
+            </article>
           ))}
-        </motion.div>
+        </div>
       </motion.section>
 
       <motion.section className="prj-quote" {...sectionMotion}>

@@ -1255,39 +1255,6 @@ body {
   color: #000;
 }
 
-/* ── HERO ────────────────────────────────────────────────────── */
-.prj-hero {
-  width: 100%;
-}
-
-.prj-hero-wrap {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 1440 / 935;
-  overflow: hidden;
-}
-
-.prj-hero-img {
-  object-fit: cover;
-  object-position: center;
-}
-
-.prj-hero-title {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0;
-  font-family: var(--font-caterina, Georgia, serif);
-  font-size: 300px;
-  font-weight: 300;
-  letter-spacing: -0.01em;
-  color: #fff;
-  text-transform: uppercase;
-  text-shadow: 0 6px 28px rgba(0, 0, 0, 0.2);
-}
-
 /* ── INTRO ───────────────────────────────────────────────────── */
 .prj-intro {
   background: #ffffff;
@@ -1441,10 +1408,6 @@ body {
 
 /* ── RESPONSIVE ──────────────────────────────────────────────── */
 @media (max-width: 1024px) {
-  .prj-hero-wrap {
-    aspect-ratio: 1280 / 900;
-  }
-
   .prj-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -1455,14 +1418,6 @@ body {
 }
 
 @media (max-width: 768px) {
-  .prj-hero-wrap {
-    aspect-ratio: 820 / 690;
-  }
-
-  .prj-hero-title {
-    font-size: clamp(2.5rem, 14vw, 5.8rem);
-  }
-
   .prj-intro {
     padding-top: 1rem;
   }
@@ -1496,10 +1451,6 @@ body {
 }
 
 @media (max-width: 480px) {
-  .prj-hero-wrap {
-    aspect-ratio: 390 / 430;
-  }
-
   .prj-img-credit {
     font-size: 0.7rem;
   }
