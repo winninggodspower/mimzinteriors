@@ -10,7 +10,6 @@ import aboutgalleryc from "@assets/images/aboutgalleryc.png";
 import ivision from "@assets/images/ivision.png";
 import imission from "@assets/images/imission.png";
 import patterns from "@assets/images/patterns.svg";
-import seperator from "@assets/images/seperator.png"
 import visiona from "@assets/images/visiona.png";
 import visionb from "@assets/images/visionb.png";
 import visionc from "@assets/images/visionc.png";
@@ -21,6 +20,7 @@ import sawarda from "@assets/images/sawarda.png";
 import sawardb from "@assets/images/sawardb.png";
 import sawardc from "@assets/images/sawardc.png";
 import aboutteam from "@assets/images/aboutteam.png";
+import { aboutContent } from "./data";
 
 export default function AboutPage() {
   const sectionMotion = sectionReveal({ y: 28 });
@@ -45,46 +45,35 @@ export default function AboutPage() {
 
           <motion.div className="about-roots-content" {...aosReveal({ direction: "right", distance: 42 })}>
             <motion.h2 className="about-section-label" {...aosReveal({ direction: "right", distance: 30 })}>
-              ROOTS.
+              {aboutContent.roots.title}
             </motion.h2>
             <motion.div className="about-roots-body" {...aosReveal({ direction: "left", distance: 34, delay: 0.06 })}>
-              <p>
-                Miracle Nwachukwu is an award-winning interior decorator, fashion enthusiast, and a dedicated mentor. As the founder and visionary behind a multiple award-winning interior design company, Miracle has established a reputation for excellence in the industry. His work has garnered significant recognition, including a recent prestigious accolade from the Africa Property Awards for Interior Design. Known for his creative flair and commitment to inspiring the next generation, Miracle continues to redefine interior design and mentorship with each project he undertakes.              
-              </p>
-              <p>
-                From mastering the art of selecting the perfect shoes to compliment an outfit, to becoming Nigeria’s leading globally recognized interior designer, Miracle Nwachukwu’s journey reflects a keen sense of style, creativity, and dedication.
-              </p>
-              <p>
-                In his early days as an undergraduate, Miracle Nwachukwu demonstrated exceptional ability in balancing academic excellence, fashion, and business. His passion for travel has further enriched his design perspective, enabling him to gain valuable insights into diverse cultures, art forms, and architectural styles around the world. This global exposure has played a pivotal role in his success as an international interior designer. Over the past five years, his designs have consistently stood out for their innovation and sophistication.                
-              </p>
-              <p>
-                Miracle’s personality and commitment to his craft can be summed up in three words: classy, unique, and impactful. His unwavering dedication to creating timeless, memorable spaces has earned him recognition and respect in the interior design industry.                
-              </p>
-              <p>
-                "Having successfully completed over 200 projects and earned the trust of more than 64,000 followers across Nigeria and globally, Mimz has built a reputation for excellence and unwavering client satisfaction.
-              </p>
+              {aboutContent.roots.paragraphs.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
             </motion.div>
           </motion.div>
         </div>
       </motion.section>
 
       {/* ── QUOTE SECTION ───────────────────────────────── */}
-      <motion.section className="about-quote-section" {...sectionMotion}>
-        <div className="about-quote-inner">
-          <motion.blockquote className="about-quote" {...aosReveal({ direction: "up", distance: 32 })}>
-            <span className="about-quote-mark about-quote-open">"</span>
-            Seeing the genuine satisfaction on my clients' faces after every
-            project is my greatest source of motivation.
-            <span className="about-quote-mark about-quote-close">"</span>
-          </motion.blockquote>
-          <div className=" seperator">
-            <Image
-              src={seperator}
-              alt="seperator image"
-              height={178}
-              width={273}
-              style={{ width: "auto", height: "auto" }}
-            />
+      <motion.section className="py-[clamp(3rem,6vw,5rem)] px-[clamp(1.5rem,8vw,10rem)] border-b border-[rgba(201,169,110,0.25)]" {...sectionMotion}>
+        <div className="mx-auto max-w-225 text-center">
+          <div className="flex flex-col items-center">
+            <motion.blockquote className="m-0 border-none bg-none p-0 font-bd-megalona text-[48px] font-normal italic leading-none text-black max-[1024px]:text-[40px] max-[768px]:text-[32px] max-[480px]:text-[26px]" {...aosReveal({ direction: "up", distance: 32 })}>
+              <span className="mr-[0.1em] align-[-0.1em] text-[clamp(2rem,5vw,3.5rem)] font-normal leading-0 text-black">"</span>
+              {aboutContent.quoteSection.text}
+              <span className="ml-[0.1em] align-[-0.1em] text-[clamp(2rem,5vw,3.5rem)] font-normal leading-0 text-black">"</span>
+            </motion.blockquote>
+            <motion.div className="flex justify-center -mt-8" {...aosReveal({ direction: "up", distance: 20, delay: 0.25 })}>
+              <Image
+                src={'/mimz-mascut-seperator.png'}
+                alt="seperator image"
+                height={178}
+                width={273}
+                className="h-44.5 w-68.25 max-[768px]:h-auto max-[768px]:w-56 max-[480px]:w-44"
+              />
+            </motion.div>
           </div>
         </div>
       </motion.section>
@@ -93,7 +82,7 @@ export default function AboutPage() {
       {/* will make this a carousel later, for now just a grid of images */}
       <motion.section className="about-gallery-row" {...sectionMotion}>
         <div className="about-gallery-grid">
-          <div className="about-gallery-item">
+          <motion.div className="about-gallery-item" {...aosReveal({ direction: "up", distance: 26, delay: 0.04 })}>
             <Image
               src={aboutgallerya}
               alt="Interior project"
@@ -101,8 +90,8 @@ export default function AboutPage() {
               className="about-img"
               sizes="(min-width: 1200px) 25vw, (min-width: 768px) 50vw, 100vw"
             />
-          </div>
-          <div className="about-gallery-item">
+          </motion.div>
+          <motion.div className="about-gallery-item" {...aosReveal({ direction: "up", distance: 26, delay: 0.1 })}>
             <Image
               src={aboutgalleryb}
               alt="Interior project"
@@ -110,8 +99,8 @@ export default function AboutPage() {
               className="about-img"
               sizes="(min-width: 1200px) 25vw, (min-width: 768px) 50vw, 100vw"
             />
-          </div>
-          <div className="about-gallery-item">
+          </motion.div>
+          <motion.div className="about-gallery-item" {...aosReveal({ direction: "up", distance: 26, delay: 0.16 })}>
             <Image
               src={aboutgalleryc}
               alt="Interior project"
@@ -119,16 +108,7 @@ export default function AboutPage() {
               className="about-img"
               sizes="(min-width: 1200px) 25vw, (min-width: 768px) 50vw, 100vw"
             />
-          </div>
-          <div className="about-gallery-item">
-            <Image
-              src={aboutgallerya}
-              alt="Interior project"
-              fill
-              className="about-img"
-              sizes="(min-width: 1200px) 25vw, (min-width: 768px) 50vw, 100vw"
-            />
-          </div>
+          </motion.div>
         </div>
       </motion.section>
 
@@ -138,20 +118,20 @@ export default function AboutPage() {
           <motion.div className="about-vision-card" {...aosReveal({ direction: "up", distance: 30, delay: 0.1 })}>
             <div className="about-vision-head">
               <Image src={ivision} alt="vision icon" className="about-vision-icon" />
-              <h3 className="about-vision-label">VISION</h3>
+              <h3 className="about-vision-label">{aboutContent.vision.items[0].title}</h3>
             </div>
             <p className="about-vision-text">
-              To provide the best solution for customers who look for originality and unparalleled quality, through our continuous effort in innovation and creativity.
+              {aboutContent.vision.items[0].text}
             </p>
           </motion.div>
 
           <motion.div className="about-vision-card" {...aosReveal({ direction: "up", distance: 30, delay: 0.25 })}>
             <div className="about-vision-head">
               <Image src={imission} alt="mission icon" className="about-vision-icon" />
-              <h3 className="about-vision-label">MISION</h3>
+              <h3 className="about-vision-label">{aboutContent.vision.items[1].title}</h3>
             </div>
             <p className="about-vision-text">
-              To design and create spaces that generate positive vibes, be it the warmth of a home, or the professional ambience of a workspace.
+              {aboutContent.vision.items[1].text}
             </p>
           </motion.div>
         </div>
@@ -161,7 +141,7 @@ export default function AboutPage() {
       {/* convert to a carousel later */}
       <motion.section className="about-vision-gallery" {...sectionMotion}>
         <div className="about-vision-gallery-grid">
-          <div className="about-vision-gallery-item">
+          <motion.div className="about-vision-gallery-item" {...aosReveal({ direction: "up", distance: 24, delay: 0.06 })}>
             <Image
               src={visiona}
               alt="Design vision"
@@ -169,8 +149,8 @@ export default function AboutPage() {
               className="about-img"
               sizes="(min-width: 1200px) 33vw, (min-width: 768px) 50vw, 100vw"
             />
-          </div>
-          <div className="about-vision-gallery-item">
+          </motion.div>
+          <motion.div className="about-vision-gallery-item" {...aosReveal({ direction: "up", distance: 24, delay: 0.13 })}>
             <Image
               src={visionb}
               alt="Design vision"
@@ -178,8 +158,8 @@ export default function AboutPage() {
               className="about-img"
               sizes="(min-width: 1200px) 33vw, (min-width: 768px) 50vw, 100vw"
             />
-          </div>
-          <div className="about-vision-gallery-item">
+          </motion.div>
+          <motion.div className="about-vision-gallery-item" {...aosReveal({ direction: "up", distance: 24, delay: 0.2 })}>
             <Image
               src={visionc}
               alt="Design vision"
@@ -187,7 +167,7 @@ export default function AboutPage() {
               className="about-img"
               sizes="(min-width: 1200px) 33vw, (min-width: 768px) 50vw, 100vw"
             />
-          </div>
+          </motion.div>
         </div>
       </motion.section>
 
@@ -196,22 +176,12 @@ export default function AboutPage() {
         <div className="about-firm-inner">
           <motion.div className="about-firm-content" {...aosReveal({ direction: "left", distance: 36 })}>
             <motion.h2 className="about-section-label" {...aosReveal({ direction: "left", distance: 28 })}>
-              THE FIRM
+              {aboutContent.firm.title}
             </motion.h2>
             <motion.div className="about-firm-body" {...aosReveal({ direction: "right", distance: 30, delay: 0.06 })}>
-              <p>
-                Mimz Interiors was founded in 2018 with a vision to provide comprehensive turnkey solutions in the design, fabrication, and installation of premium interior furnishings and furniture. We are dedicated to enhancing the interiors of both homes and offices, creating spaces that inspire and reflect the aspirations of our clients.
-              </p>
-              <p>
-                At Mimz Interiors, we specialize in delivering exceptional, contemporary, and customized interior fit-out solutions across various sectors, including corporate offices, restaurants, retail outlets, clinics, luxury villas, and modern homes. With a rapidly expanding national distribution network, we offer a diverse range of inspiring designs, high-quality furnishings, innovative textures, and refreshing colors sourced from around the world—all at competitive prices.
-                As one of the few local sources offering a complete 'Design & Build' service, we ensure the seamless implementation of projects, meeting deadlines, maintaining quality, and ensuring customer satisfaction. Our commitment to excellence means we consistently provide interior solutions that adhere to international standards while staying ahead of the latest trends in design and furnishings.
-              </p>
-              <p>
-               In December 2023, we launched Mimz Homes, a sister company to Mimz Interiors, born from the growing demand from our clients who wanted to purchase the furniture, lighting, and accessories used in our designs. With Mimz Homes, we provide a convenient way for clients to access these exclusive items without engaging us for full design services.
-              </p>
-              <p>
-                Our mission is to deliver inspired designs and décor that meet and exceed our clients’ expectations through collaborative efforts and exceptional service. We pride ourselves on tailoring each project to suit our clients' unique personal styles and practical needs. Much of our business is built on repeat clients and referrals—when people choose us once, they return, and they’re happy to recommend us to others.
-              </p>
+              {aboutContent.firm.paragraphs.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
             </motion.div>
           </motion.div>
 
@@ -313,23 +283,15 @@ export default function AboutPage() {
 
           <motion.div className="about-awards-content" {...aosReveal({ direction: "right", distance: 34 })}>
             <motion.h2 className="about-section-label" {...aosReveal({ direction: "right", distance: 26 })}>
-              AWARDS
+              {aboutContent.awards.title}
             </motion.h2>
             <motion.div className="about-awards-body" {...aosReveal({ direction: "left", distance: 30, delay: 0.06 })}>
-              <p >
-                In the past Year Mimz Interior has grown to be a worthy award winning interior design brand. 
-                Leadership Award? And how these awards impact your work and motivation?
-              </p>
-              <p >
-                Receiving awards like the recent African property awards,  Luxury Lifestyle Award, Future Awards, and the Nelson Mandela Leadership Award has been incredibly motivating. These awards and remarkable reviews serves as a reminder that our hard work is being recognized also It affirms that we are on the right path and doing something impactful.
-                These accolades not only boost our confidence but also push us to do even better. It shows that people, including international bodies, are watching our progress. 
-              </p>
-              <p>
-              It’s a great motivation for us to continue striving for excellence. Every award is a reflection of the collective effort of the entire team, reminding us that our work is making a difference.
-              </p>
+              {aboutContent.awards.paragraphs.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
             </motion.div>
             <motion.blockquote className="about-awards-quote" {...aosReveal({ direction: "up", distance: 24, delay: 0.08 })}>
-              "When it comes to interiors, uniqueness is the ultimate luxury."
+              "{aboutContent.awards.quote}"
             </motion.blockquote>
           </motion.div>
         </div>

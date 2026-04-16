@@ -158,53 +158,7 @@ body {
   margin-bottom: 0;
 }
 
-/* ── QUOTE ───────────────────────────────────────────────────── */
-.about-quote-section {
-  padding: clamp(3rem, 6vw, 5rem) clamp(1.5rem, 8vw, 10rem);
 
-  border-bottom: 1px solid rgba(201, 169, 110, 0.25);
-}
-
-.about-quote-inner {
-  max-width: 900px;
-  margin: 0 auto;
-  text-align: center;
-}
-
-.about-quote {
-  font-family: var(--font-bd-megalona, Georgia, serif);
-  font-size: 48px;
-  font-weight: 400;
-  font-style: italic;
-  line-height: 1;
-  color: #000000;
-  margin: 0;
-  padding: 0;
-  border: none;
-  background: none;
-}
-
-.about-quote-mark {
-  font-size: clamp(2rem, 5vw, 3.5rem);
-  line-height: 0;
-  vertical-align: -0.1em;
-  color: #000000;
-  font-style: normal;
-}
-
-.about-quote-open {
-  margin-right: 0.1em;
-}
-
-.about-quote-close {
-  margin-left: 0.1em;
-}
-
-.seperator {
-  display: flex;
-  justify-content: center;
-  margin-top: -2rem;
-}
 /* ── GALLERY ROW ─────────────────────────────────────────────── */
 /* .about-gallery-row {
   background: #1c1c1a;
@@ -212,7 +166,7 @@ body {
 
 .about-gallery-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: clamp(3px, 0.35vw, 6px);
 }
 
