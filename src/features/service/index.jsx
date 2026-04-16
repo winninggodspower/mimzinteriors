@@ -25,11 +25,11 @@ export default function Service() {
   const cardItem = fadeUpItem({ y: 22 });
 
   return (
-    <main className="svc-main">
+    <main className="svc-main overflow-hidden">
       <motion.section className="svc-hero" {...sectionMotion}>
         <div className="svc-hero-img-wrap">
           <motion.div
-            {...heroScaleLoop({ scale: 1.08 })}
+            {...heroScaleLoop({ scale: 1.04 })}
             className="h-full w-full"
           >
             <Image
@@ -49,13 +49,13 @@ export default function Service() {
         <div className="svc-headline-inner">
           <motion.h1
             className="svc-headline-title"
-            {...aosReveal({ direction: "right", distance: 38 })}
+            {...aosReveal({ direction: "up", distance: 34 })}
           >
             Your Space Designed For Now And The Future.
           </motion.h1>
           <motion.p
             className="svc-headline-sub"
-            {...aosReveal({ direction: "left", distance: 34, delay: 0.06 })}
+            {...aosReveal({ direction: "up", distance: 30, delay: 0.08 })}
           >
             Our complete package of services ranges from high quality and
             specialized services both interior and exterior works to maintenance
@@ -68,7 +68,7 @@ export default function Service() {
         <div className="svc-offer-inner">
           <motion.h2
             className="svc-offer-title"
-            {...aosReveal({ direction: "right", distance: 34 })}
+            {...aosReveal({ direction: "up", distance: 30 })}
           >
             SERVICES WE OFFER.
           </motion.h2>
@@ -78,9 +78,9 @@ export default function Service() {
                 key={i}
                 className="svc-offer-item"
                 {...aosReveal({
-                  direction: i % 2 === 0 ? "left" : "right",
-                  distance: 26,
-                  delay: (i % 6) * 0.02,
+                  direction: "up",
+                  distance: 22,
+                  delay: i * 0.03,
                 })}
               >
                 <span className="svc-offer-bullet">{"\u25C6"}</span>
@@ -100,13 +100,22 @@ export default function Service() {
             Patience in dealing with clients, staff, and artisans is crucial for
             a smooth workflow and successful outcomes.
           </motion.blockquote>
-          <Image src={seperator} alt="seperator" className="svcquote-seperator" />
+          <Image 
+            src={'/mimz-mascut-seperator.png'} 
+            alt="seperator" 
+            className="svcquote-seperator" 
+            width={273}
+            height={178}
+          />
         </div>
       </motion.section>
 
       <motion.section className="svc-gallery" {...sectionMotion}>
         <div className="svc-gallery-grid">
-          <div className="svc-gallery-item">
+          <motion.div
+            className="svc-gallery-item"
+            {...aosReveal({ direction: "up", distance: 24, delay: 0.05 })}
+          >
             <Image
               src={dprocessa}
               alt="Interior design project"
@@ -114,8 +123,11 @@ export default function Service() {
               className="svc-gallery-img"
             />
             <div className="svc-gallery-overlay" />
-          </div>
-          <div className="svc-gallery-item">
+          </motion.div>
+          <motion.div
+            className="svc-gallery-item"
+            {...aosReveal({ direction: "up", distance: 24, delay: 0.12 })}
+          >
             <Image
               src={dprocessb}
               alt="Interior design project"
@@ -123,8 +135,11 @@ export default function Service() {
               className="svc-gallery-img"
             />
             <div className="svc-gallery-overlay" />
-          </div>
-          <div className="svc-gallery-item">
+          </motion.div>
+          <motion.div
+            className="svc-gallery-item"
+            {...aosReveal({ direction: "up", distance: 24, delay: 0.19 })}
+          >
             <Image
               src={dprocessc}
               alt="Interior design project"
@@ -132,7 +147,7 @@ export default function Service() {
               className="svc-gallery-img"
             />
             <div className="svc-gallery-overlay" />
-          </div>
+          </motion.div>
         </div>
         <div className="svc-gallery-pattern-wrap">
           <Image
@@ -149,7 +164,7 @@ export default function Service() {
         <div className="svc-process-inner">
           <motion.h2
             className="svc-process-title"
-            {...aosReveal({ direction: "right", distance: 34 })}
+            {...aosReveal({ direction: "up", distance: 30 })}
           >
             OUR DESIGN PROCESS
           </motion.h2>

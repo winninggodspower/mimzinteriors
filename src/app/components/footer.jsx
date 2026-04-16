@@ -1,31 +1,29 @@
 import Link from "next/link";
 import Image from "next/image";
+import { Icon } from "@iconify/react";
 import patterns from "@assets/images/patterns.svg";
-import { Instagram, Linkedin, Music, Youtube } from "lucide-react";
 
 const socialLinks = [
-  { name: "Instagram", href: "#", icon: Instagram },
-  { name: "LinkedIn", href: "#", icon: Linkedin },
-  { name: "TikTok", href: "#", icon: Music },
-  { name: "YouTube", href: "#", icon: Youtube },
+  { name: "Instagram", href: "#", icon: "simple-icons:instagram", size: "text-[24px]" },
+  { name: "LinkedIn", href: "#", icon: "teenyicons:linkedin-outline", size: "text-[24px]" },
+  { name: "TikTok", href: "#", icon: "streamline-flex:tiktok-logo-remix", size: "text-[24px]" },
+  { name: "YouTube", href: "#", icon: "icomoon-free:youtube2", size: "text-[24px]" },
 ];
 
 export default function Footer() {
   return (
     <footer className="w-full border-t border-[#1f1f1f] ">
-      <div className="mx-auto max-w-[1600px] px-6 pb-6 pt-10 sm:px-12">
-        <div className="flex items-center justify-center gap-3 ">
+      <div className="mx-auto max-w-400 px-6 pb-6 pt-10 sm:px-12">
+        <div className="flex items-center justify-center gap-2 ">
           {socialLinks.map((social) => {
-            const Icon = social.icon;
-
             return (
               <Link
                 key={social.name}
                 href={social.href}
                 aria-label={social.name}
-                className="flex items-center justify-center rounded border border-black p-2 transition-all hover:bg-black hover:text-white"
+                className="flex items-center justify-center transition-opacity hover:opacity-75"
               >
-                <Icon size={18} strokeWidth={1.5} />
+                <Icon icon={social.icon} className={social.size} aria-hidden="true" />
               </Link>
             );
           })}
