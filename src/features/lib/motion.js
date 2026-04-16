@@ -21,7 +21,7 @@ export const MOTION_STAGGER = {
 
 export function sectionReveal({ y = 28, amount = 0.2, duration = MOTION_DURATIONS.section } = {}) {
   return {
-    initial: { opacity: 0, y },
+    initial: false,
     whileInView: { opacity: 1, y: 0 },
     viewport: { ...MOTION_VIEWPORT, amount },
     transition: { duration, ease: MOTION_EASE },
