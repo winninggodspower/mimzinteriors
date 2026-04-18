@@ -64,11 +64,18 @@ export default function ProjectsCatalogue() {
         </motion.div>
       </section>
 
-      <motion.section className="prjc-gallery-section" {...sectionMotion}>
+      <section className="prjc-gallery-section">
         <div className="relative min-h-[clamp(320px,42vw,620px)]">
           <div className="prjc-gallery-grid">
             {data?.projects?.map((project) => (
-              <article key={project.id} className="prjc-card">
+              <motion.article
+                key={project.id}
+                className="prjc-card"
+                variants={fadeUpItem({ y: 24, duration: 0.58 })}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.2 }}
+              >
                 <Link
                   href={`/projects/project_catalogue/${project.id}`}
                   className="prjc-card-image-wrap group"
@@ -90,7 +97,7 @@ export default function ProjectsCatalogue() {
                     </p>
                   </div>
                 </Link>
-              </article>
+              </motion.article>
             ))}
           </div>
 
@@ -133,7 +140,7 @@ export default function ProjectsCatalogue() {
             Next &gt;
           </button>
         </div>
-      </motion.section>
+      </section>
 
       <section className="prjc-quote">
         <div className="prjc-quote-inner">

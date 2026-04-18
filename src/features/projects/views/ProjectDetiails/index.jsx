@@ -88,7 +88,7 @@ export default function ProectDetail({ projectId }) {
         </motion.div>
       </motion.section>
 
-      <motion.section className="prjdp-gallery" ref={gallerySectionRef} {...sectionMotion}>
+      <section className="prjdp-gallery" ref={gallerySectionRef}>
         {isLoading ? (
           <div className="prjdp-loading">Loading project...</div>
         ) : hasImageErrorState ? (
@@ -101,9 +101,13 @@ export default function ProectDetail({ projectId }) {
               <div key={`pair-${pairIndex}`}>
                 <div className="prjdp-two-col">
                   {pair.map((imageSrc, imageIndex) => (
-                    <div
+                    <motion.div
                       key={`col-${pairIndex}-${imageIndex}`}
                       className="group relative w-full h-215 overflow-hidden bg-[#f2f2f2]"
+                      variants={fadeUpItem({ y: 20, duration: 0.56, delay: pairIndex * 0.04 + imageIndex * 0.03 })}
+                      initial="hidden"
+                      whileInView="visible"
+                      viewport={{ once: true, amount: 0.24 }}
                     >
                       <Image
                         src={imageSrc}
@@ -113,12 +117,18 @@ export default function ProectDetail({ projectId }) {
                         sizes="(min-width: 1024px) 50vw, 100vw"
                         onError={handleImageError}
                       />
-                    </div>
+                    </motion.div>
                   ))}
                 </div>
 
                 {rows[pairIndex] ? (
-                  <div className="group relative mb-[clamp(4px,0.42vw,8px)] w-full h-200 overflow-hidden bg-[#f2f2f2]">
+                  <motion.div
+                    className="group relative mb-[clamp(4px,0.42vw,8px)] w-full h-200 overflow-hidden bg-[#f2f2f2]"
+                    variants={fadeUpItem({ y: 24, duration: 0.6, delay: pairIndex * 0.06 + 0.05 })}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.2 }}
+                  >
                     <Image
                       src={rows[pairIndex]}
                       alt={`${data?.title || "Project"} row ${pairIndex + 1}`}
@@ -127,7 +137,7 @@ export default function ProectDetail({ projectId }) {
                       sizes="100vw"
                       onError={handleImageError}
                     />
-                  </div>
+                  </motion.div>
                 ) : null}
               </div>
             ))}
@@ -153,7 +163,7 @@ export default function ProectDetail({ projectId }) {
             Next &gt;
           </button>
         </div>
-      </motion.section>
+      </section>
 
       <motion.section className="prjdp-quote" {...sectionMotion}>
         <div className="prjdp-quote-inner">
