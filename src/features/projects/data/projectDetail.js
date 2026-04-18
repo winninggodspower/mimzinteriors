@@ -12,6 +12,9 @@ import ivoryColumnF from "@assets/images/projects/projectsCatalogue/projects/ivo
 import {
   PROJECT_DETAIL_COLUMNS_PER_PAGE,
 } from "@features/projects/lib/projectsCatalogueQueryKeys";
+import dbConnect from "../../../app/lib/mongoose";
+import Project from "../../../app/models/project";
+import ProjectMedia from "../../../app/models/projectMedia";
 
 const projectMetaMap = {
   "project-1": { title: "MYKONOS", period: "JAN 2025" },
@@ -40,6 +43,22 @@ const paginate = (items, page, pageSize) => {
 
 const sortByOrder = (items) => [...items].sort((leftItem, rightItem) => leftItem.order - rightItem.order);
 
+const formatProjectPeriod = (inputDate) => {
+  if (!inputDate) {
+    return ""
+  }
+
+  const date = new Date(inputDate)
+
+  if (Number.isNaN(date.getTime())) {
+    return ""
+  }
+
+  return date
+    .toLocaleDateString("en-US", { month: "short", year: "numeric" })
+    .toUpperCase()
+}
+
 export async function getProjectDetailPage({
   projectId,
   page = 1,
@@ -50,9 +69,56 @@ export async function getProjectDetailPage({
     ? Math.max(1, Math.trunc(columnsPerPage))
     : PROJECT_DETAIL_COLUMNS_PER_PAGE;
 
-  // Replace this mock project mapper with your backend/server action fetch later.
-  // Example:
-  // const payload = await getProjectByIdFromDb(projectId, { page: safePage, heroesPerPage, columnsPerPage });
+  try {
+    await dbConnect();
+
+    const [project, mediaDocuments] = await Promise.all([
+      Project.findById(projectId).lean(),
+      ProjectMedia.find({ projectId }).sort({ order: 1, createdAt: 1 }).lean(),
+    ]);
+
+    if (project) {
+      const media = mediaDocuments.map((item) => ({
+        id: String(item._id),
+        src: item.imageUrl,
+        slot: item.slot,
+        order: item.order,
+      }));
+
+      const orderedMedia = sortByOrder(media);
+      const hero = orderedMedia.find((mediaItem) => mediaItem.slot === "hero")?.src || project.profileImage || null;
+      const rows = orderedMedia.filter((mediaItem) => mediaItem.slot === "row").map((mediaItem) => mediaItem.src);
+      const columns = orderedMedia.filter((mediaItem) => mediaItem.slot === "column").map((mediaItem) => mediaItem.src);
+      const safeRowsPerPage = Math.max(1, Math.floor(safeColumnsPerPage / 3));
+
+      const totalPages = Math.max(
+        Math.ceil(rows.length / safeRowsPerPage),
+        Math.ceil(columns.length / safeColumnsPerPage),
+        1,
+      );
+
+      const boundedPage = Math.min(safePage, totalPages);
+
+      return {
+        id: String(project._id),
+        title: project.title || defaultMeta.title,
+        period: formatProjectPeriod(project.publishedAt || project.createdAt) || defaultMeta.period,
+        subtitle: project.description || "Relaxation and peace of mind can come from a well designed space. Mimz interior",
+        media: orderedMedia,
+        hero,
+        rows: paginate(rows, boundedPage, safeRowsPerPage),
+        columns: paginate(columns, boundedPage, safeColumnsPerPage),
+        heroTotal: hero ? 1 : 0,
+        rowTotal: rows.length,
+        columnTotal: columns.length,
+        totalPages,
+        page: boundedPage,
+      };
+    }
+  } catch (error) {
+    console.error("Failed to load project detail from MongoDB:", error);
+  }
+
   const meta = projectMetaMap[projectId] || defaultMeta;
   const subtitle =
     "Relaxation and peace of mind can come from a well designed space. Mimz interior";

@@ -4,6 +4,8 @@ import projectA from "@assets/images/projects/projectsCatalogue/projecta.png";
 import projectB from "@assets/images/projects/projectsCatalogue/projectb.png";
 import projectC from "@assets/images/projects/projectsCatalogue/projectc.png";
 import { PROJECTS_CATALOGUE_PAGE_SIZE } from "@features/projects/lib/projectsCatalogueQueryKeys";
+import dbConnect from "../../../app/lib/mongoose";
+import Project from "../../../app/models/project";
 
 const mockPool = [
   {
@@ -42,10 +44,34 @@ export async function getProjectsCataloguePage({
   const safeLimit = Number.isFinite(limit) ? Math.max(1, Math.trunc(limit)) : PROJECTS_CATALOGUE_PAGE_SIZE;
   const offset = (safePage - 1) * safeLimit;
 
-  // Replace this mock slice with your API/server action backend call later.
-  // Example:
-  // const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/projects?offset=${offset}&limit=${safeLimit}`, { cache: "no-store" });
-  // const payload = await response.json();
+  try {
+    await dbConnect();
+
+    const [documents, total] = await Promise.all([
+      Project.find({ isPublished: true })
+        .sort({ publishedAt: -1, createdAt: -1 })
+        .skip(offset)
+        .limit(safeLimit)
+        .lean(),
+      Project.countDocuments({ isPublished: true }),
+    ]);
+
+    if (total > 0) {
+      return {
+        projects: documents.map((project) => ({
+          id: String(project._id),
+          title: project.title,
+          profileImage: project.profileImage,
+          description: project.description,
+        })),
+        total,
+        limit: safeLimit,
+        offset,
+      };
+    }
+  } catch (error) {
+    console.error("Failed to load published projects from MongoDB:", error);
+  }
 
   await new Promise((resolve) => setTimeout(resolve, 220));
 
