@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { motion } from "motion/react";
-import { getAccessoriesPage } from "../../../app/projects/accessories/actions";
+import { getAccessoriesPage } from "@/projects/accessories/actions";
 import {
   MOTION_STAGGER,
   fadeUpItem,

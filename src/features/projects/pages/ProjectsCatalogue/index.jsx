@@ -11,7 +11,7 @@ import {
   heroScaleLoop,
   sectionReveal,
 } from "@features/lib/motion";
-import { getProjectsCataloguePage } from "../../../app/projects/projectCatalogue/actions";
+import { getProjectsCataloguePage } from "@/projects/projectCatalogue/actions";
 import {
   PROJECTS_CATALOGUE_PAGE_SIZE,
   projectsCatalogueQueryKey,

@@ -14,7 +14,7 @@ import ivoryColumnC from "@assets/images/projects/projectsCatalogue/projects/ivo
 import ivoryColumnD from "@assets/images/projects/projectsCatalogue/projects/ivorycolumnd.png";
 import ivoryColumnE from "@assets/images/projects/projectsCatalogue/projects/ivorycolumne.png";
 import ivoryColumnF from "@assets/images/projects/projectsCatalogue/projects/ivorycolumnf.png";
-import { getApartmentDetailPage } from "../../../app/projects/apartments/[apartment]/actions";
+import { getApartmentDetailPage } from "@/projects/apartments/[apartment]/actions";
 import {
   apartmentDetailQueryKey,
   PROJECT_DETAIL_COLUMNS_PER_PAGE,
