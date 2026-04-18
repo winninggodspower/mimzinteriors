@@ -1,7 +1,7 @@
 import { useCallback, useMemo, useTransition } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
-import { getProjectsCataloguePage } from "@/projects/projectCatalogue/actions";
+import { getProjectsCataloguePage } from "@features/projects/data/projectsCatalogue";
 import {
   PROJECTS_CATALOGUE_PAGE_SIZE,
   projectsCatalogueQueryKey,

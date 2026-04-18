@@ -14,15 +14,15 @@ import ivoryColumnC from "@assets/images/projects/projectsCatalogue/projects/ivo
 import ivoryColumnD from "@assets/images/projects/projectsCatalogue/projects/ivorycolumnd.png";
 import ivoryColumnE from "@assets/images/projects/projectsCatalogue/projects/ivorycolumne.png";
 import ivoryColumnF from "@assets/images/projects/projectsCatalogue/projects/ivorycolumnf.png";
-import { getApartmentDetailPage } from "@/projects/apartments/[apartment]/actions";
+import { getProjectDetailPage } from "@features/projects/data/projectDetail";
 import {
-  apartmentDetailQueryKey,
+  projectDetailQueryKey,
   PROJECT_DETAIL_COLUMNS_PER_PAGE,
   PROJECT_DETAIL_HEROES_PER_PAGE,
 } from "@features/projects/lib/projectsCatalogueQueryKeys";
-import { useApartmentDetailPagination } from "./useApartmentDetailPagination";
+import { useProjectDetailPagination } from "./useProjectDetailPagination";
 
-export default function ApartmentDetail({ apartmentId }) {
+export default function ProjectCatalogueProject({ projectId }) {
   const fallbackHeroes = [ivoryHero.src, ivoryHeroB.src, ivoryHeroC.src];
   const fallbackColumns = [
     ivoryColumnA.src,
@@ -33,15 +33,15 @@ export default function ApartmentDetail({ apartmentId }) {
     ivoryColumnF.src,
   ];
 
-  const { page, updatePageInUrl, gallerySectionRef } = useApartmentDetailPagination();
+  const { page, updatePageInUrl, gallerySectionRef } = useProjectDetailPagination();
 
   const sectionMotion = sectionReveal();
 
   const { data, isLoading, isFetching } = useQuery({
-    queryKey: apartmentDetailQueryKey(apartmentId, page),
+    queryKey: projectDetailQueryKey(projectId, page),
     queryFn: () =>
-      getApartmentDetailPage({
-        apartmentId,
+      getProjectDetailPage({
+        projectId,
         page,
         heroesPerPage: PROJECT_DETAIL_HEROES_PER_PAGE,
         columnsPerPage: PROJECT_DETAIL_COLUMNS_PER_PAGE,
@@ -72,7 +72,7 @@ export default function ApartmentDetail({ apartmentId }) {
             >
               <Image
                 src={topHero}
-                alt={data?.title || "Apartment hero"}
+                alt={data?.title || "Project hero"}
                 fill
                 priority
                 className="prjdp-hero-img"
@@ -85,7 +85,7 @@ export default function ApartmentDetail({ apartmentId }) {
 
       <motion.section className="prjdp-meta" {...sectionMotion}>
         <motion.h1 className="prjdp-title" {...aosReveal({ direction: "right", distance: 38 })}>
-          {data?.title || "APARTMENT"}
+          {data?.title || "PROJECT"}
         </motion.h1>
         <motion.p className="prjdp-period" {...aosReveal({ direction: "left", distance: 28, delay: 0.04 })}>
           {data?.period || ""}
@@ -97,7 +97,7 @@ export default function ApartmentDetail({ apartmentId }) {
 
       <motion.section className="prjdp-gallery" ref={gallerySectionRef} {...sectionMotion}>
         {isLoading ? (
-          <div className="prjdp-loading">Loading apartment...</div>
+          <div className="prjdp-loading">Loading project...</div>
         ) : (
           <>
             <div className="prjdp-two-col">
@@ -105,7 +105,7 @@ export default function ApartmentDetail({ apartmentId }) {
                 <div className="prjdp-media prjdp-media-col">
                   <Image
                     src={columns[0]}
-                    alt={`${data?.title || "Apartment"} detail 1`}
+                    alt={`${data?.title || "Project"} detail 1`}
                     fill
                     className="prjdp-media-img"
                     sizes="(min-width: 1024px) 50vw, 100vw"
@@ -117,7 +117,7 @@ export default function ApartmentDetail({ apartmentId }) {
                 <div className="prjdp-media prjdp-media-col">
                   <Image
                     src={columns[1]}
-                    alt={`${data?.title || "Apartment"} detail 2`}
+                    alt={`${data?.title || "Project"} detail 2`}
                     fill
                     className="prjdp-media-img"
                     sizes="(min-width: 1024px) 50vw, 100vw"
@@ -130,7 +130,7 @@ export default function ApartmentDetail({ apartmentId }) {
               <div className="prjdp-media prjdp-media-hero">
                 <Image
                   src={secondaryHero}
-                  alt={`${data?.title || "Apartment"} hero 2`}
+                  alt={`${data?.title || "Project"} hero 2`}
                   fill
                   className="prjdp-media-img"
                   sizes="100vw"
@@ -143,7 +143,7 @@ export default function ApartmentDetail({ apartmentId }) {
                 <div className="prjdp-media prjdp-media-col">
                   <Image
                     src={columns[2]}
-                    alt={`${data?.title || "Apartment"} detail 3`}
+                    alt={`${data?.title || "Project"} detail 3`}
                     fill
                     className="prjdp-media-img"
                     sizes="(min-width: 1024px) 50vw, 100vw"
@@ -155,7 +155,7 @@ export default function ApartmentDetail({ apartmentId }) {
                 <div className="prjdp-media prjdp-media-col">
                   <Image
                     src={columns[3]}
-                    alt={`${data?.title || "Apartment"} detail 4`}
+                    alt={`${data?.title || "Project"} detail 4`}
                     fill
                     className="prjdp-media-img"
                     sizes="(min-width: 1024px) 50vw, 100vw"
@@ -168,7 +168,7 @@ export default function ApartmentDetail({ apartmentId }) {
               <div className="prjdp-media prjdp-media-hero">
                 <Image
                   src={tertiaryHero}
-                  alt={`${data?.title || "Apartment"} hero 3`}
+                  alt={`${data?.title || "Project"} hero 3`}
                   fill
                   className="prjdp-media-img"
                   sizes="100vw"
@@ -181,7 +181,7 @@ export default function ApartmentDetail({ apartmentId }) {
                 <div className="prjdp-media prjdp-media-col">
                   <Image
                     src={columns[4]}
-                    alt={`${data?.title || "Apartment"} detail 5`}
+                    alt={`${data?.title || "Project"} detail 5`}
                     fill
                     className="prjdp-media-img"
                     sizes="(min-width: 1024px) 50vw, 100vw"
@@ -193,7 +193,7 @@ export default function ApartmentDetail({ apartmentId }) {
                 <div className="prjdp-media prjdp-media-col">
                   <Image
                     src={columns[5]}
-                    alt={`${data?.title || "Apartment"} detail 6`}
+                    alt={`${data?.title || "Project"} detail 6`}
                     fill
                     className="prjdp-media-img"
                     sizes="(min-width: 1024px) 50vw, 100vw"

@@ -1,10 +1,10 @@
 import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
-import AccessoriesPage from "@features/projects/pages/Accessories";
+import AccessoriesPage from "@features/projects/views/Accessories";
 import {
   ACCESSORIES_PAGE_SIZE,
   accessoriesQueryKey,
 } from "@features/projects/lib/projectsCatalogueQueryKeys";
-import { getAccessoriesPage } from "./actions";
+import { getAccessoriesPage } from "@features/projects/data/accessories";
 
 const Accessories = async ({ searchParams }) => {
   const resolvedSearchParams = await searchParams;

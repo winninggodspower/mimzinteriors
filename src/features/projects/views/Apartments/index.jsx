@@ -15,7 +15,7 @@ import {
   sectionReveal,
   staggerContainer,
 } from "@features/lib/motion";
-import { getApartmentsCataloguePage } from "@/projects/apartments/actions";
+import { getApartmentsCataloguePage } from "@features/projects/data/apartments";
 import {
   APARTMENTS_CATALOGUE_PAGE_SIZE,
   apartmentsCatalogueQueryKey,

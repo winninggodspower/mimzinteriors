@@ -1,7 +1,7 @@
 import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
 import { PROJECTS_CATALOGUE_PAGE_SIZE, projectsCatalogueQueryKey } from "@features/projects/lib/projectsCatalogueQueryKeys";
-import ProjectsCatalogue from "@features/projects/pages/ProjectsCatalogue";
-import { getProjectsCataloguePage } from "./actions";
+import ProjectsCatalogue from "@features/projects/views/ProjectsCatalogue";
+import { getProjectsCataloguePage } from "@features/projects/data/projectsCatalogue";
 
 const ProjectCatalogue = async ({ searchParams }) => {
   const resolvedSearchParams = await searchParams;

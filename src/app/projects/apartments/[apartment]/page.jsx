@@ -1,11 +1,11 @@
 import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
-import ApartmentDetail from "@features/projects/pages/ApartmentDetail";
+import ApartmentDetail from "@features/projects/views/ApartmentDetail";
 import {
   apartmentDetailQueryKey,
   PROJECT_DETAIL_COLUMNS_PER_PAGE,
   PROJECT_DETAIL_HEROES_PER_PAGE,
 } from "@features/projects/lib/projectsCatalogueQueryKeys";
-import { getApartmentDetailPage } from "./actions";
+import { getApartmentDetailPage } from "@features/projects/data/apartmentDetail";
 
 const ApartmentDetailPage = async ({ params, searchParams }) => {
   const { apartment } = await params;

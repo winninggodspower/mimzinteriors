@@ -3,8 +3,8 @@ import {
   APARTMENTS_CATALOGUE_PAGE_SIZE,
   apartmentsCatalogueQueryKey,
 } from "@features/projects/lib/projectsCatalogueQueryKeys";
-import ApartmentsPage from "@features/projects/pages/Apartments";
-import { getApartmentsCataloguePage } from "./actions";
+import ApartmentsPage from "@features/projects/views/Apartments";
+import { getApartmentsCataloguePage } from "@features/projects/data/apartments";
 
 const Apartments = async ({ searchParams }) => {
   const resolvedSearchParams = await searchParams;
