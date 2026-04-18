@@ -12,7 +12,7 @@ import ivoryColumnF from "@assets/images/projects/projectsCatalogue/projects/ivo
 import {
   PROJECT_DETAIL_COLUMNS_PER_PAGE,
   PROJECT_DETAIL_HEROES_PER_PAGE,
-} from "@features/projects/lib/projectsCatalogueQuery";
+} from "@features/projects/lib/projectsCatalogueQueryKeys";
 
 const projectMetaMap = {
   "project-1": { title: "MYKONOS", period: "JAN 2025" },

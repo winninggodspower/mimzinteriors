@@ -2,8 +2,6 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useMemo, useRef } from "react";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { motion } from "motion/react";
 import projectHero from "@assets/images/projects/projectsCatalogue/projectscataloguehero.png";
@@ -21,60 +19,15 @@ import { getApartmentsCataloguePage } from "../../../app/projects/apartments/act
 import {
   APARTMENTS_CATALOGUE_PAGE_SIZE,
   apartmentsCatalogueQueryKey,
-} from "@features/projects/lib/projectsCatalogueQuery";
+} from "@features/projects/lib/projectsCatalogueQueryKeys";
+import { useApartmentsPagination } from "./useApartmentsPagination";
 
-export default function Apartments() {
-  const router = useRouter();
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-  const apartmentsSectionRef = useRef(null);
-
-  const page = useMemo(() => {
-    const rawPage = Number.parseInt(searchParams.get("page") || "1", 10);
-
-    if (Number.isNaN(rawPage) || rawPage < 1) {
-      return 1;
-    }
-
-    return rawPage;
-  }, [searchParams]);
+export default function ApartmentsPage() {
+  const { page, updatePageInUrl, apartmentsSectionRef } = useApartmentsPagination();
 
   const sectionMotion = sectionReveal();
   const cardContainer = staggerContainer(MOTION_STAGGER.tight);
   const cardItem = fadeUpItem({ duration: MOTION_DURATIONS.cardFast });
-
-  const scrollToApartmentsTop = () => {
-    if (!apartmentsSectionRef.current) {
-      return;
-    }
-
-    apartmentsSectionRef.current.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
-  };
-
-  const updatePageInUrl = (nextPage, totalPages) => {
-    const boundedPage = Math.max(1, Math.min(nextPage, totalPages));
-
-    if (boundedPage === page) {
-      return;
-    }
-
-    const params = new URLSearchParams(searchParams.toString());
-
-    if (boundedPage === 1) {
-      params.delete("page");
-    } else {
-      params.set("page", String(boundedPage));
-    }
-
-    const query = params.toString();
-    const nextUrl = query ? `${pathname}?${query}` : pathname;
-
-    router.replace(nextUrl, { scroll: false });
-    scrollToApartmentsTop();
-  };
 
   const { data, isLoading, isFetching } = useQuery({
     queryKey: apartmentsCatalogueQueryKey(page, APARTMENTS_CATALOGUE_PAGE_SIZE),
@@ -87,12 +40,7 @@ export default function Apartments() {
     throwOnError: true,
   });
 
-  const totalPages = useMemo(() => {
-    if (!data?.total) {
-      return 1;
-    }
-    return Math.ceil(data.total / APARTMENTS_CATALOGUE_PAGE_SIZE);
-  }, [data?.total]);
+  const totalPages = Math.ceil((data?.total || 0) / APARTMENTS_CATALOGUE_PAGE_SIZE) || 1;
 
   const canGoPrev = page > 1;
   const canGoNext = page < totalPages;

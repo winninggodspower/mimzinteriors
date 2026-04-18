@@ -1585,15 +1585,6 @@ body {
   text-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
 }
 
-.prjc-loading {
-  min-height: 180px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1rem;
-  color: #66645f;
-}
-
 /* ── PAGINATION ──────────────────────────────────────────────── */
 .prjc-pagination-wrap {
   display: flex;

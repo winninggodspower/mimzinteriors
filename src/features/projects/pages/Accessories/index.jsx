@@ -1,8 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useMemo, useRef } from "react";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { motion } from "motion/react";
 import { getAccessoriesPage } from "../../../app/projects/accessories/actions";
@@ -15,23 +13,11 @@ import {
 import {
   ACCESSORIES_PAGE_SIZE,
   accessoriesQueryKey,
-} from "@features/projects/lib/projectsCatalogueQuery";
+} from "@features/projects/lib/projectsCatalogueQueryKeys";
+import { useAccessoriesPagination } from "./useAccessoriesPagination";
 
 export default function AccessoriesPage() {
-  const router = useRouter();
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-  const galleryRef = useRef(null);
-
-  const page = useMemo(() => {
-    const rawPage = Number.parseInt(searchParams.get("page") || "1", 10);
-
-    if (Number.isNaN(rawPage) || rawPage < 1) {
-      return 1;
-    }
-
-    return rawPage;
-  }, [searchParams]);
+  const { page, updatePageInUrl, galleryRef } = useAccessoriesPagination();
 
   const sectionMotion = sectionReveal({ y: 24 });
   const cardContainer = staggerContainer(MOTION_STAGGER.micro);
@@ -48,49 +34,10 @@ export default function AccessoriesPage() {
     throwOnError: true,
   });
 
-  const totalPages = useMemo(() => {
-    if (!data?.total) {
-      return 1;
-    }
-
-    return Math.ceil(data.total / ACCESSORIES_PAGE_SIZE);
-  }, [data?.total]);
+  const totalPages = Math.ceil((data?.total || 0) / ACCESSORIES_PAGE_SIZE) || 1;
 
   const canGoPrev = page > 1;
   const canGoNext = page < totalPages;
-
-  const scrollToGridTop = () => {
-    if (!galleryRef.current) {
-      return;
-    }
-
-    galleryRef.current.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
-  };
-
-  const updatePageInUrl = (nextPage) => {
-    const boundedPage = Math.max(1, Math.min(nextPage, totalPages));
-
-    if (boundedPage === page) {
-      return;
-    }
-
-    const params = new URLSearchParams(searchParams.toString());
-
-    if (boundedPage === 1) {
-      params.delete("page");
-    } else {
-      params.set("page", String(boundedPage));
-    }
-
-    const query = params.toString();
-    const nextUrl = query ? `${pathname}?${query}` : pathname;
-
-    router.replace(nextUrl, { scroll: false });
-    scrollToGridTop();
-  };
 
   return (
     <main className="accs-main">
@@ -138,7 +85,7 @@ export default function AccessoriesPage() {
             type="button"
             className="accs-page-btn"
             disabled={!canGoPrev || isFetching}
-            onClick={() => updatePageInUrl(page - 1)}
+            onClick={() => updatePageInUrl(page - 1, totalPages)}
           >
             &lt;
           </button>
@@ -147,7 +94,7 @@ export default function AccessoriesPage() {
             type="button"
             className="accs-page-btn"
             disabled={!canGoNext || isFetching}
-            onClick={() => updatePageInUrl(page + 1)}
+            onClick={() => updatePageInUrl(page + 1, totalPages)}
           >
             &gt;
           </button>

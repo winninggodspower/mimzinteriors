@@ -2,8 +2,6 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useCallback, useMemo } from "react";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { motion } from "motion/react";
 import projectHero from "@assets/images/projects/projectsCatalogue/projectscataloguehero.png";
@@ -17,52 +15,11 @@ import { getProjectsCataloguePage } from "../../../app/projects/projectCatalogue
 import {
   PROJECTS_CATALOGUE_PAGE_SIZE,
   projectsCatalogueQueryKey,
-} from "@features/projects/lib/projectsCatalogueQuery";
-
-function useCataloguePagination() {
-  const router = useRouter();
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-
-  const page = useMemo(() => {
-    const rawPage = Number.parseInt(searchParams.get("page") || "1", 10);
-
-    if (Number.isNaN(rawPage) || rawPage < 1) {
-      return 1;
-    }
-
-    return rawPage;
-  }, [searchParams]);
-
-  const updatePageInUrl = useCallback(
-    (nextPage, totalPages) => {
-      const boundedPage = Math.max(1, Math.min(nextPage, totalPages));
-
-      if (boundedPage === page) {
-        return;
-      }
-
-      const params = new URLSearchParams(searchParams.toString());
-
-      if (boundedPage === 1) {
-        params.delete("page");
-      } else {
-        params.set("page", String(boundedPage));
-      }
-
-      const query = params.toString();
-      const nextUrl = query ? `${pathname}?${query}` : pathname;
-
-      router.replace(nextUrl, { scroll: false });
-    },
-    [page, pathname, router, searchParams],
-  );
-
-  return { page, updatePageInUrl };
-}
+} from "@features/projects/lib/projectsCatalogueQueryKeys";
+import { useProjectsCataloguePagination } from "./useProjectsCataloguePagination";
 
 export default function ProjectsCatalogue() {
-  const { page, updatePageInUrl } = useCataloguePagination();
+  const { page, updatePageInUrl } = useProjectsCataloguePagination();
 
   const sectionMotion = sectionReveal();
 
@@ -77,15 +34,11 @@ export default function ProjectsCatalogue() {
     throwOnError: true,
   });
 
-  const totalPages = useMemo(() => {
-    if (!data?.total) {
-      return 1;
-    }
-    return Math.ceil(data.total / PROJECTS_CATALOGUE_PAGE_SIZE);
-  }, [data?.total]);
+  const totalPages = Math.ceil((data?.total || 0) / PROJECTS_CATALOGUE_PAGE_SIZE) || 1;
 
   const canGoPrev = page > 1;
   const canGoNext = page < totalPages;
+  const showLoadingOverlay = isLoading || isFetching;
 
   return (
     <main className="prjc-main">
@@ -116,10 +69,7 @@ export default function ProjectsCatalogue() {
       </motion.section>
 
       <motion.section className="prjc-gallery-section" {...sectionMotion}>
-
-        {isLoading || isFetching ? (
-          <div className="prjc-loading">Loading projects...</div>
-        ) : (
+        <div className="relative min-h-[clamp(320px,42vw,620px)]">
           <div className="prjc-gallery-grid">
             {data?.projects?.map((project) => (
               <article key={project.id} className="prjc-card">
@@ -147,7 +97,29 @@ export default function ProjectsCatalogue() {
               </article>
             ))}
           </div>
-        )}
+
+          {showLoadingOverlay ? (
+            <motion.div
+              className="absolute inset-0 z-10 flex items-center justify-center bg-white/75 px-4 backdrop-blur-sm"
+              role="status"
+              aria-live="polite"
+              aria-label="Loading projects"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              <div className="flex flex-col items-center gap-4 border border-[rgba(194,172,132,0.28)] bg-[rgba(255,252,247,0.84)] px-6 py-5 shadow-[0_18px_50px_rgba(40,32,20,0.12)] max-sm:px-5 max-sm:py-4">
+                <span
+                  className="h-12 w-12 animate-spin rounded-full border-2 border-[rgba(28,28,26,0.12)] border-t-[#c9a96e] border-r-[rgba(201,169,110,0.55)]"
+                  aria-hidden="true"
+                />
+                <p className="m-0 font-caterina text-[clamp(1rem,1.4vw,1.25rem)] uppercase tracking-[0.08em] text-[#2b2720]">
+                  Loading projects...
+                </p>
+              </div>
+            </motion.div>
+          ) : null}
+        </div>
 
         <div className="prjc-pagination-wrap">
           <button

@@ -2,7 +2,7 @@ import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query
 import {
   APARTMENTS_CATALOGUE_PAGE_SIZE,
   apartmentsCatalogueQueryKey,
-} from "@features/projects/lib/projectsCatalogueQuery";
+} from "@features/projects/lib/projectsCatalogueQueryKeys";
 import ApartmentsPage from "@features/projects/pages/Apartments";
 import { getApartmentsCataloguePage } from "./actions";
 

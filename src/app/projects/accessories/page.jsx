@@ -3,7 +3,7 @@ import AccessoriesPage from "@features/projects/pages/Accessories";
 import {
   ACCESSORIES_PAGE_SIZE,
   accessoriesQueryKey,
-} from "@features/projects/lib/projectsCatalogueQuery";
+} from "@features/projects/lib/projectsCatalogueQueryKeys";
 import { getAccessoriesPage } from "./actions";
 
 const Accessories = async ({ searchParams }) => {

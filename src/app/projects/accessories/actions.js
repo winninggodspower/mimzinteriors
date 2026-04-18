@@ -8,7 +8,7 @@ import accessoryE from "@assets/images/projects/accessories/accessorye.png";
 import accessoryF from "@assets/images/projects/accessories/accessoryf.png";
 import accessoryG from "@assets/images/projects/accessories/accessoryg.png";
 import accessoryH from "@assets/images/projects/accessories/accessoryh.png";
-import { ACCESSORIES_PAGE_SIZE } from "@features/projects/lib/projectsCatalogueQuery";
+import { ACCESSORIES_PAGE_SIZE } from "@features/projects/lib/projectsCatalogueQueryKeys";
 
 const accessoryPool = [
   accessoryA.src,

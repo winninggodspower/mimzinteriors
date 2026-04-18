@@ -3,7 +3,7 @@
 import projectA from "@assets/images/projects/projectsCatalogue/projecta.png";
 import projectB from "@assets/images/projects/projectsCatalogue/projectb.png";
 import projectC from "@assets/images/projects/projectsCatalogue/projectc.png";
-import { PROJECTS_CATALOGUE_PAGE_SIZE } from "@features/projects/lib/projectsCatalogueQuery";
+import { PROJECTS_CATALOGUE_PAGE_SIZE } from "@features/projects/lib/projectsCatalogueQueryKeys";
 
 const mockPool = [
   {
