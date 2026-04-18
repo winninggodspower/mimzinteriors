@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { motion } from "motion/react";
 import projectHero from "@assets/images/projects/projectsCatalogue/projectscataloguehero.png";
 import seperator from "@assets/images/seperator.png";
@@ -11,34 +10,21 @@ import {
   heroScaleLoop,
   sectionReveal,
 } from "@features/lib/motion";
-import { getProjectsCataloguePage } from "@/projects/projectCatalogue/actions";
-import {
-  PROJECTS_CATALOGUE_PAGE_SIZE,
-  projectsCatalogueQueryKey,
-} from "@features/projects/lib/projectsCatalogueQueryKeys";
 import { useProjectsCataloguePagination } from "./useProjectsCataloguePagination";
 
 export default function ProjectsCatalogue() {
-  const { page, updatePageInUrl } = useProjectsCataloguePagination();
+  const {
+    page,
+    data,
+    totalPages,
+    canGoPrev,
+    canGoNext,
+    showLoadingOverlay,
+    isPageChangePending,
+    updatePageInUrl,
+  } = useProjectsCataloguePagination();
 
   const sectionMotion = sectionReveal();
-
-  const { data, isLoading, isFetching } = useQuery({
-    queryKey: projectsCatalogueQueryKey(page, PROJECTS_CATALOGUE_PAGE_SIZE),
-    queryFn: () =>
-      getProjectsCataloguePage({
-        page,
-        limit: PROJECTS_CATALOGUE_PAGE_SIZE,
-      }),
-    placeholderData: keepPreviousData,
-    throwOnError: true,
-  });
-
-  const totalPages = Math.ceil((data?.total || 0) / PROJECTS_CATALOGUE_PAGE_SIZE) || 1;
-
-  const canGoPrev = page > 1;
-  const canGoNext = page < totalPages;
-  const showLoadingOverlay = isLoading || isFetching;
 
   return (
     <main className="prjc-main">
@@ -125,7 +111,7 @@ export default function ProjectsCatalogue() {
           <button
             type="button"
             className="prjc-page-btn"
-            disabled={!canGoPrev || isFetching}
+            disabled={!canGoPrev || isPageChangePending}
             onClick={() => updatePageInUrl(page - 1, totalPages)}
           >
             &lt; Previous
@@ -134,7 +120,7 @@ export default function ProjectsCatalogue() {
           <button
             type="button"
             className="prjc-page-btn"
-            disabled={!canGoNext || isFetching}
+            disabled={!canGoNext || isPageChangePending}
             onClick={() => updatePageInUrl(page + 1, totalPages)}
           >
             Next &gt;
