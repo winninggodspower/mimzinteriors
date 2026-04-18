@@ -3,19 +3,15 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useMemo, useRef } from "react";
+import { useCallback, useMemo } from "react";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { motion } from "motion/react";
 import projectHero from "@assets/images/projects/projectsCatalogue/projectscataloguehero.png";
 import seperator from "@assets/images/seperator.png";
 import {
   aosReveal,
-  MOTION_STAGGER,
-  MOTION_DURATIONS,
-  fadeUpItem,
   heroScaleLoop,
   sectionReveal,
-  staggerContainer,
 } from "@features/lib/motion";
 import { getProjectsCataloguePage } from "../../../app/projects/projectCatalogue/actions";
 import {
@@ -23,11 +19,10 @@ import {
   projectsCatalogueQueryKey,
 } from "@features/projects/lib/projectsCatalogueQuery";
 
-export default function ProjectsCatalogue() {
+function useCataloguePagination() {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const catalogueSectionRef = useRef(null);
 
   const page = useMemo(() => {
     const rawPage = Number.parseInt(searchParams.get("page") || "1", 10);
@@ -39,42 +34,37 @@ export default function ProjectsCatalogue() {
     return rawPage;
   }, [searchParams]);
 
+  const updatePageInUrl = useCallback(
+    (nextPage, totalPages) => {
+      const boundedPage = Math.max(1, Math.min(nextPage, totalPages));
+
+      if (boundedPage === page) {
+        return;
+      }
+
+      const params = new URLSearchParams(searchParams.toString());
+
+      if (boundedPage === 1) {
+        params.delete("page");
+      } else {
+        params.set("page", String(boundedPage));
+      }
+
+      const query = params.toString();
+      const nextUrl = query ? `${pathname}?${query}` : pathname;
+
+      router.replace(nextUrl, { scroll: false });
+    },
+    [page, pathname, router, searchParams],
+  );
+
+  return { page, updatePageInUrl };
+}
+
+export default function ProjectsCatalogue() {
+  const { page, updatePageInUrl } = useCataloguePagination();
+
   const sectionMotion = sectionReveal();
-  const cardContainer = staggerContainer(MOTION_STAGGER.tight);
-  const cardItem = fadeUpItem({ duration: MOTION_DURATIONS.cardFast });
-
-  const scrollToCatalogueTop = () => {
-    if (!catalogueSectionRef.current) {
-      return;
-    }
-
-    catalogueSectionRef.current.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
-  };
-
-  const updatePageInUrl = (nextPage, totalPages) => {
-    const boundedPage = Math.max(1, Math.min(nextPage, totalPages));
-
-    if (boundedPage === page) {
-      return;
-    }
-
-    const params = new URLSearchParams(searchParams.toString());
-
-    if (boundedPage === 1) {
-      params.delete("page");
-    } else {
-      params.set("page", String(boundedPage));
-    }
-
-    const query = params.toString();
-    const nextUrl = query ? `${pathname}?${query}` : pathname;
-
-    router.replace(nextUrl, { scroll: false });
-    scrollToCatalogueTop();
-  };
 
   const { data, isLoading, isFetching } = useQuery({
     queryKey: projectsCatalogueQueryKey(page, PROJECTS_CATALOGUE_PAGE_SIZE),
@@ -125,25 +115,17 @@ export default function ProjectsCatalogue() {
         </motion.p>
       </motion.section>
 
-      <motion.section className="prjc-gallery-section" ref={catalogueSectionRef} {...sectionMotion}>
-        {isLoading ? (
+      <motion.section className="prjc-gallery-section" {...sectionMotion}>
+
+        {isLoading || isFetching ? (
           <div className="prjc-loading">Loading projects...</div>
         ) : (
-          <motion.div
-            className="prjc-gallery-grid"
-            variants={cardContainer}
-            initial="hidden"
-            animate="visible"
-          >
-            {data?.projects?.map((project, index) => (
-              <motion.article
-                key={project.id}
-                className="prjc-card"
-                variants={cardItem}
-              >
+          <div className="prjc-gallery-grid">
+            {data?.projects?.map((project) => (
+              <article key={project.id} className="prjc-card">
                 <Link
                   href={`/projects/project_catalogue/${project.id}`}
-                  className="prjc-card-image-wrap"
+                  className="prjc-card-image-wrap group"
                   aria-label={project.title}
                 >
                   <Image
@@ -153,11 +135,18 @@ export default function ProjectsCatalogue() {
                     className="prjc-card-image"
                     sizes="(min-width: 1200px) 33vw, (min-width: 768px) 50vw, 100vw"
                   />
-                  <span className="prjc-card-overlay-title">{project.title}</span>
+                  <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/40 px-4 text-center opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100">
+                    <h3 className="font-caterina text-[48px] leading-none font-light uppercase text-white max-md:text-[34px] max-sm:text-[26px]">
+                      {project.title}
+                    </h3>
+                    <p className="mt-2 max-w-[32ch] text-[18px] leading-[1.15] text-white/95 max-md:text-[15px] max-sm:text-[13px]">
+                      {project.description}
+                    </p>
+                  </div>
                 </Link>
-                </motion.article>
+              </article>
             ))}
-            </motion.div>
+          </div>
         )}
 
         <div className="prjc-pagination-wrap">

@@ -9,14 +9,17 @@ const mockPool = [
   {
     profileImage: projectA.src,
     title: "Project Pearl",
+    description: "Refined comfort where soft palettes and thoughtful detailing create a calm, luxurious everyday living experience.",
   },
   {
     profileImage: projectB.src,
     title: "Project Ivory",
+    description: "A modern interior with clean lines, layered textures, and timeless finishes designed for both beauty and function.",
   },
   {
     profileImage: projectC.src,
     title: "Project Aura",
+    description: "Elegant spatial storytelling that balances warmth, light, and craftsmanship to deliver a memorable atmosphere.",
   },
 ];
 
@@ -27,6 +30,7 @@ const mockProjects = Array.from({ length: 24 }, (_, index) => {
     id: `project-${index + 1}`,
     title: `${source.title} ${index + 1}`,
     profileImage: source.profileImage,
+    description: source.description,
   };
 });
 
