@@ -3,7 +3,6 @@ import ApartmentDetail from "@features/projects/views/ApartmentDetail";
 import {
   apartmentDetailQueryKey,
   PROJECT_DETAIL_COLUMNS_PER_PAGE,
-  PROJECT_DETAIL_HEROES_PER_PAGE,
 } from "@features/projects/lib/projectsCatalogueQueryKeys";
 import { getApartmentDetailPage } from "@features/projects/data/apartmentDetail";
 
@@ -23,7 +22,6 @@ const ApartmentDetailPage = async ({ params, searchParams }) => {
       getApartmentDetailPage({
         apartmentId: apartment,
         page: requestedPage,
-        heroesPerPage: PROJECT_DETAIL_HEROES_PER_PAGE,
         columnsPerPage: PROJECT_DETAIL_COLUMNS_PER_PAGE,
       }),
   });

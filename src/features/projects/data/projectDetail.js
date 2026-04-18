@@ -11,7 +11,6 @@ import ivoryColumnE from "@assets/images/projects/projectsCatalogue/projects/ivo
 import ivoryColumnF from "@assets/images/projects/projectsCatalogue/projects/ivorycolumnf.png";
 import {
   PROJECT_DETAIL_COLUMNS_PER_PAGE,
-  PROJECT_DETAIL_HEROES_PER_PAGE,
 } from "@features/projects/lib/projectsCatalogueQueryKeys";
 
 const projectMetaMap = {
@@ -22,14 +21,16 @@ const projectMetaMap = {
 
 const defaultMeta = { title: "MYKONOS", period: "JAN 2025" };
 
-const placeholderHeroes = [ivoryHero.src, ivoryHeroB.src, ivoryHeroC.src];
-const placeholderColumns = [
-  ivoryColumnA.src,
-  ivoryColumnB.src,
-  ivoryColumnC.src,
-  ivoryColumnD.src,
-  ivoryColumnE.src,
-  ivoryColumnF.src,
+const placeholderMedia = [
+  { id: "project-hero-1", src: ivoryHero.src, slot: "hero", order: 1 },
+  { id: "project-column-1", src: ivoryColumnA.src, slot: "column", order: 2 },
+  { id: "project-column-2", src: ivoryColumnB.src, slot: "column", order: 3 },
+  { id: "project-row-1", src: ivoryHeroB.src, slot: "row", order: 4 },
+  { id: "project-column-3", src: ivoryColumnC.src, slot: "column", order: 5 },
+  { id: "project-column-4", src: ivoryColumnD.src, slot: "column", order: 6 },
+  { id: "project-row-2", src: ivoryHeroC.src, slot: "row", order: 7 },
+  { id: "project-column-5", src: ivoryColumnE.src, slot: "column", order: 8 },
+  { id: "project-column-6", src: ivoryColumnF.src, slot: "column", order: 9 },
 ];
 
 const paginate = (items, page, pageSize) => {
@@ -37,16 +38,14 @@ const paginate = (items, page, pageSize) => {
   return items.slice(start, start + pageSize);
 };
 
+const sortByOrder = (items) => [...items].sort((leftItem, rightItem) => leftItem.order - rightItem.order);
+
 export async function getProjectDetailPage({
   projectId,
   page = 1,
-  heroesPerPage = PROJECT_DETAIL_HEROES_PER_PAGE,
   columnsPerPage = PROJECT_DETAIL_COLUMNS_PER_PAGE,
 }) {
   const safePage = Number.isFinite(page) ? Math.max(1, Math.trunc(page)) : 1;
-  const safeHeroesPerPage = Number.isFinite(heroesPerPage)
-    ? Math.max(1, Math.trunc(heroesPerPage))
-    : PROJECT_DETAIL_HEROES_PER_PAGE;
   const safeColumnsPerPage = Number.isFinite(columnsPerPage)
     ? Math.max(1, Math.trunc(columnsPerPage))
     : PROJECT_DETAIL_COLUMNS_PER_PAGE;
@@ -57,11 +56,14 @@ export async function getProjectDetailPage({
   const meta = projectMetaMap[projectId] || defaultMeta;
   const subtitle =
     "Relaxation and peace of mind can come from a well designed space. Mimz interior";
-  const heroes = placeholderHeroes;
-  const columns = placeholderColumns;
+  const media = sortByOrder(placeholderMedia);
+  const hero = media.find((mediaItem) => mediaItem.slot === "hero")?.src || null;
+  const rows = media.filter((mediaItem) => mediaItem.slot === "row").map((mediaItem) => mediaItem.src);
+  const columns = media.filter((mediaItem) => mediaItem.slot === "column").map((mediaItem) => mediaItem.src);
+  const safeRowsPerPage = Math.max(1, Math.floor(safeColumnsPerPage / 3));
 
   const totalPages = Math.max(
-    Math.ceil(heroes.length / safeHeroesPerPage),
+    Math.ceil(rows.length / safeRowsPerPage),
     Math.ceil(columns.length / safeColumnsPerPage),
     1
   );
@@ -75,9 +77,12 @@ export async function getProjectDetailPage({
     title: meta.title,
     period: meta.period,
     subtitle,
-    heroes: paginate(heroes, boundedPage, safeHeroesPerPage),
+    media,
+    hero,
+    rows: paginate(rows, boundedPage, safeRowsPerPage),
     columns: paginate(columns, boundedPage, safeColumnsPerPage),
-    heroTotal: heroes.length,
+    heroTotal: hero ? 1 : 0,
+    rowTotal: rows.length,
     columnTotal: columns.length,
     totalPages,
     page: boundedPage,

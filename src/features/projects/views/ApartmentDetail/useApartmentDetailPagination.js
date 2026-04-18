@@ -1,7 +1,13 @@
 import { useMemo, useRef } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { keepPreviousData, useQuery } from "@tanstack/react-query";
+import { getApartmentDetailPage } from "@features/projects/data/apartmentDetail";
+import {
+  apartmentDetailQueryKey,
+  PROJECT_DETAIL_COLUMNS_PER_PAGE,
+} from "@features/projects/lib/projectsCatalogueQueryKeys";
 
-export function useApartmentDetailPagination() {
+export function useApartmentDetailPagination(apartmentId) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -50,5 +56,32 @@ export function useApartmentDetailPagination() {
     scrollToGalleryTop();
   };
 
-  return { page, updatePageInUrl, gallerySectionRef };
+  const { data, isLoading, isFetching, isError } = useQuery({
+    queryKey: apartmentDetailQueryKey(apartmentId, page),
+    queryFn: () =>
+      getApartmentDetailPage({
+        apartmentId,
+        page,
+        columnsPerPage: PROJECT_DETAIL_COLUMNS_PER_PAGE,
+      }),
+    placeholderData: keepPreviousData,
+    throwOnError: false,
+  });
+
+  const totalPages = data?.totalPages || 1;
+  const canGoPrev = page > 1;
+  const canGoNext = page < totalPages;
+
+  return {
+    page,
+    data,
+    isLoading,
+    isFetching,
+    isError,
+    totalPages,
+    canGoPrev,
+    canGoNext,
+    updatePageInUrl,
+    gallerySectionRef,
+  };
 }

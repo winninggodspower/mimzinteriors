@@ -5,7 +5,6 @@ import { getProjectDetailPage } from "@features/projects/data/projectDetail";
 import {
   projectDetailQueryKey,
   PROJECT_DETAIL_COLUMNS_PER_PAGE,
-  PROJECT_DETAIL_HEROES_PER_PAGE,
 } from "@features/projects/lib/projectsCatalogueQueryKeys";
 
 export function useProjectDetailPagination(projectId) {
@@ -63,7 +62,6 @@ export function useProjectDetailPagination(projectId) {
       getProjectDetailPage({
         projectId,
         page,
-        heroesPerPage: PROJECT_DETAIL_HEROES_PER_PAGE,
         columnsPerPage: PROJECT_DETAIL_COLUMNS_PER_PAGE,
       }),
     placeholderData: keepPreviousData,

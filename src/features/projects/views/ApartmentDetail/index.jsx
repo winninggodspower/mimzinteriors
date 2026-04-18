@@ -1,206 +1,139 @@
 "use client";
 
+import { useCallback, useState } from "react";
 import Image from "next/image";
-import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { motion } from "motion/react";
 import seperator from "@assets/images/seperator.png";
-import { aosReveal, heroScaleLoop, sectionReveal } from "@features/lib/motion";
-import ivoryHero from "@assets/images/projects/projectsCatalogue/projects/ivoryhero.png";
-import ivoryHeroB from "@assets/images/projects/projectsCatalogue/projects/ivoryherob.png";
-import ivoryHeroC from "@assets/images/projects/projectsCatalogue/projects/ivoryheroc.png";
-import ivoryColumnA from "@assets/images/projects/projectsCatalogue/projects/ivorycolumna.png";
-import ivoryColumnB from "@assets/images/projects/projectsCatalogue/projects/ivorycolumnb.png";
-import ivoryColumnC from "@assets/images/projects/projectsCatalogue/projects/ivorycolumnc.png";
-import ivoryColumnD from "@assets/images/projects/projectsCatalogue/projects/ivorycolumnd.png";
-import ivoryColumnE from "@assets/images/projects/projectsCatalogue/projects/ivorycolumne.png";
-import ivoryColumnF from "@assets/images/projects/projectsCatalogue/projects/ivorycolumnf.png";
-import { getApartmentDetailPage } from "@features/projects/data/apartmentDetail";
-import {
-  apartmentDetailQueryKey,
-  PROJECT_DETAIL_COLUMNS_PER_PAGE,
-  PROJECT_DETAIL_HEROES_PER_PAGE,
-} from "@features/projects/lib/projectsCatalogueQueryKeys";
+import { aosReveal, fadeUpItem, heroScaleLoop, sectionReveal, staggerContainer } from "@features/lib/motion";
 import { useApartmentDetailPagination } from "./useApartmentDetailPagination";
 
 export default function ApartmentDetail({ apartmentId }) {
-  const fallbackHeroes = [ivoryHero.src, ivoryHeroB.src, ivoryHeroC.src];
-  const fallbackColumns = [
-    ivoryColumnA.src,
-    ivoryColumnB.src,
-    ivoryColumnC.src,
-    ivoryColumnD.src,
-    ivoryColumnE.src,
-    ivoryColumnF.src,
-  ];
+  const [hasImageLoadError, setHasImageLoadError] = useState(false);
 
-  const { page, updatePageInUrl, gallerySectionRef } = useApartmentDetailPagination();
+  const {
+    page,
+    data,
+    isLoading,
+    isFetching,
+    isError,
+    canGoPrev,
+    canGoNext,
+    totalPages,
+    updatePageInUrl,
+    gallerySectionRef,
+  } = useApartmentDetailPagination(apartmentId);
 
   const sectionMotion = sectionReveal();
+  const metaMotion = staggerContainer(0.08);
+  const handleImageError = useCallback(() => {
+    setHasImageLoadError(true);
+  }, []);
 
-  const { data, isLoading, isFetching } = useQuery({
-    queryKey: apartmentDetailQueryKey(apartmentId, page),
-    queryFn: () =>
-      getApartmentDetailPage({
-        apartmentId,
-        page,
-        heroesPerPage: PROJECT_DETAIL_HEROES_PER_PAGE,
-        columnsPerPage: PROJECT_DETAIL_COLUMNS_PER_PAGE,
-      }),
-    placeholderData: keepPreviousData,
-    throwOnError: true,
-  });
+  const topHero = data?.hero || null;
+  const rows = data?.rows || [];
+  const columns = data?.columns || [];
+  const columnPairs = Array.from({ length: Math.ceil(columns.length / 2) }, (_, pairIndex) =>
+    columns.slice(pairIndex * 2, pairIndex * 2 + 2)
+  );
 
-  const heroes = data?.heroes?.length ? data.heroes : fallbackHeroes;
-  const columns = data?.columns?.length ? data.columns : fallbackColumns;
-
-  const topHero = heroes[0] || null;
-  const secondaryHero = heroes[1] || null;
-  const tertiaryHero = heroes[2] || null;
-  const totalPages = data?.totalPages || 1;
-
-  const canGoPrev = page > 1;
-  const canGoNext = page < totalPages;
+  const hasMissingImages = !topHero || (columns.length === 0 && rows.length === 0) || columns.some((image) => !image) || rows.some((image) => !image);
+  const hasImageErrorState = !isLoading && (isError || hasImageLoadError || hasMissingImages);
 
   return (
     <main className="prjdp-main">
       <motion.section className="prjdp-hero" {...sectionMotion}>
-        <div className="prjdp-hero-wrap">
-          {topHero ? (
-            <motion.div
-              {...heroScaleLoop({ scale: 1.04 })}
-              className="h-full w-full"
-            >
-              <Image
-                src={topHero}
-                alt={data?.title || "Apartment hero"}
-                fill
-                priority
-                className="prjdp-hero-img"
-                sizes="100vw"
-              />
-            </motion.div>
-          ) : null}
-        </div>
+        {topHero ? (
+          <motion.div
+            {...heroScaleLoop({ scale: 1.04 })}
+            className="hero-container"
+          >
+            <Image
+              src={topHero}
+              alt={data?.title || "Apartment hero"}
+              fill
+              priority
+                className="hero-image"
+              sizes="100vw"
+                onError={handleImageError}
+            />
+          </motion.div>
+        ) : null}
       </motion.section>
 
       <motion.section className="prjdp-meta" {...sectionMotion}>
-        <motion.h1 className="prjdp-title" {...aosReveal({ direction: "right", distance: 38 })}>
-          {data?.title || "APARTMENT"}
-        </motion.h1>
-        <motion.p className="prjdp-period" {...aosReveal({ direction: "left", distance: 28, delay: 0.04 })}>
-          {data?.period || ""}
-        </motion.p>
-        <motion.p className="prjdp-description" {...aosReveal({ direction: "up", distance: 26, delay: 0.08 })}>
-          {data?.subtitle || ""}
-        </motion.p>
+        <motion.div
+          className="mx-auto flex max-w-225 flex-col items-center text-center"
+          variants={metaMotion}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.5 }}
+        >
+          <motion.h1
+            className="prjdp-title"
+            variants={fadeUpItem({ y: 14, duration: 0.58 })}
+          >
+            {data?.title || "APARTMENT"}
+          </motion.h1>
+          <motion.p
+            className="prjdp-period"
+            variants={fadeUpItem({ y: 12, duration: 0.52, delay: 0.08 })}
+          >
+            {data?.period || ""}
+          </motion.p>
+          <motion.p
+            className="prjdp-description"
+            variants={fadeUpItem({ y: 12, duration: 0.56, delay: 0.16 })}
+          >
+            {data?.subtitle || ""}
+          </motion.p>
+        </motion.div>
       </motion.section>
 
       <motion.section className="prjdp-gallery" ref={gallerySectionRef} {...sectionMotion}>
         {isLoading ? (
-          <div className="prjdp-loading">Loading apartment...</div>
+          <div className="prjdp-loading">
+            Loading apartment...
+          </div>
+        ) : hasImageErrorState ? (
+          <div className="prjdp-loading" role="alert">
+            We could not load this apartment's images right now. Please try again.
+          </div>
         ) : (
           <>
-            <div className="prjdp-two-col">
-              {columns[0] ? (
-                <div className="group relative w-full overflow-hidden bg-[#f2f2f2] aspect-390/430 md:aspect-5/6">
-                  <Image
-                    src={columns[0]}
-                    alt={`${data?.title || "Apartment"} detail 1`}
-                    fill
-                    className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105"
-                    sizes="(min-width: 1024px) 50vw, 100vw"
-                  />
+            {columnPairs.map((pair, pairIndex) => (
+              <div key={`pair-${pairIndex}`}>
+                <div className="prjdp-two-col">
+                  {pair.map((imageSrc, imageIndex) => (
+                    <div
+                      key={`col-${pairIndex}-${imageIndex}`}
+                      className="group relative w-full overflow-hidden bg-[#f2f2f2] aspect-390/430 md:aspect-5/6"
+                    >
+                      <Image
+                        src={imageSrc}
+                        alt={`${data?.title || "Apartment"} detail ${pairIndex * 2 + imageIndex + 1}`}
+                        fill
+                        className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105"
+                        sizes="(min-width: 1024px) 50vw, 100vw"
+                        onError={handleImageError}
+                      />
+                    </div>
+                  ))}
                 </div>
-              ) : null}
 
-              {columns[1] ? (
-                <div className="group relative w-full overflow-hidden bg-[#f2f2f2] aspect-390/430 md:aspect-5/6">
-                  <Image
-                    src={columns[1]}
-                    alt={`${data?.title || "Apartment"} detail 2`}
-                    fill
-                    className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105"
-                    sizes="(min-width: 1024px) 50vw, 100vw"
-                  />
-                </div>
-              ) : null}
-            </div>
-
-            {secondaryHero ? (
-              <div className="group relative mb-[clamp(4px,0.42vw,8px)] w-full overflow-hidden bg-[#f2f2f2] aspect-820/690 md:aspect-1440/780">
-                <Image
-                  src={secondaryHero}
-                  alt={`${data?.title || "Apartment"} hero 2`}
-                  fill
-                  className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105"
-                  sizes="100vw"
-                />
+                {rows[pairIndex] ? (
+                  <div className="group relative mb-[clamp(4px,0.42vw,8px)] w-full overflow-hidden bg-[#f2f2f2] aspect-820/690 md:aspect-1440/780">
+                    <Image
+                      src={rows[pairIndex]}
+                      alt={`${data?.title || "Apartment"} row ${pairIndex + 1}`}
+                      fill
+                      className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105"
+                      sizes="100vw"
+                      onError={handleImageError}
+                    />
+                  </div>
+                ) : null}
               </div>
-            ) : null}
-
-            <div className="prjdp-two-col">
-              {columns[2] ? (
-                <div className="group relative w-full overflow-hidden bg-[#f2f2f2] aspect-390/430 md:aspect-5/6">
-                  <Image
-                    src={columns[2]}
-                    alt={`${data?.title || "Apartment"} detail 3`}
-                    fill
-                    className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105"
-                    sizes="(min-width: 1024px) 50vw, 100vw"
-                  />
-                </div>
-              ) : null}
-
-              {columns[3] ? (
-                <div className="group relative w-full overflow-hidden bg-[#f2f2f2] aspect-390/430 md:aspect-5/6">
-                  <Image
-                    src={columns[3]}
-                    alt={`${data?.title || "Apartment"} detail 4`}
-                    fill
-                    className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105"
-                    sizes="(min-width: 1024px) 50vw, 100vw"
-                  />
-                </div>
-              ) : null}
-            </div>
-
-            {tertiaryHero ? (
-              <div className="group relative mb-[clamp(4px,0.42vw,8px)] w-full overflow-hidden bg-[#f2f2f2] aspect-820/690 md:aspect-1440/780">
-                <Image
-                  src={tertiaryHero}
-                  alt={`${data?.title || "Apartment"} hero 3`}
-                  fill
-                  className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105"
-                  sizes="100vw"
-                />
-              </div>
-            ) : null}
-
-            <div className="prjdp-two-col">
-              {columns[4] ? (
-                <div className="group relative w-full overflow-hidden bg-[#f2f2f2] aspect-390/430 md:aspect-5/6">
-                  <Image
-                    src={columns[4]}
-                    alt={`${data?.title || "Apartment"} detail 5`}
-                    fill
-                    className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105"
-                    sizes="(min-width: 1024px) 50vw, 100vw"
-                  />
-                </div>
-              ) : null}
-
-              {columns[5] ? (
-                <div className="group relative w-full overflow-hidden bg-[#f2f2f2] aspect-390/430 md:aspect-5/6">
-                  <Image
-                    src={columns[5]}
-                    alt={`${data?.title || "Apartment"} detail 6`}
-                    fill
-                    className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105"
-                    sizes="(min-width: 1024px) 50vw, 100vw"
-                  />
-                </div>
-              ) : null}
-            </div>
+            ))}
           </>
         )}
 

@@ -4,7 +4,7 @@ import { useCallback, useState } from "react";
 import Image from "next/image";
 import { motion } from "motion/react";
 import seperator from "@assets/images/seperator.png";
-import { aosReveal, heroScaleLoop, sectionReveal } from "@features/lib/motion";
+import { aosReveal, fadeUpItem, heroScaleLoop, sectionReveal, staggerContainer } from "@features/lib/motion";
 import { useProjectDetailPagination } from "./useProjectDetailPagination";
 
 export default function ProectDetail({ projectId }) {
@@ -24,52 +24,68 @@ export default function ProectDetail({ projectId }) {
   } = useProjectDetailPagination(projectId);
 
   const sectionMotion = sectionReveal();
+  const metaMotion = staggerContainer(0.08);
   const handleImageError = useCallback(() => {
     setHasImageLoadError(true);
   }, []);
 
-  const heroes = data?.heroes || [];
+  const topHero = data?.hero || null;
+  const rows = data?.rows || [];
   const columns = data?.columns || [];
-  const columnPairs = [columns.slice(0, 2), columns.slice(2, 4), columns.slice(4, 6)];
-  const interleavedHeroes = [heroes[1] || null, heroes[2] || null, null];
-
-  const topHero = heroes[0] || null;
-  const hasMissingImages = !topHero || heroes.length < 3 || columns.length < 6 || columns.some((image) => !image);
+  const columnPairs = Array.from({ length: Math.ceil(columns.length / 2) }, (_, pairIndex) =>
+    columns.slice(pairIndex * 2, pairIndex * 2 + 2)
+  );
+  const hasMissingImages = !topHero || (columns.length === 0 && rows.length === 0) || columns.some((image) => !image) || rows.some((image) => !image);
   const hasImageErrorState = !isLoading && (isError || hasImageLoadError || hasMissingImages);
 
   return (
     <main className="prjdp-main">
       <motion.section className="prjdp-hero" {...sectionMotion}>
-        <div className="prjdp-hero-wrap">
-          {!hasImageErrorState && topHero ? (
-            <motion.div
-              {...heroScaleLoop({ scale: 1.04 })}
-              className="h-full w-full"
-            >
-              <Image
-                src={topHero}
-                alt={data?.title || "Project hero"}
-                fill
-                priority
-                className="prjdp-hero-img"
-                sizes="100vw"
-                onError={handleImageError}
-              />
-            </motion.div>
-          ) : null}
-        </div>
+        {!hasImageErrorState && topHero ? (
+          <motion.div
+            {...heroScaleLoop({ scale: 1.04 })}
+            className="hero-container"
+          >
+            <Image
+              src={topHero}
+              alt={data?.title || "Project hero"}
+              fill
+              priority
+              className="hero-image"
+              sizes="100vw"
+              onError={handleImageError}
+            />
+          </motion.div>
+        ) : null}
       </motion.section>
 
       <motion.section className="prjdp-meta" {...sectionMotion}>
-        <motion.h1 className="prjdp-title" {...aosReveal({ direction: "right", distance: 38 })}>
-          {data?.title || "PROJECT"}
-        </motion.h1>
-        <motion.p className="prjdp-period" {...aosReveal({ direction: "left", distance: 28, delay: 0.04 })}>
-          {data?.period || ""}
-        </motion.p>
-        <motion.p className="prjdp-description" {...aosReveal({ direction: "up", distance: 26, delay: 0.08 })}>
-          {data?.subtitle || ""}
-        </motion.p>
+        <motion.div
+          className="mx-auto flex max-w-225 flex-col items-center text-center"
+          variants={metaMotion}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.5 }}
+        >
+          <motion.h1
+            className="prjdp-title"
+            variants={fadeUpItem({ y: 14, duration: 0.58 })}
+          >
+            {data?.title || "PROJECT"}
+          </motion.h1>
+          <motion.p
+            className="prjdp-period"
+            variants={fadeUpItem({ y: 12, duration: 0.52, delay: 0.08 })}
+          >
+            {data?.period || ""}
+          </motion.p>
+          <motion.p
+            className="prjdp-description"
+            variants={fadeUpItem({ y: 12, duration: 0.56, delay: 0.16 })}
+          >
+            {data?.subtitle || ""}
+          </motion.p>
+        </motion.div>
       </motion.section>
 
       <motion.section className="prjdp-gallery" ref={gallerySectionRef} {...sectionMotion}>
@@ -101,11 +117,11 @@ export default function ProectDetail({ projectId }) {
                   ))}
                 </div>
 
-                {interleavedHeroes[pairIndex] ? (
+                {rows[pairIndex] ? (
                   <div className="group relative mb-[clamp(4px,0.42vw,8px)] w-full overflow-hidden bg-[#f2f2f2] aspect-820/690 md:aspect-1440/780">
                     <Image
-                      src={interleavedHeroes[pairIndex]}
-                      alt={`${data?.title || "Project"} hero ${pairIndex + 2}`}
+                      src={rows[pairIndex]}
+                      alt={`${data?.title || "Project"} row ${pairIndex + 1}`}
                       fill
                       className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105"
                       sizes="100vw"

@@ -3,7 +3,6 @@ import ProectDetail from "@features/projects/views/ProjectDetiails";
 import {
   projectDetailQueryKey,
   PROJECT_DETAIL_COLUMNS_PER_PAGE,
-  PROJECT_DETAIL_HEROES_PER_PAGE,
 } from "@features/projects/lib/projectsCatalogueQueryKeys";
 import { getProjectDetailPage } from "@features/projects/data/projectDetail";
 
@@ -23,7 +22,6 @@ const ProjectDetailPage = async ({ params, searchParams }) => {
       getProjectDetailPage({
         projectId: projectId,
         page: requestedPage,
-        heroesPerPage: PROJECT_DETAIL_HEROES_PER_PAGE,
         columnsPerPage: PROJECT_DETAIL_COLUMNS_PER_PAGE,
       }),
   });
