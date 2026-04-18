@@ -1,33 +1,34 @@
 import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 
-let ADMIN_EMAIL = process.env.ADMIN_EMAIL 
-let ADMIN_PASSWORD = process.env.ADMIN_PASSWORD
+const ADMIN_EMAIL = process.env.ADMIN_EMAIL
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD
 
 export const authOptions = {
+    secret: process.env.NEXTAUTH_SECRET || process.env.AUTH_SECRET,
+    pages: {
+        signIn: "/admin/login",
+    },
     providers: [
         CredentialsProvider({
             name: "Credentials",
             credentials: {
-                username: { label: "Username", type: "text", placeholder: "jsmith" },
+                email: { label: "Email", type: "email", placeholder: "admin@example.com" },
                 password: { label: "Password", type: "password" }
             },
-            async authorize(credentials, req) {
-                // You need to provide your own logic here that takes the credentials
-                // submitted and returns either a object representing a user or value
-                // that is false/null if the credentials are invalid.
-                // e.g. return { id: 1, name: 'J Smith', email: 'jsmith@example.com' }
-                // You can also use the `req` object to obtain additional parameters
-                const user = {id: '1', name: "J Smith", email: "admin@gmail.com"}
+            async authorize(credentials) {
+                const email = credentials?.email
+                const password = credentials?.password
 
-                if (credentials.username === ADMIN_EMAIL || credentials.password === ADMIN_PASSWORD) {
-                    return user;
-                }
-                else {
-                    // Return null if user data could not be retrieved
+                if (!email || !password || !ADMIN_EMAIL || !ADMIN_PASSWORD) {
                     return null
                 }
 
+                if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
+                    return { id: "1", name: "Admin", email: ADMIN_EMAIL }
+                }
+
+                return null
             }
         })
     ],

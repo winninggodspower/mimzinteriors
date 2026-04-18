@@ -3,8 +3,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import "./globals.css";
 import NextTopLoader from "nextjs-toploader";
 import NextSessionProviders from "./session-provider";
-import Navbar from "./components/navbar";
-import Footer from "./components/footer";
+import SiteShell from "./components/site-shell";
 
 
 
@@ -37,11 +36,7 @@ export default function RootLayout({ children }) {
       >
         <NextTopLoader color="#C9A96E" showSpinner={false} />
         <NextSessionProviders>
-          <div className="min-h-screen flex flex-col">
-            <Navbar />
-            <main className="flex-1">{children}</main>
-            <Footer />
-          </div>
+          <SiteShell>{children}</SiteShell>
         </NextSessionProviders>
          <ToastContainer />
       </body>

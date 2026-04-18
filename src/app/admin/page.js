@@ -1,19 +1,9 @@
 
-
-import { getServerSession } from "next-auth/next"
-import { redirect } from "next/navigation"
-import { authOptions } from "@/api/auth/[...nextauth]/route"
-
-export default async function AdminPage() {
-  const session = await getServerSession(authOptions)
-
-  if (!session) {
-    redirect("/admin/login")
-  }
-
+export default function AdminPage() {
   return (
-    <div className="min-h-screen flex items-center justify-center">
-      <h1 className="text-3xl font-bold">Welcome to the Admin Dashboard</h1>
-    </div>
+    <section className="rounded-2xl border border-[#B58A2A]/25 bg-white p-6 shadow-sm">
+      <h1 className="text-3xl font-semibold text-slate-900">Dashboard</h1>
+      <p className="mt-2 text-slate-600">Welcome to your Mimz Interiors admin dashboard.</p>
+    </section>
   )
 }

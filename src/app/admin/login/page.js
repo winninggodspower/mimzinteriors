@@ -23,10 +23,11 @@ export default function LoginPage() {
       redirect: false, // Prevent NextAuth.js from redirecting automatically
       email,
       password,
+      callbackUrl: "/admin",
     })
 
     if (result?.error) {
-      setError(result.error)
+      setError(result.error === "CredentialsSignin" ? "Invalid email or password" : result.error)
     } else {
       toast.success("Login successful!")
       router.push("/admin") 
