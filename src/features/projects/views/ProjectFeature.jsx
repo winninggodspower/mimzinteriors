@@ -17,7 +17,7 @@ const projectItems = [
   {
     title: "PROJECT CATALOG",
     desc: "Our intentional luxury projects of over Three hundred million and above, for clients able to afford foreign decor items.",
-    href: "/projects/projectCatalogue",
+    href: "/projects/project_catalogue",
     image: projectCatalogue,
     alt: "Project catalogue interior view",
   },

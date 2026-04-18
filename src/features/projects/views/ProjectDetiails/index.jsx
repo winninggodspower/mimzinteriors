@@ -135,25 +135,23 @@ export default function ProectDetail({ projectId }) {
         )}
 
         <div className="prjdp-pagination-wrap">
-          <motion.button
+          <button
             type="button"
             className="prjdp-page-btn"
             disabled={!canGoPrev || isFetching}
             onClick={() => updatePageInUrl(page - 1, totalPages)}
-            {...aosReveal({ direction: "left", distance: 18 })}
           >
             &lt; Previous
-          </motion.button>
+          </button>
 
-          <motion.button
+          <button
             type="button"
             className="prjdp-page-btn"
             disabled={!canGoNext || isFetching}
             onClick={() => updatePageInUrl(page + 1, totalPages)}
-            {...aosReveal({ direction: "right", distance: 18 })}
           >
             Next &gt;
-          </motion.button>
+          </button>
         </div>
       </motion.section>
 
