@@ -1,5 +1,5 @@
 import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
-import ProjectCatalogueProject from "@features/projects/views/ProjectCatalogueProject";
+import ProectDetail from "@features/projects/views/ProjectDetiails";
 import {
   projectDetailQueryKey,
   PROJECT_DETAIL_COLUMNS_PER_PAGE,
@@ -30,7 +30,7 @@ const ProjectDetailPage = async ({ params, searchParams }) => {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <ProjectCatalogueProject projectId={projectId} />
+      <ProectDetail projectId={projectId} />
     </HydrationBoundary>
   );
 };

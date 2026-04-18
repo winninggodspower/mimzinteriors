@@ -1,4 +1,4 @@
-import ProjectsFeature from "../../features/projects/pages/ProjectFeature";
+import ProjectsFeature from "@features/projects/views/ProjectFeature";
 
 const page = () => {
   return (

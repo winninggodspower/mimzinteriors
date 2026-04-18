@@ -2027,31 +2027,6 @@ body {
   margin-bottom: clamp(4px, 0.42vw, 8px);
 }
 
-.prjdp-media {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-  background: #f2f2f2;
-}
-
-.prjdp-media-col {
-  aspect-ratio: 1 / 1.2;
-}
-
-.prjdp-media-hero {
-  aspect-ratio: 1440 / 780;
-  margin-bottom: clamp(4px, 0.42vw, 8px);
-}
-
-.prjdp-media-img {
-  object-fit: cover;
-  transition: transform 0.78s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.prjdp-media:hover .prjdp-media-img {
-  transform: scale(1.05);
-}
-
 .prjdp-loading {
   min-height: 180px;
   display: flex;
@@ -2151,14 +2126,6 @@ body {
 
   .prjdp-two-col {
     grid-template-columns: 1fr;
-  }
-
-  .prjdp-media-col {
-    aspect-ratio: 390 / 430;
-  }
-
-  .prjdp-media-hero {
-    aspect-ratio: 820 / 690;
   }
 
   .prjdp-quote-inner blockquote {

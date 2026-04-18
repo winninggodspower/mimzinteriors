@@ -102,24 +102,24 @@ export default function ApartmentDetail({ apartmentId }) {
           <>
             <div className="prjdp-two-col">
               {columns[0] ? (
-                <div className="prjdp-media prjdp-media-col">
+                <div className="group relative w-full overflow-hidden bg-[#f2f2f2] aspect-390/430 md:aspect-5/6">
                   <Image
                     src={columns[0]}
                     alt={`${data?.title || "Apartment"} detail 1`}
                     fill
-                    className="prjdp-media-img"
+                    className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105"
                     sizes="(min-width: 1024px) 50vw, 100vw"
                   />
                 </div>
               ) : null}
 
               {columns[1] ? (
-                <div className="prjdp-media prjdp-media-col">
+                <div className="group relative w-full overflow-hidden bg-[#f2f2f2] aspect-390/430 md:aspect-5/6">
                   <Image
                     src={columns[1]}
                     alt={`${data?.title || "Apartment"} detail 2`}
                     fill
-                    className="prjdp-media-img"
+                    className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105"
                     sizes="(min-width: 1024px) 50vw, 100vw"
                   />
                 </div>
@@ -127,12 +127,12 @@ export default function ApartmentDetail({ apartmentId }) {
             </div>
 
             {secondaryHero ? (
-              <div className="prjdp-media prjdp-media-hero">
+              <div className="group relative mb-[clamp(4px,0.42vw,8px)] w-full overflow-hidden bg-[#f2f2f2] aspect-820/690 md:aspect-1440/780">
                 <Image
                   src={secondaryHero}
                   alt={`${data?.title || "Apartment"} hero 2`}
                   fill
-                  className="prjdp-media-img"
+                  className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105"
                   sizes="100vw"
                 />
               </div>
@@ -140,24 +140,24 @@ export default function ApartmentDetail({ apartmentId }) {
 
             <div className="prjdp-two-col">
               {columns[2] ? (
-                <div className="prjdp-media prjdp-media-col">
+                <div className="group relative w-full overflow-hidden bg-[#f2f2f2] aspect-390/430 md:aspect-5/6">
                   <Image
                     src={columns[2]}
                     alt={`${data?.title || "Apartment"} detail 3`}
                     fill
-                    className="prjdp-media-img"
+                    className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105"
                     sizes="(min-width: 1024px) 50vw, 100vw"
                   />
                 </div>
               ) : null}
 
               {columns[3] ? (
-                <div className="prjdp-media prjdp-media-col">
+                <div className="group relative w-full overflow-hidden bg-[#f2f2f2] aspect-390/430 md:aspect-5/6">
                   <Image
                     src={columns[3]}
                     alt={`${data?.title || "Apartment"} detail 4`}
                     fill
-                    className="prjdp-media-img"
+                    className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105"
                     sizes="(min-width: 1024px) 50vw, 100vw"
                   />
                 </div>
@@ -165,12 +165,12 @@ export default function ApartmentDetail({ apartmentId }) {
             </div>
 
             {tertiaryHero ? (
-              <div className="prjdp-media prjdp-media-hero">
+              <div className="group relative mb-[clamp(4px,0.42vw,8px)] w-full overflow-hidden bg-[#f2f2f2] aspect-820/690 md:aspect-1440/780">
                 <Image
                   src={tertiaryHero}
                   alt={`${data?.title || "Apartment"} hero 3`}
                   fill
-                  className="prjdp-media-img"
+                  className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105"
                   sizes="100vw"
                 />
               </div>
@@ -178,24 +178,24 @@ export default function ApartmentDetail({ apartmentId }) {
 
             <div className="prjdp-two-col">
               {columns[4] ? (
-                <div className="prjdp-media prjdp-media-col">
+                <div className="group relative w-full overflow-hidden bg-[#f2f2f2] aspect-390/430 md:aspect-5/6">
                   <Image
                     src={columns[4]}
                     alt={`${data?.title || "Apartment"} detail 5`}
                     fill
-                    className="prjdp-media-img"
+                    className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105"
                     sizes="(min-width: 1024px) 50vw, 100vw"
                   />
                 </div>
               ) : null}
 
               {columns[5] ? (
-                <div className="prjdp-media prjdp-media-col">
+                <div className="group relative w-full overflow-hidden bg-[#f2f2f2] aspect-390/430 md:aspect-5/6">
                   <Image
                     src={columns[5]}
                     alt={`${data?.title || "Apartment"} detail 6`}
                     fill
-                    className="prjdp-media-img"
+                    className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105"
                     sizes="(min-width: 1024px) 50vw, 100vw"
                   />
                 </div>
