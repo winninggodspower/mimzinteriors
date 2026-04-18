@@ -8,7 +8,7 @@ import {
 import { getProjectDetailPage } from "./actions";
 
 const ProjectDetailPage = async ({ params, searchParams }) => {
-  const { project } = await params;
+  const { projectId } = await params;
   const resolvedSearchParams = await searchParams;
   const requestedPage = Math.max(
     1,
@@ -18,10 +18,10 @@ const ProjectDetailPage = async ({ params, searchParams }) => {
   const queryClient = new QueryClient();
 
   await queryClient.prefetchQuery({
-    queryKey: projectDetailQueryKey(project, requestedPage),
+    queryKey: projectDetailQueryKey(projectId, requestedPage),
     queryFn: () =>
       getProjectDetailPage({
-        projectId: project,
+        projectId: projectId,
         page: requestedPage,
         heroesPerPage: PROJECT_DETAIL_HEROES_PER_PAGE,
         columnsPerPage: PROJECT_DETAIL_COLUMNS_PER_PAGE,
@@ -30,7 +30,7 @@ const ProjectDetailPage = async ({ params, searchParams }) => {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <ProjectCatalogueProject projectId={project} />
+      <ProjectCatalogueProject projectId={projectId} />
     </HydrationBoundary>
   );
 };
