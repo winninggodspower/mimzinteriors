@@ -103,7 +103,7 @@ export default function ProectDetail({ projectId }) {
                   {pair.map((imageSrc, imageIndex) => (
                     <div
                       key={`col-${pairIndex}-${imageIndex}`}
-                      className="group relative w-full overflow-hidden bg-[#f2f2f2] aspect-390/430 md:aspect-5/6"
+                      className="group relative w-full h-215 overflow-hidden bg-[#f2f2f2]"
                     >
                       <Image
                         src={imageSrc}
@@ -118,7 +118,7 @@ export default function ProectDetail({ projectId }) {
                 </div>
 
                 {rows[pairIndex] ? (
-                  <div className="group relative mb-[clamp(4px,0.42vw,8px)] w-full overflow-hidden bg-[#f2f2f2] aspect-820/690 md:aspect-1440/780">
+                  <div className="group relative mb-[clamp(4px,0.42vw,8px)] w-full h-200 overflow-hidden bg-[#f2f2f2]">
                     <Image
                       src={rows[pairIndex]}
                       alt={`${data?.title || "Project"} row ${pairIndex + 1}`}

@@ -6,9 +6,10 @@ import { motion } from "motion/react";
 import projectHero from "@assets/images/projects/projectsCatalogue/projectscataloguehero.png";
 import seperator from "@assets/images/seperator.png";
 import {
-  aosReveal,
+  fadeUpItem,
   heroScaleLoop,
   sectionReveal,
+  staggerContainer,
 } from "@features/lib/motion";
 import { useProjectsCataloguePagination } from "./useProjectsCataloguePagination";
 
@@ -25,10 +26,12 @@ export default function ProjectsCatalogue() {
   } = useProjectsCataloguePagination();
 
   const sectionMotion = sectionReveal();
+  const introMotion = staggerContainer(0.1);
+  const quoteMotion = fadeUpItem({ y: 20, duration: 0.62 });
 
   return (
     <main className="prjc-main">
-      <motion.section className="prjc-hero" {...sectionMotion}>
+      <section className="prjc-hero">
         <div className="prjc-hero-wrap">
           <motion.div
             {...heroScaleLoop({ scale: 1.04 })}
@@ -44,15 +47,22 @@ export default function ProjectsCatalogue() {
             />
           </motion.div>
         </div>
-      </motion.section>
+      </section>
 
-      <motion.section className="prjc-intro" {...sectionMotion}>
-        <motion.p className="prjc-img-credit" {...aosReveal({ direction: "left", distance: 30, duration: 0.48 })}>-All images belongs to Mimz interiors-</motion.p>
-        <motion.h1 className="prjc-title" {...aosReveal({ direction: "right", distance: 52, duration: 0.62 })}>PROJECT CATALOG</motion.h1>
-        <motion.p className="prjc-intro-copy" {...aosReveal({ direction: "left", distance: 44, duration: 0.62 })}>
-          Our project speaks loudly for itself as we handle them with the highest form of professionalism from field workers to our customer care services. All process documentation and alignments are done with modern tools to give a remarkable impression at the beginning and end of every project. At Mimz interior, we give every client a reason to come back.
-        </motion.p>
-      </motion.section>
+      <section className="prjc-intro">
+        <motion.div
+          variants={introMotion}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.45 }}
+        >
+          <motion.p className="prjc-img-credit" variants={fadeUpItem({ y: 14, duration: 0.5 })}>-All images belongs to Mimz interiors-</motion.p>
+          <motion.h1 className="prjc-title" variants={fadeUpItem({ y: 16, duration: 0.58, delay: 0.06 })}>PROJECT CATALOG</motion.h1>
+          <motion.p className="prjc-intro-copy" variants={fadeUpItem({ y: 16, duration: 0.62, delay: 0.12 })}>
+            Our project speaks loudly for itself as we handle them with the highest form of professionalism from field workers to our customer care services. All process documentation and alignments are done with modern tools to give a remarkable impression at the beginning and end of every project. At Mimz interior, we give every client a reason to come back.
+          </motion.p>
+        </motion.div>
+      </section>
 
       <motion.section className="prjc-gallery-section" {...sectionMotion}>
         <div className="relative min-h-[clamp(320px,42vw,620px)]">
@@ -85,14 +95,11 @@ export default function ProjectsCatalogue() {
           </div>
 
           {showLoadingOverlay ? (
-            <motion.div
+            <div
               className="absolute inset-0 z-10 flex items-center justify-center bg-white/75 px-4 backdrop-blur-sm"
               role="status"
               aria-live="polite"
               aria-label="Loading projects"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
             >
               <div className="flex flex-col items-center gap-4 border border-[rgba(194,172,132,0.28)] bg-[rgba(255,252,247,0.84)] px-6 py-5 shadow-[0_18px_50px_rgba(40,32,20,0.12)] max-sm:px-5 max-sm:py-4">
                 <span
@@ -103,7 +110,7 @@ export default function ProjectsCatalogue() {
                   Loading projects...
                 </p>
               </div>
-            </motion.div>
+            </div>
           ) : null}
         </div>
 
@@ -128,9 +135,14 @@ export default function ProjectsCatalogue() {
         </div>
       </motion.section>
 
-      <motion.section className="prjc-quote" {...sectionMotion}>
+      <section className="prjc-quote">
         <div className="prjc-quote-inner">
-          <motion.blockquote {...aosReveal({ direction: "right", distance: 56, duration: 0.66 })}>
+          <motion.blockquote
+            variants={quoteMotion}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.5 }}
+          >
             We design and create spaces from residential homes to office spaces with a focus on functionality and aesthetic appeal. We are never out of style.
           </motion.blockquote>
           <div className="prjc-separator-wrap" aria-hidden="true">
@@ -143,7 +155,7 @@ export default function ProjectsCatalogue() {
             />
           </div>
         </div>
-      </motion.section>
+      </section>
     </main>
   );
 }
