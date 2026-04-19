@@ -17,7 +17,7 @@ export default function AdminSidebar() {
   const pathname = usePathname()
 
   return (
-    <aside className="flex h-full w-full max-w-72 flex-col border-r border-[#B58A2A]/60 bg-black text-[#E8C678] lg:max-w-80">
+    <aside className="flex w-full flex-col border-r border-[#B58A2A]/60 bg-black text-[#E8C678] lg:sticky lg:top-0 lg:h-screen lg:overflow-y-auto">
       <div className="flex items-center justify-center border-b border-[#B58A2A]/60 px-5 py-7">
         <Image
           src={'/mimz-mascut.png'}

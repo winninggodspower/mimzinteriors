@@ -1,6 +1,7 @@
 "use server"
 
 import { revalidatePath } from "next/cache"
+import { redirect } from "next/navigation"
 import dbConnect from "@/lib/mongoose"
 import cloudinary from "@/lib/cloudinary"
 import Project from "@/models/project"
@@ -243,6 +244,8 @@ export async function deleteProjectMediaAction(formData) {
   revalidatePath("/admin/project")
   revalidatePath(`/admin/project/${projectId}/images`)
   revalidatePath(`/projects/project_catalogue/${projectId}`)
+
+  redirect(`/admin/project/${projectId}/images`)
 }
 
 export async function publishProjectAction(formData) {
@@ -277,4 +280,52 @@ export async function unpublishProjectAction(formData) {
 
   revalidatePath("/admin/project")
   revalidatePath("/projects/project_catalogue")
+}
+
+export async function deleteProjectAction(formData) {
+  const projectId = String(formData.get("projectId") || "").trim()
+
+  if (!projectId) {
+    throw new Error("Project id is required")
+  }
+
+  await dbConnect()
+
+  const project = await Project.findById(projectId).lean()
+
+  if (!project) {
+    throw new Error("Project not found")
+  }
+
+  const mediaItems = await ProjectMedia.find({ projectId }).lean()
+
+  ensureCloudinaryEnv()
+
+  try {
+    await cloudinary.uploader.destroy(project.imagePublicId, { resource_type: "image" })
+  } catch (error) {
+    console.error("Failed to delete project image from Cloudinary:", error)
+  }
+
+  await Promise.all(
+    mediaItems.map(async (media) => {
+      try {
+        await cloudinary.uploader.destroy(media.imagePublicId, { resource_type: "image" })
+      } catch (error) {
+        console.error("Failed to delete project media from Cloudinary:", error)
+      }
+    }),
+  )
+
+  await Promise.all([
+    ProjectMedia.deleteMany({ projectId }),
+    Project.deleteOne({ _id: projectId }),
+  ])
+
+  revalidatePath("/admin/project")
+  revalidatePath(`/admin/project/${projectId}/images`)
+  revalidatePath("/projects/project_catalogue")
+  revalidatePath(`/projects/project_catalogue/${projectId}`)
+
+  redirect("/admin/project")
 }

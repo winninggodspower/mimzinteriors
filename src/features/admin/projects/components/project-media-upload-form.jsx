@@ -31,12 +31,13 @@ export default function ProjectMediaUploadForm({ action, projectId }) {
   const [previewUrls, setPreviewUrls] = useState([])
   const formRef = useRef(null)
   const fileInputRef = useRef(null)
+  const previewUrlsRef = useRef([])
 
   useEffect(() => {
     return () => {
-      previewUrls.forEach((url) => URL.revokeObjectURL(url))
+      previewUrlsRef.current.forEach((url) => URL.revokeObjectURL(url))
     }
-  }, [previewUrls])
+  }, [])
 
   useEffect(() => {
     if (state?.status !== "success") {
@@ -44,10 +45,11 @@ export default function ProjectMediaUploadForm({ action, projectId }) {
     }
 
     formRef.current?.reset()
-    previewUrls.forEach((url) => URL.revokeObjectURL(url))
+    previewUrlsRef.current.forEach((url) => URL.revokeObjectURL(url))
+    previewUrlsRef.current = []
     setPreviewUrls([])
     setSelectedFiles([])
-  }, [previewUrls, state?.resetToken, state?.status])
+  }, [state?.resetToken, state?.status])
 
   const selectedCountText = useMemo(() => {
     if (selectedFiles.length === 0) {
@@ -62,12 +64,13 @@ export default function ProjectMediaUploadForm({ action, projectId }) {
   }, [selectedFiles])
 
   function handleFileChange(event) {
-    previewUrls.forEach((url) => URL.revokeObjectURL(url))
+    previewUrlsRef.current.forEach((url) => URL.revokeObjectURL(url))
 
     const files = Array.from(event.target.files || [])
     setSelectedFiles(files)
 
     const nextPreviewUrls = files.slice(0, 4).map((file) => URL.createObjectURL(file))
+    previewUrlsRef.current = nextPreviewUrls
     setPreviewUrls(nextPreviewUrls)
   }
 

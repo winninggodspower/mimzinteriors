@@ -19,7 +19,7 @@ export default async function RootLayout({ children }) {
   return (
     <div className="min-h-screen bg-[#F7F4EE]">
       <div className="flex min-h-screen w-full flex-col lg:flex-row">
-        <div className="w-full lg:sticky lg:top-0 lg:h-screen lg:w-80">
+        <div className="w-full shrink-0 lg:w-80">
           <AdminSidebar />
         </div>
 

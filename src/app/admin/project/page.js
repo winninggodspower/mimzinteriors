@@ -1,9 +1,11 @@
 import {
   createProjectFormAction,
+  deleteProjectAction,
   getAdminProjects,
   publishProjectAction,
   unpublishProjectAction,
 } from "./actions"
+import ProjectDeleteButton from "@features/admin/projects/components/project-delete-button"
 import ProjectUploadForm from "@features/admin/projects/components/project-upload-form"
 import Link from "next/link"
 
@@ -59,6 +61,12 @@ export default async function AdminProjectPage() {
                       {project.isPublished ? "Unpublish" : "Publish"}
                     </button>
                   </form>
+
+                  <ProjectDeleteButton
+                    action={deleteProjectAction}
+                    projectId={project.id}
+                    projectTitle={project.title}
+                  />
                 </div>
               </article>
             ))}
