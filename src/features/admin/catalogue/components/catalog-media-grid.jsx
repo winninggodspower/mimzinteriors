@@ -12,6 +12,7 @@ export default function CatalogMediaGrid({
   entityIdField = "projectId",
   deleteAction,
   emptyText = "No detail images uploaded yet.",
+  showLayoutMeta = true,
 }) {
   if (media.length === 0) {
     return <p className="text-sm text-slate-600">{emptyText}</p>
@@ -21,15 +22,17 @@ export default function CatalogMediaGrid({
     <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {media.map((item) => (
         <article key={item.id} className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
-          <img src={item.imageUrl} alt={`${slotLabelMap[item.slot] || "Image"} ${item.order}`} className="h-44 w-full object-cover" />
+          <img src={item.imageUrl} alt="Accessory image" className="h-44 w-full object-cover" />
 
           <div className="space-y-3 p-3">
-            <div className="flex items-center justify-between">
-              <span className="rounded-full bg-slate-100 px-2 py-1 text-xs font-semibold uppercase tracking-wide text-slate-600">
-                {slotLabelMap[item.slot] || item.slot}
-              </span>
-              <span className="text-xs text-slate-500">Order {item.order}</span>
-            </div>
+            {showLayoutMeta ? (
+              <div className="flex items-center justify-between">
+                <span className="rounded-full bg-slate-100 px-2 py-1 text-xs font-semibold uppercase tracking-wide text-slate-600">
+                  {slotLabelMap[item.slot] || item.slot}
+                </span>
+                <span className="text-xs text-slate-500">Order {item.order}</span>
+              </div>
+            ) : null}
 
             <form action={deleteAction}>
               <input type="hidden" name={entityIdField} value={entityId} />

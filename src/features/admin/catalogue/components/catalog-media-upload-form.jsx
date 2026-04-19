@@ -30,6 +30,7 @@ export default function CatalogMediaUploadForm({
   entityId,
   entityIdField = "projectId",
   entityLabel = "Project",
+  showLayoutFields = true,
 }) {
   const [state, formAction] = useActionState(action, initialState)
   const [selectedFiles, setSelectedFiles] = useState([])
@@ -83,37 +84,39 @@ export default function CatalogMediaUploadForm({
     <form ref={formRef} action={formAction} className="mt-4 grid gap-3 rounded-xl border border-slate-200 bg-slate-50 p-4">
       <input type="hidden" name={entityIdField} value={entityId} />
 
-      <div className="grid gap-2 sm:grid-cols-2">
-        <div className="grid gap-1">
-          <label htmlFor={`slot-${entityId}`} className="text-xs font-semibold uppercase tracking-wide text-slate-600">
-            Slot
-          </label>
-          <select
-            id={`slot-${entityId}`}
-            name="slot"
-            defaultValue="column"
-            className="rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900"
-          >
-            <option value="hero">Hero</option>
-            <option value="row">Row</option>
-            <option value="column">Column</option>
-          </select>
-        </div>
+      {showLayoutFields ? (
+        <div className="grid gap-2 sm:grid-cols-2">
+          <div className="grid gap-1">
+            <label htmlFor={`slot-${entityId}`} className="text-xs font-semibold uppercase tracking-wide text-slate-600">
+              Slot
+            </label>
+            <select
+              id={`slot-${entityId}`}
+              name="slot"
+              defaultValue="column"
+              className="rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900"
+            >
+              <option value="hero">Hero</option>
+              <option value="row">Row</option>
+              <option value="column">Column</option>
+            </select>
+          </div>
 
-        <div className="grid gap-1">
-          <label htmlFor={`orderStart-${entityId}`} className="text-xs font-semibold uppercase tracking-wide text-slate-600">
-            Start Order
-          </label>
-          <input
-            id={`orderStart-${entityId}`}
-            name="orderStart"
-            type="number"
-            min={1}
-            defaultValue={1}
-            className="rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900"
-          />
+          <div className="grid gap-1">
+            <label htmlFor={`orderStart-${entityId}`} className="text-xs font-semibold uppercase tracking-wide text-slate-600">
+              Start Order
+            </label>
+            <input
+              id={`orderStart-${entityId}`}
+              name="orderStart"
+              type="number"
+              min={1}
+              defaultValue={1}
+              className="rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900"
+            />
+          </div>
         </div>
-      </div>
+      ) : null}
 
       <div className="grid gap-2">
         <label htmlFor={`images-${entityId}`} className="text-xs font-semibold uppercase tracking-wide text-slate-600">
