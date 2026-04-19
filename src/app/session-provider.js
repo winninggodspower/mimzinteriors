@@ -4,7 +4,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { SessionProvider } from 'next-auth/react';
 import { useState } from 'react';
 
-export default function NextSessionProviders({ children }) {
+export default function NextSessionProviders({ children, session }) {
   const [queryClient] = useState(
     () =>
       new QueryClient({
@@ -18,7 +18,7 @@ export default function NextSessionProviders({ children }) {
   );
 
   return (
-    <SessionProvider>
+    <SessionProvider session={session}>
       <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
     </SessionProvider>
   );

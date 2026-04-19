@@ -3,43 +3,17 @@
 import { revalidatePath } from "next/cache"
 import { redirect } from "next/navigation"
 import dbConnect from "@/lib/mongoose"
-import cloudinary from "@/lib/cloudinary"
 import Project from "@/models/project"
 import ProjectMedia from "@/models/projectMedia"
+import {
+  destroyCloudinaryImage,
+  getSafeOrderStart,
+  getValidImageFiles,
+  uploadImageToCloudinary,
+  VALID_MEDIA_SLOTS,
+} from "@/lib/cloudinary"
 
-const VALID_MEDIA_SLOTS = new Set(["hero", "row", "column"])
-
-function ensureCloudinaryEnv() {
-  if (!process.env.CLOUDINARY_CLOUD_NAME || !process.env.CLOUDINARY_API_KEY || !process.env.CLOUDINARY_API_SECRET) {
-    throw new Error("Missing Cloudinary environment variables")
-  }
-}
-
-async function uploadToCloudinary(file) {
-  ensureCloudinaryEnv()
-
-  const arrayBuffer = await file.arrayBuffer()
-  const buffer = Buffer.from(arrayBuffer)
-
-  return new Promise((resolve, reject) => {
-    const uploadStream = cloudinary.uploader.upload_stream(
-      {
-        folder: "mimzinteriors/projects",
-        resource_type: "image",
-      },
-      (error, result) => {
-        if (error) {
-          reject(error)
-          return
-        }
-
-        resolve(result)
-      },
-    )
-
-    uploadStream.end(buffer)
-  })
-}
+const PROJECT_CLOUDINARY_FOLDER = "mimzinteriors/projects"
 
 export async function getAdminProjects() {
   await dbConnect()
@@ -81,7 +55,7 @@ export async function createProjectAction(formData) {
   }
 
   await dbConnect()
-  const uploaded = await uploadToCloudinary(image)
+  const uploaded = await uploadImageToCloudinary(image, PROJECT_CLOUDINARY_FOLDER)
 
   await Project.create({
     title,
@@ -117,10 +91,7 @@ export async function createProjectFormAction(previousState, formData) {
 export async function uploadProjectMediaAction(formData) {
   const projectId = String(formData.get("projectId") || "").trim()
   const slot = String(formData.get("slot") || "column").trim().toLowerCase()
-  const orderStartRaw = Number(formData.get("orderStart") || 1)
-  const files = formData
-    .getAll("images")
-    .filter((file) => file instanceof File && file.size > 0)
+  const files = getValidImageFiles(formData)
 
   if (!projectId) {
     throw new Error("Project id is required")
@@ -134,16 +105,12 @@ export async function uploadProjectMediaAction(formData) {
     throw new Error("Select at least one image")
   }
 
-  const orderStart = Number.isFinite(orderStartRaw)
-    ? Math.max(1, Math.trunc(orderStartRaw))
-    : 1
+  const orderStart = getSafeOrderStart(formData.get("orderStart"))
 
   await dbConnect()
 
   const uploadedResults = await Promise.all(
-    files.map((file) =>
-      uploadToCloudinary(file),
-    ),
+    files.map((file) => uploadImageToCloudinary(file, PROJECT_CLOUDINARY_FOLDER)),
   )
 
   const mediaDocuments = uploadedResults.map((uploaded, index) => ({
@@ -231,14 +198,7 @@ export async function deleteProjectMediaAction(formData) {
     throw new Error("Media not found")
   }
 
-  ensureCloudinaryEnv()
-
-  try {
-    await cloudinary.uploader.destroy(media.imagePublicId, { resource_type: "image" })
-  } catch (error) {
-    console.error("Failed to delete image from Cloudinary:", error)
-  }
-
+  await destroyCloudinaryImage(media.imagePublicId, "project image")
   await ProjectMedia.deleteOne({ _id: mediaId })
 
   revalidatePath("/admin/project")
@@ -298,23 +258,10 @@ export async function deleteProjectAction(formData) {
   }
 
   const mediaItems = await ProjectMedia.find({ projectId }).lean()
-
-  ensureCloudinaryEnv()
-
-  try {
-    await cloudinary.uploader.destroy(project.imagePublicId, { resource_type: "image" })
-  } catch (error) {
-    console.error("Failed to delete project image from Cloudinary:", error)
-  }
+  await destroyCloudinaryImage(project.imagePublicId, "project profile image")
 
   await Promise.all(
-    mediaItems.map(async (media) => {
-      try {
-        await cloudinary.uploader.destroy(media.imagePublicId, { resource_type: "image" })
-      } catch (error) {
-        console.error("Failed to delete project media from Cloudinary:", error)
-      }
-    }),
+    mediaItems.map((media) => destroyCloudinaryImage(media.imagePublicId, "project media image")),
   )
 
   await Promise.all([

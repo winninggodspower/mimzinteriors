@@ -5,8 +5,8 @@ import {
   publishProjectAction,
   unpublishProjectAction,
 } from "./actions"
-import ProjectDeleteButton from "@features/admin/projects/components/project-delete-button"
-import ProjectUploadForm from "@features/admin/projects/components/project-upload-form"
+import CatalogDeleteButton from "@features/admin/catalogue/components/catalog-delete-button"
+import CatalogItemUploadForm from "@features/admin/catalogue/components/catalog-item-upload-form"
 import Link from "next/link"
 
 export default async function AdminProjectPage() {
@@ -14,7 +14,16 @@ export default async function AdminProjectPage() {
 
   return (
     <div className="space-y-6">
-      <ProjectUploadForm action={createProjectFormAction} />
+      <CatalogItemUploadForm
+        action={createProjectFormAction}
+        entityLabel="Project"
+        heading="Project Upload"
+        description="Create projects and control whether they are visible on the catalogue page."
+        toggleCreateLabel="Create Project"
+        titlePlaceholder="Project Ivory"
+        descriptionPlaceholder="Write a short project description"
+        submitLabel="Upload Project"
+      />
 
       <section className="rounded-2xl border border-[#B58A2A]/25 bg-white p-6 shadow-sm">
         <h2 className="text-2xl font-semibold text-slate-900">Existing Projects</h2>
@@ -62,10 +71,12 @@ export default async function AdminProjectPage() {
                     </button>
                   </form>
 
-                  <ProjectDeleteButton
+                  <CatalogDeleteButton
                     action={deleteProjectAction}
-                    projectId={project.id}
-                    projectTitle={project.title}
+                    entityId={project.id}
+                    entityIdField="projectId"
+                    entityLabel="Project"
+                    entityTitle={project.title}
                   />
                 </div>
               </article>

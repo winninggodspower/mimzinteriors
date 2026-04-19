@@ -12,6 +12,7 @@ import ivoryColumnF from "@assets/images/projects/projectsCatalogue/projects/ivo
 import {
   PROJECT_DETAIL_COLUMNS_PER_PAGE,
 } from "@features/projects/lib/projectsCatalogueQueryKeys";
+import { buildDetailPageData, formatEntityPeriod } from "@features/projects/lib/detailPageData";
 import dbConnect from "../../../app/lib/mongoose";
 import Project from "../../../app/models/project";
 import ProjectMedia from "../../../app/models/projectMedia";
@@ -35,29 +36,6 @@ const placeholderMedia = [
   { id: "project-column-5", src: ivoryColumnE.src, slot: "column", order: 8 },
   { id: "project-column-6", src: ivoryColumnF.src, slot: "column", order: 9 },
 ];
-
-const paginate = (items, page, pageSize) => {
-  const start = (page - 1) * pageSize;
-  return items.slice(start, start + pageSize);
-};
-
-const sortByOrder = (items) => [...items].sort((leftItem, rightItem) => leftItem.order - rightItem.order);
-
-const formatProjectPeriod = (inputDate) => {
-  if (!inputDate) {
-    return ""
-  }
-
-  const date = new Date(inputDate)
-
-  if (Number.isNaN(date.getTime())) {
-    return ""
-  }
-
-  return date
-    .toLocaleDateString("en-US", { month: "short", year: "numeric" })
-    .toUpperCase()
-}
 
 export async function getProjectDetailPage({
   projectId,
@@ -85,35 +63,16 @@ export async function getProjectDetailPage({
         order: item.order,
       }));
 
-      const orderedMedia = sortByOrder(media);
-      const hero = orderedMedia.find((mediaItem) => mediaItem.slot === "hero")?.src || project.profileImage || null;
-      const rows = orderedMedia.filter((mediaItem) => mediaItem.slot === "row").map((mediaItem) => mediaItem.src);
-      const columns = orderedMedia.filter((mediaItem) => mediaItem.slot === "column").map((mediaItem) => mediaItem.src);
-      const safeRowsPerPage = Math.max(1, Math.floor(safeColumnsPerPage / 3));
-
-      const totalPages = Math.max(
-        Math.ceil(rows.length / safeRowsPerPage),
-        Math.ceil(columns.length / safeColumnsPerPage),
-        1,
-      );
-
-      const boundedPage = Math.min(safePage, totalPages);
-
-      return {
+      return buildDetailPageData({
         id: String(project._id),
         title: project.title || defaultMeta.title,
-        period: formatProjectPeriod(project.publishedAt || project.createdAt) || defaultMeta.period,
+        period: formatEntityPeriod(project.publishedAt || project.createdAt) || defaultMeta.period,
         subtitle: project.description || "Relaxation and peace of mind can come from a well designed space. Mimz interior",
-        media: orderedMedia,
-        hero,
-        rows: paginate(rows, boundedPage, safeRowsPerPage),
-        columns: paginate(columns, boundedPage, safeColumnsPerPage),
-        heroTotal: hero ? 1 : 0,
-        rowTotal: rows.length,
-        columnTotal: columns.length,
-        totalPages,
-        page: boundedPage,
-      };
+        profileImage: project.profileImage,
+        media,
+        page: safePage,
+        columnsPerPage: safeColumnsPerPage,
+      });
     }
   } catch (error) {
     console.error("Failed to load project detail from MongoDB:", error);
@@ -122,35 +81,17 @@ export async function getProjectDetailPage({
   const meta = projectMetaMap[projectId] || defaultMeta;
   const subtitle =
     "Relaxation and peace of mind can come from a well designed space. Mimz interior";
-  const media = sortByOrder(placeholderMedia);
-  const hero = media.find((mediaItem) => mediaItem.slot === "hero")?.src || null;
-  const rows = media.filter((mediaItem) => mediaItem.slot === "row").map((mediaItem) => mediaItem.src);
-  const columns = media.filter((mediaItem) => mediaItem.slot === "column").map((mediaItem) => mediaItem.src);
-  const safeRowsPerPage = Math.max(1, Math.floor(safeColumnsPerPage / 3));
-
-  const totalPages = Math.max(
-    Math.ceil(rows.length / safeRowsPerPage),
-    Math.ceil(columns.length / safeColumnsPerPage),
-    1
-  );
-
-  const boundedPage = Math.min(safePage, totalPages);
 
   await new Promise((resolve) => setTimeout(resolve, 160));
 
-  return {
+  return buildDetailPageData({
     id: projectId,
     title: meta.title,
     period: meta.period,
     subtitle,
-    media,
-    hero,
-    rows: paginate(rows, boundedPage, safeRowsPerPage),
-    columns: paginate(columns, boundedPage, safeColumnsPerPage),
-    heroTotal: hero ? 1 : 0,
-    rowTotal: rows.length,
-    columnTotal: columns.length,
-    totalPages,
-    page: boundedPage,
-  };
+    profileImage: null,
+    media: placeholderMedia,
+    page: safePage,
+    columnsPerPage: safeColumnsPerPage,
+  });
 }

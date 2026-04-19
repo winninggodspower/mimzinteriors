@@ -4,6 +4,8 @@ import "./globals.css";
 import NextTopLoader from "nextjs-toploader";
 import NextSessionProviders from "./session-provider";
 import SiteShell from "./components/site-shell";
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "@/lib/auth";
 
 
 
@@ -28,14 +30,16 @@ export const metadata = {
 };
 
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+  const session = await getServerSession(authOptions)
+
   return (
     <html lang="en" className={`${caterina.variable} ${arefRuqaa.variable} ${bdMegalona.variable}`} >
       <body
         className={`${arefRuqaa.className} antialiased`}
       >
         <NextTopLoader color="#C9A96E" showSpinner={false} />
-        <NextSessionProviders>
+        <NextSessionProviders session={session}>
           <SiteShell>{children}</SiteShell>
         </NextSessionProviders>
          <ToastContainer />

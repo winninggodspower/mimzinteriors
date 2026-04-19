@@ -5,8 +5,8 @@ import {
   getAdminProjectImagesPageData,
   uploadProjectMediaFormAction,
 } from "../../actions"
-import ProjectMediaUploadForm from "@features/admin/projects/components/project-media-upload-form"
-import ProjectMediaGrid from "@features/admin/projects/components/project-media-grid"
+import CatalogMediaUploadForm from "@features/admin/catalogue/components/catalog-media-upload-form"
+import CatalogMediaGrid from "@features/admin/catalogue/components/catalog-media-grid"
 
 export default async function AdminProjectImagesPage({ params }) {
   const { projectId } = await params
@@ -34,7 +34,7 @@ export default async function AdminProjectImagesPage({ params }) {
           </Link>
         </div>
 
-        <ProjectMediaUploadForm action={uploadProjectMediaFormAction} projectId={data.project.id} />
+        <CatalogMediaUploadForm action={uploadProjectMediaFormAction} entityId={data.project.id} entityIdField="projectId" entityLabel="Project" />
       </section>
 
       <section className="rounded-2xl border border-[#B58A2A]/25 bg-white p-6 shadow-sm">
@@ -42,7 +42,7 @@ export default async function AdminProjectImagesPage({ params }) {
         <p className="mt-1 text-sm text-slate-600">Upload new images above or delete any image from this gallery.</p>
 
         <div className="mt-4">
-          <ProjectMediaGrid media={data.media} projectId={data.project.id} deleteAction={deleteProjectMediaAction} />
+          <CatalogMediaGrid media={data.media} entityId={data.project.id} entityIdField="projectId" deleteAction={deleteProjectMediaAction} />
         </div>
       </section>
     </div>

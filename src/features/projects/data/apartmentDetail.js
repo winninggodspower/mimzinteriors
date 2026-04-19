@@ -1,25 +1,29 @@
-"use server";
+"use server"
 
-import ivoryHero from "@assets/images/projects/projectsCatalogue/projects/ivoryhero.png";
-import ivoryHeroB from "@assets/images/projects/projectsCatalogue/projects/ivoryherob.png";
-import ivoryHeroC from "@assets/images/projects/projectsCatalogue/projects/ivoryheroc.png";
-import ivoryColumnA from "@assets/images/projects/projectsCatalogue/projects/ivorycolumna.png";
-import ivoryColumnB from "@assets/images/projects/projectsCatalogue/projects/ivorycolumnb.png";
-import ivoryColumnC from "@assets/images/projects/projectsCatalogue/projects/ivorycolumnc.png";
-import ivoryColumnD from "@assets/images/projects/projectsCatalogue/projects/ivorycolumnd.png";
-import ivoryColumnE from "@assets/images/projects/projectsCatalogue/projects/ivorycolumne.png";
-import ivoryColumnF from "@assets/images/projects/projectsCatalogue/projects/ivorycolumnf.png";
+import ivoryHero from "@assets/images/projects/projectsCatalogue/projects/ivoryhero.png"
+import ivoryHeroB from "@assets/images/projects/projectsCatalogue/projects/ivoryherob.png"
+import ivoryHeroC from "@assets/images/projects/projectsCatalogue/projects/ivoryheroc.png"
+import ivoryColumnA from "@assets/images/projects/projectsCatalogue/projects/ivorycolumna.png"
+import ivoryColumnB from "@assets/images/projects/projectsCatalogue/projects/ivorycolumnb.png"
+import ivoryColumnC from "@assets/images/projects/projectsCatalogue/projects/ivorycolumnc.png"
+import ivoryColumnD from "@assets/images/projects/projectsCatalogue/projects/ivorycolumnd.png"
+import ivoryColumnE from "@assets/images/projects/projectsCatalogue/projects/ivorycolumne.png"
+import ivoryColumnF from "@assets/images/projects/projectsCatalogue/projects/ivorycolumnf.png"
 import {
   PROJECT_DETAIL_COLUMNS_PER_PAGE,
-} from "@features/projects/lib/projectsCatalogueQueryKeys";
+} from "@features/projects/lib/projectsCatalogueQueryKeys"
+import { buildDetailPageData, formatEntityPeriod } from "@features/projects/lib/detailPageData"
+import dbConnect from "@/lib/mongoose"
+import Apartment from "@/models/apartment"
+import ApartmentMedia from "@/models/apartmentMedia"
 
 const apartmentMetaMap = {
   "apartment-1": { title: "APARTMENT PEARL", period: "JAN 2025" },
   "apartment-2": { title: "APARTMENT IVORY", period: "FEB 2025" },
   "apartment-3": { title: "APARTMENT AURA", period: "MAR 2025" },
-};
+}
 
-const defaultMeta = { title: "APARTMENT PEARL", period: "JAN 2025" };
+const defaultMeta = { title: "APARTMENT PEARL", period: "JAN 2025" }
 
 const placeholderMedia = [
   { id: "apartment-hero-1", src: ivoryHero.src, slot: "hero", order: 1 },
@@ -31,57 +35,63 @@ const placeholderMedia = [
   { id: "apartment-row-2", src: ivoryHeroC.src, slot: "row", order: 7 },
   { id: "apartment-column-5", src: ivoryColumnE.src, slot: "column", order: 8 },
   { id: "apartment-column-6", src: ivoryColumnF.src, slot: "column", order: 9 },
-];
-
-const paginate = (items, page, pageSize) => {
-  const start = (page - 1) * pageSize;
-  return items.slice(start, start + pageSize);
-};
-
-const sortByOrder = (items) => [...items].sort((leftItem, rightItem) => leftItem.order - rightItem.order);
+]
 
 export async function getApartmentDetailPage({
   apartmentId,
   page = 1,
   columnsPerPage = PROJECT_DETAIL_COLUMNS_PER_PAGE,
 }) {
-  const safePage = Number.isFinite(page) ? Math.max(1, Math.trunc(page)) : 1;
+  const safePage = Number.isFinite(page) ? Math.max(1, Math.trunc(page)) : 1
   const safeColumnsPerPage = Number.isFinite(columnsPerPage)
     ? Math.max(1, Math.trunc(columnsPerPage))
-    : PROJECT_DETAIL_COLUMNS_PER_PAGE;
+    : PROJECT_DETAIL_COLUMNS_PER_PAGE
 
-  const meta = apartmentMetaMap[apartmentId] || defaultMeta;
+  try {
+    await dbConnect()
+
+    const [apartment, mediaDocuments] = await Promise.all([
+      Apartment.findById(apartmentId).lean(),
+      ApartmentMedia.find({ apartmentId }).sort({ order: 1, createdAt: 1 }).lean(),
+    ])
+
+    if (apartment) {
+      const media = mediaDocuments.map((item) => ({
+        id: String(item._id),
+        src: item.imageUrl,
+        slot: item.slot,
+        order: item.order,
+      }))
+
+      return buildDetailPageData({
+        id: String(apartment._id),
+        title: apartment.title || defaultMeta.title,
+        period: formatEntityPeriod(apartment.publishedAt || apartment.createdAt) || defaultMeta.period,
+        subtitle: apartment.description || "Relaxation and peace of mind can come from a well designed space. Mimz interior",
+        profileImage: apartment.profileImage,
+        media,
+        page: safePage,
+        columnsPerPage: safeColumnsPerPage,
+      })
+    }
+  } catch (error) {
+    console.error("Failed to load apartment detail from MongoDB:", error)
+  }
+
+  const meta = apartmentMetaMap[apartmentId] || defaultMeta
   const subtitle =
-    "Relaxation and peace of mind can come from a well designed space. Mimz interior";
-  const media = sortByOrder(placeholderMedia);
-  const hero = media.find((mediaItem) => mediaItem.slot === "hero")?.src || null;
-  const safeRowsPerPage = Math.max(1, Math.floor(safeColumnsPerPage / 3));
-  const columns = media.filter((mediaItem) => mediaItem.slot === "column").map((mediaItem) => mediaItem.src);
-  const rows = media.filter((mediaItem) => mediaItem.slot === "row").map((mediaItem) => mediaItem.src);
+    "Relaxation and peace of mind can come from a well designed space. Mimz interior"
 
-  const totalPages = Math.max(
-    Math.ceil(rows.length / safeRowsPerPage),
-    Math.ceil(columns.length / safeColumnsPerPage),
-    1
-  );
+  await new Promise((resolve) => setTimeout(resolve, 160))
 
-  const boundedPage = Math.min(safePage, totalPages);
-
-  await new Promise((resolve) => setTimeout(resolve, 160));
-
-  return {
+  return buildDetailPageData({
     id: apartmentId,
     title: meta.title,
     period: meta.period,
     subtitle,
-    media,
-    hero,
-    columns: paginate(columns, boundedPage, safeColumnsPerPage),
-    rows: paginate(rows, boundedPage, safeRowsPerPage),
-    heroTotal: hero ? 1 : 0,
-    columnTotal: columns.length,
-    rowTotal: rows.length,
-    totalPages,
-    page: boundedPage,
-  };
+    profileImage: null,
+    media: placeholderMedia,
+    page: safePage,
+    columnsPerPage: safeColumnsPerPage,
+  })
 }
