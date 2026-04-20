@@ -25,9 +25,9 @@ export default function ProjectsCatalogue() {
     updatePageInUrl,
   } = useProjectsCataloguePagination();
 
-  const sectionMotion = sectionReveal();
   const introMotion = staggerContainer(0.1);
   const quoteMotion = fadeUpItem({ y: 20, duration: 0.62 });
+  const projectCount = data?.projects?.length || 0;
 
   return (
     <main className="prjc-main">
@@ -57,49 +57,73 @@ export default function ProjectsCatalogue() {
           viewport={{ once: true, amount: 0.45 }}
         >
           <motion.p className="prjc-img-credit" variants={fadeUpItem({ y: 14, duration: 0.5 })}>-All images belongs to Mimz interiors-</motion.p>
-          <motion.h1 className="prjc-title" variants={fadeUpItem({ y: 16, duration: 0.58, delay: 0.06 })}>PROJECT CATALOG</motion.h1>
+          <motion.h1
+            className="mt-[clamp(2rem,4vw,3rem)] font-caterina text-[40px] leading-none font-light uppercase text-black max-md:text-[clamp(2rem,4vw,3rem)]"
+            variants={fadeUpItem({ y: 16, duration: 0.58, delay: 0.06 })}
+          >
+            PROJECT CATALOG
+          </motion.h1>
           <motion.p className="prjc-intro-copy" variants={fadeUpItem({ y: 16, duration: 0.62, delay: 0.12 })}>
             Our project speaks loudly for itself as we handle them with the highest form of professionalism from field workers to our customer care services. All process documentation and alignments are done with modern tools to give a remarkable impression at the beginning and end of every project. At Mimz interior, we give every client a reason to come back.
           </motion.p>
         </motion.div>
       </section>
 
-      <section className="prjc-gallery-section">
-        <div className="relative min-h-[clamp(320px,42vw,620px)]">
-          <div className="prjc-gallery-grid">
-            {data?.projects?.map((project) => (
-              <motion.article
-                key={project.id}
-                className="prjc-card"
-                variants={fadeUpItem({ y: 24, duration: 0.58 })}
+      <section className="bg-white px-4 md:px-8 lg:px-12.5">
+        <div className="relative pb-10">
+          {projectCount > 0 ? (
+            <div className="prjc-gallery-grid">
+              {data?.projects?.map((project) => (
+                <motion.article
+                  key={project.id}
+                  className="prjc-card"
+                  variants={fadeUpItem({ y: 24, duration: 0.58 })}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, amount: 0.2 }}
+                >
+                  <Link
+                    href={`/projects/project_catalogue/${project.id}`}
+                    className="prjc-card-image-wrap group"
+                    aria-label={project.title}
+                  >
+                    <Image
+                      src={project.profileImage}
+                      alt={project.title}
+                      fill
+                      className="prjc-card-image"
+                      sizes="(min-width: 1200px) 33vw, (min-width: 768px) 50vw, 100vw"
+                    />
+                    <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/40 px-4 text-center opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100">
+                      <h3 className="font-caterina text-[48px] leading-none font-light uppercase text-white max-md:text-[34px] max-sm:text-[26px]">
+                        {project.title}
+                      </h3>
+                      <p className="mt-2 max-w-[32ch] text-[18px] leading-[1.15] text-white/95 max-md:text-[15px] max-sm:text-[13px]">
+                        {project.description}
+                      </p>
+                    </div>
+                  </Link>
+                </motion.article>
+              ))}
+            </div>
+          ) : showLoadingOverlay ? null : (
+            <div className="flex items-center justify-center px-4 pt-[clamp(1.5rem,3vw,2.5rem)] text-center">
+              <motion.div
+                className="max-w-xl rounded-3xl border border-[rgba(194,172,132,0.24)] bg-[rgba(255,252,247,0.92)] px-6 py-10 shadow-[0_18px_50px_rgba(40,32,20,0.08)]"
+                variants={fadeUpItem({ y: 18, duration: 0.58 })}
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: true, amount: 0.2 }}
+                viewport={{ once: true, amount: 0.4 }}
               >
-                <Link
-                  href={`/projects/project_catalogue/${project.id}`}
-                  className="prjc-card-image-wrap group"
-                  aria-label={project.title}
-                >
-                  <Image
-                    src={project.profileImage}
-                    alt={project.title}
-                    fill
-                    className="prjc-card-image"
-                    sizes="(min-width: 1200px) 33vw, (min-width: 768px) 50vw, 100vw"
-                  />
-                  <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/40 px-4 text-center opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100">
-                    <h3 className="font-caterina text-[48px] leading-none font-light uppercase text-white max-md:text-[34px] max-sm:text-[26px]">
-                      {project.title}
-                    </h3>
-                    <p className="mt-2 max-w-[32ch] text-[18px] leading-[1.15] text-white/95 max-md:text-[15px] max-sm:text-[13px]">
-                      {project.description}
-                    </p>
-                  </div>
-                </Link>
-              </motion.article>
-            ))}
-          </div>
+                <p className="font-caterina text-[clamp(1.2rem,2vw,1.7rem)] uppercase tracking-[0.08em] text-[#2b2720]">
+                  No projects available yet
+                </p>
+                <p className="mt-3 text-[15px] leading-6 text-[#6f655a]">
+                  We’re currently updating the catalogue. Please check back soon for new projects.
+                </p>
+              </motion.div>
+            </div>
+          )}
 
           {showLoadingOverlay ? (
             <div
@@ -121,28 +145,30 @@ export default function ProjectsCatalogue() {
           ) : null}
         </div>
 
-        <div className="prjc-pagination-wrap">
-          <button
-            type="button"
-            className="prjc-page-btn"
-            disabled={!canGoPrev || isPageChangePending}
-            onClick={() => updatePageInUrl(page - 1, totalPages)}
-          >
-            &lt; Previous
-          </button>
+        {projectCount > 0 ? (
+          <div className="mt-16 md:mt-24 lg:mt-36 flex items-center justify-between px-[clamp(0.7rem,1.5vw,1rem)]">
+            <button
+              type="button"
+              className="prjc-page-btn"
+              disabled={!canGoPrev || isPageChangePending}
+              onClick={() => updatePageInUrl(page - 1, totalPages)}
+            >
+              &lt; Previous
+            </button>
 
-          <button
-            type="button"
-            className="prjc-page-btn"
-            disabled={!canGoNext || isPageChangePending}
-            onClick={() => updatePageInUrl(page + 1, totalPages)}
-          >
-            Next &gt;
-          </button>
-        </div>
+            <button
+              type="button"
+              className="prjc-page-btn"
+              disabled={!canGoNext || isPageChangePending}
+              onClick={() => updatePageInUrl(page + 1, totalPages)}
+            >
+              Next &gt;
+            </button>
+          </div>
+        ) : null}
       </section>
 
-      <section className="prjc-quote">
+      <section className="bg-white px-4 md:px-8 lg:px-16 pb-[clamp(4.8rem,9vw,8rem)] pt-[clamp(3.8rem,8vw,5.8rem)] lg:pt-30.25">
         <div className="prjc-quote-inner">
           <motion.blockquote
             variants={quoteMotion}

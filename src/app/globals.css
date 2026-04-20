@@ -1530,28 +1530,12 @@ body {
   color: #545453;
 }
 
-.prjc-title {
-  margin: clamp(2rem, 4vw, 3rem) 0 0;
-  font-family: var(--font-caterina, Georgia, serif);
-  font-size: 40px;
-  font-weight: 300;
-  line-height: 1;
-  text-transform: uppercase;
-  color: #000;
-}
-
 .prjc-intro-copy {
   margin: 0.85rem 0 0;
   max-width: 1320px;
   font-size: 16px;
   line-height: 1.7;
   color: #000;
-}
-
-/* ── GALLERY ─────────────────────────────────────────────────── */
-.prjc-gallery-section {
-  background: #ffffff;
-  padding: 0 clamp(0.8rem, 1.8vw, 1.1rem) clamp(4rem, 8vw, 6.8rem);
 }
 
 .prjc-gallery-grid {
@@ -1624,13 +1608,6 @@ body {
   cursor: not-allowed;
 }
 
-/* ── QUOTE ───────────────────────────────────────────────────── */
-.prjc-quote {
-  background: #fff;
-  padding: clamp(3.8rem, 8vw, 6.6rem) clamp(1rem, 6vw, 4rem)
-    clamp(4.8rem, 9vw, 8rem);
-}
-
 .prjc-quote-inner {
   max-width: 950px;
   margin: 0 auto;
@@ -1673,10 +1650,6 @@ body {
 }
 
 @media (max-width: 768px) {
-  .prjc-title {
-    font-size: clamp(2rem, 4vw, 3rem);
-  }
-
   .prjc-hero-wrap {
     aspect-ratio: 820 / 690;
   }
@@ -2107,10 +2080,6 @@ body {
 }
 
 @media (max-width: 768px) {
-  .prjc-title {
-    font-size: clamp(2rem, 4vw, 3rem);
-  }
-
   .prjdp-description {
     font-size: clamp(0.85rem, 1.45vw, 1rem);
   }
