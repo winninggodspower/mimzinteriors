@@ -1,7 +1,8 @@
 "use client"
 
-import { useActionState, useEffect, useRef, useState } from "react"
+import { useActionState, useEffect, useMemo, useRef, useState } from "react"
 import { useFormStatus } from "react-dom"
+import { useForm, useWatch } from "react-hook-form"
 import { ChevronDown, ChevronUp, ImagePlus, Loader2 } from "lucide-react"
 
 const initialState = {
@@ -39,55 +40,73 @@ export default function CatalogItemUploadForm({
 }) {
   const [isOpen, setIsOpen] = useState(false)
   const [previewUrl, setPreviewUrl] = useState("")
-  const [fileName, setFileName] = useState("")
-  const fileInputRef = useRef(null)
   const formRef = useRef(null)
+  const fileInputRef = useRef(null)
+  const previewUrlRef = useRef("")
   const [state, formAction] = useActionState(action, initialState)
+  const { register, control, reset } = useForm({
+    defaultValues: {
+      title: "",
+      description: "",
+      image: undefined,
+    },
+  })
+
+  const watchedImage = useWatch({ control, name: "image" })
+  const imageField = register("image")
+  const titleField = register("title")
+  const descriptionField = register("description")
+  const { ref: imageRegisterRef, ...imageFieldProps } = imageField
+  const imageFieldRef = (node) => {
+    imageRegisterRef(node)
+    fileInputRef.current = node
+  }
 
   useEffect(() => {
     return () => {
-      if (previewUrl) {
-        URL.revokeObjectURL(previewUrl)
+      if (previewUrlRef.current) {
+        URL.revokeObjectURL(previewUrlRef.current)
       }
     }
-  }, [previewUrl])
+  }, [])
 
   useEffect(() => {
     if (state?.status !== "success") {
       return
     }
 
-    formRef.current?.reset()
+    reset()
 
-    if (previewUrl) {
-      URL.revokeObjectURL(previewUrl)
+    if (previewUrlRef.current) {
+      URL.revokeObjectURL(previewUrlRef.current)
+      previewUrlRef.current = ""
     }
-
     setPreviewUrl("")
-    setFileName("")
-  }, [previewUrl, state?.resetToken, state?.status])
+  }, [reset, state?.resetToken, state?.status])
 
-  function handleFileChange(event) {
-    const file = event.target.files?.[0]
+  useEffect(() => {
+    const file = watchedImage?.[0]
 
     if (!file) {
-      if (previewUrl) {
-        URL.revokeObjectURL(previewUrl)
+      if (previewUrlRef.current) {
+        URL.revokeObjectURL(previewUrlRef.current)
+        previewUrlRef.current = ""
       }
 
       setPreviewUrl("")
-      setFileName("")
       return
     }
 
-    if (previewUrl) {
-      URL.revokeObjectURL(previewUrl)
+    if (previewUrlRef.current) {
+      URL.revokeObjectURL(previewUrlRef.current)
     }
 
     const objectUrl = URL.createObjectURL(file)
+    previewUrlRef.current = objectUrl
     setPreviewUrl(objectUrl)
-    setFileName(file.name)
-  }
+  }, [watchedImage])
+
+  const selectedFileName = useMemo(() => watchedImage?.[0]?.name || "No file selected", [watchedImage])
 
   const resolvedHeading = heading || `${entityLabel} Upload`
   const resolvedDescription = description || `Create ${entityLabel.toLowerCase()} items and control whether they are visible on the catalogue page.`
@@ -124,7 +143,7 @@ export default function CatalogItemUploadForm({
             </label>
             <input
               id={`${entityLabel.toLowerCase()}-title`}
-              name="title"
+              {...titleField}
               type="text"
               required
               placeholder={resolvedTitlePlaceholder}
@@ -138,7 +157,7 @@ export default function CatalogItemUploadForm({
             </label>
             <textarea
               id={`${entityLabel.toLowerCase()}-description`}
-              name="description"
+              {...descriptionField}
               required
               rows={4}
               placeholder={resolvedDescriptionPlaceholder}
@@ -153,12 +172,11 @@ export default function CatalogItemUploadForm({
 
             <input
               id={`${entityLabel.toLowerCase()}-image`}
-              ref={fileInputRef}
-              name="image"
+              ref={imageFieldRef}
+              {...imageFieldProps}
               type="file"
               accept="image/*"
               required
-              onChange={handleFileChange}
               className="hidden"
             />
 
@@ -182,7 +200,7 @@ export default function CatalogItemUploadForm({
               )}
 
               <div className="mt-3 flex items-center justify-between gap-2 px-1">
-                <p className="truncate text-xs text-slate-600">{fileName || "No file selected"}</p>
+                <p className="truncate text-xs text-slate-600">{selectedFileName}</p>
                 <span className="rounded-lg bg-[#1A1205] px-3 py-1 text-xs font-medium text-[#F4D891]">
                   {previewUrl ? "Change" : "Choose"}
                 </span>

@@ -1,5 +1,11 @@
 import { useMemo, useRef } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { keepPreviousData, useQuery } from "@tanstack/react-query";
+import { getAccessoriesPage } from "@features/projects/data/accessories";
+import {
+  ACCESSORIES_PAGE_SIZE,
+  accessoriesQueryKey,
+} from "@features/projects/lib/projectsCatalogueQueryKeys";
 
 export function useAccessoriesPagination() {
   const router = useRouter();
@@ -50,5 +56,30 @@ export function useAccessoriesPagination() {
     scrollToGridTop();
   };
 
-  return { page, updatePageInUrl, galleryRef };
+  const { data, isLoading, isFetching } = useQuery({
+    queryKey: accessoriesQueryKey(page, ACCESSORIES_PAGE_SIZE),
+    queryFn: () =>
+      getAccessoriesPage({
+        page,
+        limit: ACCESSORIES_PAGE_SIZE,
+      }),
+    placeholderData: keepPreviousData,
+    throwOnError: true,
+  });
+
+  const totalPages = Math.ceil((data?.total || 0) / ACCESSORIES_PAGE_SIZE) || 1;
+  const canGoPrev = page > 1;
+  const canGoNext = page < totalPages;
+
+  return {
+    page,
+    updatePageInUrl,
+    galleryRef,
+    data,
+    isLoading,
+    isFetching,
+    totalPages,
+    canGoPrev,
+    canGoNext,
+  };
 }

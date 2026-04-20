@@ -1,70 +1,86 @@
 "use client";
 
 import Image from "next/image";
-import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { motion } from "motion/react";
-import { getAccessoriesPage } from "@features/projects/data/accessories";
-import {
-  MOTION_STAGGER,
-  fadeUpItem,
-  sectionReveal,
-  staggerContainer,
-} from "@features/lib/motion";
-import {
-  ACCESSORIES_PAGE_SIZE,
-  accessoriesQueryKey,
-} from "@features/projects/lib/projectsCatalogueQueryKeys";
+import { MOTION_DURATIONS, MOTION_EASE, MOTION_VIEWPORT } from "@features/lib/motion";
 import { useAccessoriesPagination } from "./useAccessoriesPagination";
 
+const getGridColumnCount = () => {
+  if (typeof window === "undefined") {
+    return 4;
+  }
+
+  if (window.matchMedia("(max-width: 768px)").matches) {
+    return 2;
+  }
+
+  if (window.matchMedia("(max-width: 1024px)").matches) {
+    return 3;
+  }
+
+  return 4;
+};
+
+const rowStaggerDelay = (index, columns) => {
+  const row = Math.floor(index / columns);
+  const col = index % columns;
+
+  return row * 0.04 + col * 0.12;
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 18 },
+  visible: (delay) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: MOTION_DURATIONS.cardFast,
+      ease: MOTION_EASE,
+      delay,
+    },
+  }),
+};
+
 export default function AccessoriesPage() {
-  const { page, updatePageInUrl, galleryRef } = useAccessoriesPagination();
+  const {
+    page,
+    updatePageInUrl,
+    galleryRef,
+    data,
+    isLoading,
+    isFetching,
+    totalPages,
+    canGoPrev,
+    canGoNext,
+  } = useAccessoriesPagination();
 
-  const sectionMotion = sectionReveal({ y: 24 });
-  const cardContainer = staggerContainer(MOTION_STAGGER.micro);
-  const cardItem = fadeUpItem({ y: 16 });
-
-  const { data, isLoading, isFetching } = useQuery({
-    queryKey: accessoriesQueryKey(page, ACCESSORIES_PAGE_SIZE),
-    queryFn: () =>
-      getAccessoriesPage({
-        page,
-        limit: ACCESSORIES_PAGE_SIZE,
-      }),
-    placeholderData: keepPreviousData,
-    throwOnError: true,
-  });
-
-  const totalPages = Math.ceil((data?.total || 0) / ACCESSORIES_PAGE_SIZE) || 1;
-
-  const canGoPrev = page > 1;
-  const canGoNext = page < totalPages;
+  const gridColumns = getGridColumnCount();
 
   return (
     <main className="accs-main">
-      <motion.section className="accs-head" {...sectionMotion}>
+      <section className="accs-head">
         <h1 className="accs-title">ACCESSORIES</h1>
         <p className="accs-subtitle">
           "Accessories are the punctuation marks of a room
           <br />
           — They complete the sentence and give it personality."
         </p>
-      </motion.section>
+      </section>
 
-      <motion.section className="accs-grid-section" ref={galleryRef} {...sectionMotion}>
+      <section className="accs-grid-section" ref={galleryRef}>
         {isLoading ? (
           <div className="accs-loading">Loading accessories...</div>
         ) : (
-          <motion.div
-            className="accs-grid"
-            variants={cardContainer}
-            initial="hidden"
-            animate="visible"
-          >
+          <motion.div className="accs-grid">
             {data?.items?.map((item, index) => (
               <motion.article
                 key={item.id}
                 className="accs-card"
-                variants={cardItem}
+                variants={cardVariants}
+                custom={rowStaggerDelay(index, gridColumns)}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ ...MOTION_VIEWPORT, amount: 0.2 }}
               >
                 <div className="accs-card-img-wrap">
                   <Image
@@ -99,7 +115,7 @@ export default function AccessoriesPage() {
             &gt;
           </button>
         </div>
-      </motion.section>
+      </section>
     </main>
   );
 }
