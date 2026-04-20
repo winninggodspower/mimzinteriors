@@ -3,7 +3,7 @@ import mongoose from "mongoose"
 const projectMediaSchema = new mongoose.Schema(
   {
     projectId: { type: mongoose.Schema.Types.ObjectId, ref: "Project", required: true, index: true },
-    slot: { type: String, enum: ["hero", "row", "column"], required: true, index: true },
+    slot: { type: String, enum: ["row", "column"], required: true, index: true },
     imageUrl: { type: String, required: true },
     imagePublicId: { type: String, required: true },
     order: { type: Number, required: true, min: 1 },

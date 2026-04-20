@@ -33,8 +33,10 @@ export function buildDetailPageData({
   page,
   columnsPerPage,
 }) {
-  const orderedMedia = sortMediaByOrder(media)
-  const hero = orderedMedia.find((mediaItem) => mediaItem.slot === "hero")?.src || profileImage || null
+  const orderedMedia = sortMediaByOrder(media).filter(
+    (mediaItem) => mediaItem.slot === "row" || mediaItem.slot === "column",
+  )
+  const hero = profileImage || null
   const rows = orderedMedia.filter((mediaItem) => mediaItem.slot === "row").map((mediaItem) => mediaItem.src)
   const columns = orderedMedia.filter((mediaItem) => mediaItem.slot === "column").map((mediaItem) => mediaItem.src)
   const safeRowsPerPage = Math.max(1, Math.floor(columnsPerPage / 3))

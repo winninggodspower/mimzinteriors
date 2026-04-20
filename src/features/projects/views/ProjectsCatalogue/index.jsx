@@ -8,7 +8,6 @@ import seperator from "@assets/images/seperator.png";
 import {
   fadeUpItem,
   heroScaleLoop,
-  sectionReveal,
   staggerContainer,
 } from "@features/lib/motion";
 import { useProjectsCataloguePagination } from "./useProjectsCataloguePagination";

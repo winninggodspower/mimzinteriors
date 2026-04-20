@@ -3,7 +3,7 @@ import mongoose from "mongoose"
 const apartmentMediaSchema = new mongoose.Schema(
   {
     apartmentId: { type: mongoose.Schema.Types.ObjectId, ref: "Apartment", required: true, index: true },
-    slot: { type: String, enum: ["hero", "row", "column"], required: true, index: true },
+    slot: { type: String, enum: ["row", "column"], required: true, index: true },
     imageUrl: { type: String, required: true },
     imagePublicId: { type: String, required: true },
     order: { type: Number, required: true, min: 1 },

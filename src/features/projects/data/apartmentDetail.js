@@ -26,15 +26,14 @@ const apartmentMetaMap = {
 const defaultMeta = { title: "APARTMENT PEARL", period: "JAN 2025" }
 
 const placeholderMedia = [
-  { id: "apartment-hero-1", src: ivoryHero.src, slot: "hero", order: 1 },
-  { id: "apartment-column-1", src: ivoryColumnA.src, slot: "column", order: 2 },
-  { id: "apartment-column-2", src: ivoryColumnB.src, slot: "column", order: 3 },
-  { id: "apartment-row-1", src: ivoryHeroB.src, slot: "row", order: 4 },
-  { id: "apartment-column-3", src: ivoryColumnC.src, slot: "column", order: 5 },
-  { id: "apartment-column-4", src: ivoryColumnD.src, slot: "column", order: 6 },
-  { id: "apartment-row-2", src: ivoryHeroC.src, slot: "row", order: 7 },
-  { id: "apartment-column-5", src: ivoryColumnE.src, slot: "column", order: 8 },
-  { id: "apartment-column-6", src: ivoryColumnF.src, slot: "column", order: 9 },
+  { id: "apartment-column-1", src: ivoryColumnA.src, slot: "column", order: 1 },
+  { id: "apartment-column-2", src: ivoryColumnB.src, slot: "column", order: 2 },
+  { id: "apartment-row-1", src: ivoryHeroB.src, slot: "row", order: 3 },
+  { id: "apartment-column-3", src: ivoryColumnC.src, slot: "column", order: 4 },
+  { id: "apartment-column-4", src: ivoryColumnD.src, slot: "column", order: 5 },
+  { id: "apartment-row-2", src: ivoryHeroC.src, slot: "row", order: 6 },
+  { id: "apartment-column-5", src: ivoryColumnE.src, slot: "column", order: 7 },
+  { id: "apartment-column-6", src: ivoryColumnF.src, slot: "column", order: 8 },
 ]
 
 export async function getApartmentDetailPage({
@@ -89,7 +88,7 @@ export async function getApartmentDetailPage({
     title: meta.title,
     period: meta.period,
     subtitle,
-    profileImage: null,
+    profileImage: ivoryHero.src,
     media: placeholderMedia,
     page: safePage,
     columnsPerPage: safeColumnsPerPage,

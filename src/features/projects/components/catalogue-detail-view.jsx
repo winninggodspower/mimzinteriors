@@ -29,12 +29,13 @@ export default function CatalogueDetailView({
   const topHero = data?.hero || null
   const rows = data?.rows || []
   const columns = data?.columns || []
+  const hasGalleryMedia = columns.length > 0 || rows.length > 0
   const entityLabelLower = entityLabel.toLowerCase()
   const fallbackTitle = entityLabel.toUpperCase()
   const columnPairs = Array.from({ length: Math.ceil(columns.length / 2) }, (_, pairIndex) =>
     columns.slice(pairIndex * 2, pairIndex * 2 + 2),
   )
-  const hasMissingImages = !topHero || (columns.length === 0 && rows.length === 0) || columns.some((image) => !image) || rows.some((image) => !image)
+  const hasMissingImages = !topHero || columns.some((image) => !image) || rows.some((image) => !image)
   const hasImageErrorState = !isLoading && (isError || hasImageLoadError || hasMissingImages)
 
   return (
@@ -94,6 +95,8 @@ export default function CatalogueDetailView({
           <div className="prjdp-loading" role="alert">
             We could not load this {entityLabelLower}&apos;s images right now. Please try again.
           </div>
+        ) : !hasGalleryMedia ? (
+          <div className="prjdp-loading">No detail images uploaded yet.</div>
         ) : (
           <>
             {columnPairs.map((pair, pairIndex) => (
@@ -143,25 +146,27 @@ export default function CatalogueDetailView({
           </>
         )}
 
-        <div className="prjdp-pagination-wrap">
-          <button
-            type="button"
-            className="prjdp-page-btn"
-            disabled={!canGoPrev || isFetching}
-            onClick={() => updatePageInUrl(page - 1, totalPages)}
-          >
-            &lt; Previous
-          </button>
+        {hasGalleryMedia && !hasImageErrorState ? (
+          <div className="prjdp-pagination-wrap">
+            <button
+              type="button"
+              className="prjdp-page-btn"
+              disabled={!canGoPrev || isFetching}
+              onClick={() => updatePageInUrl(page - 1, totalPages)}
+            >
+              &lt; Previous
+            </button>
 
-          <button
-            type="button"
-            className="prjdp-page-btn"
-            disabled={!canGoNext || isFetching}
-            onClick={() => updatePageInUrl(page + 1, totalPages)}
-          >
-            Next &gt;
-          </button>
-        </div>
+            <button
+              type="button"
+              className="prjdp-page-btn"
+              disabled={!canGoNext || isFetching}
+              onClick={() => updatePageInUrl(page + 1, totalPages)}
+            >
+              Next &gt;
+            </button>
+          </div>
+        ) : null}
       </section>
 
       <motion.section className="prjdp-quote" {...sectionMotion}>

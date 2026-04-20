@@ -34,7 +34,13 @@ export default async function AdminProjectImagesPage({ params }) {
           </Link>
         </div>
 
-        <CatalogMediaUploadForm action={uploadProjectMediaFormAction} entityId={data.project.id} entityIdField="projectId" entityLabel="Project" />
+        <CatalogMediaUploadForm
+          action={uploadProjectMediaFormAction}
+          entityId={data.project.id}
+          entityIdField="projectId"
+          entityLabel="Project"
+          allowedSlots={["row", "column"]}
+        />
       </section>
 
       <section className="rounded-2xl border border-[#B58A2A]/25 bg-white p-6 shadow-sm">

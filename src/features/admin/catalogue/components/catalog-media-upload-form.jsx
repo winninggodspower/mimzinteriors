@@ -31,6 +31,7 @@ export default function CatalogMediaUploadForm({
   entityIdField = "projectId",
   entityLabel = "Project",
   showLayoutFields = true,
+  allowedSlots = ["row", "column"],
 }) {
   const [state, formAction] = useActionState(action, initialState)
   const [selectedFiles, setSelectedFiles] = useState([])
@@ -93,12 +94,11 @@ export default function CatalogMediaUploadForm({
             <select
               id={`slot-${entityId}`}
               name="slot"
-              defaultValue="column"
+              defaultValue={allowedSlots.includes("column") ? "column" : allowedSlots[0]}
               className="rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900"
             >
-              <option value="hero">Hero</option>
-              <option value="row">Row</option>
-              <option value="column">Column</option>
+              {allowedSlots.includes("row") ? <option value="row">Row</option> : null}
+              {allowedSlots.includes("column") ? <option value="column">Column</option> : null}
             </select>
           </div>
 

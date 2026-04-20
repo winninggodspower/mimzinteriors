@@ -6,7 +6,7 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 })
 
-export const VALID_MEDIA_SLOTS = new Set(["hero", "row", "column"])
+export const VALID_MEDIA_SLOTS = new Set(["row", "column"])
 
 export function ensureCloudinaryEnv() {
   if (!process.env.CLOUDINARY_CLOUD_NAME || !process.env.CLOUDINARY_API_KEY || !process.env.CLOUDINARY_API_SECRET) {
