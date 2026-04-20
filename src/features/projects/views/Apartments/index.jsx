@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { motion } from "motion/react";
 import projectHero from "@assets/images/projects/projectsCatalogue/projectscataloguehero.png";
 import seperator from "@assets/images/seperator.png";
@@ -15,35 +14,24 @@ import {
   sectionReveal,
   staggerContainer,
 } from "@features/lib/motion";
-import { getApartmentsCataloguePage } from "@features/projects/data/apartments";
-import {
-  APARTMENTS_CATALOGUE_PAGE_SIZE,
-  apartmentsCatalogueQueryKey,
-} from "@features/projects/lib/projectsCatalogueQueryKeys";
 import { useApartmentsPagination } from "./useApartmentsPagination";
 
 export default function ApartmentsPage() {
-  const { page, updatePageInUrl, apartmentsSectionRef } = useApartmentsPagination();
+  const {
+    page,
+    data,
+    isLoading,
+    isPageChangePending,
+    totalPages,
+    canGoPrev,
+    canGoNext,
+    updatePageInUrl,
+    apartmentsSectionRef,
+  } = useApartmentsPagination();
 
   const sectionMotion = sectionReveal();
   const cardContainer = staggerContainer(MOTION_STAGGER.tight);
   const cardItem = fadeUpItem({ duration: MOTION_DURATIONS.cardFast });
-
-  const { data, isLoading, isFetching } = useQuery({
-    queryKey: apartmentsCatalogueQueryKey(page, APARTMENTS_CATALOGUE_PAGE_SIZE),
-    queryFn: () =>
-      getApartmentsCataloguePage({
-        page,
-        limit: APARTMENTS_CATALOGUE_PAGE_SIZE,
-      }),
-    placeholderData: keepPreviousData,
-    throwOnError: true,
-  });
-
-  const totalPages = Math.ceil((data?.total || 0) / APARTMENTS_CATALOGUE_PAGE_SIZE) || 1;
-
-  const canGoPrev = page > 1;
-  const canGoNext = page < totalPages;
 
   return (
     <main className="aptc-main">
@@ -91,7 +79,7 @@ export default function ApartmentsPage() {
               >
                 <Link
                   href={`/projects/apartments/${apartment.id}`}
-                  className="aptc-card-image-wrap"
+                  className="aptc-card-image-wrap group"
                   aria-label={apartment.title}
                 >
                   <Image
@@ -101,7 +89,14 @@ export default function ApartmentsPage() {
                     className="aptc-card-image"
                     sizes="(min-width: 1200px) 33vw, (min-width: 768px) 50vw, 100vw"
                   />
-                  <span className="aptc-card-overlay-title">{apartment.title}</span>
+                  <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/40 px-4 text-center opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100">
+                    <h3 className="font-caterina text-[48px] leading-none font-light uppercase text-white max-md:text-[34px] max-sm:text-[26px]">
+                      {apartment.title}
+                    </h3>
+                    <p className="mt-2 max-w-[32ch] text-[18px] leading-[1.15] text-white/95 max-md:text-[15px] max-sm:text-[13px]">
+                      {apartment.description}
+                    </p>
+                  </div>
                 </Link>
               </motion.article>
             ))}
@@ -112,7 +107,7 @@ export default function ApartmentsPage() {
           <button
             type="button"
             className="aptc-page-btn"
-            disabled={!canGoPrev || isFetching}
+            disabled={!canGoPrev || isPageChangePending}
             onClick={() => updatePageInUrl(page - 1, totalPages)}
           >
             &lt; Previous
@@ -121,7 +116,7 @@ export default function ApartmentsPage() {
           <button
             type="button"
             className="aptc-page-btn"
-            disabled={!canGoNext || isFetching}
+            disabled={!canGoNext || isPageChangePending}
             onClick={() => updatePageInUrl(page + 1, totalPages)}
           >
             Next &gt;
