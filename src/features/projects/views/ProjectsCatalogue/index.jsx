@@ -145,10 +145,10 @@ export default function ProjectsCatalogue() {
         </div>
 
         {projectCount > 0 ? (
-          <div className="mt-16 md:mt-24 lg:mt-36 flex items-center justify-between px-[clamp(0.7rem,1.5vw,1rem)]">
+          <div className="mimz-pagination-wrap">
             <button
               type="button"
-              className="prjc-page-btn"
+              className="mimz-pagination-btn"
               disabled={!canGoPrev || isPageChangePending}
               onClick={() => updatePageInUrl(page - 1, totalPages)}
             >
@@ -157,7 +157,7 @@ export default function ProjectsCatalogue() {
 
             <button
               type="button"
-              className="prjc-page-btn"
+              className="mimz-pagination-btn"
               disabled={!canGoNext || isPageChangePending}
               onClick={() => updatePageInUrl(page + 1, totalPages)}
             >

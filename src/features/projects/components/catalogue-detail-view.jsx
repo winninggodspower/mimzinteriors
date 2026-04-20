@@ -147,10 +147,10 @@ export default function CatalogueDetailView({
         )}
 
         {hasGalleryMedia && !hasImageErrorState ? (
-          <div className="prjdp-pagination-wrap">
+          <div className="mimz-pagination-wrap">
             <button
               type="button"
-              className="prjdp-page-btn"
+              className="mimz-pagination-btn"
               disabled={!canGoPrev || isFetching}
               onClick={() => updatePageInUrl(page - 1, totalPages)}
             >
@@ -159,7 +159,7 @@ export default function CatalogueDetailView({
 
             <button
               type="button"
-              className="prjdp-page-btn"
+              className="mimz-pagination-btn"
               disabled={!canGoNext || isFetching}
               onClick={() => updatePageInUrl(page + 1, totalPages)}
             >

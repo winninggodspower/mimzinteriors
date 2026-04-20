@@ -103,10 +103,10 @@ export default function ApartmentsPage() {
           </motion.div>
         )}
 
-        <div className="aptc-pagination-wrap">
+        <div className="mimz-pagination-wrap">
           <button
             type="button"
-            className="aptc-page-btn"
+            className="mimz-pagination-btn"
             disabled={!canGoPrev || isPageChangePending}
             onClick={() => updatePageInUrl(page - 1, totalPages)}
           >
@@ -115,7 +115,7 @@ export default function ApartmentsPage() {
 
           <button
             type="button"
-            className="aptc-page-btn"
+            className="mimz-pagination-btn"
             disabled={!canGoNext || isPageChangePending}
             onClick={() => updatePageInUrl(page + 1, totalPages)}
           >

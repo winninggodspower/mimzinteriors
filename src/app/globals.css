@@ -61,6 +61,30 @@
   .hero-image {
     @apply object-cover object-center;
   }
+
+  .mimz-pagination-wrap {
+    @apply flex items-center justify-between lg:mt-37.5;
+    margin-top: clamp(2.8rem, 5.5vw, 4.4rem);
+    padding-inline: clamp(0.7rem, 1.5vw, 1rem);
+  }
+
+  .mimz-pagination-btn {
+    @apply border-0 bg-transparent font-aref-ruqaa text-[#1c1c1a] transition duration-200 ease-out;
+    font-size: clamp(1rem, 1.5vw, 1.35rem);
+  }
+
+  .mimz-pagination-btn:not(:disabled) {
+    @apply cursor-pointer;
+  }
+
+  .mimz-pagination-btn:not(:disabled):hover {
+    @apply -translate-y-px opacity-70;
+  }
+
+  .mimz-pagination-btn:disabled {
+    @apply cursor-not-allowed;
+    opacity: 0.35;
+  }
 }
 
 body {
@@ -1577,37 +1601,6 @@ body {
   text-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
 }
 
-/* ── PAGINATION ──────────────────────────────────────────────── */
-.prjc-pagination-wrap {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: clamp(2.8rem, 5.5vw, 4.4rem);
-  padding-inline: clamp(0.7rem, 1.5vw, 1rem);
-}
-
-.prjc-page-btn {
-  border: 0;
-  background: transparent;
-  color: #1c1c1a;
-  font-size: clamp(1rem, 1.5vw, 1.4rem);
-  font-family: var(--font-aref-ruqaa, Georgia, serif);
-  cursor: pointer;
-  transition:
-    opacity 0.22s ease,
-    transform 0.22s ease;
-}
-
-.prjc-page-btn:hover:not(:disabled) {
-  opacity: 0.72;
-  transform: translateY(-1px);
-}
-
-.prjc-page-btn:disabled {
-  opacity: 0.35;
-  cursor: not-allowed;
-}
-
 .prjc-quote-inner {
   max-width: 950px;
   margin: 0 auto;
@@ -1661,10 +1654,6 @@ body {
 
   .prjc-gallery-grid {
     grid-template-columns: 1fr;
-  }
-
-  .prjc-page-btn {
-    font-size: 1rem;
   }
 
   .prjc-quote-inner blockquote {
@@ -1807,37 +1796,6 @@ body {
   color: #66645f;
 }
 
-/* ── PAGINATION ──────────────────────────────────────────────── */
-.aptc-pagination-wrap {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: clamp(2.8rem, 5.5vw, 4.4rem);
-  padding-inline: clamp(0.7rem, 1.5vw, 1rem);
-}
-
-.aptc-page-btn {
-  border: 0;
-  background: transparent;
-  color: #1c1c1a;
-  font-size: clamp(1rem, 1.5vw, 1.4rem);
-  font-family: var(--font-aref-ruqaa, Georgia, serif);
-  cursor: pointer;
-  transition:
-    opacity 0.22s ease,
-    transform 0.22s ease;
-}
-
-.aptc-page-btn:hover:not(:disabled) {
-  opacity: 0.72;
-  transform: translateY(-1px);
-}
-
-.aptc-page-btn:disabled {
-  opacity: 0.35;
-  cursor: not-allowed;
-}
-
 /* ── QUOTE ───────────────────────────────────────────────────── */
 .aptc-quote {
   background: #fff;
@@ -1902,10 +1860,6 @@ body {
 
   .aptc-gallery-grid {
     grid-template-columns: 1fr;
-  }
-
-  .aptc-page-btn {
-    font-size: 1rem;
   }
 
   .aptc-quote-inner blockquote {
@@ -2007,37 +1961,6 @@ body {
   color: #66645f;
 }
 
-/* ── PAGINATION ──────────────────────────────────────────────── */
-.prjdp-pagination-wrap {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: clamp(2.4rem, 4.5vw, 3.8rem);
-  padding-inline: clamp(0.6rem, 1.4vw, 0.95rem);
-}
-
-.prjdp-page-btn {
-  border: 0;
-  background: transparent;
-  color: #1c1c1a;
-  font-size: clamp(1rem, 1.5vw, 1.35rem);
-  font-family: var(--font-aref-ruqaa, Georgia, serif);
-  cursor: pointer;
-  transition:
-    opacity 0.22s ease,
-    transform 0.22s ease;
-}
-
-.prjdp-page-btn:hover:not(:disabled) {
-  opacity: 0.72;
-  transform: translateY(-1px);
-}
-
-.prjdp-page-btn:disabled {
-  opacity: 0.35;
-  cursor: not-allowed;
-}
-
 /* ── QUOTE ───────────────────────────────────────────────────── */
 .prjdp-quote {
   background: #fff;
@@ -2109,9 +2032,6 @@ body {
     font-size: 0.84rem;
   }
 
-  .prjdp-page-btn {
-    font-size: 0.98rem;
-  }
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -2187,36 +2107,6 @@ body {
   justify-content: center;
   font-size: 1rem;
   color: #66645f;
-}
-
-/* ── PAGINATION ──────────────────────────────────────────────── */
-.accs-pagination-wrap {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: clamp(3rem, 6vw, 5rem);
-  padding-inline: clamp(0.3rem, 0.8vw, 0.8rem);
-}
-
-.accs-page-btn {
-  border: 0;
-  background: transparent;
-  color: #1c1c1a;
-  font-size: clamp(1.2rem, 1.8vw, 1.7rem);
-  cursor: pointer;
-  transition:
-    opacity 0.22s ease,
-    transform 0.22s ease;
-}
-
-.accs-page-btn:hover:not(:disabled) {
-  opacity: 0.68;
-  transform: translateY(-1px);
-}
-
-.accs-page-btn:disabled {
-  opacity: 0.3;
-  cursor: not-allowed;
 }
 
 /* ── RESPONSIVE ──────────────────────────────────────────────── */

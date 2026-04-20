@@ -96,23 +96,23 @@ export default function AccessoriesPage() {
           </motion.div>
         )}
 
-        <div className="accs-pagination-wrap">
+        <div className="mimz-pagination-wrap">
           <button
             type="button"
-            className="accs-page-btn"
+            className="mimz-pagination-btn"
             disabled={!canGoPrev || isFetching}
             onClick={() => updatePageInUrl(page - 1, totalPages)}
           >
-            &lt;
+            &lt; Previous
           </button>
 
           <button
             type="button"
-            className="accs-page-btn"
+            className="mimz-pagination-btn"
             disabled={!canGoNext || isFetching}
             onClick={() => updatePageInUrl(page + 1, totalPages)}
           >
-            &gt;
+            Next &gt;
           </button>
         </div>
       </section>
