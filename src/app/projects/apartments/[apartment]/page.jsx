@@ -6,6 +6,11 @@ import {
 } from "@features/projects/lib/projectsCatalogueQueryKeys";
 import { getApartmentDetailPage } from "@features/projects/data/apartmentDetail";
 
+export const metadata = {
+  title: "Apartment Details — Mimz Interiors",
+  description: "Detailed apartment project view from Mimz Interiors.",
+};
+
 const ApartmentDetailPage = async ({ params, searchParams }) => {
   const { apartment } = await params;
   const resolvedSearchParams = await searchParams;
