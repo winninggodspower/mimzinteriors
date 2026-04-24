@@ -34,8 +34,16 @@ export default function Footer() {
         </p>
       </div>
 
-      <div className="footer-pattern" aria-hidden="true">
-        <Image src={patterns} alt="" fill className="footer-pattern-img" sizes="100vw" />
+      <div
+        className="relative w-full overflow-hidden bg-white min-h-[clamp(28px,3vw,48px)] mt-5"
+        aria-hidden="true"
+      >
+        <Image
+          src={patterns}
+          alt=""
+          className="absolute w-full top-0 h-auto max-w-none "
+          sizes="120vw"
+        />
       </div>
     </footer>
   );

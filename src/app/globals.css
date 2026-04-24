@@ -85,6 +85,7 @@
     @apply cursor-not-allowed;
     opacity: 0.35;
   }
+
 }
 
 body {
@@ -103,20 +104,6 @@ html {
 
 body {
   overflow-y: auto;
-}
-
-/* ── FOOTER PATTERN ─────────────────────────────────────────── */
-.footer-pattern {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 1440 / 49;
-  overflow: hidden;
-  background: #ffffff;
-}
-
-.footer-pattern-img {
-  object-fit: cover;
-  object-position: top center;
 }
 
 /* ── BASE ────────────────────────────────────────────────────── */
@@ -965,12 +952,6 @@ body {
 ═══════════════════════════════════════════════════════════════ */
 
 /* ── BASE ────────────────────────────────────────────────────── */
-.home-main {
-  width: 100%;
-  overflow-x: hidden;
-  color: #000;
-  background: #ffffff;
-}
 
 @keyframes homeHeroFloat {
   0% {
@@ -1026,76 +1007,12 @@ body {
 }
 
 /* ── PATTERN BAND ────────────────────────────────────────────── */
-.home-pattern {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 1440 / 98;
-  min-height: clamp(48px, 6vw, 96px);
-  background: #fff;
-  overflow: hidden;
-  margin-bottom: 10px;
-}
 
-.home-pattern-img {
-  object-fit: cover;
-}
 
 /* ── FEATURE IMAGE ───────────────────────────────────────────── */
-.home-feature-image {
-  width: 100%;
-  background: #ffffff;
-}
 
-.home-feature-image-wrap {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 1440 / 745;
-  overflow: hidden;
-}
 
-.home-feature-image-img {
-  object-fit: cover;
-  object-position: center;
-  transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
-}
 
-.home-feature-image-wrap:hover .home-feature-image-img {
-  transform: scale(1.04);
-}
-
-/* ── QUOTE ───────────────────────────────────────────────────── */
-.home-quote {
-  background: #fff;
-  padding: clamp(2.2rem, 5vw, 4rem) clamp(1rem, 4vw, 3rem)
-    clamp(3.8rem, 7vw, 6rem);
-}
-
-.home-quote-inner {
-  max-width: 920px;
-  margin: 0 auto;
-  text-align: center;
-}
-
-.home-quote-text {
-  margin: 0;
-  border: 0;
-  padding: 0;
-  background: none;
-  font-family: var(--font-bd-megalona, Georgia, serif);
-  font-size: 48px;
-  font-weight: 400;
-  font-style: italic;
-  line-height: 1.2;
-  color: #000;
-  text-wrap: balance;
-}
-
-.home-quote-author {
-  margin: clamp(1rem, 2vw, 1.8rem) 0 0;
-  font-size: 32px;
-  color: #000;
-  letter-spacing: 0.01em;
-}
 
 /* ── QUOTE SEPARATOR ────────────────────────────────────────── */
 .home-quote-separator {

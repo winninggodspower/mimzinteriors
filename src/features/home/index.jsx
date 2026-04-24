@@ -6,6 +6,7 @@ import homeHero from "@assets/images/home/homehero.png";
 import quoteImage from "@assets/images/home/quoteimage.png";
 import patterns from "@assets/images/patterns.svg";
 import seperator from "@assets/images/seperator.png";
+import QuoteSection from "@features/about/components/quote-section";
 
 const revealMotion = (delay = 0) => ({
   initial: { opacity: 0, y: 36 },
@@ -35,7 +36,7 @@ const introParagraphVariants = {
 
 export default function HomeFeature() {
   return (
-    <main className="home-main overflow-hidden">
+    <main className="w-full text-black bg-white overflow-hidden">
       <section className="relative w-full overflow-visible bg-white">
         <motion.div
           className="pointer-events-none absolute left-3 top-0 z-20 sm:left-6"
@@ -80,36 +81,31 @@ export default function HomeFeature() {
         </motion.div>
       </motion.section>
 
-      <motion.section className="home-pattern" aria-hidden="true" {...revealMotion(0.08)}>
-        <Image src={patterns} alt="" fill className="home-pattern-img" sizes="100vw" />
+      <motion.section
+        className="mb-2.5 w-full h-full bg-white "
+        aria-hidden="true"
+        {...revealMotion(0.08)}
+      >
+        <Image src={patterns} alt="" className="object-cover h-full w-full" sizes="100vw" />
       </motion.section>
 
-      <motion.section className="home-feature-image" {...revealMotion(0.1)}>
-        <div className="home-feature-image-wrap h-175 w-full">
+      <motion.section className="w-full bg-white" {...revealMotion(0.1)}>
+        <div className="group relative h-125 w-full overflow-hidden">
           <Image
             src={quoteImage}
             alt="Founder standing in a designed interior"
             fill
-            className="home-feature-image-img"
+            className="object-cover object-center transition-transform duration-900 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]"
             sizes="100vw"
           />
         </div>
       </motion.section>
 
-      <motion.section className="home-quote max-[480px]:pb-[3.2rem]!" {...revealMotion(0.12)}>
-        <div className="home-quote-inner">
-          <blockquote className="home-quote-text max-md:text-[1.9rem]! max-[480px]:text-[1.9rem]!">
-            "Interior design is my canvas, where every detail is styled to reflect my client's dreams and personality."
-          </blockquote>
-          <p className="home-quote-author max-md:text-[1.15rem]!">-Miracle Godsent Nwachukwu-</p>
-        </div>
-      </motion.section>
+      <QuoteSection
+        text="Interior design is my canvas, where every detail is styled to reflect my client's dreams and personality."
+        author="Miracle Godsent Nwachukwu"
+      />
 
-      <motion.section className="home-quote-separator max-[480px]:-mt-17.5!" aria-hidden="true" {...revealMotion(0.14)}>
-        <div className="home-quote-separator-wrap max-[480px]:w-[min(460px,68vw)]!">
-          <Image src={seperator} alt="" fill className="home-quote-separator-img" sizes="(min-width: 1024px) 520px, 55vw" />
-        </div>
-      </motion.section>
     </main>
   );
 }

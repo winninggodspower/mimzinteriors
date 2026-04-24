@@ -21,6 +21,7 @@ import sawardb from "@assets/images/sawardb.png";
 import sawardc from "@assets/images/sawardc.png";
 import aboutteam from "@assets/images/aboutteam.png";
 import { aboutContent } from "./data";
+import QuoteSection from "./components/quote-section";
 
 export default function AboutPage() {
   const sectionMotion = sectionReveal({ y: 28 });
@@ -57,26 +58,10 @@ export default function AboutPage() {
       </motion.section>
 
       {/* ── QUOTE SECTION ───────────────────────────────── */}
-      <motion.section className="py-[clamp(3rem,6vw,5rem)] px-[clamp(1.5rem,8vw,10rem)] border-b border-[rgba(201,169,110,0.25)]" {...sectionMotion}>
-        <div className="mx-auto max-w-225 text-center">
-          <div className="flex flex-col items-center">
-            <motion.blockquote className="m-0 border-none bg-none p-0 font-bd-megalona text-[48px] font-normal italic leading-none text-black max-lg:text-[40px] max-md:text-[32px] max-sm:text-[26px]" {...aosReveal({ direction: "up", distance: 32 })}>
-              <span className="mr-[0.1em] align-[-0.1em] text-[clamp(2rem,5vw,3.5rem)] font-normal leading-0 text-black">"</span>
-              {aboutContent.quoteSection.text}
-              <span className="ml-[0.1em] align-[-0.1em] text-[clamp(2rem,5vw,3.5rem)] font-normal leading-0 text-black">"</span>
-            </motion.blockquote>
-            <motion.div className="flex justify-center -mt-8" {...aosReveal({ direction: "up", distance: 20, delay: 0.25 })}>
-              <Image
-                src={'/mimz-mascut-seperator.png'}
-                alt="seperator image"
-                height={178}
-                width={273}
-                className="h-44.5 w-68.25 max-md:h-auto max-md:w-56 max-sm:w-44"
-              />
-            </motion.div>
-          </div>
-        </div>
-      </motion.section>
+      <QuoteSection
+        text={aboutContent.quoteSection.text}
+        author={aboutContent.quoteSection.author}
+      />
 
       {/* ── GALLERY ROW ─────────────────────────────────── */}
       {/* will make this a carousel later, for now just a grid of images */}
@@ -251,31 +236,31 @@ export default function AboutPage() {
 
             {/* three certificate badges */}
             <div className="flex w-83 items-center justify-center -space-x-3 max-sm:-space-x-2">
-              <div className="group flex items-center justify-center">
+              <div className="group flex w-[calc((100%+1.5rem)/3)] shrink-0 items-center justify-center max-sm:w-[calc((100%+1rem)/3)]">
                 <Image
                   src={sawarda}
                   alt="Laufen Award"
                   width={100}
                   height={100}
-                  className="h-auto w-25 object-contain drop-shadow-[0_4px_12px_rgba(0,0,0,0.12)] transition-transform duration-300 ease-in-out group-hover:scale-[1.04]"
+                  className="h-auto w-full object-contain drop-shadow-[0_4px_12px_rgba(0,0,0,0.12)] transition-transform duration-300 ease-in-out group-hover:scale-[1.04]"
                 />
               </div>
-              <div className="group flex items-center justify-center">
+              <div className="group flex w-[calc((100%+1.5rem)/3)] shrink-0 items-center justify-center max-sm:w-[calc((100%+1rem)/3)]">
                 <Image
                   src={sawardb}
                   alt="Roca Award"
                   width={100}
                   height={100}
-                  className="h-auto w-25 object-contain drop-shadow-[0_4px_12px_rgba(0,0,0,0.12)] transition-transform duration-300 ease-in-out group-hover:scale-[1.04]"
+                  className="h-auto w-full object-contain drop-shadow-[0_4px_12px_rgba(0,0,0,0.12)] transition-transform duration-300 ease-in-out group-hover:scale-[1.04]"
                 />
               </div>
-              <div className="group flex items-center justify-center">
+              <div className="group flex w-[calc((100%+1.5rem)/3)] shrink-0 items-center justify-center max-sm:w-[calc((100%+1rem)/3)]">
                 <Image
                   src={sawardc}
                   alt="Roca Award"
                   width={100}
                   height={100}
-                  className="h-auto w-25 object-contain drop-shadow-[0_4px_12px_rgba(0,0,0,0.12)] transition-transform duration-300 ease-in-out group-hover:scale-[1.04]"
+                  className="h-auto w-full object-contain drop-shadow-[0_4px_12px_rgba(0,0,0,0.12)] transition-transform duration-300 ease-in-out group-hover:scale-[1.04]"
                 />
               </div>
             </div>
