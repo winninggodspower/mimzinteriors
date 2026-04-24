@@ -12,6 +12,7 @@ import {
   aosReveal,
   sectionReveal,
 } from "@features/lib/motion";
+import QuoteSection from "../../about/components/quote-section";
 
 const projectItems = [
   {
@@ -41,7 +42,8 @@ export default function ProjectsFeature() {
   const sectionMotion = sectionReveal({ y: 30 });
 
   return (
-    <main className="prj-main">
+    <main className="w-full overflow-hidden">
+
       <motion.section className="w-full" {...sectionMotion}>
         <div className="relative h-200 w-full overflow-hidden max-md:h-172.5 max-sm:h-107.5">
           <div className="h-full w-full">
@@ -70,36 +72,34 @@ export default function ProjectsFeature() {
       <motion.section className="prj-grid-section" {...sectionMotion}>
         <div className="prj-grid">
           {projectItems.map((item, index) => (
+            <Link href={item.href}  key={item.title}>
             <article className="prj-card" key={item.title}>
-              <motion.div {...aosReveal({ direction: "up", distance: 24, delay: 0.06 + index * 0.07 })}>
-                <Link href={item.href} className="prj-card-image-wrap" aria-label={item.title}>
+              <motion.div className="prj-card-image-wrap" {...aosReveal({ direction: "up", distance: 24, delay: 0.06 + index * 0.07 })}>
                   <Image src={item.image} alt={item.alt} fill className="prj-card-image" sizes="(min-width: 1200px) 33vw, (min-width: 768px) 50vw, 100vw" />
-                </Link>
               </motion.div>
               <div className="prj-card-copy">
                 <h2>{item.title}</h2>
                 <p>{item.desc}</p>
               </div>
             </article>
+            </Link>
           ))}
         </div>
       </motion.section>
+        
+      <QuoteSection
+        text={'We design and create spaces from residential homes to office spaces with a focus on functionality and aesthetic appeal. We are never out of style. '}
+      />
 
-      <motion.section className="prj-quote" {...sectionMotion}>
-        <div className="prj-quote-inner">
-          <blockquote>
-            We design and create spaces from residential homes to office spaces with a focus on functionality and aesthetic appeal. We are never out of style.
-          </blockquote>
-          <div className="prj-quote-separator" aria-hidden="true">
-            <Image src={seperator} alt="" fill className="prj-quote-separator-img" sizes="(min-width: 1024px) 180px, 42vw" />
-          </div>
-          <motion.div {...aosReveal({ direction: "up", distance: 32, duration: 0.5 })}>
-          <Link href="/contact" className="prj-cta-btn">
-            GET IN TOUCH
-          </Link>
-          </motion.div>
-        </div>
-      </motion.section>
+      <motion.div className="w-full text-center mb-24" {...aosReveal({ direction: "up", distance: 32, duration: 0.5 })}>
+        <Link
+          href="/contact"
+          className="inline-flex min-h-14 items-center justify-center rounded-lg bg-[#c28831] px-7 py-3 text-[22px] leading-none font-medium tracking-[0.06em] text-white uppercase transition duration-200 ease-out hover:-translate-y-0.5 hover:bg-[#ab7424] hover:shadow-[0_10px_26px_rgba(171,116,36,0.28)] max-sm:min-h-[50px] max-sm:px-5 max-sm:py-2.5 max-sm:text-sm"
+        >
+          GET IN TOUCH
+        </Link>
+      </motion.div>
+      
     </main>
   );
 }

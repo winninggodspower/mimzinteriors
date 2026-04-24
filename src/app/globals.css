@@ -95,7 +95,7 @@
   }
 
   .hero-title {
-    @apply absolute inset-x-0 top-[40%] m-0 flex -translate-y-1/2 justify-center text-center font-caterina text-[220px] leading-none font-light tracking-[-0.01em] text-white uppercase drop-shadow-[0_6px_28px_rgba(0,0,0,0.2)] max-md:text-[110px];
+    @apply absolute inset-x-0 top-[40%] m-0 flex -translate-y-1/2 justify-center text-center font-caterina text-[280px] leading-none font-light tracking-[-0.01em] text-white uppercase drop-shadow-[0_6px_28px_rgba(0,0,0,0.2)] max-md:text-[140px];
   }
 }
 
@@ -1000,7 +1000,6 @@ body {
 .contact-info-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: clamp(1.8rem, 2.5vw, 2.2rem);
 }
 
 .contact-info-card {
@@ -1100,13 +1099,6 @@ body {
    Palette: cream #F6F4EE · dark #1C1C1A · bronze #C28831
 ═══════════════════════════════════════════════════════════════ */
 
-/* ── BASE ────────────────────────────────────────────────────── */
-.prj-main {
-  width: 100%;
-  overflow-x: hidden;
-  background: #ffffff;
-  color: #000;
-}
 
 /* ── INTRO ───────────────────────────────────────────────────── */
 .prj-intro {
@@ -1185,11 +1177,9 @@ body {
 }
 
 .prj-card-copy p {
-  margin: 0.55rem 0 0;
   font-weight: 300;
   color: #000;
-  line-height: 1.6;
-  font-size: 20px;
+  font-size: 18px;
 }
 
 /* ── QUOTE + CTA ─────────────────────────────────────────────── */
@@ -1238,7 +1228,6 @@ body {
   padding: 0.9rem 2.4rem;
   margin-top: clamp(1.6rem, 3vw, 2.3rem);
   border-radius: 8px;
-  border: 1px solid #c28831;
   background: #c28831;
   color: #fff;
   text-decoration: none;
@@ -1278,7 +1267,6 @@ body {
   .prj-intro-copy,
   .prj-card-copy p {
     font-size: 0.9rem;
-    line-height: 1.66;
   }
 
   .prj-grid {

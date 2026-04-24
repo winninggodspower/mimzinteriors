@@ -18,7 +18,7 @@ export default function Contact() {
     <main className="contact-main">
       <section className="contact-info-section">
         <div className="contact-info-inner">
-          <div className="contact-info-grid">
+          <div className="contact-info-grid gap-10 md:gap-y-16 mt-10 md:mt-0">
             {contactInfo.map((item, i) => (
               <motion.div
                 key={i}
@@ -34,7 +34,7 @@ export default function Contact() {
                 <span className="row-start-2 inline-flex h-8 w-8 min-w-8 self-start pt-1">
                   <Image className="w-full h-full object-contain" src={item.icon} alt="" aria-hidden="true" />
                 </span>
-                <h3 className="col-start-2 mb-1 flex items-start font-caterina text-3xl font-bold tracking-[0.04em] uppercase">
+                <h3 className="col-start-2 mb-0 flex items-start font-caterina text-3xl font-normal tracking-[0.04em] uppercase">
                   {item.label}
                 </h3>
                 <div className="col-start-2">

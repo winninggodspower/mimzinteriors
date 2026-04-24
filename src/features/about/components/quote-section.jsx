@@ -9,7 +9,7 @@ export default function QuoteSection({ text, author=null }) {
 
   return (
     <motion.section
-      className="py-[clamp(3rem,6vw,5rem)] px-[clamp(1.5rem,8vw,10rem)] border-b border-[rgba(201,169,110,0.25)]"
+      className="py-[clamp(3rem,6vw,5rem)] px-[clamp(1.5rem,8vw,10rem)]"
       {...sectionMotion}
     >
       <div className="mx-auto max-w-225 text-center">
