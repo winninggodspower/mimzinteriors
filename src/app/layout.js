@@ -1,4 +1,5 @@
 import localFont from "next/font/local";
+import {  Aref_Ruqaa } from 'next/font/google'
 import { ToastContainer, toast } from 'react-toastify';
 import "./globals.css";
 import NextTopLoader from "nextjs-toploader";
@@ -12,16 +13,19 @@ import { authOptions } from "@/lib/auth";
 const caterina = localFont({
   src: '../assets/fonts/Caterina.woff2',
   variable: '--font-caterina',
+  weight: '400 700',
 })
 
-const arefRuqaa = localFont({
-  src: '../assets/fonts/ArefRuqaa-Regular.woff2',
+const arefRuqaa = Aref_Ruqaa({
+  subsets: ['latin'],
+  weight: ['400', '700'],
   variable: '--font-aref-ruqaa',
 })
 
 const bdMegalona = localFont({ 
   src: '../assets/fonts/BDMegalona.woff2',
   variable: '--font-bd-megalona',
+  weight: '400 700',
 })
 
 export const metadata = {
