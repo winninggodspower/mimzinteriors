@@ -48,9 +48,9 @@ export default function AboutPage() {
             <motion.h2 className="about-section-label" {...aosReveal({ direction: "left", distance: 30 })}>
               {aboutContent.roots.title}
             </motion.h2>
-            <motion.div className="about-roots-body" {...aosReveal({ direction: "right", distance: 34, delay: 0.06 })}>
+            <motion.div {...aosReveal({ direction: "right", distance: 34, delay: 0.06 })}>
               {aboutContent.roots.paragraphs.map((paragraph) => (
-                <p key={paragraph}>{paragraph}</p>
+                <p key={paragraph} className="about-body-paragraph mb-1">{paragraph}</p>
               ))}
             </motion.div>
           </div>
@@ -163,9 +163,9 @@ export default function AboutPage() {
             <motion.h2 className="about-section-label" {...aosReveal({ direction: "left", distance: 28 })}>
               {aboutContent.firm.title}
             </motion.h2>
-            <motion.div className="about-firm-body" {...aosReveal({ direction: "right", distance: 30, delay: 0.06 })}>
+            <motion.div {...aosReveal({ direction: "right", distance: 30, delay: 0.06 })}>
               {aboutContent.firm.paragraphs.map((paragraph) => (
-                <p key={paragraph}>{paragraph}</p>
+                <p key={paragraph} className="about-body-paragraph last:mb-0">{paragraph}</p>
               ))}
             </motion.div>
           </motion.div>
@@ -208,9 +208,9 @@ export default function AboutPage() {
 
       {/* ── AWARDS SECTION ──────────────────────────────── */}
       <motion.section className="px-[clamp(1.5rem,6vw,7rem)] py-[clamp(4rem,8vw,7rem)]" {...sectionMotion}>
-        <div className="mx-40 grid max-w-7xl grid-cols-[auto_1fr] items-start gap-10 max-lg:mx-auto max-lg:grid-cols-1 max-md:gap-4">
+        <div className="mx-auto grid max-w-7xl grid-cols-1 items-start gap-4 lg:mx-40 lg:grid-cols-[auto_1fr] lg:gap-10">
 
-          <div className="flex flex-col items-center gap-4 max-lg:order-2 max-lg:justify-start max-md:w-full justify-center">
+          <div className="order-2 flex w-full flex-col items-center justify-start gap-4 lg:order-none lg:w-auto lg:justify-center">
             
             {/* two awards badges */}
             <div className="grid w-83 grid-cols-2 gap-3 max-md:gap-0 items-start justify-center mt-10 md:mt-0">
@@ -270,9 +270,13 @@ export default function AboutPage() {
             <motion.h2 className="about-section-label" {...aosReveal({ direction: "right", distance: 26 })}>
               {aboutContent.awards.title}
             </motion.h2>
-            <motion.div className="about-awards-body" {...aosReveal({ direction: "left", distance: 30, delay: 0.06 })}>
-              {aboutContent.awards.paragraphs.map((paragraph) => (
-                <p key={paragraph}>{paragraph}</p>
+            <motion.div {...aosReveal({ direction: "left", distance: 30, delay: 0.06 })}>
+              {aboutContent.awards.paragraphs.map((paragraph, index) => (
+                <p key={paragraph} className={
+                  `about-body-paragraph ${index === aboutContent.awards.paragraphs.length - 1 ? 'last:mb-0' : 'mb-4'}
+                  `}>
+                  {paragraph}
+                </p>
               ))}
             </motion.div>
             <motion.blockquote className="about-awards-quote" {...aosReveal({ direction: "up", distance: 24, delay: 0.08 })}>
