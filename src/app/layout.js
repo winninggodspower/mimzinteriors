@@ -11,7 +11,7 @@ import { authOptions } from "@/lib/auth";
 
 
 const caterina = localFont({
-  src: '../assets/fonts/Caterina.woff2',
+  src: '../assets/fonts/Caterina.ttf',
   variable: '--font-caterina',
   weight: '400 700',
 })

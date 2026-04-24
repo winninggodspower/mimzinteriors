@@ -210,7 +210,7 @@ export default function AboutPage() {
       <motion.section className="px-[clamp(1.5rem,6vw,7rem)] py-[clamp(4rem,8vw,7rem)]" {...sectionMotion}>
         <div className="mx-auto grid max-w-7xl grid-cols-1 items-start gap-4 lg:mx-40 lg:grid-cols-[auto_1fr] lg:gap-10">
 
-          <div className="order-2 flex w-full flex-col items-center justify-start gap-4 lg:order-none lg:w-auto lg:justify-center">
+          <div className="order-2 flex w-full flex-col items-center justify-start gap-4 lg:order-0 lg:w-auto lg:justify-center">
             
             {/* two awards badges */}
             <div className="grid w-83 grid-cols-2 gap-3 max-md:gap-0 items-start justify-center mt-10 md:mt-0">
