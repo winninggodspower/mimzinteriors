@@ -45,6 +45,7 @@ export default function ProjectsCatalogue() {
               sizes="100vw"
             />
           </motion.div>
+          <h1 className="hero-title">PROJECTS</h1>
         </div>
       </section>
 
@@ -60,7 +61,7 @@ export default function ProjectsCatalogue() {
             className="mt-[clamp(2rem,4vw,3rem)] font-caterina text-[40px] leading-none font-light uppercase text-black max-md:text-[clamp(2rem,4vw,3rem)]"
             variants={fadeUpItem({ y: 16, duration: 0.58, delay: 0.06 })}
           >
-            PROJECT CATALOG
+            PROJECT CATALOGUE
           </motion.h1>
           <motion.p className="prjc-intro-copy" variants={fadeUpItem({ y: 16, duration: 0.62, delay: 0.12 })}>
             Our project speaks loudly for itself as we handle them with the highest form of professionalism from field workers to our customer care services. All process documentation and alignments are done with modern tools to give a remarkable impression at the beginning and end of every project. At Mimz interior, we give every client a reason to come back.

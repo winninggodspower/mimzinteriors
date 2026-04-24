@@ -50,6 +50,7 @@ export default function ApartmentsPage() {
               sizes="100vw"
             />
           </motion.div>
+          <h1 className="hero-title">APARTMENTS</h1>
         </div>
       </motion.section>
 

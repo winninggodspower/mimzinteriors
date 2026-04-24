@@ -27,7 +27,7 @@ export default function Service() {
   return (
     <main className="svc-main overflow-hidden">
       <motion.section className="svc-hero" {...sectionMotion}>
-        <div className="svc-hero-img-wrap">
+        <div className="relative h-200 w-full overflow-hidden max-md:h-172.5 max-sm:h-107.5">
           <motion.div
             {...heroScaleLoop({ scale: 1.04 })}
             className="h-full w-full"
@@ -41,6 +41,7 @@ export default function Service() {
             />
           </motion.div>
           <div className="svc-hero-overlay" />
+          <h1 className="hero-title">SERVICES</h1>
         </div>
       </motion.section>
       <p className="svc-hero-caption">All images belongs to Mimz Interiors</p>

@@ -54,7 +54,7 @@ export default function ProjectsFeature() {
               sizes="800px"
             />
           </div>
-          <h1 className="absolute inset-x-0 top-[40%] m-0 flex -translate-y-1/2 justify-center font-caterina text-[220px] leading-none font-light tracking-[-0.01em] text-white uppercase drop-shadow-[0_6px_28px_rgba(0,0,0,0.2)] max-md:text-[110px]">
+          <h1 className="hero-title">
             PROJECTS
           </h1>
         </div>

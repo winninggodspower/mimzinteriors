@@ -86,6 +86,9 @@
     opacity: 0.35;
   }
 
+  .hero-title {
+    @apply absolute inset-x-0 top-[40%] m-0 flex -translate-y-1/2 justify-center text-center font-caterina text-[220px] leading-none font-light tracking-[-0.01em] text-white uppercase drop-shadow-[0_6px_28px_rgba(0,0,0,0.2)] max-md:text-[110px];
+  }
 }
 
 body {
