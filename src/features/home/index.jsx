@@ -45,7 +45,7 @@ export default function HomeFeature() {
           transition={{ duration: 0.85, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
         >
           <Image
-            src="/AF_2024_MIMZ_AWARD_RIBBON.png"
+            src="/BEST-01.png"
             alt=""
             width={180}
             height={180}
@@ -74,7 +74,7 @@ export default function HomeFeature() {
           </video>
 
           {/* Optional overlay (improves text readability if needed) */}
-          <div className="absolute inset-0 z-10 bg-black/20" />
+          {/* <div className="absolute inset-0 z-10 bg-black/20" /> */}
         </div>
       </section>
 
