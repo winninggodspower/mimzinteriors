@@ -53,14 +53,28 @@ export default function HomeFeature() {
             className="h-auto w-24 sm:w-28 lg:w-32"
           />
         </motion.div>
-        <div className="relative h-200 w-full overflow-hidden">
-          <Image
-            src={homeHero}
-            alt="Mimz Interiors project hero"
-            fill
-            priority
-            className="block object-cover object-center animate-[homeHeroFloat_12s_ease-in-out_infinite_alternate] will-change-transform"
-          />
+        <div className="relative h-125 sm:h-150 lg:h-175 w-full overflow-hidden">
+          {/* Poster image (fallback / loading) */}
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="none"
+            poster="/hero.png"
+            className="
+              absolute inset-0 h-full w-full 
+              object-cover object-center 
+              z-0
+              will-change-transform
+            "
+          >
+            <source src="/videos/hero.webm" type="video/webm" />
+            <source src="/videos/hero.mp4" type="video/mp4" />
+          </video>
+
+          {/* Optional overlay (improves text readability if needed) */}
+          <div className="absolute inset-0 z-10 bg-black/20" />
         </div>
       </section>
 
