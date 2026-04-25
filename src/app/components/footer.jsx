@@ -4,10 +4,10 @@ import { Icon } from "@iconify/react";
 import patterns from "@assets/images/patterns.svg";
 
 const socialLinks = [
-  { name: "Instagram", href: "#", icon: "simple-icons:instagram", size: "text-[24px]" },
-  { name: "LinkedIn", href: "#", icon: "teenyicons:linkedin-outline", size: "text-[24px]" },
-  { name: "TikTok", href: "#", icon: "streamline-flex:tiktok-logo-remix", size: "text-[24px]" },
-  { name: "YouTube", href: "#", icon: "icomoon-free:youtube2", size: "text-[24px]" },
+  { name: "Instagram", href: "https://www.instagram.com/mimz_interiors/", icon: "simple-icons:instagram", size: "text-[24px]" },
+  { name: "LinkedIn", href: "https://www.linkedin.com/company/mimz-interior", icon: "teenyicons:linkedin-outline", size: "text-[24px]" },
+  { name: "TikTok", href: "https://www.tiktok.com/@mimz.interiors", icon: "streamline-flex:tiktok-logo-remix", size: "text-[24px]" },
+  { name: "YouTube", href: "https://www.youtube.com/@MimzInteriors", icon: "icomoon-free:youtube2", size: "text-[24px]" },
 ];
 
 export default function Footer() {
@@ -21,7 +21,8 @@ export default function Footer() {
                 key={social.name}
                 href={social.href}
                 aria-label={social.name}
-                className="flex items-center justify-center transition-opacity hover:opacity-75"
+                target="_blank"
+                className="flex items-center justify-center transition-all duration-300 hover:scale-125 hover:rotate-6"
               >
                 <Icon icon={social.icon} className={social.size} aria-hidden="true" />
               </Link>

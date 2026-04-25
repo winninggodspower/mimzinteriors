@@ -183,7 +183,7 @@ export default function Navbar() {
                 </motion.div>
 
                 <motion.div
-                  className="absolute right-0 top-0 z-10 flex w-47.5  flex-col items-start justify-center gap-8 lg:w-55 lg:gap-8"
+                  className="absolute right-0 top-0 z-10 flex flex-col items-start justify-center gap-8 w-fit lg:gap-8"
                   variants={panelVariants}
                   initial="closed"
                   animate="open"
@@ -194,7 +194,7 @@ export default function Navbar() {
                       <Link
                         href={item.href}
                         onClick={() => setIsMenuOpen(false)}
-                        className={`text-4xl leading-none transition-colors hover:translate-x-2 hover:opacity-70 lg:text-6xl ${
+                        className={`text-5xl leading-none transition-colors hover:translate-x-2 hover:opacity-70 ${
                           isItemActive(item.href) ? "text-mimz-gold" : "text-[#2a2a2a]"
                         }`}
                       >
