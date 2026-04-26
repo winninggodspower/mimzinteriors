@@ -73,8 +73,6 @@ export default function HomeFeature() {
             <source src="/videos/hero.mp4" type="video/mp4" />
           </video>
 
-          {/* Optional overlay (improves text readability if needed) */}
-          {/* <div className="absolute inset-0 z-10 bg-black/20" /> */}
         </div>
       </section>
 
@@ -95,15 +93,12 @@ export default function HomeFeature() {
         </motion.div>
       </motion.section>
 
-      <motion.section
-        className="mb-2.5 w-full h-full bg-white "
-        aria-hidden="true"
-        {...revealMotion(0.08)}
-      >
-        <Image src={patterns} alt="" className="object-cover h-full w-full" sizes="100vw" />
-      </motion.section>
-
-      <motion.section className="w-full bg-white" {...revealMotion(0.1)}>
+      <motion.section className="w-full bg-white relative" {...revealMotion(0.1)}>
+        <Image 
+          src={patterns} alt="" 
+          className="object-cover h-full w-full  inset-x-0 top-0 z-0 translate-y-1/2" 
+          sizes="100vw" 
+        />
         <div className="group relative h-125 w-full overflow-hidden">
           <Image
             src={quoteImage}

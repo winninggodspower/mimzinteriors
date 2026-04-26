@@ -18,6 +18,7 @@ import {
   staggerContainer,
 } from "@features/lib/motion";
 import { processSteps, services } from "@features/service/data";
+import QuoteSection from "@features/about/components/quote-section";
 
 export default function Service() {
   const sectionMotion = sectionReveal({ y: 30 });
@@ -46,8 +47,8 @@ export default function Service() {
       </motion.section>
       <p className="svc-hero-caption">All images belongs to Mimz Interiors</p>
 
-      <motion.section className="svc-headline" {...sectionMotion}>
-        <div className="svc-headline-inner">
+      <motion.section className="svc-headline mt-12 mb-16 md:mb-20 md:mt-14 " {...sectionMotion}>
+        <div className="max-w-275 mx-auto text-center">
           <motion.h1
             className="svc-headline-title"
             {...aosReveal({ direction: "up", distance: 34 })}
@@ -55,7 +56,7 @@ export default function Service() {
             Your Space Designed For Now And The Future.
           </motion.h1>
           <motion.p
-            className="svc-headline-sub"
+            className="svc-headline-sub max-w-225 mx-auto text-center leading-relaxed"
             {...aosReveal({ direction: "up", distance: 30, delay: 0.08 })}
           >
             Our complete package of services ranges from high quality and
@@ -95,7 +96,7 @@ export default function Service() {
       <motion.section className="svc-philosophy" {...sectionMotion}>
         <div className="svc-philosophy-inner">
           <motion.blockquote
-            className="svc-philosophy-quote"
+            className="svc-philosophy-quote leading-tight"
             {...aosReveal({ direction: "up", distance: 32 })}
           >
             Patience in dealing with clients, staff, and artisans is crucial for
@@ -112,7 +113,7 @@ export default function Service() {
       </motion.section>
 
       <motion.section className="svc-gallery" {...sectionMotion}>
-        <div className="svc-gallery-grid">
+        <div className="svc-gallery-grid relative z-10 ">
           <motion.div
             className="svc-gallery-item"
             {...aosReveal({ direction: "up", distance: 24, delay: 0.05 })}
@@ -125,6 +126,7 @@ export default function Service() {
             />
             <div className="svc-gallery-overlay" />
           </motion.div>
+
           <motion.div
             className="svc-gallery-item"
             {...aosReveal({ direction: "up", distance: 24, delay: 0.12 })}
@@ -150,12 +152,11 @@ export default function Service() {
             <div className="svc-gallery-overlay" />
           </motion.div>
         </div>
-        <div className="svc-gallery-pattern-wrap">
+        <div className="relative w-full h-full">
           <Image
             src={patterns}
             alt=""
-            fill
-            className="svc-gallery-pattern"
+            className="absolute object-cover w-full inset-x-0 -translate-y-1/2 z-0"
             sizes="100vw"
           />
         </div>

@@ -30,20 +30,21 @@ export default function Footer() {
           })}
         </div>
 
-        <p className="mt-6 text-center text-[18px] ">
+        <p className="mt-4 text-center text-[18px] ">
           &copy; 2025 Mimzinteriors. All Rights Reserved. Privacy Policy
         </p>
       </div>
 
       <div
-        className="relative w-full overflow-hidden bg-white min-h-[clamp(28px,3vw,48px)] mt-5"
+        className="relative w-full  overflow-hidden bg-white mt-2"
         aria-hidden="true"
       >
         <Image
-          src={patterns}
+          src={'/footer-pattern.svg'}
           alt=""
-          className="absolute w-full top-0 h-auto max-w-none "
-          sizes="120vw"
+          className="w-full "
+          width={1920}
+          height={200}
         />
       </div>
     </footer>

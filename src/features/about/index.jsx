@@ -4,22 +4,25 @@ import Image from "next/image";
 import { motion } from "motion/react";
 import { aosReveal, sectionReveal } from "@features/lib/motion";
 import roots from "@assets/images/roots.png";
-import aboutgallerya from "@assets/images/aboutgallerya.png";
-import aboutgalleryb from "@assets/images/aboutgalleryb.png";
-import aboutgalleryc from "@assets/images/aboutgalleryc.png";
-import ivision from "@assets/images/ivision.png";
-import imission from "@assets/images/imission.png";
+
+import aboutgallerya from "@assets/images/about/aboutgallerya.png";
+import aboutgalleryb from "@assets/images/about/aboutgalleryb.png";
+import aboutgalleryc from "@assets/images/about/aboutgalleryc.png";
+import ivision from "@assets/images/icons/ivision.svg";
+import imission from "@assets/images/icons/imision.svg";
 import patterns from "@assets/images/patterns.svg";
-import visiona from "@assets/images/visiona.png";
-import visionb from "@assets/images/visionb.png";
-import visionc from "@assets/images/visionc.png";
+
+import activitya from "@assets/images/about/activity-1.jpg";
+import activityb from "@assets/images/about/activity-2.jpg";
+import activityc from "@assets/images/about/activity-3.jpg";
+
 import thefirm from "@assets/images/thefirm.png";
 import mimza from "@assets/images/mimza.png";
 import mimzb from "@assets/images/mimzb.png";
 import sawarda from "@assets/images/sawarda.png";
 import sawardb from "@assets/images/sawardb.png";
 import sawardc from "@assets/images/sawardc.png";
-import aboutteam from "@assets/images/aboutteam.png";
+import aboutteam from "@assets/images/about/about-team.jpg";
 import { aboutContent } from "./data";
 import QuoteSection from "./components/quote-section";
 
@@ -128,7 +131,7 @@ export default function AboutPage() {
         <div className="grid grid-cols-3 gap-[clamp(3px,0.35vw,6px)] max-md:grid-cols-1">
           <motion.div className="about-vision-gallery-item" {...aosReveal({ direction: "up", distance: 24, delay: 0.06 })}>
             <Image
-              src={visiona}
+              src={activitya}
               alt="Design vision"
               fill
               className="about-img"
@@ -137,7 +140,7 @@ export default function AboutPage() {
           </motion.div>
           <motion.div className="about-vision-gallery-item" {...aosReveal({ direction: "up", distance: 24, delay: 0.13 })}>
             <Image
-              src={visionb}
+              src={activityb}
               alt="Design vision"
               fill
               className="about-img"
@@ -146,7 +149,7 @@ export default function AboutPage() {
           </motion.div>
           <motion.div className="about-vision-gallery-item" {...aosReveal({ direction: "up", distance: 24, delay: 0.2 })}>
             <Image
-              src={visionc}
+              src={activityc}
               alt="Design vision"
               fill
               className="about-img"
@@ -185,17 +188,16 @@ export default function AboutPage() {
       </section>
 
       {/* ── TEAM PHOTO ──────────────────────────────────── */}
-      <motion.section className="about-team" {...sectionMotion}>
-        <div className="about-team-pattern-wrap" aria-hidden="true">
+      <motion.section className="about-team relative" {...sectionMotion}>
+        <div className="absolute inset-x-0 top-0 z-0 translate-y-1/2" aria-hidden="true">
           <Image
             src={patterns}
             alt=""
-            fill
-            className="about-team-pattern"
+            className="w-full object-cover"
             sizes="100vw"
           />
         </div>
-        <div className="relative z-1 mt-[clamp(-1.75rem,-3.5vw,-3rem)] h-145 w-full overflow-hidden mx-auto max-md:-mt-6 max-sm:-mt-4">
+        <div className="relative z-1 h-145 w-full overflow-hidden mx-auto">
           <Image
             src={aboutteam}
             alt="Mimz Interiors team"
