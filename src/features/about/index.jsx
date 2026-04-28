@@ -188,8 +188,8 @@ export default function AboutPage() {
       </section>
 
       {/* ── TEAM PHOTO ──────────────────────────────────── */}
-      <motion.section className="about-team relative" {...sectionMotion}>
-        <div className="absolute inset-x-0 top-0 z-0 translate-y-1/2" aria-hidden="true">
+      <motion.section className="about-team mt-16 relative" {...sectionMotion}>
+        <div className="absolute inset-x-0 top-0 z-0 translate-y-5/6 sm:translate-y-1/2" aria-hidden="true">
           <Image
             src={patterns}
             alt=""
