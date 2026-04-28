@@ -2,10 +2,8 @@
 
 import Image from "next/image";
 import { motion } from "motion/react";
-import homeHero from "@assets/images/home/homehero.png";
 import quoteImage from "@assets/images/home/quoteimage.png";
 import patterns from "@assets/images/patterns.svg";
-import seperator from "@assets/images/seperator.png";
 import QuoteSection from "@features/about/components/quote-section";
 
 const revealMotion = (delay = 0) => ({
