@@ -79,7 +79,7 @@ export default function AboutPage() {
               sizes="(min-width: 1200px) 25vw, (min-width: 768px) 50vw, 100vw"
             />
           </motion.div>
-          <motion.div className="about-gallery-item" {...aosReveal({ direction: "up", distance: 26, delay: 0.1 })}>
+          <motion.div className="about-gallery-item max-md:hidden" {...aosReveal({ direction: "up", distance: 26, delay: 0.1 })}>
             <Image
               src={aboutgalleryb}
               alt="Interior project"
@@ -88,7 +88,7 @@ export default function AboutPage() {
               sizes="(min-width: 1200px) 25vw, (min-width: 768px) 50vw, 100vw"
             />
           </motion.div>
-          <motion.div className="about-gallery-item" {...aosReveal({ direction: "up", distance: 26, delay: 0.16 })}>
+          <motion.div className="about-gallery-item max-md:hidden" {...aosReveal({ direction: "up", distance: 26, delay: 0.16 })}>
             <Image
               src={aboutgalleryc}
               alt="Interior project"
@@ -138,7 +138,7 @@ export default function AboutPage() {
               sizes="(min-width: 1200px) 33vw, (min-width: 768px) 50vw, 100vw"
             />
           </motion.div>
-          <motion.div className="about-vision-gallery-item" {...aosReveal({ direction: "up", distance: 24, delay: 0.13 })}>
+          <motion.div className="about-vision-gallery-item max-md:hidden" {...aosReveal({ direction: "up", distance: 24, delay: 0.13 })}>
             <Image
               src={activityb}
               alt="Design vision"
@@ -147,7 +147,7 @@ export default function AboutPage() {
               sizes="(min-width: 1200px) 33vw, (min-width: 768px) 50vw, 100vw"
             />
           </motion.div>
-          <motion.div className="about-vision-gallery-item" {...aosReveal({ direction: "up", distance: 24, delay: 0.2 })}>
+          <motion.div className="about-vision-gallery-item max-md:hidden" {...aosReveal({ direction: "up", distance: 24, delay: 0.2 })}>
             <Image
               src={activityc}
               alt="Design vision"
