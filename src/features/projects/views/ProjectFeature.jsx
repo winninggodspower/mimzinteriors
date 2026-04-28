@@ -73,15 +73,15 @@ export default function ProjectsFeature() {
         <div className="prj-grid">
           {projectItems.map((item, index) => (
             <Link href={item.href}  key={item.title}>
-            <article className="prj-card" key={item.title}>
-              <motion.div className="prj-card-image-wrap" {...aosReveal({ direction: "up", distance: 24, delay: 0.06 + index * 0.07 })}>
+            <motion.article className="prj-card" key={item.title} {...aosReveal({ direction: "up", distance: 24, delay: 0.06 + index * 0.07 })}>
+              <div className="prj-card-image-wrap" >
                   <Image src={item.image} alt={item.alt} fill className="prj-card-image" sizes="(min-width: 1200px) 33vw, (min-width: 768px) 50vw, 100vw" />
-              </motion.div>
+              </div>
               <div className="prj-card-copy">
                 <h2>{item.title}</h2>
                 <p>{item.desc}</p>
               </div>
-            </article>
+            </motion.article>
             </Link>
           ))}
         </div>
