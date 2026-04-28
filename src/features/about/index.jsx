@@ -160,7 +160,7 @@ export default function AboutPage() {
       </motion.section>
 
       {/* ── THE FIRM SECTION ────────────────────────────── */}
-      <section className="about-firm">
+      <section className="about-firm mt-20 md:mt-28 lg:mt-32">
         <div className="about-firm-inner">
           <motion.div className="about-firm-content" {...aosReveal({ direction: "left", distance: 36 })}>
             <motion.h2 className="about-section-label" {...aosReveal({ direction: "left", distance: 28 })}>
@@ -210,13 +210,13 @@ export default function AboutPage() {
 
       {/* ── AWARDS SECTION ──────────────────────────────── */}
       <motion.section className="px-[clamp(1.5rem,6vw,7rem)] py-[clamp(4rem,8vw,7rem)]" {...sectionMotion}>
-        <div className="mx-auto grid max-w-7xl grid-cols-1 items-start gap-4 lg:mx-40 lg:grid-cols-[auto_1fr] lg:gap-10">
+        <div className="mx-auto grid max-w-7xl grid-cols-1 items-start gap-4 lg:mx-40 lg:grid-cols-[auto_1fr] lg:gap-10 ">
 
-          <div className="order-2 flex w-full flex-col items-center justify-start gap-4 lg:order-0 lg:w-auto lg:justify-center">
+          <div className="order-2 flex w-72 md:w-83 mx-auto flex-col justify-items-normal justify-center gap-4 lg:order-0 lg:w-auto">
             
             {/* two awards badges */}
-            <div className="grid w-83 grid-cols-2 gap-3 max-md:gap-0 items-start justify-center mt-10 md:mt-0">
-              <div className="group flex items-center justify-center w-fit">
+            <div className="flex items-start justify-between mt-10 md:mt-0 ">
+              <div className="group flex items-center justify-center ">
                 <Image
                   src={mimza}
                   alt="African Property Awards — Best Interior Design"
@@ -225,7 +225,7 @@ export default function AboutPage() {
                   className="about-award-primary-badge"
                 />
               </div>
-              <div className="group flex items-center justify-center w-fit">
+              <div className="group flex items-center justify-center">
                 <Image
                   src={mimzb}
                   alt="African Property Awards — Interior Design"
@@ -237,7 +237,7 @@ export default function AboutPage() {
             </div>
 
             {/* three certificate badges */}
-            <div className="flex w-83 items-center justify-center -space-x-3 max-sm:-space-x-2">
+            <div className="flex w-full items-center justify-center -space-x-3 max-sm:-space-x-2">
               <div className="group flex w-[calc((100%+1.5rem)/3)] shrink-0 items-center justify-center max-sm:w-[calc((100%+1rem)/3)]">
                 <Image
                   src={sawarda}

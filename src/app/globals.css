@@ -203,8 +203,7 @@ body {
 
 /* ── THE FIRM ────────────────────────────────────────────────── */
 .about-firm {
-  margin-top: 180px;
-  padding: clamp(4rem, 8vw, 7rem) clamp(1.5rem, 6vw, 7rem);
+  padding: 0px clamp(1.5rem, 6vw, 7rem);
 }
 
 .about-firm-inner {
