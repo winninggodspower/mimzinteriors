@@ -48,7 +48,7 @@ export default function HomeFeature() {
             width={180}
             height={180}
             priority
-            className="h-auto w-24 sm:w-28 lg:w-32"
+            className="h-auto w-16 sm:w-24 lg:w-32"
           />
         </motion.div>
         <div className="relative h-125 sm:h-150 lg:h-175 w-full overflow-hidden">
