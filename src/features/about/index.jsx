@@ -188,7 +188,7 @@ export default function AboutPage() {
       </section>
 
       {/* ── TEAM PHOTO ──────────────────────────────────── */}
-      <motion.section className="about-team mt-16 relative" {...sectionMotion}>
+      {/* <motion.section className="about-team mt-16 relative" {...sectionMotion}>
         <div className="absolute inset-x-0 top-0 z-0 translate-y-5/6 sm:translate-y-1/2" aria-hidden="true">
           <Image
             src={patterns}
@@ -206,13 +206,13 @@ export default function AboutPage() {
           />
           <div className="about-team-overlay" />
         </div>
-      </motion.section>
+      </motion.section> */}
 
       {/* ── AWARDS SECTION ──────────────────────────────── */}
       <motion.section className="px-[clamp(1.5rem,6vw,7rem)] py-[clamp(4rem,8vw,7rem)]" {...sectionMotion}>
         <div className="mx-auto grid max-w-7xl grid-cols-1 items-start gap-4 lg:mx-40 lg:grid-cols-[auto_1fr] lg:gap-10 ">
 
-          <div className="order-2 flex w-72 md:w-83 mx-auto flex-col justify-items-normal justify-center gap-4 lg:order-0 lg:w-auto">
+          <div className="order-2 flex w-60 md:w-83 mx-auto flex-col justify-items-normal justify-center gap-4 lg:order-0 lg:w-auto">
             
             {/* two awards badges */}
             <div className="flex items-start justify-between mt-10 md:mt-0 ">

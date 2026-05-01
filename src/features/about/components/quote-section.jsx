@@ -15,7 +15,7 @@ export default function QuoteSection({ text, author=null }) {
       <div className="mx-auto max-w-225 text-center">
         <div className="flex flex-col items-center">
           <motion.blockquote
-            className="m-0 border-none bg-none p-0 font-bd-megalona text-[26px] font-normal italic leading-none text-black sm:text-[32px] md:text-[40px]"
+            className="mb-3 border-none bg-none p-0 font-bd-megalona text-[26px] font-normal italic leading-none text-black sm:text-[32px] md:text-[40px]"
             {...aosReveal({ direction: "up", distance: 32 })}
           >
             <span className="mr-[0.1em] align-[-0.1em] text-[clamp(2rem,5vw,3.5rem)] font-normal leading-0 text-black">
@@ -25,16 +25,16 @@ export default function QuoteSection({ text, author=null }) {
             <span className="ml-[0.1em] align-[-0.1em] text-[clamp(2rem,5vw,3.5rem)] font-normal leading-0 text-black">
               "
             </span>
-          </motion.blockquote>
-
           {author ? (
             <motion.p
-              className="mt-7 font-aref-ruqaa text-lg md:text-2xl"
+              className="mt-1 font-aref-ruqaa text-lg md:text-2xl"
               {...aosReveal({ direction: "up", distance: 20, delay: 0.15 })}
             >
               - {author}
             </motion.p>
           ) : null}
+          </motion.blockquote>
+
 
           <motion.div
             className="flex justify-center -mt-6"

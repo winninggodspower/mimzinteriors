@@ -6,7 +6,6 @@ import servicehero from "@assets/images/service/servicehero.png";
 import dprocessa from "@assets/images/service/dprocessa.png";
 import dprocessb from "@assets/images/service/dprocessb.png";
 import dprocessc from "@assets/images/service/dprocessc.png";
-import seperator from "@assets/images/seperator.png";
 import patterns from "@assets/images/patterns.svg";
 import {
   aosReveal,
@@ -48,7 +47,7 @@ export default function Service() {
       <p className="svc-hero-caption">All images belongs to Mimz Interiors</p>
 
       <motion.section className="svc-headline mt-12 mb-16 md:mb-20 md:mt-14 " {...sectionMotion}>
-        <div className="max-w-275 mx-auto text-center">
+        <div className="px-5 max-w-275 mx-auto text-center">
           <motion.h1
             className="svc-headline-title"
             {...aosReveal({ direction: "up", distance: 34 })}
@@ -128,7 +127,7 @@ export default function Service() {
           </motion.div>
 
           <motion.div
-            className="svc-gallery-item"
+            className="svc-gallery-item max-sm:hidden"
             {...aosReveal({ direction: "up", distance: 24, delay: 0.12 })}
           >
             <Image
@@ -140,7 +139,7 @@ export default function Service() {
             <div className="svc-gallery-overlay" />
           </motion.div>
           <motion.div
-            className="svc-gallery-item"
+            className="svc-gallery-item max-sm:hidden"
             {...aosReveal({ direction: "up", distance: 24, delay: 0.19 })}
           >
             <Image
@@ -152,11 +151,11 @@ export default function Service() {
             <div className="svc-gallery-overlay" />
           </motion.div>
         </div>
-        <div className="relative w-full h-full">
+        <div className="relative w-full min-h-14">
           <Image
             src={patterns}
             alt=""
-            className="absolute object-cover w-full inset-x-0 -translate-y-1/2 z-0"
+            className="absolute object-cover w-full max-sm:h-[-webkit-fill-available] inset-x-0 inset-y-0 -translate-y-1/2 z-0"
             sizes="100vw"
           />
         </div>
