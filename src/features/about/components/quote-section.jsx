@@ -4,12 +4,12 @@ import Image from "next/image";
 import { motion } from "motion/react";
 import { aosReveal, sectionReveal } from "@features/lib/motion";
 
-export default function QuoteSection({ text, author=null }) {
+export default function QuoteSection({ text, author=null, showIcon=true, className="" }) {
   const sectionMotion = sectionReveal({ y: 28 });
 
   return (
     <motion.section
-      className="py-[clamp(3rem,6vw,5rem)] px-[clamp(1.5rem,8vw,10rem)]"
+      className={`py-[clamp(3rem,6vw,5rem)] px-[clamp(1.5rem,8vw,10rem)] ${className}`}
       {...sectionMotion}
     >
       <div className="mx-auto max-w-225 text-center">
@@ -35,19 +35,20 @@ export default function QuoteSection({ text, author=null }) {
           ) : null}
           </motion.blockquote>
 
-
-          <motion.div
-            className="flex justify-center -mt-6"
-            {...aosReveal({ direction: "up", distance: 20, delay: 0.25 })}
-          >
-            <Image
-              src="/mimz-mascut-seperator.png"
-              alt="separator image"
-              height={178}
-              width={273}
-              className="h-auto w-44 sm:w-56 md:w-68.25"
-            />
-          </motion.div>
+          {showIcon && (
+            <motion.div
+              className="flex justify-center -mt-6"
+              {...aosReveal({ direction: "up", distance: 20, delay: 0.25 })}
+            >
+              <Image
+                src="/mimz-mascut-seperator.png"
+                alt="separator image"
+                height={178}
+                width={273}
+                className="h-auto w-44 sm:w-56 md:w-68.25"
+              />
+            </motion.div>
+          )}
         </div>
       </div>
     </motion.section>
