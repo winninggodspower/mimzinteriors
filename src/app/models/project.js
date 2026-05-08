@@ -8,13 +8,20 @@ const projectSchema = new mongoose.Schema(
     imagePublicId: { type: String, required: true },
     isPublished: { type: Boolean, default: false },
     publishedAt: { type: Date, default: null },
+    isFeatured: { type: Boolean, default: false },
+    featuredAt: { type: Date, default: null },
   },
   { timestamps: true },
 )
 
 projectSchema.index({ createdAt: -1 })
 projectSchema.index({ isPublished: 1, createdAt: -1 })
+projectSchema.index({ isPublished: 1, isFeatured: 1, featuredAt: -1, createdAt: -1 })
 
-const Project = mongoose.models.Project || mongoose.model("Project", projectSchema)
+if (mongoose.models.Project) {
+  delete mongoose.models.Project
+}
+
+const Project = mongoose.model("Project", projectSchema)
 
 export default Project

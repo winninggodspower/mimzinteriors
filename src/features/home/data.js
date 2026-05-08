@@ -1,7 +1,3 @@
-import projectA from "@assets/images/projects/projectsCatalogue/projecta.png";
-import projectB from "@assets/images/projects/projectsCatalogue/projectb.png";
-import projectC from "@assets/images/projects/projectsCatalogue/projectc.png";
-
 export const heroCards = [
   {
     title: "Homes",
@@ -42,27 +38,6 @@ export const heroCards = [
       "Healthcare spaces for clinics, pharmacies, dental offices, and wellness centers.",
     mobileDescription: "Clinics, dental, wellness.",
     tone: "light",
-  },
-];
-
-export const featuredProjects = [
-  {
-    title: "Project Pinnock",
-    date: "May 2026",
-    image: projectA,
-    href: "/projects/project_catalogue",
-  },
-  {
-    title: "Project Pinnock",
-    date: "May 2026",
-    image: projectB,
-    href: "/projects/project_catalogue",
-  },
-  {
-    title: "Project Pinnock",
-    date: "May 2026",
-    image: projectC,
-    href: "/projects/project_catalogue",
   },
 ];
 

@@ -37,6 +37,8 @@ export async function getAdminProjects() {
     mediaCount: mediaCountByProjectId.get(String(project._id)) || 0,
     isPublished: Boolean(project.isPublished),
     publishedAt: project.publishedAt ? new Date(project.publishedAt).toISOString() : null,
+    isFeatured: Boolean(project.isFeatured),
+    featuredAt: project.featuredAt ? new Date(project.featuredAt).toISOString() : null,
     createdAt: project.createdAt ? new Date(project.createdAt).toISOString() : null,
   }))
 }
@@ -64,6 +66,8 @@ export async function createProjectAction(formData) {
     imagePublicId: uploaded.public_id,
     isPublished: false,
     publishedAt: null,
+    isFeatured: false,
+    featuredAt: null,
   })
 
   revalidatePath("/admin/project")
@@ -236,10 +240,66 @@ export async function unpublishProjectAction(formData) {
   await Project.findByIdAndUpdate(projectId, {
     isPublished: false,
     publishedAt: null,
+    isFeatured: false,
+    featuredAt: null,
   })
 
   revalidatePath("/admin/project")
   revalidatePath("/projects/project_catalogue")
+  revalidatePath("/")
+}
+
+export async function featureProjectAction(formData) {
+  const projectId = String(formData.get("projectId") || "").trim()
+
+  if (!projectId) {
+    throw new Error("Project id is required")
+  }
+
+  await dbConnect()
+
+  const updatedProject = await Project.findOneAndUpdate(
+    { _id: projectId, isPublished: true },
+    {
+      isFeatured: true,
+      featuredAt: new Date(),
+    },
+    { new: true },
+  ).lean()
+
+  if (!updatedProject) {
+    throw new Error("Unable to feature project. Ensure it is published first.")
+  }
+
+  revalidatePath("/admin/project")
+  revalidatePath("/projects/project_catalogue")
+  revalidatePath("/")
+}
+
+export async function unfeatureProjectAction(formData) {
+  const projectId = String(formData.get("projectId") || "").trim()
+
+  if (!projectId) {
+    throw new Error("Project id is required")
+  }
+
+  await dbConnect()
+  const updatedProject = await Project.findByIdAndUpdate(
+    projectId,
+    {
+    isFeatured: false,
+    featuredAt: null,
+    },
+    { new: true },
+  ).lean()
+
+  if (!updatedProject) {
+    throw new Error("Project not found")
+  }
+
+  revalidatePath("/admin/project")
+  revalidatePath("/projects/project_catalogue")
+  revalidatePath("/")
 }
 
 export async function deleteProjectAction(formData) {

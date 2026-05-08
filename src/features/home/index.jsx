@@ -1,16 +1,15 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { motion } from "motion/react";
 import quoteImage from "@assets/images/home/quoteimage.png";
 import patterns from "@assets/images/patterns.svg";
 import QuoteSection from "@features/about/components/quote-section";
 import AccessoriesSection from "@features/home/components/accessories-section";
-import FeaturedProjectCard from "@features/home/components/featured-project-card";
+import FeaturedProjectsSection from "@features/home/components/featured-projects-section";
 import HeroCardsStrip from "@features/home/components/hero-cards-strip";
 import TestimonialsSection from "@features/home/components/testimonials-section";
-import { accessoriesSection, featuredProjects, testimonials } from "@features/home/data";
+import { accessoriesSection, testimonials } from "@features/home/data";
 
 const revealMotion = (delay = 0) => ({
   initial: { opacity: 0, y: 36 },
@@ -26,6 +25,15 @@ const introCopyVariants = {
       staggerChildren: 0.16,
       delayChildren: 0.08,
     },
+  },
+};
+
+const introParagraphVariants = {
+  hidden: { opacity: 0, y: 14 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] },
   },
 };
 
@@ -115,35 +123,7 @@ export default function HomeFeature() {
         className="py-[clamp(4rem,6vw,7rem)]"
       />
 
-      <motion.section
-        className="bg-white px-6 pb-20 sm:px-8 lg:px-10"
-        {...revealMotion(0.12)}
-      >
-        <div className="mx-auto max-w-[1400px]">
-          <h2 className="font-caterina text-[1.9rem] leading-none uppercase text-[#161616] sm:text-[2.2rem]">
-            Featured Projects
-          </h2>
-
-          <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-            {featuredProjects.map((project) => (
-              <FeaturedProjectCard
-                key={`${project.title}-${project.image.src}`}
-                title={project.title}
-                date={project.date}
-                image={project.image}
-                href={project.href}
-              />
-            ))}
-          </div>
-
-          <Link
-            href="/projects/project_catalogue"
-            className="mt-8 inline-flex min-w-28 items-center justify-center rounded-[8px] bg-[#cb912d] px-6 py-3 font-aref-ruqaa text-[1rem] leading-none uppercase text-white transition-colors duration-200 hover:bg-[#b88024]"
-          >
-            View More
-          </Link>
-        </div>
-      </motion.section>
+      <FeaturedProjectsSection />
 
       <AccessoriesSection
         title={accessoriesSection.title}

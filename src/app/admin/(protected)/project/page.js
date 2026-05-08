@@ -1,8 +1,10 @@
 import {
   createProjectFormAction,
   deleteProjectAction,
+  featureProjectAction,
   getAdminProjects,
   publishProjectAction,
+  unfeatureProjectAction,
   unpublishProjectAction,
 } from "./actions"
 import CatalogDeleteButton from "@features/admin/catalogue/components/catalog-delete-button"
@@ -47,6 +49,9 @@ export default async function AdminProjectPage() {
                   <p className="mt-2 text-xs font-medium uppercase tracking-wide text-slate-500">
                     {project.isPublished ? "Published" : "Unpublished"}
                   </p>
+                  <p className="mt-1 text-xs font-medium uppercase tracking-wide text-[#7A5B1B]">
+                    {project.isFeatured ? "Featured on home" : "Not featured"}
+                  </p>
                 </div>
 
                 <div className="flex flex-col items-start gap-2 md:items-end">
@@ -70,6 +75,22 @@ export default async function AdminProjectPage() {
                       {project.isPublished ? "Unpublish" : "Publish"}
                     </button>
                   </form>
+                  
+                  {project.isPublished && (
+                    <form action={project.isFeatured ? unfeatureProjectAction : featureProjectAction}>
+                      <input type="hidden" name="projectId" value={project.id} />
+                      <button
+                        type="submit"
+                        className={`rounded-lg px-4 py-2 text-sm font-medium ${
+                          project.isFeatured
+                            ? "bg-amber-100 text-amber-900 hover:bg-amber-200"
+                            : "bg-amber-600 text-white hover:bg-amber-700"
+                        }`}
+                      >
+                        {project.isFeatured ? "Remove Feature" : "Feature"}
+                      </button>
+                    </form>
+                  )}
 
                   <CatalogDeleteButton
                     action={deleteProjectAction}
