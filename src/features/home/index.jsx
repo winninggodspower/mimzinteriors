@@ -12,11 +12,28 @@ import TestimonialsSection from "@features/home/components/testimonials-section"
 import { accessoriesSection, testimonials } from "@features/home/data";
 
 const revealMotion = (delay = 0) => ({
-  initial: { opacity: 0, y: 36 },
-  whileInView: { opacity: 1, y: 0 },
+  initial: { opacity: 0, y: 44, scale: 0.985 },
+  whileInView: { opacity: 1, y: 0, scale: 1 },
   viewport: { once: true, amount: 0.2 },
-  transition: { duration: 0.95, delay, ease: [0.22, 1, 0.36, 1] },
+  transition: { duration: 1.05, delay, ease: [0.16, 1, 0.3, 1] },
 });
+
+const introSectionVariants = {
+  hidden: {
+    opacity: 0,
+    y: 36,
+    clipPath: "inset(0 0 22% 0)",
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    clipPath: "inset(0 0 0% 0)",
+    transition: {
+      duration: 0.95,
+      ease: [0.16, 1, 0.3, 1],
+    },
+  },
+};
 
 const introCopyVariants = {
   hidden: {},
@@ -29,11 +46,13 @@ const introCopyVariants = {
 };
 
 const introParagraphVariants = {
-  hidden: { opacity: 0, y: 14 },
+  hidden: { opacity: 0, y: 18, x: -10, filter: "blur(5px)" },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] },
+    x: 0,
+    filter: "blur(0px)",
+    transition: { duration: 0.72, ease: [0.16, 1, 0.3, 1] },
   },
 };
 
@@ -43,21 +62,31 @@ export default function HomeFeature() {
       <section className="relative w-full overflow-visible bg-white pb-16 ">
         <motion.div
           className="pointer-events-none absolute left-3 top-0 z-20 sm:left-6"
-          initial={{ opacity: 0, y: -26 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.85, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+          initial={{ opacity: 0, y: -36, rotate: -5, scale: 0.9 }}
+          animate={{ opacity: 1, y: 0, rotate: 0, scale: 1 }}
+          transition={{ duration: 0.9, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
         >
-          <Image
-            src="/BEST-01.png"
-            alt=""
-            width={180}
-            height={180}
-            priority
-            className="h-auto w-16 sm:w-24 lg:w-32"
-          />
+          <motion.div
+            animate={{ y: [0, -6, 0], rotate: [0, -1.5, 0] }}
+            transition={{ duration: 4.8, repeat: Infinity, ease: "easeInOut" }}
+          >
+            <Image
+              src="/BEST-01.png"
+              alt=""
+              width={180}
+              height={180}
+              priority
+              className="h-auto w-16 sm:w-24 lg:w-32"
+            />
+          </motion.div>
         </motion.div>
         <div className="relative h-125 sm:h-150 lg:h-175 w-full overflow-visible">
-          <div className="absolute inset-0 overflow-hidden">
+          <motion.div
+            className="absolute inset-0 overflow-hidden"
+            initial={{ scale: 1.08, opacity: 0.7 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 1.35, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+          >
             {/* Poster image (fallback / loading) */}
             <video
               autoPlay
@@ -76,14 +105,32 @@ export default function HomeFeature() {
               <source src="/videos/hero.webm" type="video/webm" />
               <source src="/videos/hero.mp4" type="video/mp4" />
             </video>
-          </div>
+            <motion.div
+              className="absolute inset-0 bg-linear-to-t from-black/18 via-black/0 to-black/22"
+              initial={{ opacity: 0.55 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+            />
+          </motion.div>
 
           <HeroCardsStrip />
         </div>
       </section>
 
-      <motion.section className="home-intro mt-6" {...revealMotion(0.05)}>
-        <motion.p className="home-img-credit max-[480px]:text-[0.7rem]!" initial={{ opacity: 0, y: 14 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.25 }} transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}>
+      <motion.section
+        className="home-intro mt-6"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.25 }}
+        variants={introSectionVariants}
+      >
+        <motion.p
+          className="home-img-credit max-[480px]:text-[0.7rem]!"
+          initial={{ opacity: 0, y: 14, letterSpacing: "0.18em" }}
+          whileInView={{ opacity: 1, y: 0, letterSpacing: "0.08em" }}
+          viewport={{ once: true, amount: 0.25 }}
+          transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
+        >
           -All Images belongs to Mimz interiors-
         </motion.p>
         <motion.div className="home-intro-copy" variants={introCopyVariants} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }}>
@@ -100,20 +147,42 @@ export default function HomeFeature() {
       </motion.section>
 
       <motion.section className="w-full bg-white relative" {...revealMotion(0.1)}>
-        <Image 
-          src={patterns} alt="" 
-          className="object-cover h-full w-full  inset-x-0 top-0 z-0 translate-y-1/2" 
-          sizes="100vw" 
-        />
-        <div className="group relative h-125 w-full overflow-hidden">
+        <motion.div
+          initial={{ opacity: 0, y: 30, rotate: -2 }}
+          whileInView={{ opacity: 1, y: 0, rotate: 0 }}
+          viewport={{ once: true, amount: 0.22 }}
+          transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
+        >
           <Image
-            src={quoteImage}
-            alt="Founder standing in a designed interior"
-            fill
-            className="object-cover object-center transition-transform duration-900 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]"
+            src={patterns}
+            alt=""
+            className="object-cover h-full w-full inset-x-0 top-0 z-0 translate-y-1/2"
             sizes="100vw"
           />
-        </div>
+        </motion.div>
+        <motion.div
+          className="group relative h-125 w-full overflow-hidden"
+          initial={{ opacity: 0, scale: 1.05, y: 20 }}
+          whileInView={{ opacity: 1, scale: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.28 }}
+          transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <motion.div
+            className="absolute inset-0"
+            initial={{ scale: 1.08 }}
+            whileInView={{ scale: 1 }}
+            viewport={{ once: true, amount: 0.25 }}
+            transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <Image
+              src={quoteImage}
+              alt="Founder standing in a designed interior"
+              fill
+              className="object-cover object-center transition-transform duration-900 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]"
+              sizes="100vw"
+            />
+          </motion.div>
+        </motion.div>
       </motion.section>
 
       <QuoteSection

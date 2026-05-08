@@ -8,10 +8,24 @@ import FeaturedProjectCard from "@features/home/components/featured-project-card
 const SECTION_LIMIT = 3;
 
 const revealMotion = {
-  initial: { opacity: 0, y: 36 },
-  whileInView: { opacity: 1, y: 0 },
+  initial: { opacity: 0, y: 48, scale: 0.98 },
+  whileInView: { opacity: 1, y: 0, scale: 1 },
   viewport: { once: true, amount: 0.2 },
-  transition: { duration: 0.95, delay: 0.12, ease: [0.22, 1, 0.36, 1] },
+  transition: { duration: 1.08, delay: 0.08, ease: [0.16, 1, 0.3, 1] },
+};
+
+const projectCardVariants = {
+  hidden: { opacity: 0, y: 32, rotate: -1.2 },
+  visible: (index) => ({
+    opacity: 1,
+    y: 0,
+    rotate: 0,
+    transition: {
+      duration: 0.85,
+      delay: index * 0.12,
+      ease: [0.16, 1, 0.3, 1],
+    },
+  }),
 };
 
 function formatProjectDate(project) {
@@ -99,32 +113,59 @@ export default function FeaturedProjectsSection() {
         <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
           {status === "loading" &&
             Array.from({ length: SECTION_LIMIT }).map((_, index) => (
-              <FeaturedProjectCardSkeleton key={`featured-project-skeleton-${index}`} />
+              <motion.div
+                key={`featured-project-skeleton-${index}`}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: index * 0.08, duration: 0.6 }}
+              >
+                <FeaturedProjectCardSkeleton />
+              </motion.div>
             ))}
 
           {status === "success" &&
             hasProjects &&
-            projects.map((project) => (
-              <FeaturedProjectCard
+            projects.map((project, index) => (
+              <motion.div
                 key={project.id}
-                title={project.title}
-                date={formatProjectDate(project)}
-                image={project.profileImage}
-                href={`/projects/project_catalogue/${project.id}`}
-              />
+                custom={index}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.3 }}
+                variants={projectCardVariants}
+              >
+                <FeaturedProjectCard
+                  title={project.title}
+                  date={formatProjectDate(project)}
+                  image={project.profileImage}
+                  href={`/projects/project_catalogue/${project.id}`}
+                />
+              </motion.div>
             ))}
         </div>
 
         {status === "error" && (
-          <p className="mt-5 font-aref-ruqaa text-[1rem] text-slate-600">
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="mt-5 font-aref-ruqaa text-[1rem] text-slate-600"
+          >
             Featured projects are not available right now.
-          </p>
+          </motion.p>
         )}
 
         {status === "success" && !hasProjects && (
-          <p className="mt-5 font-aref-ruqaa text-[1rem] text-slate-600">
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="mt-5 font-aref-ruqaa text-[1rem] text-slate-600"
+          >
             No featured projects yet.
-          </p>
+          </motion.p>
         )}
 
         <Link
