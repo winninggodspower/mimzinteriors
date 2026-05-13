@@ -26,7 +26,7 @@ function renderHeroCard(card, { interactive = false, mobile = false } = {}) {
           : "bg-white text-black"
       } ${
         mobile
-          ? "h-36 w-40 shrink-0 px-4 py-3.5"
+          ? "h-30 w-34 shrink-0 px-3 py-2.5"
           : "min-h-35.25 w-56.75 flex-[1_1_0%] cursor-pointer px-4 py-[1.15rem]"
       }`}
       variants={interactive ? introParagraphVariants : undefined}
@@ -38,18 +38,18 @@ function renderHeroCard(card, { interactive = false, mobile = false } = {}) {
     >
       <div className="relative flex h-full w-full items-center justify-center">
         <div
-          className={`flex flex-col items-center justify-center font-aref-ruqaa transition-transform duration-300 ease-out ${mobile ? "max-w-34" : "max-w-51"} ${interactive ? "group-hover:scale-[0.846154]" : ""}`}
+          className={`flex flex-col items-center justify-center font-aref-ruqaa transition-transform duration-300 ease-out ${mobile ? "max-w-28" : "max-w-51"} ${interactive ? "group-hover:scale-[0.846154]" : ""}`}
         >
           <Icon
             icon={card.icon}
-            className={`${mobile ? "h-10 w-10" : "h-8 w-8"} ${card.tone === "gold" ? "text-white" : "text-mimz-gold"}`}
+            className={`${mobile ? "h-8 w-8" : "h-8 w-8"} ${card.tone === "gold" ? "text-white" : "text-mimz-gold"}`}
             aria-hidden="true"
           />
-          <span className={`${mobile ? "mt-1.5 text-[1.02rem]" : "mt-1 text-base"} leading-none uppercase tracking-[0.04em]`}>
+          <span className={`${mobile ? "mt-1 text-[0.9rem]" : "mt-1 text-base"} leading-none uppercase tracking-[0.04em]`}>
             {card.title}
           </span>
           {mobile ? (
-            <p className="mt-0 text-[0.84rem] leading-[1.35] opacity-85">
+            <p className="mt-0 text-[0.74rem] leading-[1.3] opacity-85">
               {card.mobileDescription}
             </p>
           ) : (
@@ -93,8 +93,6 @@ export default function HeroCardsStrip() {
           >
             {heroCards.map((card) => renderHeroCard(card, { mobile: true }))}
           </Marquee>
-          <div className="pointer-events-none absolute inset-y-0 left-0 w-12 bg-linear-to-r from-white to-transparent"></div>
-          <div className="pointer-events-none absolute inset-y-0 right-0 w-12 bg-linear-to-l from-white to-transparent"></div>
         </div>
       </div>
     </>

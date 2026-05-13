@@ -5,7 +5,7 @@ import TestimonialCard from "@features/home/components/testimonial-card";
 
 export default function TestimonialsSection({ testimonials }) {
   return (
-    <section className="bg-white pb-36 pt-10">
+    <section className="bg-white pb-36 md:pt-10">
       <div className="mx-auto w-full">
         <h2 className="font-caterina text-center text-[1.9rem] leading-none uppercase text-[#161616] sm:text-[2.2rem] px-2">
             Client Reviews

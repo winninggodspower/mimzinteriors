@@ -44,7 +44,7 @@ const paragraphVariants = {
 export default function AccessoriesSection({ title, paragraphs, imageSrc, imageAlt, href }) {
   return (
     <motion.section
-      className="bg-white px-6 pb-24 pt-12 sm:px-8 lg:px-10"
+      className="bg-white px-6 pb-24 md:pt-12 sm:px-8 lg:px-10"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.22 }}
@@ -87,7 +87,7 @@ export default function AccessoriesSection({ title, paragraphs, imageSrc, imageA
               alt={imageAlt}
               width={760}
               height={620}
-              className="h-auto w-full object-cover"
+              className="h-auto w-full object-cover max-sm:min-w-[85vw]"
               sizes="(min-width: 1280px) 34vw, (min-width: 1024px) 40vw, 100vw"
             />
           </div>

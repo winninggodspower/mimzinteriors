@@ -105,12 +105,7 @@ export default function HomeFeature() {
               <source src="/videos/hero.webm" type="video/webm" />
               <source src="/videos/hero.mp4" type="video/mp4" />
             </video>
-            <motion.div
-              className="absolute inset-0 bg-linear-to-t from-black/18 via-black/0 to-black/22"
-              initial={{ opacity: 0.55 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-            />
+            <div className="absolute inset-0 bg-black/5" />
           </motion.div>
 
           <HeroCardsStrip />
