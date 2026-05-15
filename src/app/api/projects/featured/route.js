@@ -26,7 +26,7 @@ const DUMMY_FEATURED_PROJECTS = [
   },
   {
     id: "dummy-featured-3",
-    title: "Minimal Apartment Concept",
+    title: "Minimal Apartment",
     profileImage: "/project-catalogue/projectc.png",
     featuredAt: "2025-11-01T00:00:00.000Z",
     publishedAt: "2025-11-01T00:00:00.000Z",

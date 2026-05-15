@@ -113,7 +113,7 @@ export default function HomeFeature() {
       </section>
 
       <motion.section
-        className="home-intro mt-6"
+        className="home-intro"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.25 }}
@@ -140,7 +140,10 @@ export default function HomeFeature() {
           </motion.p>
         </motion.div>
       </motion.section>
+      
+      <FeaturedProjectsSection />
 
+      {/* 
       <motion.section className="w-full bg-white relative" {...revealMotion(0.1)}>
         <motion.div
           initial={{ opacity: 0, y: 30, rotate: -2 }}
@@ -178,24 +181,38 @@ export default function HomeFeature() {
             />
           </motion.div>
         </motion.div>
+      </motion.section> 
+      */}
+
+      <motion.section className="w-full bg-white " {...revealMotion(0.1)}>
+          <motion.div
+            className="w-full max-h-[80vh] relative"
+            initial={{ scale: 1.08 }}
+            whileInView={{ scale: 1 }}
+            viewport={{ once: true, amount: 0.25 }}
+            transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <img
+              src={'/hero-quote-img.jpg'}
+              alt="Founder standing in a designed interior"
+              className="max-h-[85vh] w-full object-cover object-center transition-transform duration-900 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]"
+            />
+          </motion.div>
       </motion.section>
 
       <QuoteSection
-        text="Interior design is my canvas, where every detail is styled to reflect my client's dreams and personality."
-        author="Miracle Godsent Nwachukwu"
-        showIcon={false}
-        className="py-[clamp(4rem,6vw,7rem)]"
+        text="Designing homes, that last a lifetime."
+        className="mt-[clamp(7rem,6vw,8rem)] mb-[clamp(3.5rem,6vw,4.5rem)]"
+        textClassName="md:text-[60px]"
       />
 
-      <FeaturedProjectsSection />
-
-      <AccessoriesSection
+      {/* <AccessoriesSection
         title={accessoriesSection.title}
         paragraphs={accessoriesSection.paragraphs}
         imageSrc={accessoriesSection.imageSrc}
         imageAlt={accessoriesSection.imageAlt}
         href={accessoriesSection.href}
-      />
+      /> */}
 
       <TestimonialsSection testimonials={testimonials} />
     </main>

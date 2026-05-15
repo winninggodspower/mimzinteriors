@@ -104,13 +104,13 @@ export default function FeaturedProjectsSection() {
   const hasProjects = useMemo(() => projects.length > 0, [projects]);
 
   return (
-    <motion.section className="bg-white px-6 pb-20 sm:px-8 lg:px-10" {...revealMotion}>
+    <motion.section className="bg-white px-6 sm:px-8 lg:px-10 mb-20 md:mb-40" {...revealMotion}>
       <div className="mx-auto max-w-350">
-        <h2 className="font-caterina text-[1.9rem] leading-none uppercase text-[#161616] sm:text-[2.2rem]">
-          Featured Projects
+        <h2 className="font-caterina text-[1.9rem] leading-none text-center uppercase text-[#161616] sm:text-[2.2rem]">
+          OUR PROJECTS
         </h2>
 
-        <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+        <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
           {status === "loading" &&
             Array.from({ length: SECTION_LIMIT }).map((_, index) => (
               <motion.div

@@ -10,7 +10,6 @@ import aboutgalleryb from "@assets/images/about/aboutgalleryb.png";
 import aboutgalleryc from "@assets/images/about/aboutgalleryc.png";
 import ivision from "@assets/images/icons/ivision.svg";
 import imission from "@assets/images/icons/imision.svg";
-import patterns from "@assets/images/patterns.svg";
 
 import activitya from "@assets/images/about/activity-1.jpg";
 import activityb from "@assets/images/about/activity-2.jpg";
@@ -22,7 +21,6 @@ import mimzb from "@assets/images/mimzb.png";
 import sawarda from "@assets/images/sawarda.png";
 import sawardb from "@assets/images/sawardb.png";
 import sawardc from "@assets/images/sawardc.png";
-import aboutteam from "@assets/images/about/about-team.jpg";
 import { aboutContent } from "./data";
 import QuoteSection from "./components/quote-section";
 
