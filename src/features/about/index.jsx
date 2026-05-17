@@ -31,7 +31,7 @@ export default function AboutPage() {
     <main className="about-main">
 
       {/* ── ROOTS SECTION ───────────────────────────────── */}
-      <motion.section className="about-roots" {...sectionMotion}>
+      <motion.section className="about-roots pb-0!" {...sectionMotion}>
         <div className="about-roots-inner">
           <div className="about-roots-image">
             <div className="about-roots-img-wrap">
@@ -57,163 +57,41 @@ export default function AboutPage() {
           </div>
         </div>
       </motion.section>
-
-      {/* ── QUOTE SECTION ───────────────────────────────── */}
-      <QuoteSection
-        text={aboutContent.quoteSection.text}
-        author={aboutContent.quoteSection.author}
-      />
-
-      {/* ── GALLERY ROW ─────────────────────────────────── */}
-      {/* will make this a carousel later, for now just a grid of images */}
-      <motion.section className="about-gallery-row" {...sectionMotion}>
-        <div className="about-gallery-grid">
-          <motion.div className="about-gallery-item" {...aosReveal({ direction: "up", distance: 26, delay: 0.04 })}>
-            <Image
-              src={aboutgallerya}
-              alt="Interior project"
-              fill
-              className="about-img"
-              sizes="(min-width: 1200px) 25vw, (min-width: 768px) 50vw, 100vw"
-            />
-          </motion.div>
-          <motion.div className="about-gallery-item max-md:hidden" {...aosReveal({ direction: "up", distance: 26, delay: 0.1 })}>
-            <Image
-              src={aboutgalleryb}
-              alt="Interior project"
-              fill
-              className="about-img"
-              sizes="(min-width: 1200px) 25vw, (min-width: 768px) 50vw, 100vw"
-            />
-          </motion.div>
-          <motion.div className="about-gallery-item max-md:hidden" {...aosReveal({ direction: "up", distance: 26, delay: 0.16 })}>
-            <Image
-              src={aboutgalleryc}
-              alt="Interior project"
-              fill
-              className="about-img"
-              sizes="(min-width: 1200px) 25vw, (min-width: 768px) 50vw, 100vw"
-            />
-          </motion.div>
-        </div>
-      </motion.section>
-
-      {/* ── VISION SECTION ──────────────────────────────── */}
-      <motion.section className="px-6 my-20 md:mt-36 md:mb-32 sm:px-12 lg:px-[clamp(1.5rem,6vw,7rem)]" {...sectionMotion}>
-        <div className="mx-auto grid max-w-7xl grid-cols-1 items-start gap-[clamp(2rem,5vw,5rem)] md:grid-cols-2">
-          <motion.div className="about-vision-card" {...aosReveal({ direction: "up", distance: 30, delay: 0.1 })}>
-            <div className="about-vision-head">
-              <Image src={ivision} alt="vision icon" className="about-vision-icon" />
-              <h3 className="about-vision-label">{aboutContent.vision.items[0].title}</h3>
-            </div>
-            <p className="about-vision-text">
-              {aboutContent.vision.items[0].text}
-            </p>
+      
+      
+      {/* ── MISSION & VISION — revamped layout ───────────────────────── */}
+      <motion.section className="max-sm:px-6 mt-20 md:mt-44 " {...sectionMotion}>
+        <div className="mx-auto grid grid-cols-1 h-[290px] items-stretch gap-5 md:grid-cols-2">
+          <motion.div className="bg-[#CEAD8B]/30 p-8 h-full md:p-12" {...aosReveal({ direction: "up", distance: 30, delay: 0.1 })}>
+           <div className="max-w-[500px] mx-auto flex flex-col items-center justify-center text-center h-full">
+              <div className="about-vision-head mb-1">
+                <Image src={ivision} alt="vision icon" width={24} />
+                <h3 className="about-vision-label">{aboutContent.vision.items[0].title}</h3>
+              </div>
+              <p className="about-vision-text">{aboutContent.vision.items[0].text}</p>
+           </div>
           </motion.div>
 
-          <motion.div className="about-vision-card" {...aosReveal({ direction: "up", distance: 30, delay: 0.25 })}>
-            <div className="about-vision-head">
-              <Image src={imission} alt="mission icon" className="about-vision-icon" />
+          <motion.div className="bg-[#CEAD8B]/30 flex flex-col items-center justify-center text-center p-8 h-full md:p-12" {...aosReveal({ direction: "up", distance: 30, delay: 0.25 })}>
+           <div className="max-w-[500px] mx-auto flex flex-col items-center justify-center text-center h-full">
+            <div className="about-vision-head mb-1">
+              <Image src={imission} alt="mission icon" width={24} />
               <h3 className="about-vision-label">{aboutContent.vision.items[1].title}</h3>
             </div>
-            <p className="about-vision-text">
-              {aboutContent.vision.items[1].text}
-            </p>
-          </motion.div>
-        </div>
-      </motion.section>
-
-      {/* ── VISION GALLERY ──────────────────────────────── */}
-      {/* convert to a carousel later */}
-      <motion.section className="about-vision-gallery" {...sectionMotion}>
-        <div className="grid grid-cols-3 gap-[clamp(3px,0.35vw,6px)] max-md:grid-cols-1">
-          <motion.div className="about-vision-gallery-item" {...aosReveal({ direction: "up", distance: 24, delay: 0.06 })}>
-            <Image
-              src={activitya}
-              alt="Design vision"
-              fill
-              className="about-img"
-              sizes="(min-width: 1200px) 33vw, (min-width: 768px) 50vw, 100vw"
-            />
-          </motion.div>
-          <motion.div className="about-vision-gallery-item max-md:hidden" {...aosReveal({ direction: "up", distance: 24, delay: 0.13 })}>
-            <Image
-              src={activityb}
-              alt="Design vision"
-              fill
-              className="about-img"
-              sizes="(min-width: 1200px) 33vw, (min-width: 768px) 50vw, 100vw"
-            />
-          </motion.div>
-          <motion.div className="about-vision-gallery-item max-md:hidden" {...aosReveal({ direction: "up", distance: 24, delay: 0.2 })}>
-            <Image
-              src={activityc}
-              alt="Design vision"
-              fill
-              className="about-img"
-              sizes="(min-width: 1200px) 33vw, (min-width: 768px) 50vw, 100vw"
-            />
-          </motion.div>
-        </div>
-      </motion.section>
-
-      {/* ── THE FIRM SECTION ────────────────────────────── */}
-      <section className="about-firm mt-20 md:mt-28 lg:mt-32">
-        <div className="about-firm-inner">
-          <motion.div className="about-firm-content" {...aosReveal({ direction: "left", distance: 36 })}>
-            <motion.h2 className="about-section-label" {...aosReveal({ direction: "left", distance: 28 })}>
-              {aboutContent.firm.title}
-            </motion.h2>
-            <motion.div {...aosReveal({ direction: "right", distance: 30, delay: 0.06 })}>
-              {aboutContent.firm.paragraphs.map((paragraph) => (
-                <p key={paragraph} className="about-body-paragraph last:mb-0">{paragraph}</p>
-              ))}
-            </motion.div>
-          </motion.div>
-
-          <div className="about-firm-image">
-            <div className="about-firm-img-wrap">
-              <Image
-                src={thefirm}
-                alt="Mimz Interiors showroom"
-                fill
-                className="about-img"
-                sizes="(min-width: 1200px) 34vw, (min-width: 768px) 45vw, 100vw"
-              />
-            </div>
+            <p className="about-vision-text">{aboutContent.vision.items[1].text}</p>
           </div>
+          </motion.div>
         </div>
-      </section>
-
-      {/* ── TEAM PHOTO ──────────────────────────────────── */}
-      {/* <motion.section className="about-team mt-16 relative" {...sectionMotion}>
-        <div className="absolute inset-x-0 top-0 z-0 translate-y-5/6 sm:translate-y-1/2" aria-hidden="true">
-          <Image
-            src={patterns}
-            alt=""
-            className="w-full object-cover"
-            sizes="100vw"
-          />
-        </div>
-        <div className="relative z-1 h-145 w-full overflow-hidden mx-auto">
-          <Image
-            src={aboutteam}
-            alt="Mimz Interiors team"
-            fill
-            className="about-img object-top"
-          />
-          <div className="about-team-overlay" />
-        </div>
-      </motion.section> */}
-
+      </motion.section>
+      
       {/* ── AWARDS SECTION ──────────────────────────────── */}
-      <motion.section className="px-[clamp(1.5rem,6vw,7rem)] py-[clamp(4rem,8vw,7rem)]" {...sectionMotion}>
+      <motion.section className="px-[clamp(1.5rem,6vw,7rem)] py-[clamp(4rem,8vw,7rem)] pt-32" {...sectionMotion}>
         <div className="mx-auto grid max-w-7xl grid-cols-1 items-start gap-4 lg:mx-40 lg:grid-cols-[auto_1fr] lg:gap-10 ">
 
           <div className="order-2 flex w-60 md:w-83 mx-auto flex-col justify-items-normal justify-center gap-4 lg:order-0 lg:w-auto">
             
             {/* two awards badges */}
-            <div className="flex items-start justify-between mt-10 md:mt-0 ">
+            <div className="flex items-start justify-between mt-4 md:mt-0 ">
               <div className="group flex items-center justify-center ">
                 <Image
                   src={mimza}
@@ -279,12 +157,121 @@ export default function AboutPage() {
                 </p>
               ))}
             </motion.div>
-            <motion.blockquote className="about-awards-quote" {...aosReveal({ direction: "up", distance: 24, delay: 0.08 })}>
+            <motion.blockquote className="about-awards-quote max-sm:mt-0!" {...aosReveal({ direction: "up", distance: 24, delay: 0.08 })}>
               "{aboutContent.awards.quote}"
             </motion.blockquote>
           </div>
         </div>
       </motion.section>
+
+      {/* ── GALLERY ROW ─────────────────────────────────── */}
+      {/* will make this a carousel later, for now just a grid of images */}
+      <motion.section className="about-gallery-row" {...sectionMotion}>
+        <div className="about-gallery-grid">
+          <motion.div className="about-gallery-item" {...aosReveal({ direction: "up", distance: 26, delay: 0.04 })}>
+            <Image
+              src={aboutgallerya}
+              alt="Interior project"
+              fill
+              className="about-img"
+              sizes="(min-width: 1200px) 25vw, (min-width: 768px) 50vw, 100vw"
+            />
+          </motion.div>
+          <motion.div className="about-gallery-item max-md:hidden" {...aosReveal({ direction: "up", distance: 26, delay: 0.1 })}>
+            <Image
+              src={aboutgalleryb}
+              alt="Interior project"
+              fill
+              className="about-img"
+              sizes="(min-width: 1200px) 25vw, (min-width: 768px) 50vw, 100vw"
+            />
+          </motion.div>
+          <motion.div className="about-gallery-item max-md:hidden" {...aosReveal({ direction: "up", distance: 26, delay: 0.16 })}>
+            <Image
+              src={aboutgalleryc}
+              alt="Interior project"
+              fill
+              className="about-img"
+              sizes="(min-width: 1200px) 25vw, (min-width: 768px) 50vw, 100vw"
+            />
+          </motion.div>
+        </div>
+      </motion.section>
+
+      {/* ── QUOTE SECTION ───────────────────────────────── */}
+      <QuoteSection
+        text={aboutContent.quoteSection.text}
+        author={aboutContent.quoteSection.author}
+        textClassName="font-[36px] md:text-[48px] max-w-[800px]"
+        className="mt-20"
+      />
+
+      <p className="text-center font-aref-ruqaa text-[#54545] mb-6">
+        -All images belongs to Mimz interiors-
+      </p>
+
+      {/* ── VISION GALLERY ──────────────────────────────── */}
+      {/* convert to a carousel later */}
+      {/* <motion.section className="about-vision-gallery" {...sectionMotion}>
+        <div className="grid grid-cols-3 gap-[clamp(3px,0.35vw,6px)] max-md:grid-cols-1">
+          <motion.div className="about-vision-gallery-item" {...aosReveal({ direction: "up", distance: 24, delay: 0.06 })}>
+            <Image
+              src={activitya}
+              alt="Design vision"
+              fill
+              className="about-img"
+              sizes="(min-width: 1200px) 33vw, (min-width: 768px) 50vw, 100vw"
+            />
+          </motion.div>
+          <motion.div className="about-vision-gallery-item max-md:hidden" {...aosReveal({ direction: "up", distance: 24, delay: 0.13 })}>
+            <Image
+              src={activityb}
+              alt="Design vision"
+              fill
+              className="about-img"
+              sizes="(min-width: 1200px) 33vw, (min-width: 768px) 50vw, 100vw"
+            />
+          </motion.div>
+          <motion.div className="about-vision-gallery-item max-md:hidden" {...aosReveal({ direction: "up", distance: 24, delay: 0.2 })}>
+            <Image
+              src={activityc}
+              alt="Design vision"
+              fill
+              className="about-img"
+              sizes="(min-width: 1200px) 33vw, (min-width: 768px) 50vw, 100vw"
+            />
+          </motion.div>
+        </div>
+      </motion.section> */}
+
+      {/* ── THE FIRM SECTION ────────────────────────────── */}
+      {/* <section className="about-firm mt-20 md:mt-28 lg:mt-32">
+        <div className="about-firm-inner">
+          <motion.div className="about-firm-content" {...aosReveal({ direction: "left", distance: 36 })}>
+            <motion.h2 className="about-section-label" {...aosReveal({ direction: "left", distance: 28 })}>
+              {aboutContent.firm.title}
+            </motion.h2>
+            <motion.div {...aosReveal({ direction: "right", distance: 30, delay: 0.06 })}>
+              {aboutContent.firm.paragraphs.map((paragraph) => (
+                <p key={paragraph} className="about-body-paragraph last:mb-0">{paragraph}</p>
+              ))}
+            </motion.div>
+          </motion.div>
+
+          <div className="about-firm-image">
+            <div className="about-firm-img-wrap">
+              <Image
+                src={thefirm}
+                alt="Mimz Interiors showroom"
+                fill
+                className="about-img"
+                sizes="(min-width: 1200px) 34vw, (min-width: 768px) 45vw, 100vw"
+              />
+            </div>
+          </div>
+        </div>
+      </section> */}
+
     </main>
   );
 }

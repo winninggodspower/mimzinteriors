@@ -19,7 +19,7 @@ export const aboutContent = {
         text: "To provide the best solution for customers who look for originality and unparalleled quality, through our continuous effort in innovation and creativity.",
       },
       {
-        title: "MISION",
+        title: "MISSION",
         text: "To design and create spaces that generate positive vibes, be it the warmth of a home, or the professional ambience of a workspace.",
       },
     ],

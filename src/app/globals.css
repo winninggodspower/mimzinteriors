@@ -132,11 +132,11 @@
   }
 
   .about-vision-label {
-    @apply font-caterina text-[40px] font-light uppercase leading-none tracking-[0] text-[#1c1c1a];
+    @apply font-caterina text-[28px] md:text-[40px] font-light uppercase leading-none tracking-[0];
   }
 
   .about-vision-text {
-    @apply text-[16px] leading-[1.45] text-[#4a4843];
+    @apply font-aref-ruqaa text-[14px] md:text-base leading-[1.45];
   }
 
   .about-award-primary-badge {
@@ -145,6 +145,46 @@
 
   .about-section-label {
     @apply mb-1 font-caterina text-[24px] font-medium uppercase leading-none text-black sm:text-[28px] lg:text-[34px] xl:text-[40px];
+  }
+
+  /* Flip card for mission & vision */
+  .flip-card {
+    perspective: 1100px;
+  }
+
+  .flip-card-inner {
+    transition: transform 0.72s cubic-bezier(.2,.9,.2,1);
+    transform-style: preserve-3d;
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  .flip-card:focus-within .flip-card-inner,
+  .flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+  }
+
+  .flip-card-front,
+  .flip-card-back {
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .flip-card-front {
+    transform: rotateY(0deg);
+  }
+
+  .flip-card-back {
+    transform: rotateY(180deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
   }
 
   .about-body-paragraph {
@@ -221,7 +261,7 @@ body {
 
 .about-roots-inner {
   display: grid;
-  grid-template-columns: 1fr 1.35fr;
+  grid-template-columns: 1fr 1fr;
   gap: clamp(2rem, 5vw, 5rem);
   align-items: start;
   max-width: 1280px;
@@ -372,18 +412,11 @@ body {
 
 /* ── RESPONSIVE ──────────────────────────────────────────────── */
 @media (max-width: 1024px) {
-  .about-vision-label {
-    font-size: 34px;
-  }
+  
 
   .about-quote {
     font-size: 40px;
   }
-
-  .about-vision-text {
-    font-size: 15px;
-  }
-
   .about-awards-quote {
     font-size: 50px;
   }
@@ -404,18 +437,11 @@ body {
 }
 
 @media (max-width: 768px) {
-  .about-vision-label {
-    font-size: 28px;
-  }
+  
 
   .about-quote {
     font-size: 32px;
   }
-
-  .about-vision-text {
-    font-size: 14px;
-  }
-
   .about-awards-quote {
     font-size: 38px;
   }
@@ -459,18 +485,11 @@ body {
 }
 
 @media (max-width: 480px) {
-  .about-vision-label {
-    font-size: 24px;
-  }
+  
 
   .about-quote {
     font-size: 26px;
   }
-
-  .about-vision-text {
-    font-size: 13px;
-  }
-
   .about-awards-quote {
     font-size: 30px;
   }
