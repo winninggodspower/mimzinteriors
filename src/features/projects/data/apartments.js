@@ -1,25 +1,23 @@
 "use server"
 
-import projectA from "@assets/images/projects/projectsCatalogue/projecta.png"
-import projectB from "@assets/images/projects/projectsCatalogue/projectb.png"
-import projectC from "@assets/images/projects/projectsCatalogue/projectc.png"
+
 import { APARTMENTS_CATALOGUE_PAGE_SIZE } from "@features/projects/lib/projectsCatalogueQueryKeys"
 import dbConnect from "@/lib/mongoose"
 import Apartment from "@/models/apartment"
 
 const mockPool = [
   {
-    profileImage: projectA.src,
+    profileImage: '/project-catalogue/projecta.png',
     title: "Apartment Pearl",
     description: "Soft finishes, layered comfort, and a calm shortlet atmosphere designed for easy stays.",
   },
   {
-    profileImage: projectB.src,
+    profileImage: "/project-catalogue/projectb.png",
     title: "Apartment Ivory",
     description: "A polished apartment interior with clean details and welcoming everyday luxury.",
   },
   {
-    profileImage: projectC.src,
+    profileImage: "/project-catalogue/projectc.png",
     title: "Apartment Aura",
     description: "A bright, elegant apartment concept that balances warmth, comfort, and style.",
   },
