@@ -968,15 +968,12 @@ body {
 /* ── PROJECT GRID ────────────────────────────────────────────── */
 .prj-grid-section {
   background: #ffffff;
-  padding: 0 clamp(1rem, 3.2vw, 1.6rem) clamp(3.2rem, 6vw, 5rem);
+  padding: clamp(1rem, 3.2vw, 1.6rem) clamp(3.2rem, 6vw, 5rem);
 }
 
 .prj-grid {
-  width: min(1420px, 100%);
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(0.65rem, 1.1vw, 1.15rem);
+  /* Tailwind utilities: constrained width, centered, responsive auto-fit grid */
+  @apply w-[min(1420px,100%)] mx-auto grid grid-cols-[repeat(auto-fit,minmax(220px,1fr))] justify-center gap-[clamp(0.65rem,1.1vw,1.15rem)];
 }
 
 .prj-card {
@@ -1019,8 +1016,8 @@ body {
 }
 
 .prj-card-copy p {
-  font-weight: 300;
   color: #000;
+  font-family: var(--font-caterina, Georgia, serif);
   font-size: 18px;
 }
 
@@ -1092,10 +1089,6 @@ body {
 
 /* ── RESPONSIVE ──────────────────────────────────────────────── */
 @media (max-width: 1024px) {
-  .prj-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
   .prj-card:last-child {
     grid-column: span 2;
   }
@@ -1109,11 +1102,6 @@ body {
   .prj-intro-copy,
   .prj-card-copy p {
     font-size: 0.9rem;
-  }
-
-  .prj-grid {
-    grid-template-columns: 1fr;
-    gap: 1.2rem;
   }
 
   .prj-card:last-child {

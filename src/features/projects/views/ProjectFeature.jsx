@@ -29,13 +29,7 @@ const projectItems = [
     image: apartments,
     alt: "Apartment and shortlet interior",
   },
-  {
-    title: "ACCESSORIES",
-    desc: "Our Decor items at Mimz Homes are available for purchase in all shapes, sizes and colors. From chairs to tables and lots more..",
-    href: "/projects/accessories",
-    image: accessories,
-    alt: "Decor accessories arranged on side table",
-  },
+  // Accessories removed — only Projects and Apartments are shown here.
 ];
 
 export default function ProjectsFeature() {
@@ -60,7 +54,7 @@ export default function ProjectsFeature() {
         </div>
       </motion.section>
 
-      <motion.section className="prj-intro" {...sectionMotion}>
+      <motion.section className="prj-intro md:pb-30!" {...sectionMotion}>
         <motion.p className="prj-img-credit" {...aosReveal({ direction: "up", distance: 20, duration: 0.5 })}>-All images belongs to Mimz interiors-</motion.p>
         <motion.p className="prj-intro-copy" {...aosReveal({ direction: "up", distance: 24, duration: 0.55, delay: 0.06 })}>
           Our project speaks loudly for itself as we handle them with the highest form of professionalism, from field workers to our customer care services. All process documentation and alignments are done with modern tools to give a remarkable impression at the beginning and end of every project. At Mimz interior, we give every client a reason to come back.
@@ -68,7 +62,7 @@ export default function ProjectsFeature() {
       </motion.section>
 
       <motion.section className="prj-grid-section" {...sectionMotion}>
-        <div className="prj-grid">
+        <div className="w-[min(1420px,100%)] mx-auto grid grid-cols-1 md:grid-cols-[repeat(auto-fit,minmax(430px,435px))] justify-center gap-[1.2rem] md:gap-[clamp(0.65rem,1.1vw,1.15rem)]">
           {projectItems.map((item, index) => (
             <Link href={item.href}  key={item.title}>
             <motion.article className="prj-card" key={item.title} {...aosReveal({ direction: "up", distance: 24, delay: 0.06 + index * 0.07 })}>
@@ -77,7 +71,7 @@ export default function ProjectsFeature() {
               </div>
               <div className="prj-card-copy">
                 <h2>{item.title}</h2>
-                <p>{item.desc}</p>
+                <p className="">{item.desc}</p>
               </div>
             </motion.article>
             </Link>
