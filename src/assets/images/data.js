@@ -4,10 +4,9 @@ import iconc from "@assets/images/service/iconc.svg";
 import icond from "@assets/images/service/icond.svg";
 import icone from "@assets/images/service/icone.svg";
 import iconf from "@assets/images/service/iconf.svg";
-import slide2 from "@assets/images/services-slides/slide-2.jpg";
-import slide3 from "@assets/images/services-slides/slide-3.jpg";
-import slide4 from "@assets/images/services-slides/slide-4.jpg";
-import slide5 from "@assets/images/services-slides/slide-5.jpg";
+import dprocessa from "@assets/images/service/dprocessa.png";
+import dprocessb from "@assets/images/service/dprocessb.png";
+import dprocessc from "@assets/images/service/dprocessc.png";
 
 export const services = [
   "Consultation Services",
@@ -30,25 +29,20 @@ export const serviceShowcase = {
     "At Mimz Interiors, we don’t just design spaces, we curate experiences. Every project is approached with intention, blending functionality, aesthetics, and your unique lifestyle into a seamless, refined result. From concept to completion, we handle every detail with precision and creativity.",
   slides: [
     {
-      title: "Site Inspection",
-      src: slide2,
+      title: "House Mapping",
+      src: dprocessa,
       alt: "Interior design site layout planning in progress",
     },
     {
-      title: "Digital 3d Render",
-      src: slide3,
+      title: "Site Inspection",
+      src: dprocessb,
       alt: "Interior design team reviewing a project site",
     },
     {
-      title: "Mid Level Conceptualization",
-      src: slide4,
+      title: "Material Selection",
+      src: dprocessc,
       alt: "Interior design material and finish selection process",
     },
-    {
-      title: "Final outcome",
-      src: slide5,
-      alt: "Interior design project execution and implementation",
-    }
   ],
   items: [
     {

@@ -35,14 +35,37 @@ export default function ServiceShowcase({ sectionMotion }) {
   const [currentIndex, setCurrentIndex] = useState(1);
   const [isSliding, setIsSliding] = useState(false);
   const wrapTimerRef = useRef(null);
+  const autoplayTimerRef = useRef(null);
 
   useEffect(() => {
     return () => {
       if (wrapTimerRef.current) {
         window.clearTimeout(wrapTimerRef.current);
       }
+
+      if (autoplayTimerRef.current) {
+        window.clearTimeout(autoplayTimerRef.current);
+      }
     };
   }, []);
+
+  useEffect(() => {
+    if (isSliding) return;
+
+    if (autoplayTimerRef.current) {
+      window.clearTimeout(autoplayTimerRef.current);
+    }
+
+    autoplayTimerRef.current = window.setTimeout(() => {
+      goToNextSlide();
+    }, 4500);
+
+    return () => {
+      if (autoplayTimerRef.current) {
+        window.clearTimeout(autoplayTimerRef.current);
+      }
+    };
+  }, [currentIndex, isSliding]);
 
   const trackSlides = [slides[slides.length - 1], ...slides, slides[0]];
   const activeSlideIndex = (currentIndex - 1 + slides.length) % slides.length;
@@ -140,10 +163,10 @@ export default function ServiceShowcase({ sectionMotion }) {
         </div>
 
         <motion.div
-          className="group relative w-full max-w-[450px] bg-white"
+          className="group relative w-full max-w-112.5 justify-self-center bg-white lg:justify-self-start"
           {...imageReveal}
         >
-          <div className="relative aspect-[478/580] w-full overflow-hidden md:h-150 lg:aspect-auto">
+          <div className="relative aspect-478/580 w-full overflow-hidden md:h-150 lg:aspect-auto">
             <div
               className="flex h-full w-full"
               style={{
@@ -167,7 +190,7 @@ export default function ServiceShowcase({ sectionMotion }) {
             </div>
           </div>
 
-          <div className="flex items-center justify-between gap-4 border-t px-4 py-4 sm:px-6 sm:py-5 lg:px-7 shadow-[0_4px_4px_rgba(0,0,0,0.25)]">
+          <div className="flex items-center justify-between gap-2 border-t px-4 py-4 sm:px-6 sm:py-5 lg:px-7 shadow-[0_4px_4px_rgba(0,0,0,0.25)]">
             <button
               type="button"
               onClick={goToPreviousSlide}

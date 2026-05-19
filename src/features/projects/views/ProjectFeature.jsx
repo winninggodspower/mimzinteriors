@@ -6,8 +6,6 @@ import { motion } from "motion/react";
 import projectHero from "@assets/images/projects/projecthero.png";
 import projectCatalogue from "@assets/images/projects/projectcatalogue.png";
 import apartments from "@assets/images/projects/apartments.png";
-import accessories from "@assets/images/projects/accessories.png";
-import seperator from "@assets/images/seperator.png";
 import {
   aosReveal,
   sectionReveal,

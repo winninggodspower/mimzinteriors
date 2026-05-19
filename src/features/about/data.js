@@ -1,12 +1,11 @@
 export const aboutContent = {
   roots: {
-    title: "ROOTS.",
+    title: "About Us",
     paragraphs: [
       "Miracle Nwachukwu is an award-winning interior decorator, fashion enthusiast, and a dedicated mentor. As the founder and visionary behind a multiple award-winning interior design company, Miracle has established a reputation for excellence in the industry. His work has garnered significant recognition, including a recent prestigious accolade from the Africa Property Awards for Interior Design. Known for his creative flair and commitment to inspiring the next generation, Miracle continues to redefine interior design and mentorship with each project he undertakes.",
-      "From mastering the art of selecting the perfect shoes to compliment an outfit, to becoming Nigeria’s leading globally recognized interior designer, Miracle Nwachukwu’s journey reflects a keen sense of style, creativity, and dedication.",
-      "In his early days as an undergraduate, Miracle Nwachukwu demonstrated exceptional ability in balancing academic excellence, fashion, and business. His passion for travel has further enriched his design perspective, enabling him to gain valuable insights into diverse cultures, art forms, and architectural styles around the world. This global exposure has played a pivotal role in his success as an international interior designer. Over the past five years, his designs have consistently stood out for their innovation and sophistication.",
-      "Miracle’s personality and commitment to his craft can be summed up in three words: classy, unique, and impactful. His unwavering dedication to creating timeless, memorable spaces has earned him recognition and respect in the interior design industry.",
-      "Having successfully completed over 200 projects and earned the trust of more than 64,000 followers across Nigeria and globally, Mimz has built a reputation for excellence and unwavering client satisfaction.",
+      "Mimz Interiors was founded in 2018 with a vision to provide comprehensive turnkey solutions in the design, fabrication, and installation of premium interior furnishings and furniture. We are dedicated to creating timeless designs(designs that last a life time) enhancing the interiors of both homes and offices, creating spaces that inspire and reflect the aspirations of our clients.",
+      "At Mimz Interiors, we specialize in delivering exceptional, contemporary, and customized interior fit-out solutions across various sectors, including corporate offices,  luxury villas, and modern homes. With a rapidly expanding national distribution network, we offer a diverse range of inspiring designs, high-quality furnishings, innovative textures, and refreshing colors sourced from around the world all at competitive prices.",
+      "As one of the few local sources offering a complete 'Design & Build' service, we ensure the seamless implementation of projects, meeting deadlines, maintaining quality, and ensuring customer satisfaction. Our commitment to excellence means we consistently provide interior solutions that adhere to international standards while staying ahead of the latest trends in design and furnishings.",
     ],
   },
   quoteSection: {

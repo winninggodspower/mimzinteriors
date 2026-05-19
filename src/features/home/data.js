@@ -23,22 +23,6 @@ export const heroCards = [
     mobileDescription: "Hotels, lounges, events.",
     tone: "light",
   },
-  {
-    title: "Schools",
-    icon: "emojione-monotone:school",
-    description:
-      "Educational spaces for schools, universities, lecture halls, libraries, and study centers.",
-    mobileDescription: "Schools, campuses, libraries.",
-    tone: "gold",
-  },
-  {
-    title: "Hospital",
-    icon: "emojione-monotone:hospital",
-    description:
-      "Healthcare spaces for clinics, pharmacies, dental offices, and wellness centers.",
-    mobileDescription: "Clinics, dental, wellness.",
-    tone: "light",
-  },
 ];
 
 export const accessoriesSection = {

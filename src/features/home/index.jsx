@@ -2,8 +2,6 @@
 
 import Image from "next/image";
 import { motion } from "motion/react";
-import quoteImage from "@assets/images/home/quoteimage.png";
-import patterns from "@assets/images/patterns.svg";
 import QuoteSection from "@features/about/components/quote-section";
 import AccessoriesSection from "@features/home/components/accessories-section";
 import FeaturedProjectsSection from "@features/home/components/featured-projects-section";
@@ -142,47 +140,6 @@ export default function HomeFeature() {
       </motion.section>
       
       <FeaturedProjectsSection />
-
-      {/* 
-      <motion.section className="w-full bg-white relative" {...revealMotion(0.1)}>
-        <motion.div
-          initial={{ opacity: 0, y: 30, rotate: -2 }}
-          whileInView={{ opacity: 1, y: 0, rotate: 0 }}
-          viewport={{ once: true, amount: 0.22 }}
-          transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
-        >
-          <Image
-            src={patterns}
-            alt=""
-            className="object-cover h-full w-full inset-x-0 top-0 z-0 translate-y-1/2"
-            sizes="100vw"
-          />
-        </motion.div>
-        <motion.div
-          className="group relative h-125 w-full overflow-hidden"
-          initial={{ opacity: 0, scale: 1.05, y: 20 }}
-          whileInView={{ opacity: 1, scale: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.28 }}
-          transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
-        >
-          <motion.div
-            className="absolute inset-0"
-            initial={{ scale: 1.08 }}
-            whileInView={{ scale: 1 }}
-            viewport={{ once: true, amount: 0.25 }}
-            transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <Image
-              src={quoteImage}
-              alt="Founder standing in a designed interior"
-              fill
-              className="object-cover object-center transition-transform duration-900 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]"
-              sizes="100vw"
-            />
-          </motion.div>
-        </motion.div>
-      </motion.section> 
-      */}
 
       <motion.section className="w-full bg-white " {...revealMotion(0.1)}>
           <motion.div

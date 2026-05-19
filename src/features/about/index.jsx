@@ -3,7 +3,6 @@
 import Image from "next/image";
 import { motion } from "motion/react";
 import { aosReveal, sectionReveal } from "@features/lib/motion";
-import roots from "@assets/images/roots.png";
 
 import aboutgallerya from "@assets/images/about/aboutgallerya.png";
 import aboutgalleryb from "@assets/images/about/aboutgalleryb.png";
@@ -11,11 +10,6 @@ import aboutgalleryc from "@assets/images/about/aboutgalleryc.png";
 import ivision from "@assets/images/icons/ivision.svg";
 import imission from "@assets/images/icons/imision.svg";
 
-import activitya from "@assets/images/about/activity-1.jpg";
-import activityb from "@assets/images/about/activity-2.jpg";
-import activityc from "@assets/images/about/activity-3.jpg";
-
-import thefirm from "@assets/images/thefirm.png";
 import mimza from "@assets/images/mimza.png";
 import mimzb from "@assets/images/mimzb.png";
 import sawarda from "@assets/images/sawarda.png";
@@ -26,6 +20,16 @@ import QuoteSection from "./components/quote-section";
 
 export default function AboutPage() {
   const sectionMotion = sectionReveal({ y: 28 });
+  const cardReveal = (delay = 0) => ({
+    initial: { opacity: 0, y: 32, scale: 0.97, filter: "blur(8px)" },
+    whileInView: { opacity: 1, y: 0, scale: 1, filter: "blur(0px)" },
+    viewport: { once: true, amount: 0.4 },
+    transition: {
+      duration: 0.75,
+      delay,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  });
 
   return (
     <main className="about-main">
@@ -36,7 +40,7 @@ export default function AboutPage() {
           <div className="about-roots-image">
             <div className="about-roots-img-wrap">
               <Image
-                src={roots}
+                src={'/about-hero.jpg'}
                 alt="Mimz Ferunmise — Interior Designer"
                 fill
                 className="about-img"
@@ -51,35 +55,54 @@ export default function AboutPage() {
             </motion.h2>
             <motion.div {...aosReveal({ direction: "right", distance: 34, delay: 0.06 })}>
               {aboutContent.roots.paragraphs.map((paragraph) => (
-                <p key={paragraph} className="about-body-paragraph mb-1">{paragraph}</p>
+                <p key={paragraph} className="about-body-paragraph font-aref-ruqaa mb-4">{paragraph}</p>
               ))}
             </motion.div>
           </div>
         </div>
       </motion.section>
       
-      
       {/* ── MISSION & VISION — revamped layout ───────────────────────── */}
-      <motion.section className="max-sm:px-6 mt-20 md:mt-44 " {...sectionMotion}>
+      <motion.section className="max-sm:px-6 mt-20 md:mt-44 " {...cardReveal}>
         <div className="mx-auto grid grid-cols-1 h-[290px] items-stretch gap-5 md:grid-cols-2">
-          <motion.div className="bg-[#CEAD8B]/30 p-8 h-full md:p-12" {...aosReveal({ direction: "up", distance: 30, delay: 0.1 })}>
-           <div className="max-w-[500px] mx-auto flex flex-col items-center justify-center text-center h-full">
+          <motion.div className="bg-[#CEAD8B]/30 p-8 h-full md:p-12" {...cardReveal(0)}>
+           <motion.div 
+              className="max-w-[500px] mx-auto flex flex-col items-center justify-center text-center h-full" 
+              whileHover={{ scale: 1.08, rotate: 0.8 }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
+              >
               <div className="about-vision-head mb-1">
-                <Image src={ivision} alt="vision icon" width={24} />
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.6 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.45, duration: 0.4, ease: "backOut" }}
+                >
+                  <Image src={ivision} alt="vision icon" width={24} />
+                </motion.div>
                 <h3 className="about-vision-label">{aboutContent.vision.items[0].title}</h3>
               </div>
               <p className="about-vision-text">{aboutContent.vision.items[0].text}</p>
-           </div>
+           </motion.div>
           </motion.div>
 
-          <motion.div className="bg-[#CEAD8B]/30 flex flex-col items-center justify-center text-center p-8 h-full md:p-12" {...aosReveal({ direction: "up", distance: 30, delay: 0.25 })}>
-           <div className="max-w-[500px] mx-auto flex flex-col items-center justify-center text-center h-full">
+          <motion.div className="bg-[#CEAD8B]/30 flex flex-col items-center justify-center text-center p-8 h-full md:p-12" {...cardReveal(0.18)}>
+           <motion.div 
+              className="max-w-[500px] mx-auto flex flex-col items-center justify-center text-center h-full"
+              whileHover={{ scale: 1.08, rotate: -0.8 }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
+              >
             <div className="about-vision-head mb-1">
-              <Image src={imission} alt="mission icon" width={24} />
+              <motion.div
+                initial={{ opacity: 0, scale: 0.6 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.53, duration: 0.4, ease: "backOut" }}
+              >
+                <Image src={imission} alt="mission icon" width={24} />
+              </motion.div>
               <h3 className="about-vision-label">{aboutContent.vision.items[1].title}</h3>
             </div>
             <p className="about-vision-text">{aboutContent.vision.items[1].text}</p>
-          </div>
+          </motion.div>
           </motion.div>
         </div>
       </motion.section>
