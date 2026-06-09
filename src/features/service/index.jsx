@@ -82,8 +82,8 @@ export default function Service() {
 
       <ServiceShowcase sectionMotion={sectionMotion} />
 
-      <motion.section className="bg-[#CEAD8B]/30 pt-13.5 pb-9 px-[clamp(4rem,4vw,7rem)] h-full" {...sectionMotion}>
-        <div className="mx-auto max-w-400 w-full ">
+      <motion.section className="bg-[#CEAD8B]/30 pt-13.5 pb-9 h-full" {...sectionMotion}>
+        <div className="mx-auto max-w-7xl w-full px-4 sm:px-6 ">
           <motion.h2
             className="font-caterina text-[28px] sm:text-[34px] lg:text-[40px] font-light tracking-[-0.05em] text-black uppercase mb-1"
             {...aosReveal({ direction: "up", distance: 30 })}
