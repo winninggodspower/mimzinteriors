@@ -2,11 +2,13 @@ export const aboutContent = {
   roots: {
     title: "About Us",
     paragraphs: [
-      "Miracle Nwachukwu is an award-winning interior decorator, fashion enthusiast, and a dedicated mentor. As the founder and visionary behind a multiple award-winning interior design company, Miracle has established a reputation for excellence in the industry. His work has garnered significant recognition, including a recent prestigious accolade from the Africa Property Awards for Interior Design. Known for his creative flair and commitment to inspiring the next generation, Miracle continues to redefine interior design and mentorship with each project he undertakes.",
       "Mimz Interiors was founded in 2018 with a vision to provide comprehensive turnkey solutions in the design, fabrication, and installation of premium interior furnishings and furniture. We are dedicated to creating timeless designs(designs that last a life time) enhancing the interiors of both homes and offices, creating spaces that inspire and reflect the aspirations of our clients.",
       "At Mimz Interiors, we specialize in delivering exceptional, contemporary, and customized interior fit-out solutions across various sectors, including corporate offices,  luxury villas, and modern homes. With a rapidly expanding national distribution network, we offer a diverse range of inspiring designs, high-quality furnishings, innovative textures, and refreshing colors sourced from around the world all at competitive prices.",
       "As one of the few local sources offering a complete 'Design & Build' service, we ensure the seamless implementation of projects, meeting deadlines, maintaining quality, and ensuring customer satisfaction. Our commitment to excellence means we consistently provide interior solutions that adhere to international standards while staying ahead of the latest trends in design and furnishings.",
     ],
+  },
+  founder: {
+    paragraph: "Miracle Nwachukwu is an award-winning interior decorator, fashion enthusiast, and a dedicated mentor. As the founder and visionary behind a multiple award-winning interior design company, Miracle has established a reputation for excellence in the industry. His work has garnered significant recognition, including a recent prestigious accolade from the Africa Property Awards for Interior Design. Known for his creative flair and commitment to inspiring the next generation, Miracle continues to redefine interior design and mentorship with each project he undertakes. On an interview with THIS DAY NEWSPAPER, he was asked what his motivation was and he simply replied:",
   },
   quoteSection: {
     text: "Seeing the genuine satisfaction on my clients' faces after every project is my greatest source of motivation.",

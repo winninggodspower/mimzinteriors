@@ -36,41 +36,43 @@ export default function AboutPage() {
 
       {/* ── ROOTS SECTION ───────────────────────────────── */}
       <motion.section className="about-roots pb-0!" {...sectionMotion}>
-        <div className="about-roots-inner">
-          <div className="about-roots-image">
-            <div className="about-roots-img-wrap">
-              <Image
-                src={'/about-hero.jpg'}
-                alt="Mimz Ferunmise — Interior Designer"
-                fill
-                className="about-img"
-                sizes="(min-width: 1200px) 33vw, (min-width: 768px) 45vw, 100vw"
-              />
-            </div>
-          </div>
-
-          <div className="about-roots-content" >
-            <motion.h2 className="about-section-label" {...aosReveal({ direction: "left", distance: 30 })}>
+        <div className="about-roots-inner max-w-7xl text-justify mx-auto">
+          <div className="about-roots-content">
+            <motion.h2 className="about-section-label text-center" {...aosReveal({ direction: "left", distance: 30 })}>
               {aboutContent.roots.title}
             </motion.h2>
+
+            <motion.div
+              className="flex justify-center -mt-8"
+              {...aosReveal({ direction: "up", distance: 20, delay: 0.25 })}
+            >
+              <Image
+                src="/mimz-mascut-seperator.png"
+                alt="separator image"
+                height={178}
+                width={273}
+                className="h-auto w-44 sm:w-56 md:w-68.25"
+              />
+            </motion.div>
+
             <motion.div {...aosReveal({ direction: "right", distance: 34, delay: 0.06 })}>
               {aboutContent.roots.paragraphs.map((paragraph) => (
-                <p key={paragraph} className="about-body-paragraph font-aref-ruqaa mb-4">{paragraph}</p>
+                <p key={paragraph} className="about-body-paragraph font-aref-ruqaa mb-4 ">{paragraph}</p>
               ))}
             </motion.div>
           </div>
         </div>
       </motion.section>
-      
+
       {/* ── MISSION & VISION — revamped layout ───────────────────────── */}
       <motion.section className="max-sm:px-6 mt-20 md:mt-44 " {...cardReveal}>
         <div className="mx-auto grid grid-cols-1 h-[290px] items-stretch gap-5 md:grid-cols-2">
           <motion.div className="bg-[#CEAD8B]/30 p-8 h-full md:p-12" {...cardReveal(0)}>
-           <motion.div 
-              className="max-w-[500px] mx-auto flex flex-col items-center justify-center text-center h-full" 
+            <motion.div
+              className="max-w-[500px] mx-auto flex flex-col items-center justify-center text-center h-full"
               whileHover={{ scale: 1.08, rotate: 0.8 }}
               transition={{ duration: 0.3, ease: "easeOut" }}
-              >
+            >
               <div className="about-vision-head mb-1">
                 <motion.div
                   initial={{ opacity: 0, scale: 0.6 }}
@@ -82,37 +84,37 @@ export default function AboutPage() {
                 <h3 className="about-vision-label">{aboutContent.vision.items[0].title}</h3>
               </div>
               <p className="about-vision-text">{aboutContent.vision.items[0].text}</p>
-           </motion.div>
+            </motion.div>
           </motion.div>
 
           <motion.div className="bg-[#CEAD8B]/30 flex flex-col items-center justify-center text-center p-8 h-full md:p-12" {...cardReveal(0.18)}>
-           <motion.div 
+            <motion.div
               className="max-w-[500px] mx-auto flex flex-col items-center justify-center text-center h-full"
               whileHover={{ scale: 1.08, rotate: -0.8 }}
               transition={{ duration: 0.3, ease: "easeOut" }}
-              >
-            <div className="about-vision-head mb-1">
-              <motion.div
-                initial={{ opacity: 0, scale: 0.6 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.53, duration: 0.4, ease: "backOut" }}
-              >
-                <Image src={imission} alt="mission icon" width={24} />
-              </motion.div>
-              <h3 className="about-vision-label">{aboutContent.vision.items[1].title}</h3>
-            </div>
-            <p className="about-vision-text">{aboutContent.vision.items[1].text}</p>
-          </motion.div>
+            >
+              <div className="about-vision-head mb-1">
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.6 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.53, duration: 0.4, ease: "backOut" }}
+                >
+                  <Image src={imission} alt="mission icon" width={24} />
+                </motion.div>
+                <h3 className="about-vision-label">{aboutContent.vision.items[1].title}</h3>
+              </div>
+              <p className="about-vision-text">{aboutContent.vision.items[1].text}</p>
+            </motion.div>
           </motion.div>
         </div>
       </motion.section>
-      
+
       {/* ── AWARDS SECTION ──────────────────────────────── */}
       <motion.section className="px-[clamp(1.5rem,6vw,7rem)] py-[clamp(4rem,8vw,7rem)] pt-32" {...sectionMotion}>
         <div className="mx-auto grid max-w-7xl grid-cols-1 items-start gap-4 lg:mx-40 lg:grid-cols-[auto_1fr] lg:gap-10 ">
 
           <div className="order-2 flex w-60 md:w-83 mx-auto flex-col justify-items-normal justify-center gap-4 lg:order-0 lg:w-auto">
-            
+
             {/* two awards badges */}
             <div className="flex items-start justify-between mt-4 md:mt-0 ">
               <div className="group flex items-center justify-center ">
@@ -167,7 +169,7 @@ export default function AboutPage() {
             </div>
           </div>
 
-          <div className="about-awards-content">
+          <div className="about-awards-content mt-4">
             <motion.h2 className="about-section-label" {...aosReveal({ direction: "right", distance: 26 })}>
               {aboutContent.awards.title}
             </motion.h2>
@@ -189,45 +191,56 @@ export default function AboutPage() {
 
       {/* ── GALLERY ROW ─────────────────────────────────── */}
       {/* will make this a carousel later, for now just a grid of images */}
-      <motion.section className="about-gallery-row" {...sectionMotion}>
-        <div className="about-gallery-grid">
-          <motion.div className="about-gallery-item" {...aosReveal({ direction: "up", distance: 26, delay: 0.04 })}>
-            <Image
-              src={aboutgallerya}
-              alt="Interior project"
-              fill
-              className="about-img"
-              sizes="(min-width: 1200px) 25vw, (min-width: 768px) 50vw, 100vw"
-            />
-          </motion.div>
-          <motion.div className="about-gallery-item max-md:hidden" {...aosReveal({ direction: "up", distance: 26, delay: 0.1 })}>
-            <Image
-              src={aboutgalleryb}
-              alt="Interior project"
-              fill
-              className="about-img"
-              sizes="(min-width: 1200px) 25vw, (min-width: 768px) 50vw, 100vw"
-            />
-          </motion.div>
-          <motion.div className="about-gallery-item max-md:hidden" {...aosReveal({ direction: "up", distance: 26, delay: 0.16 })}>
-            <Image
-              src={aboutgalleryc}
-              alt="Interior project"
-              fill
-              className="about-img"
-              sizes="(min-width: 1200px) 25vw, (min-width: 768px) 50vw, 100vw"
-            />
-          </motion.div>
+      <motion.section className="py-16 md:py-24 mb-28 bg-[#CEAD8B]/30" {...sectionMotion}>
+        <div className="max-w-7xl mx-auto px-6">
+          <motion.h2 className="about-section-label text-center mb-8" {...aosReveal({ direction: "left", distance: 30 })}>
+            Meet Our Founder
+          </motion.h2>
+          <div className="about-gallery-grid">
+            <motion.div className="about-gallery-item" {...aosReveal({ direction: "up", distance: 26, delay: 0.04 })}>
+              <Image
+                src={aboutgallerya}
+                alt="Interior project"
+                fill
+                className="about-img"
+                sizes="(min-width: 1200px) 25vw, (min-width: 768px) 50vw, 100vw"
+              />
+            </motion.div>
+            <motion.div className="about-gallery-item max-md:hidden" {...aosReveal({ direction: "up", distance: 26, delay: 0.1 })}>
+              <Image
+                src={aboutgalleryb}
+                alt="Interior project"
+                fill
+                className="about-img"
+                sizes="(min-width: 1200px) 25vw, (min-width: 768px) 50vw, 100vw"
+              />
+            </motion.div>
+            <motion.div className="about-gallery-item max-md:hidden" {...aosReveal({ direction: "up", distance: 26, delay: 0.16 })}>
+              <Image
+                src={aboutgalleryc}
+                alt="Interior project"
+                fill
+                className="about-img"
+                sizes="(min-width: 1200px) 25vw, (min-width: 768px) 50vw, 100vw"
+              />
+            </motion.div>
+          </div>
+
+          <motion.p className="about-body-paragraph font-aref-ruqaa text-justify mt-6 md:mt-14" {...aosReveal({ direction: "up", distance: 20, delay: 0.1 })}>
+            {aboutContent.founder.paragraph}
+          </motion.p>
+
+
+          <QuoteSection
+            text={aboutContent.quoteSection.text}
+            author={aboutContent.quoteSection.author}
+            textClassName="font-[36px] md:text-[40px] max-w-900px]"
+            className="mt-10 mb-0 max-w-[1200px]"
+          />
         </div>
       </motion.section>
 
       {/* ── QUOTE SECTION ───────────────────────────────── */}
-      <QuoteSection
-        text={aboutContent.quoteSection.text}
-        author={aboutContent.quoteSection.author}
-        textClassName="font-[36px] md:text-[48px] max-w-[800px]"
-        className="mt-20"
-      />
 
       <p className="text-center font-aref-ruqaa text-[#54545] mb-6">
         -All images belongs to Mimz interiors-

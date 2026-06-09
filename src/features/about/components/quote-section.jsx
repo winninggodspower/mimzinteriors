@@ -15,10 +15,10 @@ export default function QuoteSection(
 
   return (
     <motion.section
-      className={`my-[clamp(3rem,6vw,5rem)] px-[clamp(1.5rem,8vw,10rem)] ${className}`}
+      className={`my-[clamp(3rem,6vw,5rem)] px-[clamp(1.5rem,8vw,10rem)] mx-auto max-w-225 ${className}`}
       {...sectionMotion}
     >
-      <div className="mx-auto max-w-225 text-center">
+      <div className="mx-auto text-center">
         <div className="flex flex-col items-center">
           <motion.blockquote
             className={`mb-3 border-none bg-none p-0 font-bd-megalona text-[26px] font-normal italic leading-none text-black sm:text-[32px] md:text-[40px] ${textClassName}`}
