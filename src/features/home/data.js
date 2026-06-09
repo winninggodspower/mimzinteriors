@@ -42,7 +42,7 @@ export const testimonials = [
     name: "Mrs Mercy",
     role: "Gospel Artist",
     quote:
-      "When we wanted to design our new home, he came highly recommended and he delivered exceptionally. The space was designed to my taste and likeness.",
+      "When we wanted to design our new home, he came highly recommended and he delivered exceptionally, the space was designed to my taste and likening. ",
   },
   {
     name: "Mr Dickson",

@@ -775,22 +775,6 @@ body {
   letter-spacing: 0.03em;
 }
 
-.home-intro-copy {
-  max-width: 1220px;
-  margin: clamp(2rem, 4vw, 3rem) auto 0;
-}
-
-.home-intro-copy p {
-  margin: 0;
-  font-size: 16px;
-  line-height: 1.72;
-  color: #000;
-}
-
-.home-intro-copy p + p {
-  margin-top: 0.25rem;
-}
-
 /* ── PATTERN BAND ────────────────────────────────────────────── */
 
 /* ── FEATURE IMAGE ───────────────────────────────────────────── */

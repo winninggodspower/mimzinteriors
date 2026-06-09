@@ -126,14 +126,14 @@ export default function HomeFeature() {
         >
           -All Images belongs to Mimz interiors-
         </motion.p>
-        <motion.div className="home-intro-copy" variants={introCopyVariants} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }}>
-          <motion.p className="max-md:text-[0.9rem]! max-md:leading-[1.66]! max-[480px]:text-[0.84rem]!" variants={introParagraphVariants}>
+        <motion.div className="max-w-7xl mx-auto mt-[clamp(2rem,4vw,3rem)] space-y-1" variants={introCopyVariants} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }}>
+          <motion.p className="m-0 text-base leading-[1.72] text-black max-md:text-[0.9rem]! max-md:leading-[1.66]! max-[480px]:text-[0.84rem]!" variants={introParagraphVariants}>
             Mimz interior is a company specialized in architectural interior and exterior projects from start to finish, we handle both local and international project that require our design, management skills and furniture fixings for both real estate developers and personal property owners.
           </motion.p>
-          <motion.p className="max-md:text-[0.9rem]! max-md:leading-[1.66]! max-[480px]:text-[0.84rem]!" variants={introParagraphVariants}>
+          <motion.p className="m-0 text-base leading-[1.72] text-black max-md:text-[0.9rem]! max-md:leading-[1.66]! max-[480px]:text-[0.84rem]!" variants={introParagraphVariants}>
             Mimz interior was founded in the year 2018 by Miracle Godsent Nwachukwu (Creative director). Amongst other wonderful achievement as a model, actor and fashion enthusiast , Miracle has been awarded over the years for his innovative Creation when it comes to interior design and space management. All his efforts has made mimz interior to be awarded best interior design company in the year 2021. Over the years he has made remarkable trailblazing top notch designs ideas that are universally accepted for both homes, office spaces, restaurant etc.
           </motion.p>
-          <motion.p className="max-md:text-[0.9rem]! max-md:leading-[1.66]! max-[480px]:text-[0.84rem]!" variants={introParagraphVariants}>
+          <motion.p className="m-0 text-base leading-[1.72] text-black max-md:text-[0.9rem]! max-md:leading-[1.66]! max-[480px]:text-[0.84rem]!" variants={introParagraphVariants}>
             At mimz interior, we see through the mind of our clients, by paying attention to details, providing comfort, poise and class putting cost optimization as a great excellent value: enjoying comfort with less cost.
           </motion.p>
         </motion.div>
@@ -141,20 +141,63 @@ export default function HomeFeature() {
       
       <FeaturedProjectsSection />
 
-      <motion.section className="w-full bg-white " {...revealMotion(0.1)}>
-          <motion.div
-            className="w-full max-h-[80vh] relative"
-            initial={{ scale: 1.08 }}
-            whileInView={{ scale: 1 }}
-            viewport={{ once: true, amount: 0.25 }}
-            transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <img
-              src={'/hero-quote-img.jpg'}
-              alt="Founder standing in a designed interior"
-              className="max-h-[85vh] w-full object-cover object-center transition-transform duration-900 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]"
-            />
-          </motion.div>
+      <motion.section
+        className="w-full bg-white"
+        {...revealMotion(0.1)}
+      >
+        <motion.div
+          className="relative w-full max-h-[90vh] overflow-hidden"
+          initial={{ scale: 1.08 }}
+          whileInView={{ scale: 1 }}
+          viewport={{ once: true, amount: 0.25 }}
+          transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
+        >
+          {/* IMAGE */}
+          <img
+            src="/hero-quote-img.jpg"
+            alt="Founder standing in a designed interior"
+            className="h-[85vh] w-full object-cover object-center"
+          />
+
+          {/* DARK + WARM OVERLAY */}
+          <div className="absolute inset-0 bg-black/47" />
+
+          {/* CENTER CONTENT */}
+          <div className="absolute inset-0 z-10 flex items-center justify-center px-6 text-center">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1, delay: 0.2 }}
+              className="relative"
+            >
+              {/* QUOTE */}
+              <blockquote
+                className="p-0 font-bd-megalona text-[26px] font-normal italic leading-none text-white sm:text-[42px] md:text-[60px]"
+              >
+                <span className="mr-[0.1em] align-[-0.1em] text-[clamp(2rem,5vw,3.5rem)] font-normal">
+                  "
+                </span>
+                Designing homes, that last a lifetime.
+                <span className="ml-[0.1em] align-[-0.1em] text-[clamp(2rem,5vw,3.5rem)] font-normal">
+                  "
+                </span>
+              </blockquote>
+              {/* faint logo behind  */}
+              <div
+                className="flex justify-center -mt-8"
+              >
+                <Image
+                  src="/mimz-mascut-seperator.png"
+                  alt="separator image"
+                  height={178}
+                  width={273}
+                  className="h-auto w-44 sm:w-56 md:w-68.25"
+                />
+              </div>
+            </motion.div>
+          </div>
+        </motion.div>
       </motion.section>
 
       <QuoteSection
@@ -163,13 +206,6 @@ export default function HomeFeature() {
         textClassName="md:text-[60px]"
       />
 
-      {/* <AccessoriesSection
-        title={accessoriesSection.title}
-        paragraphs={accessoriesSection.paragraphs}
-        imageSrc={accessoriesSection.imageSrc}
-        imageAlt={accessoriesSection.imageAlt}
-        href={accessoriesSection.href}
-      /> */}
 
       <TestimonialsSection testimonials={testimonials} />
     </main>

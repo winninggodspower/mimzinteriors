@@ -105,8 +105,8 @@ export default function FeaturedProjectsSection() {
 
   return (
     <motion.section className="bg-white px-6 sm:px-8 lg:px-10 mb-20 md:mb-40" {...revealMotion}>
-      <div className="mx-auto max-w-350">
-        <h2 className="font-caterina text-[1.9rem] leading-none text-center uppercase text-[#161616] sm:text-[2.2rem]">
+      <div className="mx-auto max-w-7xl">
+        <h2 className="font-caterina text-[1.9rem] leading-none text-center uppercase text-[#161616] sm:text-[2.2rem] ">
           OUR PROJECTS
         </h2>
 
@@ -136,6 +136,7 @@ export default function FeaturedProjectsSection() {
               >
                 <FeaturedProjectCard
                   title={project.title}
+                  description={project.description}
                   date={formatProjectDate(project)}
                   image={project.profileImage}
                   href={`/projects/project_catalogue/${project.id}`}

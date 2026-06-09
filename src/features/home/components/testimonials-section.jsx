@@ -11,7 +11,7 @@ export default function TestimonialsSection({ testimonials }) {
           Client Reviews
         </h2>
 
-        <div className="mt-10 bg-mimz-gold py-13">
+        <div className="mt-10 bg-[#CEAD8B]/30 h-[500px] flex items-center justify-start overflow-hidden">
           <Marquee
             pauseOnHover
             repeat={3}
