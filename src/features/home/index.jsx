@@ -99,7 +99,6 @@ export default function HomeFeature() {
                 will-change-transform
               "
             >
-              <source src="/videos/web-hero.webm" type="video/webm" />
               <source src="/videos/web_hero.mp4" type="video/mp4" />
             </video>
             <div className="absolute inset-0 bg-black/5" />

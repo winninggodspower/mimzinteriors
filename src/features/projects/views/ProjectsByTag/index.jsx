@@ -12,6 +12,19 @@ import {
 } from "@features/lib/motion";
 import { useProjectsByTagPagination } from "./useProjectsByTagPagination";
 import HeroCardsStrip from "@features/home/components/hero-cards-strip";
+import QuoteSection from "@features/about/components/quote-section";
+
+const TAG_QUOTES = {
+  home: "The essence of interior design will always be about people and how they live.",
+  office: "The space you work in should work for you.",
+  hotel: "Hospitality is making your guests feel at home, even when you wish they were.",
+};
+
+const TAG_PLURALS = {
+  home: "HOMES",
+  office: "OFFICES",
+  hotel: "HOTELS",
+};
 
 export default function ProjectsByTagPage() {
   const {
@@ -31,6 +44,8 @@ export default function ProjectsByTagPage() {
   const introMotion = staggerContainer(0.1);
   const quoteMotion = fadeUpItem({ y: 20, duration: 0.62 });
   const projectCount = data?.projects?.length || 0;
+  const tagQuote = TAG_QUOTES[activeTag] || TAG_QUOTES.home;
+  const tagHeading = TAG_PLURALS[activeTag] || "PROJECT CATALOGUE";
 
   return (
     <main className="prjc-main overflow-x-visible">
@@ -72,7 +87,7 @@ export default function ProjectsByTagPage() {
             className="mt-[clamp(2rem,4vw,3rem)] font-caterina text-[40px] leading-none font-light uppercase text-black max-md:text-[clamp(2rem,4vw,3rem)]"
             variants={fadeUpItem({ y: 16, duration: 0.58, delay: 0.06 })}
           >
-            PROJECT CATALOGUE
+            {tagHeading}
           </motion.h1>
           <motion.p
             className="prjc-intro-copy"
@@ -146,7 +161,7 @@ export default function ProjectsByTagPage() {
               aria-live="polite"
               aria-label="Loading projects"
             >
-              <div className="flex flex-col items-center gap-4 border border-[rgba(194,172,132,0.28)] bg-[rgba(255,252,247,0.84)] px-6 py-5 shadow-[0_18px_50px_rgba(40,32,20,0.12)] max-sm:px-5 max-sm:py-4">
+              <div className="flex flex-col items-center gap-4 px-6 py-5 max-sm:px-5 max-sm:py-4">
                 <span
                   className="h-12 w-12 animate-spin rounded-full border-2 border-[rgba(28,28,26,0.12)] border-t-[#c9a96e] border-r-[rgba(201,169,110,0.55)]"
                   aria-hidden="true"
@@ -181,28 +196,13 @@ export default function ProjectsByTagPage() {
           </div>
         ) : null}
       </section>
+      
+      <QuoteSection
+        text={tagQuote}
+        className="pb-[clamp(4.8rem,9vw,8rem)] pt-[clamp(3.8rem,8vw,5.8rem)] max-w-6xl!"
+        textClassName="text-[26px] sm:text-[32px] md:text-[40px] max-w-6xl! mx-auto"
 
-      <section className="bg-white px-4 md:px-8 lg:px-16 pb-[clamp(4.8rem,9vw,8rem)] pt-[clamp(3.8rem,8vw,5.8rem)] lg:pt-30.25">
-        <div className="prjc-quote-inner">
-          <motion.blockquote
-            variants={quoteMotion}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.5 }}
-          >
-            We design and create spaces from residential homes to office spaces with a focus on functionality and aesthetic appeal. We are never out of style.
-          </motion.blockquote>
-          <div className="prjc-separator-wrap" aria-hidden="true">
-            <Image
-              src={seperator}
-              alt=""
-              fill
-              className="prjc-separator-img"
-              sizes="(min-width: 1024px) 190px, 40vw"
-            />
-          </div>
-        </div>
-      </section>
+      />
     </main>
   );
 }
