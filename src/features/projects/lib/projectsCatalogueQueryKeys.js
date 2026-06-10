@@ -19,6 +19,13 @@ export const apartmentsCatalogueQueryKey = (
   pageSize = APARTMENTS_CATALOGUE_PAGE_SIZE
 ) => ["apartmentsCatalogue", page, pageSize];
 
+export const projectsByTagQueryKey = (tag, page, pageSize = PROJECTS_CATALOGUE_PAGE_SIZE) => [
+  "projectsByTag",
+  tag,
+  page,
+  pageSize,
+];
+
 export const accessoriesQueryKey = (
   page,
   pageSize = ACCESSORIES_PAGE_SIZE

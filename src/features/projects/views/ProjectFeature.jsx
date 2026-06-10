@@ -27,7 +27,13 @@ const projectItems = [
     image: apartments,
     alt: "Apartment and shortlet interior",
   },
-  // Accessories removed — only Projects and Apartments are shown here.
+  {
+    title: "PROJECTS BY TAG",
+    desc: "Browse our projects filtered by type — Home, Office, or Hotel — to find the inspiration you need.",
+    href: "/projects/home",
+    image: projectHero,
+    alt: "Projects filtered by tag",
+  },
 ];
 
 export default function ProjectsFeature() {
@@ -84,7 +90,7 @@ export default function ProjectsFeature() {
       <motion.div className="w-full text-center mb-24" {...aosReveal({ direction: "up", distance: 32, duration: 0.5 })}>
         <Link
           href="/contact"
-          className="inline-flex min-h-14 items-center justify-center rounded-lg bg-[#c28831] px-7 py-3 text-[22px] leading-none font-medium tracking-[0.06em] text-white uppercase transition duration-200 ease-out hover:-translate-y-0.5 hover:bg-[#ab7424] hover:shadow-[0_10px_26px_rgba(171,116,36,0.28)] max-sm:min-h-12.5 max-sm:px-5 max-sm:py-2.5 max-sm:text-sm"
+          className="inline-flex min-h-14 items-center justify-center rounded-lg bg-[#c28831] px-7 py-3 text-[22px] leading-none font-medium tracking-[0.06em] text-white uppercase transition duration-200 ease-out hover:-translate-y-0.5 hover:bg-[#ab7424] hover:shadow-[0_18px_26px_rgba(171,116,36,0.28)] max-sm:min-h-12.5 max-sm:px-5 max-sm:py-2.5 max-sm:text-sm"
         >
           GET IN TOUCH
         </Link>

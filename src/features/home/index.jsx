@@ -3,11 +3,10 @@
 import Image from "next/image";
 import { motion } from "motion/react";
 import QuoteSection from "@features/about/components/quote-section";
-import AccessoriesSection from "@features/home/components/accessories-section";
 import FeaturedProjectsSection from "@features/home/components/featured-projects-section";
 import HeroCardsStrip from "@features/home/components/hero-cards-strip";
 import TestimonialsSection from "@features/home/components/testimonials-section";
-import { accessoriesSection, testimonials } from "@features/home/data";
+import { testimonials } from "@features/home/data";
 
 const revealMotion = (delay = 0) => ({
   initial: { opacity: 0, y: 44, scale: 0.985 },
