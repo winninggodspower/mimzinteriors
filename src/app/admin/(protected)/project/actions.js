@@ -33,6 +33,7 @@ export async function getAdminProjects() {
     id: String(project._id),
     title: project.title,
     description: project.description,
+    tag: project.tag || "home",
     profileImage: project.profileImage,
     mediaCount: mediaCountByProjectId.get(String(project._id)) || 0,
     isPublished: Boolean(project.isPublished),
@@ -43,9 +44,30 @@ export async function getAdminProjects() {
   }))
 }
 
+export async function updateProjectTagAction(formData) {
+  const projectId = String(formData.get("projectId") || "").trim()
+  const tag = String(formData.get("tag") || "home").trim()
+
+  if (!projectId) {
+    throw new Error("Project id is required")
+  }
+
+  const VALID_TAGS = new Set(["home", "office", "hotel"])
+  if (!VALID_TAGS.has(tag)) {
+    throw new Error("Invalid tag value")
+  }
+
+  await dbConnect()
+  await Project.findByIdAndUpdate(projectId, { tag })
+
+  revalidatePath("/admin/project")
+  revalidatePath("/projects/project_catalogue")
+}
+
 export async function createProjectAction(formData) {
   const title = String(formData.get("title") || "").trim()
   const description = String(formData.get("description") || "").trim()
+  const tag = String(formData.get("tag") || "home").trim()
   const image = formData.get("image")
 
   if (!title || !description) {
@@ -62,6 +84,7 @@ export async function createProjectAction(formData) {
   await Project.create({
     title,
     description,
+    tag,
     profileImage: uploaded.secure_url,
     imagePublicId: uploaded.public_id,
     isPublished: false,

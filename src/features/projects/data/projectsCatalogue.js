@@ -32,6 +32,7 @@ export async function getProjectsCataloguePage({
           title: project.title,
           profileImage: project.profileImage,
           description: project.description,
+          tag: project.tag || "home",
         })),
         total,
         limit: safeLimit,

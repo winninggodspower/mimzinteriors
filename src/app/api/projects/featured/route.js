@@ -39,6 +39,7 @@ function serializeProject(project) {
     id: String(project._id),
     title: project.title,
     profileImage: project.profileImage,
+    tag: project.tag || "home",
     featuredAt: project.featuredAt ? new Date(project.featuredAt).toISOString() : null,
     publishedAt: project.publishedAt ? new Date(project.publishedAt).toISOString() : null,
     createdAt: project.createdAt ? new Date(project.createdAt).toISOString() : null,

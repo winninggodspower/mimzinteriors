@@ -776,7 +776,6 @@ body {
 }
 
 .contact-info-inner {
-  max-width: 1380px;
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr 1.1fr;

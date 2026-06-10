@@ -17,7 +17,7 @@ export default function Contact() {
   return (
     <main className="contact-main">
       <section className="contact-info-section">
-        <div className="contact-info-inner">
+        <div className="contact-info-inner max-w-7xl">
           <div className="contact-info-grid gap-10 md:gap-y-16 mt-10 md:mt-0">
             {contactInfo.map((item, i) => (
               <motion.div

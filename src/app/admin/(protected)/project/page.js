@@ -6,10 +6,31 @@ import {
   publishProjectAction,
   unfeatureProjectAction,
   unpublishProjectAction,
+  updateProjectTagAction,
 } from "./actions"
 import CatalogDeleteButton from "@features/admin/catalogue/components/catalog-delete-button"
 import CatalogItemUploadForm from "@features/admin/catalogue/components/catalog-item-upload-form"
+import TagEditForm from "@features/admin/catalogue/components/tag-edit-form"
 import Link from "next/link"
+
+function TagBadge({ tag }) {
+  const styles = {
+    home: "bg-emerald-100 text-emerald-800 border-emerald-300",
+    office: "bg-blue-100 text-blue-800 border-blue-300",
+    hotel: "bg-purple-100 text-purple-800 border-purple-300",
+  }
+  const labels = {
+    home: "🏠 Home",
+    office: "🏢 Office",
+    hotel: "🏨 Hotel",
+  }
+
+  return (
+    <span className={`inline-block rounded-full border px-3 py-0.5 text-xs font-medium ${styles[tag] || styles.home}`}>
+      {labels[tag] || tag}
+    </span>
+  )
+}
 
 export default async function AdminProjectPage() {
   const projects = await getAdminProjects()
@@ -45,13 +66,17 @@ export default async function AdminProjectPage() {
                 <div>
                   <h3 className="text-lg font-semibold text-slate-900">{project.title}</h3>
                   <p className="mt-1 text-sm text-slate-600">{project.description}</p>
-                  <p className="mt-2 text-xs text-slate-500">Detail images: {project.mediaCount}</p>
-                  <p className="mt-2 text-xs font-medium uppercase tracking-wide text-slate-500">
-                    {project.isPublished ? "Published" : "Unpublished"}
-                  </p>
-                  <p className="mt-1 text-xs font-medium uppercase tracking-wide text-[#7A5B1B]">
-                    {project.isFeatured ? "Featured on home" : "Not featured"}
-                  </p>
+                  <div className="mt-2 flex flex-wrap items-center gap-3">
+                    <TagBadge tag={project.tag} />
+                    <TagEditForm projectId={project.id} currentTag={project.tag} action={updateProjectTagAction} />
+                    <p className="text-xs text-slate-500">Detail images: {project.mediaCount}</p>
+                    <p className="text-xs font-medium uppercase tracking-wide text-slate-500">
+                      {project.isPublished ? "Published" : "Unpublished"}
+                    </p>
+                    <p className="text-xs font-medium uppercase tracking-wide text-[#7A5B1B]">
+                      {project.isFeatured ? "Featured on home" : "Not featured"}
+                    </p>
+                  </div>
                 </div>
 
                 <div className="flex flex-col items-start gap-2 md:items-end">

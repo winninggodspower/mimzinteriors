@@ -10,6 +10,7 @@ const projectSchema = new mongoose.Schema(
     publishedAt: { type: Date, default: null },
     isFeatured: { type: Boolean, default: false },
     featuredAt: { type: Date, default: null },
+    tag: { type: String, enum: ["home", "office", "hotel"], default: "home" },
   },
   { timestamps: true },
 )
