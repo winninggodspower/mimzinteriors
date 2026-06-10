@@ -13,15 +13,15 @@ export default function FeaturedProjectCard({
   href = "/projects/project_catalogue",
 }) {
   return (
-    <Link href={href} className="group block overflow-hidden bg-white">
-      <div className="relative h-[382px] overflow-hidden">
+    <Link href={href} className="group block bg-white">
+      <div className="relative h-95.5 group group-hover:scale-110 group-hover:z-20 transition-transform duration-700 ease-out">
 
         {/* IMAGE */}
         <Image
           src={image}
           alt={title}
           fill
-          className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+          className="object-cover  "
           sizes="(min-width: 1280px) 31vw, (min-width: 768px) 48vw, 100vw"
         />
 
@@ -35,7 +35,7 @@ export default function FeaturedProjectCard({
           </h3>
 
           <p className="max-w-md text-white">
-              
+              {description?.split(" ").slice(0, 8).join(" ")}
           </p>
 
           <p className="text-white">
@@ -46,10 +46,10 @@ export default function FeaturedProjectCard({
         {/* BOTTOM PANEL (FIXED + SMOOTH EXIT) */}
         <div
           className="
-            absolute bottom-0 left-0 right-0 z-20
+            absolute bottom-0 left-0 right-0 z-10
             flex items-center justify-between gap-4 bg-[#E3CEBC] px-4 py-4 shadow-[0px_4px_4px_rgba(0,0,0,0.25)] sm:px-5 sm:py-[1.125rem]
             transition-all duration-700 ease-out
-            group-hover:opacity-0 group-hover:translate-y-6
+            group-hover:opacity-0 group-hover:translate-y-6 
           "
         >
           <h3 className="font-caterina text-[1.15rem] leading-none uppercase text-[#151515] sm:text-[1.6rem]">

@@ -5,7 +5,7 @@ import { Icon } from "@iconify/react";
 
 export default function TestimonialCard({ name, quote, rating = 4 }) {
   return (
-    <article className="flex w-full max-w-[350px] items-stretch gap-4 rounded-l-[70px] rounded-tr-[30px] bg-white p-1 shadow-sm">
+    <article className="flex w-full max-w-[350px] items-stretch gap-4 rounded-l-[70px] rounded-tr-[30px] bg-white p-0.5 shadow-sm">
       {/* Left Avatar / Name Badge */}
       <div className="flex size-[86px] shrink-0 flex-col items-center justify-center rounded-full bg-[#D4B391] p-3 text-center text-white">
         {/* Simple User Icon SVG */}

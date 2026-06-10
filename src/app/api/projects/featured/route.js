@@ -11,6 +11,7 @@ const DUMMY_FEATURED_PROJECTS = [
   {
     id: "dummy-featured-1",
     title: "Project Pinnock",
+    description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, quasi.",
     profileImage: '/project-catalogue/projecta.png',
     featuredAt: "2026-01-01T00:00:00.000Z",
     publishedAt: "2026-01-01T00:00:00.000Z",
@@ -19,6 +20,7 @@ const DUMMY_FEATURED_PROJECTS = [
   {
     id: "dummy-featured-2",
     title: "Luxury Living Room",
+    description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, quasi.",
     profileImage: "/project-catalogue/projectb.png",
     featuredAt: "2025-12-01T00:00:00.000Z",
     publishedAt: "2025-12-01T00:00:00.000Z",
@@ -27,6 +29,7 @@ const DUMMY_FEATURED_PROJECTS = [
   {
     id: "dummy-featured-3",
     title: "Minimal Apartment",
+    description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, quasi.",
     profileImage: "/project-catalogue/projectc.png",
     featuredAt: "2025-11-01T00:00:00.000Z",
     publishedAt: "2025-11-01T00:00:00.000Z",
@@ -38,6 +41,7 @@ function serializeProject(project) {
   return {
     id: String(project._id),
     title: project.title,
+    description: project.description,
     profileImage: project.profileImage,
     tag: project.tag || "home",
     featuredAt: project.featuredAt ? new Date(project.featuredAt).toISOString() : null,
