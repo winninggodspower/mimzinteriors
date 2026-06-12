@@ -15,6 +15,7 @@ import {
 import HeroCardsStrip from "@features/home/components/hero-cards-strip";
 import ServiceShowcase from "@features/service/components/service-showcase";
 import { processSteps } from "@features/service/data";
+import QuoteSection from "@features/about/components/quote-section";
 
 export default function Service() {
   const sectionMotion = sectionReveal({ y: 30 });
@@ -68,14 +69,13 @@ export default function Service() {
             />
           </motion.div>
           <div className="svc-hero-overlay" />
-          <HeroCardsStrip />
           <h1 className="hero-title">SERVICES</h1>
         </div>
       </motion.section>
       
-      <div className="mt-20 font-aref-ruqaa mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
+      <div className="mt-10 md:mt-16 font-aref-ruqaa mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
         <p className="svc-hero-caption">All images belongs to Mimz Interiors</p>
-        <p className="svc-hero-description mt-10 text-start">
+        <p className="svc-hero-description mt-6 md:mt-10 text-start">
           Our complete package of services ranges from high quality and specialized services both interior and exterior works to maintenance for both commercial and residential properties.
         </p>
       </div>
@@ -105,7 +105,7 @@ export default function Service() {
                 custom={i}
                 whileHover={{ y: -4, transition: { duration: 0.22 } }}
               >
-                <div className=" font-caterina flex items-center gap-[0.4rem] mb-3 flex-wrap">
+                <div className=" font-caterina flex items-center gap-[0.4rem] mb-3 flex-nowrap">
                   <span className="font-caterina text-[16px] sm:text-[21px] lg:text-[24px] font-semibold text-black">{step.num}</span>
                   <span className="text-black text-base">{"\u00B7"}</span>
                   <span className="text-[0.9rem]">
@@ -120,39 +120,13 @@ export default function Service() {
         </div>
       </motion.section>
 
-      <motion.section className="svc-philosophy" {...sectionMotion}>
-        <div className="svc-philosophy-inner">
-          <motion.blockquote
-            className="svc-philosophy-quote leading-tight"
-            {...quoteReveal}
-          >
-            Patience in dealing with clients, staff, and artisans is crucial for
-            a smooth workflow and successful outcomes.
-          </motion.blockquote>
-
-          <motion.div
-            {...aosReveal({ direction: "down", distance: 18, delay: 0.06 })}
-            className="mt-1"
-          >
-            <Image
-              src={'/mimz-mascut-seperator.png'}
-              alt="seperator"
-              className="svcquote-seperator"
-              width={273}
-              height={178}
-            />
-          </motion.div>
-
-          <motion.div {...ctaReveal} className="mt-5 flex justify-center">
-            <Link
-              href="/contact"
-              className="inline-flex items-center justify-center rounded-[10px] bg-[#c58d2f] px-7 py-3 font-caterina text-[1.15rem] font-light uppercase tracking-[0.01em] text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#b27d27]"
-            >
-              Get In Touch
-            </Link>
-          </motion.div>
-        </div>
-      </motion.section>
+      <QuoteSection
+        text={"Patience in dealing with clients, staff, and artisans is crucial for a smooth workflow and successful outcomes."}
+        showQuoteIcon={false}
+        showBtn={true}
+        className="max-w-[1050px]"
+        textClassName="md:text-[40px] max-w-[1050px] mx-auto"
+      />
 
       {/* <motion.section className="svc-gallery" {...sectionMotion}>
         <div className="svc-gallery-grid relative z-10 ">

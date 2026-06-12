@@ -63,19 +63,14 @@ export default function HomeFeature() {
           animate={{ opacity: 1, y: 0, rotate: 0, scale: 1 }}
           transition={{ duration: 0.9, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
         >
-          <motion.div
-            animate={{ y: [0, -6, 0], rotate: [0, -1.5, 0] }}
-            transition={{ duration: 4.8, repeat: Infinity, ease: "easeInOut" }}
-          >
-            <Image
-              src="/BEST-01.png"
-              alt=""
-              width={180}
-              height={180}
-              priority
-              className="h-auto w-16 sm:w-24 lg:w-32"
-            />
-          </motion.div>
+          <Image
+            src="/BEST-01.png"
+            alt=""
+            width={180}
+            height={180}
+            priority
+            className="h-auto w-16 sm:w-24 lg:w-32"
+          />
         </motion.div>
         <div className="relative h-125 sm:h-150 lg:h-175 w-full overflow-visible">
           <motion.div
@@ -126,13 +121,14 @@ export default function HomeFeature() {
         </motion.p>
         <motion.div className="max-w-7xl mx-auto mt-[clamp(2rem,4vw,3rem)] space-y-1" variants={introCopyVariants} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }}>
           <motion.p className="m-0 text-base leading-[1.72] text-black max-md:text-[0.9rem]! max-md:leading-[1.66]! max-[480px]:text-[0.84rem]!" variants={introParagraphVariants}>
-            Mimz interior is a company specialized in architectural interior and exterior projects from start to finish, we handle both local and international project that require our design, management skills and furniture fixings for both real estate developers and personal property owners.
+            Welcome to Mimz Interiors, where timeless design meets spaces created to last a lifetime. For over eight years, we have been transforming homes into beautiful, functional, and deeply personal environments that reflect the unique lifestyles of our clients.
           </motion.p>
           <motion.p className="m-0 text-base leading-[1.72] text-black max-md:text-[0.9rem]! max-md:leading-[1.66]! max-[480px]:text-[0.84rem]!" variants={introParagraphVariants}>
-            Mimz interior was founded in the year 2018 by Miracle Godsent Nwachukwu (Creative director). Amongst other wonderful achievement as a model, actor and fashion enthusiast , Miracle has been awarded over the years for his innovative Creation when it comes to interior design and space management. All his efforts has made mimz interior to be awarded best interior design company in the year 2021. Over the years he has made remarkable trailblazing top notch designs ideas that are universally accepted for both homes, office spaces, restaurant etc.
+            At Mimz Interiors, we believe great design goes beyond aesthetics. It is about creating spaces that inspire comfort, elevate everyday living, and stand the test of time. Drawing inspiration from world-class interior design trends and adapting them to suit the modern African lifestyle, we deliver interiors that are elegant, intentional, and unforgettable.
           </motion.p>
           <motion.p className="m-0 text-base leading-[1.72] text-black max-md:text-[0.9rem]! max-md:leading-[1.66]! max-[480px]:text-[0.84rem]!" variants={introParagraphVariants}>
-            At mimz interior, we see through the mind of our clients, by paying attention to details, providing comfort, poise and class putting cost optimization as a great excellent value: enjoying comfort with less cost.
+            From concept development to the finest finishing details, every project is approached with creativity, precision, and an unwavering commitment to excellence. Whether you are building a new home, renovating an existing space, or seeking bespoke furnishings and décor, our goal remains the same: to create exceptional spaces that tell your story and enrich the way you live. <br />
+            Welcome to a world of timeless design.
           </motion.p>
         </motion.div>
       </motion.section>
@@ -197,13 +193,6 @@ export default function HomeFeature() {
           </div>
         </motion.div>
       </motion.section>
-
-      <QuoteSection
-        text="Designing homes, that last a lifetime."
-        className="mt-[clamp(7rem,6vw,8rem)] mb-[clamp(3.5rem,6vw,4.5rem)]"
-        textClassName="md:text-[60px]"
-      />
-
 
       <TestimonialsSection testimonials={testimonials} />
     </main>

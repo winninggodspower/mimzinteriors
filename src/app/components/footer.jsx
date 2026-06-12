@@ -12,40 +12,43 @@ const socialLinks = [
 
 export default function Footer() {
   return (
-    <footer className="w-full border-t border-[#1f1f1f] ">
-      <div className="mx-auto max-w-400 px-6 pb-6 pt-10 sm:px-12">
-        <div className="flex items-center justify-center gap-2 ">
-          {socialLinks.map((social) => {
-            return (
-              <Link
-                key={social.name}
-                href={social.href}
-                aria-label={social.name}
-                target="_blank"
-                className="flex items-center justify-center transition-all duration-300 hover:scale-125 hover:rotate-6"
-              >
-                <Icon icon={social.icon} className={social.size} aria-hidden="true" />
-              </Link>
-            );
-          })}
+    <footer>
+      <p className="svc-hero-caption text-[#545453] mb-5! md:mb-6! ">All images belongs to Mimz Interiors</p>
+      <div className="w-full border-t border-[#1f1f1f] ">
+        <div className="mx-auto max-w-400 px-6 pb-6 pt-10 sm:px-12">
+          <div className="flex items-center justify-center gap-2 ">
+            {socialLinks.map((social) => {
+              return (
+                <Link
+                  key={social.name}
+                  href={social.href}
+                  aria-label={social.name}
+                  target="_blank"
+                  className="flex items-center justify-center transition-all duration-300 hover:scale-125 hover:rotate-6"
+                >
+                  <Icon icon={social.icon} className={social.size} aria-hidden="true" />
+                </Link>
+              );
+            })}
+          </div>
+
+          <p className="mt-4 text-center text-[18px] ">
+            &copy; 2025 Mimzinteriors. All Rights Reserved. Privacy Policy
+          </p>
         </div>
 
-        <p className="mt-4 text-center text-[18px] ">
-          &copy; 2025 Mimzinteriors. All Rights Reserved. Privacy Policy
-        </p>
-      </div>
-
-      <div
-        className="relative w-full  overflow-hidden bg-white mt-2"
-        aria-hidden="true"
-      >
-        <Image
-          src={'/footer-pattern.svg'}
-          alt=""
-          className="w-full "
-          width={1920}
-          height={200}
-        />
+        <div
+          className="relative w-full  overflow-hidden bg-white mt-2"
+          aria-hidden="true"
+        >
+          <Image
+            src={'/footer-pattern.svg'}
+            alt=""
+            className="w-full "
+            width={1920}
+            height={200}
+          />
+        </div>
       </div>
     </footer>
   );

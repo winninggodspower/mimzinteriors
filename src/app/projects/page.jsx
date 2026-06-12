@@ -1,11 +1,7 @@
-import ProjectsFeature from "@features/projects/views/ProjectFeature";
+import { redirect } from "next/navigation";
 
-const page = () => {
-  return (
-    <>
-      <ProjectsFeature />
-    </>
-  );
+const Page = () => {
+  redirect("/projects/home");
 };
 
-export default page;
+export default Page;
