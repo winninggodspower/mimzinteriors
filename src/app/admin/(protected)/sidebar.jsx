@@ -4,13 +4,11 @@ import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { signOut } from "next-auth/react"
-import { LayoutDashboard, BriefcaseBusiness, Building2, LampDesk, LogOut } from "lucide-react"
+import { LayoutDashboard, BriefcaseBusiness, LogOut } from "lucide-react"
 
 const navItems = [
   { label: "Dashboard", href: "/admin", icon: LayoutDashboard },
   { label: "Project", href: "/admin/project", icon: BriefcaseBusiness },
-  { label: "Apartment", href: "/admin/apartment", icon: Building2 },
-  { label: "Accesories", href: "/admin/accesories", icon: LampDesk },
 ]
 
 export default function AdminSidebar() {

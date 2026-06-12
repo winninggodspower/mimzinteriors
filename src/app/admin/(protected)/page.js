@@ -1,25 +1,17 @@
-
 import dbConnect from "@/lib/mongoose"
 import Project from "@/models/project"
-import Apartment from "@/models/apartment"
-import AccessoryMedia from "@/models/accessoryMedia"
 
 async function getDashboardStats() {
   await dbConnect()
 
-  const [
-    projectTotal,
-    projectPublished,
-    apartmentTotal,
-    apartmentPublished,
-    accessoryTotal,
-  ] = await Promise.all([
-    Project.countDocuments({}),
-    Project.countDocuments({ isPublished: true }),
-    Apartment.countDocuments({}),
-    Apartment.countDocuments({ isPublished: true }),
-    AccessoryMedia.countDocuments({}),
-  ])
+  const [projectTotal, projectPublished, homeCount, officeCount, hotelCount] =
+    await Promise.all([
+      Project.countDocuments({}),
+      Project.countDocuments({ isPublished: true }),
+      Project.countDocuments({ tag: "home" }),
+      Project.countDocuments({ tag: "office" }),
+      Project.countDocuments({ tag: "hotel" }),
+    ])
 
   return {
     projects: {
@@ -28,38 +20,22 @@ async function getDashboardStats() {
       unpublished: Math.max(projectTotal - projectPublished, 0),
       tracksPublishing: true,
     },
-    apartments: {
-      total: apartmentTotal,
-      published: apartmentPublished,
-      unpublished: Math.max(apartmentTotal - apartmentPublished, 0),
-      tracksPublishing: true,
-    },
-    accessories: {
-      total: accessoryTotal,
-      published: null,
-      unpublished: null,
-      tracksPublishing: false,
+    byTag: {
+      home: homeCount,
+      office: officeCount,
+      hotel: hotelCount,
     },
   }
 }
 
+const tagLabels = {
+  home: "Home",
+  office: "Office",
+  hotel: "Hotel",
+}
+
 export default async function AdminPage() {
   const stats = await getDashboardStats()
-
-  const cards = [
-    {
-      label: "Projects",
-      values: stats.projects,
-    },
-    {
-      label: "Apartments",
-      values: stats.apartments,
-    },
-    {
-      label: "Accessories",
-      values: stats.accessories,
-    },
-  ]
 
   return (
     <div className="space-y-6">
@@ -71,29 +47,43 @@ export default async function AdminPage() {
       <section className="rounded-2xl border border-[#B58A2A]/25 bg-white p-6 shadow-sm">
         <h2 className="text-2xl font-semibold text-slate-900">Content Analytics</h2>
         <p className="mt-1 text-sm text-slate-600">
-          Snapshot of projects, apartments, and accessories currently in your admin.
+          Overview of all projects currently in your admin.
         </p>
 
-        <div className="mt-4 grid gap-4 md:grid-cols-3">
-          {cards.map((card) => (
-            <article key={card.label} className="rounded-xl border border-slate-200 bg-slate-50/60 p-4">
-              <p className="text-sm font-medium uppercase tracking-wide text-slate-500">{card.label}</p>
-              <p className="mt-2 text-3xl font-semibold text-slate-900">{card.values.total}</p>
+        <div className="mt-4 grid gap-4 md:grid-cols-4">
+          {/* Total projects card */}
+          <article className="rounded-xl border border-slate-200 bg-slate-50/60 p-4">
+            <p className="text-sm font-medium uppercase tracking-wide text-slate-500">
+              Total Projects
+            </p>
+            <p className="mt-2 text-3xl font-semibold text-slate-900">
+              {stats.projects.total}
+            </p>
+            <div className="mt-3 flex flex-wrap gap-2 text-xs font-medium">
+              <span className="rounded-full bg-emerald-100 px-2.5 py-1 text-emerald-700">
+                Published: {stats.projects.published}
+              </span>
+              <span className="rounded-full bg-amber-100 px-2.5 py-1 text-amber-700">
+                Unpublished: {stats.projects.unpublished}
+              </span>
+            </div>
+          </article>
 
-              {card.values.tracksPublishing ? (
-                <div className="mt-3 flex flex-wrap gap-2 text-xs font-medium">
-                  <span className="rounded-full bg-emerald-100 px-2.5 py-1 text-emerald-700">
-                    Published: {card.values.published}
-                  </span>
-                  <span className="rounded-full bg-amber-100 px-2.5 py-1 text-amber-700">
-                    Unpublished: {card.values.unpublished}
-                  </span>
-                </div>
-              ) : (
-                <p className="mt-3 text-xs text-slate-500">
-                  Publish status is not tracked for accessories.
-                </p>
-              )}
+          {/* Per-tag cards */}
+          {Object.entries(stats.byTag).map(([tag, count]) => (
+            <article
+              key={tag}
+              className="rounded-xl border border-slate-200 bg-slate-50/60 p-4"
+            >
+              <p className="text-sm font-medium uppercase tracking-wide text-slate-500">
+                {tagLabels[tag]}
+              </p>
+              <p className="mt-2 text-3xl font-semibold text-slate-900">
+                {count}
+              </p>
+              <p className="mt-3 text-xs text-slate-500">
+                Projects tagged with &ldquo;{tagLabels[tag]}&rdquo;
+              </p>
             </article>
           ))}
         </div>
