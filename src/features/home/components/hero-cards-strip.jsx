@@ -36,7 +36,7 @@ function renderHeroCard(card, { mobile = false, active = false, onClick, navigat
   return (
     <motion.div
       key={`${mobile ? "mobile" : "desktop"}-${card.title}`}
-      className={`group relative origin-center flex items-center justify-center overflow-hidden rounded-[15px] text-center shadow-[0px_4px_60px_2px_rgba(206,173,139,0.3)] backdrop-blur-md transition-shadow duration-300 ease-out ${
+      className={`group relative origin-center flex items-center justify-center rounded-[15px] text-center shadow-[0px_4px_60px_2px_rgba(206,173,139,0.3)] backdrop-blur-md transition-shadow duration-300 ease-out ${
         card.tone === "gold"
           ? "bg-[#CEAD8B] text-white"
           : "bg-white text-black"
@@ -105,6 +105,8 @@ export default function HeroCardsStrip({ activeTag, onCardClick }) {
   const router = useRouter();
   return (
     <>
+
+      {/* // this renders the hero cards in a horizontal strip for desktop and a scrollable or marquee view for mobile */}
       <motion.div
         className="absolute left-1/2 bottom-0 z-10 hidden items-end gap-3 -translate-x-1/2 translate-y-1/2 px-3 sm:flex"
         initial="hidden"
@@ -129,13 +131,14 @@ export default function HeroCardsStrip({ activeTag, onCardClick }) {
           });
         })}
       </motion.div>
-
+      
+      {/* // this renders the hero cards in a scrollable or marquee view for mobile */}
       <div className="absolute inset-x-0 bottom-0 z-10 translate-y-1/2 sm:hidden">
-        <div className="relative flex w-full items-center justify-center overflow-hidden">
+        <div className="relative flex w-full items-center justify-center">
           <Marquee
             pauseOnHover
             repeat={2}
-            className="w-full px-3 py-2 [--duration:22s] [--gap:1rem]"
+            className="w-full overflow-visible px-3 py-2 [--duration:22s] [--gap:0.5rem]"
           >
             {heroCards.map((card) => {
               const cardTag = TITLE_TO_TAG[card.title];

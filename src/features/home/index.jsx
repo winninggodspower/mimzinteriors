@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import { motion } from "motion/react";
-import QuoteSection from "@features/about/components/quote-section";
 import FeaturedProjectsSection from "@features/home/components/featured-projects-section";
 import HeroCardsStrip from "@features/home/components/hero-cards-strip";
 import TestimonialsSection from "@features/home/components/testimonials-section";
