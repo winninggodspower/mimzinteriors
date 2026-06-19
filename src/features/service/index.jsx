@@ -1,56 +1,18 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { motion } from "motion/react";
 import servicehero from "@assets/images/service/servicehero.png";
 import {
-  aosReveal,
-  MOTION_STAGGER,
-  MOTION_VIEWPORT,
   heroScaleLoop,
   sectionReveal,
-  staggerContainer,
 } from "@features/lib/motion";
-import HeroCardsStrip from "@features/home/components/hero-cards-strip";
 import ServiceShowcase from "@features/service/components/service-showcase";
-import { processSteps } from "@features/service/data";
+import DesignProcess from "@features/service/components/design-process";
 import QuoteSection from "@features/about/components/quote-section";
 
 export default function Service() {
   const sectionMotion = sectionReveal({ y: 30 });
-  const cardContainer = staggerContainer(MOTION_STAGGER.medium);
-  const cardItem = {
-    hidden: (index) => ({
-      opacity: 0,
-      y: 26,
-      x: index % 2 === 0 ? -16 : 16,
-      rotate: index % 2 === 0 ? -1.25 : 1.25,
-      scale: 0.97,
-    }),
-    visible: {
-      opacity: 1,
-      y: 0,
-      x: 0,
-      rotate: 0,
-      scale: 1,
-      transition: { duration: 0.82, ease: [0.22, 1, 0.36, 1] },
-    },
-  };
-
-  const quoteReveal = {
-    initial: { opacity: 0, y: 20, filter: "blur(6px)" },
-    whileInView: { opacity: 1, y: 0, filter: "blur(0px)" },
-    viewport: { once: true, amount: 0.6 },
-    transition: { duration: 0.95, ease: [0.22, 1, 0.36, 1] },
-  };
-
-  const ctaReveal = {
-    initial: { opacity: 0, y: 28, scale: 0.94 },
-    whileInView: { opacity: 1, y: 0, scale: 1 },
-    viewport: { once: true, amount: 0.8 },
-    transition: { duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] },
-  };
 
   return (
     <main className="svc-main overflow-hidden">
@@ -82,43 +44,7 @@ export default function Service() {
 
       <ServiceShowcase sectionMotion={sectionMotion} />
 
-      <motion.section className="bg-[#CEAD8B]/30 pt-13.5 pb-9 h-full" {...sectionMotion}>
-        <div className="mx-auto max-w-7xl w-full px-4 sm:px-6 ">
-          <motion.h2
-            className="font-caterina text-[28px] sm:text-[34px] lg:text-[40px] font-light tracking-[-0.05em] text-black uppercase mb-1"
-            {...aosReveal({ direction: "up", distance: 30 })}
-          >
-            OUR DESIGN PROCESS
-          </motion.h2>
-          <motion.div
-            className="svc-process-grid"
-            variants={cardContainer}
-            initial="hidden"
-            whileInView="visible"
-            viewport={MOTION_VIEWPORT}
-          >
-            {processSteps.map((step, i) => (
-              <motion.div
-                key={i}
-                className="svc-process-card"
-                variants={cardItem}
-                custom={i}
-                whileHover={{ y: -4, transition: { duration: 0.22 } }}
-              >
-                <div className=" font-caterina flex items-center gap-[0.4rem] mb-3 flex-nowrap">
-                  <span className="font-caterina text-[16px] sm:text-[21px] lg:text-[24px] font-semibold text-black">{step.num}</span>
-                  <span className="text-black text-base">{"\u00B7"}</span>
-                  <span className="text-[0.9rem]">
-                    <Image src={step.icon} alt="" aria-hidden="true" />
-                  </span>
-                  <span className="text-[16px] sm:text-[18px] lg:text-[24px] font-light uppercase">{step.title}</span>
-                </div>
-                <p className="svc-process-desc">{step.desc}</p>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </motion.section>
+      <DesignProcess sectionMotion={sectionMotion} />
 
       <QuoteSection
         text={"Patience in dealing with clients, staff, and artisans is crucial for a smooth workflow and successful outcomes."}
