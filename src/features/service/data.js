@@ -7,7 +7,8 @@ import iconf from "@assets/images/service/iconf.svg";
 import slide2 from "@assets/images/services-slides/slide-2.jpg";
 import slide3 from "@assets/images/services-slides/slide-3.jpg";
 import slide4 from "@assets/images/services-slides/slide-4.jpg";
-import slide5 from "@assets/images/services-slides/slide-5.jpg";
+// import slide5 from "@assets/images/services-slides/slide-5.jpg";
+import slide5 from "@assets/images/services-slides/new-slide-5.png";
 
 export const services = [
   "Consultation Services",
