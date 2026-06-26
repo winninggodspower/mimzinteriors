@@ -6,13 +6,13 @@ import {
 import ProjectsByTagPage from "@features/projects/views/ProjectsByTag";
 import { getProjectsByTagPage } from "@features/projects/data/projectsByTag";
 
-const VALID_TAGS = ["home", "office", "hotel"];
+const VALID_TAGS = ["residential", "commercial"];
 
 const ProjectsByTag = async ({ searchParams }) => {
   const resolvedSearchParams = await searchParams;
   const requestedTag = VALID_TAGS.includes(resolvedSearchParams?.tag)
     ? resolvedSearchParams.tag
-    : "home";
+    : "residential";
   const requestedPage = Math.max(
     1,
     Number.parseInt(resolvedSearchParams?.page || "1", 10) || 1

@@ -9,7 +9,7 @@ import {
   projectsByTagQueryKey,
 } from "@features/projects/lib/projectsCatalogueQueryKeys";
 
-const VALID_TAGS = ["home", "office", "hotel"];
+const VALID_TAGS = ["residential", "commercial"];
 
 export function useProjectsByTagPagination() {
   const router = useRouter();
@@ -20,8 +20,8 @@ export function useProjectsByTagPagination() {
   const [isRoutePending, startTransition] = useTransition();
 
   const tag = useMemo(() => {
-    const rawTag = params?.tag || "home";
-    return VALID_TAGS.includes(rawTag) ? rawTag : "home";
+    const rawTag = params?.tag || "residential";
+    return VALID_TAGS.includes(rawTag) ? rawTag : "residential";
   }, [params]);
 
   const page = useMemo(() => {

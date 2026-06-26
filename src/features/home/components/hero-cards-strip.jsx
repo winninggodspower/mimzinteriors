@@ -18,9 +18,8 @@ const introParagraphVariants = {
 const HERO_CARD_HOVER_SCALE = 1.3;
 
 const TITLE_TO_TAG = {
-  Homes: "home",
-  Offices: "office",
-  Hotels: "hotel",
+  Residential: "residential",
+  Commercial: "commercial",
 };
 
 function renderHeroCard(card, { mobile = false, active = false, onClick, navigate } = {}) {

@@ -4,10 +4,10 @@ import { PROJECTS_CATALOGUE_PAGE_SIZE } from "@features/projects/lib/projectsCat
 import dbConnect from "../../../app/lib/mongoose";
 import Project from "../../../app/models/project";
 
-const VALID_TAGS = ["home", "office", "hotel"];
+const VALID_TAGS = ["residential", "commercial"];
 
 const mockPool = {
-  home: [
+  residential: [
     {
       profileImage: "/project-catalogue/projecta.png",
       title: "Home Serene",
@@ -24,7 +24,7 @@ const mockPool = {
       description: "A cozy family space crafted for connection, rest, and everyday luxury.",
     },
   ],
-  office: [
+  commercial: [
     {
       profileImage: "/project-catalogue/projecta.png",
       title: "Office Pinnacle",
@@ -41,27 +41,10 @@ const mockPool = {
       description: "Executive-level office design that communicates authority and refined taste.",
     },
   ],
-  hotel: [
-    {
-      profileImage: "/project-catalogue/projecta.png",
-      title: "Hotel Luxe",
-      description: "Five-star hospitality interiors with opulent finishes and unforgettable guest experiences.",
-    },
-    {
-      profileImage: "/project-catalogue/projectb.png",
-      title: "Hotel Boutique",
-      description: "Boutique hotel charm with curated details and intimate ambiance.",
-    },
-    {
-      profileImage: "/project-catalogue/projectc.png",
-      title: "Hotel Grand",
-      description: "Grand lobby and suite designs that set the standard for luxury hospitality.",
-    },
-  ],
 };
 
 function generateMockProjects(tag, totalCount = 24) {
-  const pool = mockPool[tag] || mockPool.home;
+  const pool = mockPool[tag] || mockPool.residential;
   return Array.from({ length: totalCount }, (_, index) => {
     const source = pool[index % pool.length];
     return {
@@ -75,11 +58,11 @@ function generateMockProjects(tag, totalCount = 24) {
 }
 
 export async function getProjectsByTagPage({
-  tag = "home",
+  tag = "residential",
   page = 1,
   limit = PROJECTS_CATALOGUE_PAGE_SIZE,
 }) {
-  const safeTag = VALID_TAGS.includes(tag) ? tag : "home";
+  const safeTag = VALID_TAGS.includes(tag) ? tag : "residential";
   const safePage = Number.isFinite(page) ? Math.max(1, Math.trunc(page)) : 1;
   const safeLimit = Number.isFinite(limit) ? Math.max(1, Math.trunc(limit)) : PROJECTS_CATALOGUE_PAGE_SIZE;
   const offset = (safePage - 1) * safeLimit;
@@ -105,7 +88,7 @@ export async function getProjectsByTagPage({
           title: project.title,
           profileImage: project.profileImage,
           description: project.description,
-          tag: project.tag || "home",
+          tag: project.tag || "residential",
         })),
         tag: safeTag,
         total,

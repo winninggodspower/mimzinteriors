@@ -4,7 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "motion/react";
 import projectHero from "@assets/images/projects/projectsCatalogue/projectscataloguehero.png";
-import seperator from "@assets/images/seperator.png";
 import {
   fadeUpItem,
   heroScaleLoop,
@@ -15,15 +14,13 @@ import HeroCardsStrip from "@features/home/components/hero-cards-strip";
 import QuoteSection from "@features/about/components/quote-section";
 
 const TAG_QUOTES = {
-  home: "The essence of interior design will always be about people and how they live.",
-  office: "The space you work in should work for you.",
-  hotel: "Hospitality is making your guests feel at home, even when you wish they were.",
+  residential: "The essence of interior design will always be about people and how they live.",
+  commercial: "The space you work in should work for you.",
 };
 
 const TAG_PLURALS = {
-  home: "HOMES",
-  office: "OFFICES",
-  hotel: "HOTELS",
+  residential: "RESIDENTIAL PROJECTS",
+  commercial: "COMMERCIAL PROJECTS",
 };
 
 export default function ProjectsByTagPage() {

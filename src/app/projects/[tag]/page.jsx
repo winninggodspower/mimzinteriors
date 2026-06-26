@@ -6,7 +6,7 @@ import {
 import ProjectsByTagPage from "@features/projects/views/ProjectsByTag";
 import { getProjectsByTagPage } from "@features/projects/data/projectsByTag";
 
-const VALID_TAGS = ["home", "office", "hotel"];
+const VALID_TAGS = ["residential", "commercial"];
 
 export async function generateStaticParams() {
   return VALID_TAGS.map((tag) => ({ tag }));
@@ -15,7 +15,7 @@ export async function generateStaticParams() {
 const ProjectsByTag = async ({ params, searchParams }) => {
   const { tag } = await params;
   const resolvedSearchParams = await searchParams;
-  const requestedTag = VALID_TAGS.includes(tag) ? tag : "home";
+  const requestedTag = VALID_TAGS.includes(tag) ? tag : "residential";
   const requestedPage = Math.max(
     1,
     Number.parseInt(resolvedSearchParams?.page || "1", 10) || 1

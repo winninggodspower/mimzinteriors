@@ -168,7 +168,7 @@ export default function CatalogItemUploadForm({
           <fieldset>
             <legend className="text-sm font-medium text-slate-700">Tag (Category)</legend>
             <div className="mt-2 flex flex-wrap gap-3">
-              {["home", "office", "hotel"].map((value) => (
+              {["residential", "commercial"].map((value) => (
                 <label
                   key={value}
                   className="flex cursor-pointer items-center gap-2 rounded-xl border border-slate-300 px-4 py-3 text-sm font-medium text-slate-700 has-[:checked]:border-[#B58A2A] has-[:checked]:bg-[#FFF7E5] has-[:checked]:text-[#7A5B1B]"
@@ -177,10 +177,10 @@ export default function CatalogItemUploadForm({
                     type="radio"
                     name="tag"
                     value={value}
-                    defaultChecked={value === "home"}
+                    defaultChecked={value === "residential"}
                     className="sr-only"
                   />
-                  {value === "home" ? "🏠 Home" : value === "office" ? "🏢 Office" : "🏨 Hotel"}
+                  {value === "residential" ? "🏠 Residential" : "� Commercial"}
                 </label>
               ))}
             </div>

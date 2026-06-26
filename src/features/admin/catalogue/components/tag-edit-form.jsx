@@ -3,9 +3,8 @@
 import { useFormStatus } from "react-dom"
 
 const TAG_OPTIONS = [
-  { value: "home", label: "🏠 Home" },
-  { value: "office", label: "🏢 Office" },
-  { value: "hotel", label: "🏨 Hotel" },
+  { value: "residential", label: "🏠 Residential" },
+  { value: "commercial", label: "🏢 Commercial" },
 ]
 
 function SubmitButton() {

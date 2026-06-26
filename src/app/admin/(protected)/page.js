@@ -4,12 +4,12 @@ import Project from "@/models/project"
 async function getDashboardStats() {
   await dbConnect()
 
-  const [projectTotal, projectPublished, homeCount, officeCount, hotelCount] =
+  const [projectTotal, projectPublished, residentialCount, commercialCount] =
     await Promise.all([
       Project.countDocuments({}),
       Project.countDocuments({ isPublished: true }),
-      Project.countDocuments({ tag: "home" }),
-      Project.countDocuments({ tag: "office" }),
+      Project.countDocuments({ tag: "residential" }),
+      Project.countDocuments({ tag: "commercial" }),
       Project.countDocuments({ tag: "hotel" }),
     ])
 
@@ -21,17 +21,16 @@ async function getDashboardStats() {
       tracksPublishing: true,
     },
     byTag: {
-      home: homeCount,
-      office: officeCount,
+      residential: residentialCount,
+      commercial: commercialCount,
       hotel: hotelCount,
     },
   }
 }
 
 const tagLabels = {
-  home: "Home",
-  office: "Office",
-  hotel: "Hotel",
+  residential: "Residential",
+  commercial: "Commercial",
 }
 
 export default async function AdminPage() {

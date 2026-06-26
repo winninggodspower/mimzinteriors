@@ -1,6 +1,6 @@
 export const heroCards = [
   {
-    title: "Homes",
+    title: "Residential",
     icon: "healthicons:home-outline",
     description:
       "Residential spaces including apartments, duplexes, villas, shortlets, and private rooms.",
@@ -8,20 +8,12 @@ export const heroCards = [
     tone: "light",
   },
   {
-    title: "Offices",
+    title: "Commercial",
     icon: "emojione-monotone:japanese-post-office",
     description:
       "Commercial spaces for offices, co-working hubs, retail stores, and banking environments.",
     mobileDescription: "Corporate, retail, banking.",
     tone: "gold",
-  },
-  {
-    title: "Hotels",
-    icon: "emojione-monotone:hotel",
-    description:
-      "Hospitality spaces including hotels, restaurants, lounges, bars, and event halls.",
-    mobileDescription: "Hotels, lounges, events.",
-    tone: "light",
   },
 ];
 
