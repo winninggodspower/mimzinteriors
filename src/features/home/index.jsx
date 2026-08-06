@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { motion } from "motion/react";
 import FeaturedProjectsSection from "@features/home/components/featured-projects-section";
+import FeaturedProjectsComparisonSection from "@features/home/components/featured-projects-comparison-section";
 import HeroCardsStrip from "@features/home/components/hero-cards-strip";
 import TestimonialsSection from "@features/home/components/testimonials-section";
 import { testimonials } from "@features/home/data";
@@ -132,7 +133,9 @@ export default function HomeFeature() {
         </motion.div>
       </motion.section>
       
-      <FeaturedProjectsSection />
+      {/* <FeaturedProjectsSection /> */}
+
+      <FeaturedProjectsComparisonSection />
 
       <motion.section
         className="w-full bg-white"
