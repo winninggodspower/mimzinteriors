@@ -241,10 +241,10 @@ export default function AboutPage() {
       </motion.section>
 
       {/* ── QUOTE SECTION ───────────────────────────────── */}
-
+{/* 
       <p className="text-center font-aref-ruqaa text-[#54545] mb-6">
         -All images belongs to Mimz interiors-
-      </p>
+      </p> */}
 
       {/* ── VISION GALLERY ──────────────────────────────── */}
       {/* convert to a carousel later */}

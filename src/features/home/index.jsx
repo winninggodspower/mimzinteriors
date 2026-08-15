@@ -121,14 +121,7 @@ export default function HomeFeature() {
         </motion.p>
         <motion.div className="max-w-7xl mx-auto mt-[clamp(2rem,4vw,3rem)] space-y-1" variants={introCopyVariants} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }}>
           <motion.p className="m-0 text-base leading-[1.72] text-black max-md:text-[0.9rem]! max-md:leading-[1.66]! max-[480px]:text-[0.84rem]!" variants={introParagraphVariants}>
-            Welcome to Mimz Interiors, where timeless design meets spaces created to last a lifetime. For over eight years, we have been transforming homes into beautiful, functional, and deeply personal environments that reflect the unique lifestyles of our clients.
-          </motion.p>
-          <motion.p className="m-0 text-base leading-[1.72] text-black max-md:text-[0.9rem]! max-md:leading-[1.66]! max-[480px]:text-[0.84rem]!" variants={introParagraphVariants}>
-            At Mimz Interiors, we believe great design goes beyond aesthetics. It is about creating spaces that inspire comfort, elevate everyday living, and stand the test of time. Drawing inspiration from world-class interior design trends and adapting them to suit the modern African lifestyle, we deliver interiors that are elegant, intentional, and unforgettable.
-          </motion.p>
-          <motion.p className="m-0 text-base leading-[1.72] text-black max-md:text-[0.9rem]! max-md:leading-[1.66]! max-[480px]:text-[0.84rem]!" variants={introParagraphVariants}>
-            From concept development to the finest finishing details, every project is approached with creativity, precision, and an unwavering commitment to excellence. Whether you are building a new home, renovating an existing space, or seeking bespoke furnishings and décor, our goal remains the same: to create exceptional spaces that tell your story and enrich the way you live. <br />
-            Welcome to a world of timeless design.
+            Welcome to Mimz Interiors, where timeless design meets spaces created to last a lifetime. At Mimz Interiors, we believe great design goes beyond aesthetics. It is about creating spaces that inspire comfort, elevate everyday living, and stand the test of time. drawing inspiration from world-class interior design trends and adapting them to suit our client’s needs, we deliver interiors that are elegant, intentional, and unforgettable.
           </motion.p>
         </motion.div>
       </motion.section>
