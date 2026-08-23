@@ -31,33 +31,63 @@ export const accessoriesSection = {
 
 export const testimonials = [
   {
-    name: "Mrs Mercy",
-    role: "Gospel Artist",
+    name: "Pradley Luv",
     quote:
-      "When we wanted to design our new home, he came highly recommended and he delivered exceptionally, the space was designed to my taste and likening. ",
+      "MIMZ interiors is the absolute best, they literally transform a space to a complete beauty. And also they offer a lot of services including cleaning, so all you need to do is get your properties and move in 🚚😁STRESS FREE!!!!!!!! 💃🏿💃🏿💃🏿💃🏿💃🏿",
+    rating: 5,
   },
   {
-    name: "Mr Dickson",
-    role: "C.E.O Kora",
+    name: "Adeshina Jude",
     quote:
-      "They truly understood our vision and transformed our space into something beautiful, functional, and uniquely ours. Highly recommend.",
+      "Mimz Interiors has proven with amazing evidence to be the best Interior Design Company. Their job delivery is classic, with clear emphasis on detail and uniqueness. Positive Responsiveness, Quality, Value",
+    rating: 5,
   },
   {
-    name: "Mrs Pamela",
-    role: "Entrepreneur",
-    quote:
-      "He designed my home with the purest of intentions, my family and I love our spaces. I dream of coming home always instead of staying out.",
+    name: "Thelma Dike",
+    quote: "One of the best interior designers I've ever met...their designs are excellent and beautiful. You can't help but fall in love 😊😊",
+    rating: 5,
   },
   {
-    name: "Mr Miracle",
-    role: "C.E.O Fluid Homes",
-    quote:
-      "Mimz designed both our spaces in Abuja and Lagos, every clients that works has one or more amazing thing to say about space.",
+    name: "Pastor Miracle Bruno",
+    quote: "Absolutely hardworking, excellent, great work ethics, and experienced.",
+    rating: 5,
   },
   {
-    name: "Miss Destiny",
-    role: "NOLLYWOOD ACTRESS",
-    quote:
-      "Mimz designed both our spaces in Abuja and Lagos, every clients that works has one or more amazing thing to say about space.",
+    name: "Moses Ogbleba",
+    quote: "Creative company with agile design team. 👍",
+    rating: 4,
+  },
+  {
+    name: "Sample Modlen",
+    quote: "Very nice place\nSell good and durable Interiors",
+    rating: 5,
+  },
+  {
+    name: "Jacqueline Ejenavbo",
+    quote: "If simplicity is what you seek, Here You Go!!! 👌👌",
+    rating: 5,
+  },
+  {
+    name: "Ogbonda Mirabelle",
+    quote: "An absolute work of art and pleasure",
+    rating: 5,
+  },
+  {
+    name: "Edidiong",
+    quote: "Beautiful experience and",
+    rating: 3,
+  },
+  {
+    name: "John Lekwa",
+    quote: "Awesome place",
+    rating: 5,
+  },
+  {
+    name: "Sophia Enoch",
+    quote: "Never seen an interior designing company that is this good.",
+    rating: 5,
   },
 ];
+
+export const googleReviewsUrl =
+  "https://www.google.com/maps/search/?api=1&query=MIMZ%20Interiors%20Lekki%20Lagos";

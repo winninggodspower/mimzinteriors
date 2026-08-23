@@ -5,21 +5,21 @@ import { Icon } from "@iconify/react";
 
 export default function TestimonialCard({ name, quote, rating = 4 }) {
   return (
-    <article className="flex w-full max-w-[350px] items-stretch gap-4 rounded-l-[70px] rounded-tr-[30px] bg-white p-0.5 shadow-sm">
+    <article className="flex w-[min(88vw,360px)] items-center gap-3 rounded-l-[70px] rounded-tr-[30px] bg-white p-1 shadow-sm">
       {/* Left Avatar / Name Badge */}
-      <div className="flex size-[86px] shrink-0 flex-col items-center justify-center rounded-full bg-[#D4B391] p-3 text-center text-white">
+      <div className="flex size-19.5 shrink-0 flex-col items-center justify-center rounded-full bg-[#D4B391] p-2 text-center text-white">
         {/* Simple User Icon SVG */}
          <Icon icon="healthicons:ui-user-profile" className="text-white text-[15px]" />
         
-        <h3 className="mt-2 font-caterina text-[15px] italic leading-tight">
+        <h3 className="mt-1 font-caterina text-[14px] italic leading-tight">
           {name}
         </h3>
       </div>
 
       {/* Right Content Area */}
-      <div className="flex flex-col justify-center py-2 pr-4">
+      <div className="min-w-0 flex-1 py-1 pr-1">
         {/* Quote Text */}
-        <p className="font-caterina font-light text-[11px]">
+        <p className="line-clamp-3 font-caterina font-light text-[11px]">
           {quote}
         </p>
 
