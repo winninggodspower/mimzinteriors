@@ -145,7 +145,7 @@ export default function HomeFeature() {
           <img
             src="/hero-quote-img.jpg"
             alt="Founder standing in a designed interior"
-            className="h-[85vh] w-full object-cover object-center"
+            className="max-md:max-h-2xl h-[85vh] w-full object-cover object-center"
           />
 
           {/* DARK + WARM OVERLAY */}
@@ -162,7 +162,7 @@ export default function HomeFeature() {
             >
               {/* QUOTE */}
               <blockquote
-                className="p-0 font-bd-megalona text-[26px] font-normal italic leading-none text-white sm:text-[42px] md:text-[60px]"
+                className="p-0 font-bd-megalona text-[30px] font-normal italic leading-none text-white sm:text-[42px] md:text-[60px]"
               >
                 <span className="mr-[0.1em] align-[-0.1em] text-[clamp(2rem,5vw,3.5rem)] font-normal">
                   "
@@ -174,7 +174,7 @@ export default function HomeFeature() {
               </blockquote>
               {/* faint logo behind  */}
               <div
-                className="flex justify-center -mt-8"
+                className="flex justify-center max-md:-mt-5 -mt-8"
               >
                 <Image
                   src="/mimz-mascut-seperator.png"

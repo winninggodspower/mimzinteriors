@@ -190,9 +190,9 @@ export default function FeaturedProjectsComparisonSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="mt-5 font-aref-ruqaa text-[1rem] text-slate-600"
+            className="mt-5 font-aref-ruqaa text-[1rem] text-slate-600 text-center"
           >
-            The comparison layout is not available right now.
+            The featured projects were unable to load right now.
           </motion.p>
         )}
 

@@ -15,7 +15,7 @@ export default function Footer() {
     <footer>
       <p className="svc-hero-caption text-[#545453] mb-5! md:mb-6! ">All images belongs to Mimz Interiors</p>
       <div className="w-full border-t border-[#1f1f1f] ">
-        <div className="mx-auto max-w-400 px-6 pb-6 pt-10 sm:px-12">
+        <div className="mx-auto max-w-400 px-6 py-4 md:pb-6 md:pt-10 sm:px-12">
           <div className="flex items-center justify-center gap-2 ">
             {socialLinks.map((social) => {
               return (
@@ -32,7 +32,7 @@ export default function Footer() {
             })}
           </div>
 
-          <p className="mt-4 text-center text-[18px] ">
+          <p className="mt-4 text-center text-[16px] md:text-[18px] ">
             &copy; 2025 Mimzinteriors. All Rights Reserved. Privacy Policy
           </p>
         </div>

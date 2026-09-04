@@ -63,7 +63,7 @@ export default function ProjectsByTagPage() {
           </motion.div>
           <h1 className="hero-title">PROJECTS</h1>
 
-          <HeroCardsStrip activeTag={activeTag} onCardClick={updateTag} />
+          <HeroCardsStrip activeTag={activeTag} onCardClick={updateTag} disableMarquee={true} />
         </div>
       </section>
 
@@ -75,7 +75,7 @@ export default function ProjectsByTagPage() {
           viewport={{ once: true, amount: 0.45 }}
         >
           <motion.p
-            className="prjc-img-credit"
+            className="prjc-img-credit max-md:mt-8!"
             variants={fadeUpItem({ y: 14, duration: 0.5 })}
           >
             -All images belongs to Mimz interiors-

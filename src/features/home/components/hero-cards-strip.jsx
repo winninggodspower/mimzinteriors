@@ -100,14 +100,14 @@ function renderHeroCard(card, { mobile = false, active = false, onClick, navigat
   );
 }
 
-export default function HeroCardsStrip({ activeTag, onCardClick }) {
+export default function HeroCardsStrip({ activeTag, onCardClick, disableMarquee=false }) {
   const router = useRouter();
   return (
     <>
 
       {/* // this renders the hero cards in a horizontal strip for desktop and a scrollable or marquee view for mobile */}
       <motion.div
-        className="absolute left-1/2 bottom-0 z-10 hidden items-end gap-3 -translate-x-1/2 translate-y-1/2 px-3 sm:flex"
+        className={`absolute left-1/2 bottom-0 z-10 ${!disableMarquee? 'hidden': 'flex'}  sm:flex items-end gap-3 -translate-x-1/2 translate-y-1/2 max-md:max-w-[95%] mx-auto px-3 `}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.18 }}
@@ -132,7 +132,7 @@ export default function HeroCardsStrip({ activeTag, onCardClick }) {
       </motion.div>
       
       {/* // this renders the hero cards in a scrollable or marquee view for mobile */}
-      <div className="absolute inset-x-0 bottom-0 z-10 translate-y-1/2 sm:hidden">
+      <div className={`absolute inset-x-0 bottom-0 z-10 translate-y-1/2 ${!disableMarquee ? 'sm:hidden': 'hidden'}`}>
         <div className="relative flex w-full items-center justify-center">
           <Marquee
             pauseOnHover

@@ -89,5 +89,5 @@ export const testimonials = [
   },
 ];
 
-export const googleReviewsUrl =
-  "https://www.google.com/maps/search/?api=1&query=MIMZ%20Interiors%20Lekki%20Lagos";
+export const googleReviewsUrl = "https://www.google.com/search?q=MIMZ+INTERIORS#lrd=0x103bf5eaa0a35125:0xd6f1719e9f022fa6,3";
+

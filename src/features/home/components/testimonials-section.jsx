@@ -11,7 +11,7 @@ export default function TestimonialsSection({ testimonials }) {
         <h2 className="font-caterina text-center text-[1.9rem] leading-none uppercase text-[#161616] sm:text-[2.2rem] px-2">
           Client Reviews
         </h2>
-        <div className="mt-4 flex justify-center px-4">
+        <div className="mt-2 flex justify-center px-4">
           <a
             href={googleReviewsUrl}
             target="_blank"
@@ -22,7 +22,7 @@ export default function TestimonialsSection({ testimonials }) {
           </a>
         </div>
 
-        <div className="mt-10 bg-[#CEAD8B]/30 h-125 flex items-center justify-start overflow-hidden">
+        <div className="mt-7 md:mt-10 bg-[#CEAD8B]/30 max-md:h-100 h-112.5 flex items-center justify-start overflow-hidden">
           <Marquee
             pauseOnHover
             repeat={3}
