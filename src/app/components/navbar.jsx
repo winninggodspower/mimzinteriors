@@ -66,17 +66,19 @@ export default function Navbar() {
   }, [pathname]);
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-mimz-cream/95 backdrop-blur-md transition-all shadow-[0_1px_4px_rgba(0,0,0,0.06)] text-[#2a2a2a]">
+    <header className="sticky top-0 z-50 w-full bg-mimz-cream transition-all shadow-[0_1px_3px_rgba(0,0,0,0.05)] text-[#2a2a2a]">
       <FlowbiteNavbar
         fluid
-        className="rounded-none! bg-transparent! px-8! py-4! sm:px-12!"
+        className="rounded-none! bg-mimz-cream! px-8! py-4! sm:px-12!"
       >
         <NavbarBrand as={Link} href="/" className="leading-none">
           <Image
             src="/INTERIORS-logo.png"
             alt="MIMZ Interiors"
-            width={138}
-            height={44}
+            width={360}
+            height={152}
+            quality={100}
+            unoptimized
             priority
             className="h-auto w-32.5"
             style={{ height: "auto" }}
@@ -116,7 +118,7 @@ export default function Navbar() {
         {isMenuOpen ? (
           <motion.div
             key="navbar-menu"
-            className="fixed inset-x-0 bottom-0 top-21 bg-mimz-cream pointer-events-auto sm:top-22"
+            className="fixed inset-x-0 bottom-0 top-21 bg-mimz-cream pointer-events-auto sm:top-22 z-50"
             variants={panelVariants}
             initial="closed"
             animate="open"
