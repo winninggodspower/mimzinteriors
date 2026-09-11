@@ -1,7 +1,6 @@
 "use client";
 
 import { Icon } from "@iconify/react";
-import { Marquee } from "@/components/ui/marquee";
 import { motion } from "motion/react";
 import { useRouter } from "next/navigation";
 import { heroCards } from "@features/home/data";
@@ -15,34 +14,23 @@ const introParagraphVariants = {
   },
 };
 
-const HERO_CARD_HOVER_SCALE = 1.3;
+const HERO_CARD_HOVER_SCALE = 1.15;
 
 const TITLE_TO_TAG = {
   Residential: "residential",
   Commercial: "commercial",
 };
 
-function renderHeroCard(card, { mobile = false, active = false, onClick, navigate } = {}) {
+function renderHeroCard(card, { active = false, onClick, navigate } = {}) {
   const isActive = active;
-
-  const desktopCardClasses = [
-    "min-h-35.25 w-56.75 flex-[1_1_0%] px-4 py-[1.15rem]",
-    "cursor-pointer",
-  ]
-    .filter(Boolean)
-    .join(" ");
 
   return (
     <motion.div
-      key={`${mobile ? "mobile" : "desktop"}-${card.title}`}
-      className={`group relative origin-center flex items-center justify-center rounded-[15px] text-center shadow-[0px_4px_60px_2px_rgba(206,173,139,0.3)] backdrop-blur-md transition-shadow duration-300 ease-out ${
+      key={`card-${card.title}`}
+      className={`group relative origin-center flex items-center justify-center rounded-[15px] text-center shadow-[0px_4px_60px_2px_rgba(206,173,139,0.3)] backdrop-blur-md transition-shadow duration-300 ease-out min-h-28 sm:min-h-35.25 w-36 sm:w-56.75 px-3 sm:px-4 py-2.5 sm:py-[1.15rem] cursor-pointer ${
         card.tone === "gold"
           ? "bg-[#CEAD8B] text-white"
           : "bg-white text-black"
-      } ${
-        mobile
-          ? "h-30 w-34 shrink-0 px-3 py-2.5"
-          : desktopCardClasses
       }`}
       variants={!isActive ? introParagraphVariants : undefined}
       initial={!isActive ? "rest" : undefined}
@@ -52,7 +40,7 @@ function renderHeroCard(card, { mobile = false, active = false, onClick, navigat
           : "rest"
       }
       whileHover={!isActive ? { scale: HERO_CARD_HOVER_SCALE, zIndex: 20 } : undefined}
-      whileTap={!isActive ? { scale: 1.05 } : undefined}
+      whileTap={!isActive ? { scale: 1.04 } : undefined}
       onClick={() => {
         const tag = TITLE_TO_TAG[card.title] || card.title.toLowerCase();
         if (onClick) {
@@ -65,92 +53,69 @@ function renderHeroCard(card, { mobile = false, active = false, onClick, navigat
     >
       <div className="relative flex h-full w-full items-center justify-center">
         <div
-          className={`flex flex-col items-center justify-center font-aref-ruqaa transition-transform duration-300 ease-out ${mobile ? "max-w-28" : "max-w-51"} ${
+          className={`flex flex-col items-center justify-center font-aref-ruqaa transition-transform duration-300 ease-out max-w-28 sm:max-w-51 ${
             isActive
-              ? "scale-[0.846154]"
-              : "group-hover:scale-[0.846154]"
+              ? "scale-[0.88]"
+              : "group-hover:scale-[0.88]"
           }`}
         >
           <Icon
             icon={card.icon}
-            className={`${mobile ? "h-8 w-8" : "h-8 w-8"} ${card.tone === "gold" ? "text-white" : "text-mimz-gold"}`}
+            className={`h-7 w-7 sm:h-8 sm:w-8 ${card.tone === "gold" ? "text-white" : "text-mimz-gold"}`}
             aria-hidden="true"
           />
-          <span className={`${mobile ? "mt-1 text-[0.9rem]" : "mt-1 text-base"} leading-none uppercase tracking-[0.04em]`}>
+          <span className="mt-1 text-[0.85rem] sm:text-base leading-none uppercase tracking-[0.04em]">
             {card.title}
           </span>
-          {mobile ? (
-            <p className="mt-0 text-[0.74rem] leading-[1.3] opacity-85">
-              {card.mobileDescription}
-            </p>
-          ) : (
-            <p
-              className={`text-[0.82rem] leading-[1.4] transition-all duration-300 ease-out ${
-                isActive
-                  ? "h-auto translate-y-0 opacity-100"
-                  : "pointer-events-none h-0 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 group-hover:h-auto"
-              }`}
-            >
-              {card.description}
-            </p>
-          )}
+
+          {/* Mobile Description (Always Visible, Concise) */}
+          <p className="mt-0.5 text-[0.72rem] leading-[1.3] opacity-85 sm:hidden">
+            {card.mobileDescription}
+          </p>
+
+          {/* Desktop Description (Reveals on Hover) */}
+          <p
+            className={`hidden sm:block text-[0.82rem] leading-[1.4] transition-all duration-300 ease-out ${
+              isActive
+                ? "h-auto translate-y-0 opacity-100"
+                : "pointer-events-none h-0 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 group-hover:h-auto"
+            }`}
+          >
+            {card.description}
+          </p>
         </div>
       </div>
     </motion.div>
   );
 }
 
-export default function HeroCardsStrip({ activeTag, onCardClick, disableMarquee=false }) {
+export default function HeroCardsStrip({ activeTag, onCardClick }) {
   const router = useRouter();
-  return (
-    <>
 
-      {/* // this renders the hero cards in a horizontal strip for desktop and a scrollable or marquee view for mobile */}
-      <motion.div
-        className={`absolute left-1/2 bottom-0 z-10 ${!disableMarquee? 'hidden': 'flex'}  sm:flex items-end gap-3 -translate-x-1/2 translate-y-1/2 max-md:max-w-[95%] mx-auto px-3 `}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.18 }}
-        variants={{
-          hidden: {},
-          visible: {
-            transition: {
-              staggerChildren: 0.16,
-              delayChildren: 0.08,
-            },
+  return (
+    <motion.div
+      className="absolute left-1/2 bottom-0 z-10 flex items-end justify-center gap-2.5 sm:gap-3 -translate-x-1/2 translate-y-1/2 max-w-[95%] sm:max-w-none mx-auto px-2 sm:px-3"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.18 }}
+      variants={{
+        hidden: {},
+        visible: {
+          transition: {
+            staggerChildren: 0.16,
+            delayChildren: 0.08,
           },
-        }}
-      >
-        {heroCards.map((card) => {
-          const cardTag = TITLE_TO_TAG[card.title];
-          return renderHeroCard(card, {
-            active: cardTag === activeTag,
-            onClick: onCardClick,
-            navigate: router.push,
-          });
-        })}
-      </motion.div>
-      
-      {/* // this renders the hero cards in a scrollable or marquee view for mobile */}
-      <div className={`absolute inset-x-0 bottom-0 z-10 translate-y-1/2 ${!disableMarquee ? 'sm:hidden': 'hidden'}`}>
-        <div className="relative flex w-full items-center justify-center">
-          <Marquee
-            pauseOnHover
-            repeat={2}
-            className="w-full overflow-visible px-3 py-2 [--duration:22s] [--gap:0.5rem]"
-          >
-            {heroCards.map((card) => {
-              const cardTag = TITLE_TO_TAG[card.title];
-              return renderHeroCard(card, {
-                mobile: true,
-                active: cardTag === activeTag,
-                onClick: onCardClick,
-                navigate: router.push,
-              });
-            })}
-          </Marquee>
-        </div>
-      </div>
-    </>
+        },
+      }}
+    >
+      {heroCards.map((card) => {
+        const cardTag = TITLE_TO_TAG[card.title];
+        return renderHeroCard(card, {
+          active: cardTag === activeTag,
+          onClick: onCardClick,
+          navigate: router.push,
+        });
+      })}
+    </motion.div>
   );
 }
