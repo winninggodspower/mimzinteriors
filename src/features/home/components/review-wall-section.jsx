@@ -6,18 +6,9 @@ import ReviewWallCard from "./review-wall-card";
 import { reviewWallItems, googleReviewsUrl } from "@features/home/data";
 
 export default function ReviewWallSection() {
-  // Curated Bento Layout: 3 balanced, symmetrical columns
-  const col1 = reviewWallItems.slice(0, 2); // Left: Handover Milestone Image + Review
-  const col2 = reviewWallItems.slice(2, 5); // Center: Review + Dark Bento Google Tile + Review
-  const col3 = reviewWallItems.slice(5, 7); // Right: Apartment Reveal Image + Review
-
-  // Tablet 2-column distribution
-  const tabletCol1 = [reviewWallItems[0], reviewWallItems[1], reviewWallItems[2]];
-  const tabletCol2 = [reviewWallItems[3], reviewWallItems[4], reviewWallItems[5], reviewWallItems[6]];
-
   return (
-    <section className="relative w-full bg-[#FAF8F4] py-20 sm:py-28 overflow-hidden">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section className="relative w-full bg-[#FAF8F4] px-6 py-20 sm:px-8 sm:py-28 lg:px-10 overflow-hidden">
+      <div className="mx-auto max-w-7xl">
         {/* Section Header */}
         <div className="mx-auto max-w-3xl text-center">
           {/* Google 5-Star Trust Badge */}
@@ -76,49 +67,21 @@ export default function ReviewWallSection() {
           </div>
         </div>
 
-        {/* Desktop 3-Column Bento Grid: Symmetrical & Curated */}
-        <div className="mt-12 sm:mt-16 hidden lg:grid lg:grid-cols-3 gap-5 items-start">
-          {/* Left Column: Image Showcase + Client Review */}
-          <div className="flex flex-col">
-            {col1.map((item) => (
-              <ReviewWallCard key={item.id} item={item} />
-            ))}
-          </div>
-
-          {/* Center Column: Review + Dark Bento Google Tile + Review */}
-          <div className="flex flex-col">
-            {col2.map((item) => (
-              <ReviewWallCard key={item.id} item={item} />
-            ))}
-          </div>
-
-          {/* Right Column: Image Showcase + Client Review */}
-          <div className="flex flex-col">
-            {col3.map((item) => (
-              <ReviewWallCard key={item.id} item={item} />
-            ))}
-          </div>
-        </div>
-
-        {/* Tablet 2-Column Grid */}
-        <div className="mt-12 hidden md:grid lg:hidden md:grid-cols-2 gap-5 items-start">
-          <div className="flex flex-col">
-            {tabletCol1.map((item) => (
-              <ReviewWallCard key={item.id} item={item} />
-            ))}
-          </div>
-          <div className="flex flex-col">
-            {tabletCol2.map((item) => (
-              <ReviewWallCard key={item.id} item={item} />
-            ))}
-          </div>
-        </div>
-
-        {/* Mobile 1-Column Grid */}
-        <div className="mt-10 grid grid-cols-1 md:hidden gap-4">
+        {/* Responsive Bento Grid (Tablet 2-Col, Desktop 3-Col with 2-Col Spans) */}
+        <div className="mt-12 sm:mt-16 hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-5 items-stretch">
           {reviewWallItems.map((item) => (
             <ReviewWallCard key={item.id} item={item} />
           ))}
+        </div>
+
+        {/* Mobile 1-Column List (Only 3 Curated Reviews on Mobile) */}
+        <div className="mt-10 flex flex-col space-y-4 md:hidden">
+          {reviewWallItems
+            .filter((item) => !item.isBentoTile)
+            .slice(0, 3)
+            .map((item) => (
+              <ReviewWallCard key={item.id} item={item} />
+            ))}
         </div>
 
         {/* Bottom Callout */}

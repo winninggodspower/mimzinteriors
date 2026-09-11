@@ -92,26 +92,33 @@ export const testimonials = [
 export const googleReviewsUrl = "https://www.google.com/search?q=MIMZ+INTERIORS#lrd=0x103bf5eaa0a35125:0xd6f1719e9f022fa6,3";
 
 export const reviewWallItems = [
-  // Column 1: Image Showcase + Punchy Text Review
+  // Row 1: Featured Story (Spans 2 columns on desktop) + Dark Google Bento Tile
   {
     id: "review-handover",
     name: "Adeshina Jude",
     handle: "@adeshinajude",
     role: "Local Guide · 15 reviews",
     rating: 5,
+    featured: true,
+    span: "md:col-span-2 lg:col-span-2",
+    tag: "Verified Client Story",
     quote:
       "Mimz Interiors has proven with amazing evidence to be the best Interior Design Company. Their job delivery is classic, with clear emphasis on detail and uniqueness.",
     highlights: ["best Interior Design Company", "clear emphasis on detail"],
-    media: {
-      type: "image",
-      src: "/project-catalogue/projecta.png",
-      alt: "Delivered Luxury Interior Project",
-      badge: "Handover Milestone",
-    },
     avatarColor: "bg-[#2563EB]",
     date: "2 weeks ago",
     link: googleReviewsUrl,
   },
+  {
+    id: "bento-metric-tile",
+    isBentoTile: true,
+    title: "5.0 Rating",
+    subtitle: "Google Business Reviews",
+    description: "Rated 5.0 stars by luxury homeowners, developers, and corporate clients across Nigeria.",
+    link: googleReviewsUrl,
+  },
+
+  // Row 2: 3 Single-Column Review Cards
   {
     id: "review-pradley",
     name: "Pradley Luv",
@@ -125,8 +132,6 @@ export const reviewWallItems = [
     date: "1 month ago",
     link: googleReviewsUrl,
   },
-
-  // Column 2: Elegant Review + Dark Bento Google Tile + Work Ethics Review
   {
     id: "review-thelma",
     name: "Thelma Dike",
@@ -138,14 +143,6 @@ export const reviewWallItems = [
     highlights: ["best interior designers", "excellent and beautiful"],
     avatarColor: "bg-[#7C3AED]",
     date: "3 weeks ago",
-    link: googleReviewsUrl,
-  },
-  {
-    id: "bento-metric-tile",
-    isBentoTile: true,
-    title: "5.0 Rating",
-    subtitle: "Google Business Reviews",
-    description: "Rated 5.0 stars by luxury homeowners, developers, and corporate clients across Nigeria.",
     link: googleReviewsUrl,
   },
   {
@@ -162,26 +159,7 @@ export const reviewWallItems = [
     link: googleReviewsUrl,
   },
 
-  // Column 3: Image Showcase + High-Praise Review
-  {
-    id: "review-reveal",
-    name: "Ogbonda Mirabelle",
-    handle: "@mirabelle_og",
-    role: "Verified Client",
-    rating: 5,
-    quote:
-      "An absolute work of art and pleasure. Walking into my apartment after Mimz styled it feels like stepping into a 5-star boutique hotel.",
-    highlights: ["absolute work of art", "5-star boutique hotel"],
-    media: {
-      type: "image",
-      src: "/project-catalogue/projectb.png",
-      alt: "Living Room Transformation",
-      badge: "Apartment Reveal",
-    },
-    avatarColor: "bg-[#D97706]",
-    date: "3 weeks ago",
-    link: googleReviewsUrl,
-  },
+  // Row 3: 1 Single-Column Card + 1 Featured Card (Spans 2 columns on desktop)
   {
     id: "review-sophia",
     name: "Sophia Enoch",
@@ -193,6 +171,22 @@ export const reviewWallItems = [
     highlights: ["company that is this good", "cheat code for homeowners"],
     avatarColor: "bg-[#059669]",
     date: "1 month ago",
+    link: googleReviewsUrl,
+  },
+  {
+    id: "review-reveal",
+    name: "Ogbonda Mirabelle",
+    handle: "@mirabelle_og",
+    role: "Verified Client",
+    rating: 5,
+    featured: true,
+    span: "md:col-span-1 lg:col-span-2",
+    tag: "Residential Highlight",
+    quote:
+      "An absolute work of art and pleasure. Walking into my apartment after Mimz styled it feels like stepping into a 5-star boutique hotel every single day.",
+    highlights: ["absolute work of art", "5-star boutique hotel"],
+    avatarColor: "bg-[#D97706]",
+    date: "3 weeks ago",
     link: googleReviewsUrl,
   },
 ];
