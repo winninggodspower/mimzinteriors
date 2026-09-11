@@ -230,15 +230,7 @@
 
 html,
 body {
-  overflow-x: hidden;
-}
-
-html {
-  overflow-y: auto;
-}
-
-body {
-  overflow-y: auto;
+  overflow-x: clip;
 }
 
 /* ── BASE ────────────────────────────────────────────────────── */

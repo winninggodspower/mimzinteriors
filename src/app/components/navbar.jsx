@@ -66,10 +66,10 @@ export default function Navbar() {
   }, [pathname]);
 
   return (
-    <div className="sticky top-0 z-40 w-full bg-mimz-cream text-[#2a2a2a]">
+    <header className="sticky top-0 z-50 w-full bg-mimz-cream/95 backdrop-blur-md transition-all shadow-[0_1px_4px_rgba(0,0,0,0.06)] text-[#2a2a2a]">
       <FlowbiteNavbar
         fluid
-        className="rounded-none! bg-mimz-cream! px-8! py-4! sm:px-12!"
+        className="rounded-none! bg-transparent! px-8! py-4! sm:px-12!"
       >
         <NavbarBrand as={Link} href="/" className="leading-none">
           <Image
@@ -91,25 +91,21 @@ export default function Navbar() {
           className="group relative flex h-12 w-10 flex-col items-center justify-start pt-2.5 text-[#2a2a2a] sm:h-14 sm:w-12 sm:pt-3"
         >
           <span
-            className={`absolute top-4 block h-0.5 w-7 bg-current transition-all duration-300 sm:w-8 ${
-              isMenuOpen ? "rotate-45" : "-translate-y-2"
-            }`}
+            className={`absolute top-4 block h-0.5 w-7 bg-current transition-all duration-300 sm:w-8 ${isMenuOpen ? "rotate-45" : "-translate-y-2"
+              }`}
           />
           <span
-            className={`absolute top-4 block h-0.5 w-7 bg-current transition-all duration-300 sm:w-8 ${
-              isMenuOpen ? "opacity-0" : "opacity-100"
-            }`}
+            className={`absolute top-4 block h-0.5 w-7 bg-current transition-all duration-300 sm:w-8 ${isMenuOpen ? "opacity-0" : "opacity-100"
+              }`}
           />
           <span
-            className={`absolute top-4 block h-0.5 w-7 bg-current transition-all duration-300 sm:w-8 ${
-              isMenuOpen ? "-rotate-45" : "translate-y-2"
-            }`}
+            className={`absolute top-4 block h-0.5 w-7 bg-current transition-all duration-300 sm:w-8 ${isMenuOpen ? "-rotate-45" : "translate-y-2"
+              }`}
           />
-          
-           <span
-            className={`mt-5 text-[11px] tracking-[0.18em] transition-all duration-300 sm:mt-6 sm:text-[12px] ${
-              isMenuOpen ? "opacity-0" : "translate-y-0 opacity-100"
-            }`}
+
+          <span
+            className={`mt-5 text-[11px] tracking-[0.18em] transition-all duration-300 sm:mt-6 sm:text-[12px] ${isMenuOpen ? "opacity-0" : "translate-y-0 opacity-100"
+              }`}
           >
             MENU
           </span>
@@ -152,16 +148,15 @@ export default function Navbar() {
                     <Link
                       href={item.href}
                       onClick={() => setIsMenuOpen(false)}
-                      className={`relative z-10 text-4xl leading-none transition-colors hover:opacity-70 ${
-                        isItemActive(item.href) ? "text-mimz-gold" : "text-[#2a2a2a]"
-                      }`}
+                      className={`relative z-10 text-4xl leading-none transition-colors hover:opacity-70 ${isItemActive(item.href) ? "text-mimz-gold" : "text-[#2a2a2a]"
+                        }`}
                     >
                       {item.label}
                     </Link>
                   </motion.div>
                 ))}
               </div>
-              
+
               {/* // Desktop menu */}
               <div className="relative hidden h-full w-full sm:block">
                 <motion.div
@@ -194,9 +189,8 @@ export default function Navbar() {
                       <Link
                         href={item.href}
                         onClick={() => setIsMenuOpen(false)}
-                        className={`text-5xl leading-none transition-colors hover:translate-x-2 hover:opacity-70 ${
-                          isItemActive(item.href) ? "text-mimz-gold" : "text-[#2a2a2a]"
-                        }`}
+                        className={`text-5xl leading-none transition-colors hover:translate-x-2 hover:opacity-70 ${isItemActive(item.href) ? "text-mimz-gold" : "text-[#2a2a2a]"
+                          }`}
                       >
                         {item.label}
                       </Link>
@@ -208,6 +202,6 @@ export default function Navbar() {
           </motion.div>
         ) : null}
       </AnimatePresence>
-    </div>
+    </header>
   );
 }
