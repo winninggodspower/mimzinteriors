@@ -11,27 +11,6 @@ export default function ReviewWallSection() {
       <div className="mx-auto max-w-7xl">
         {/* Section Header */}
         <div className="mx-auto max-w-3xl text-center">
-          {/* Google 5-Star Trust Badge */}
-          <a
-            href={googleReviewsUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-full border border-neutral-200/80 bg-white px-4 py-1.5 shadow-2xs transition-transform hover:scale-103"
-          >
-            <Icon icon="logos:google-icon" className="h-4 w-4" />
-            <div className="flex items-center gap-0.5">
-              {[...Array(5)].map((_, i) => (
-                <Icon
-                  key={i}
-                  icon="material-symbols:star-rounded"
-                  className="h-4 w-4 text-[#F59E0B]"
-                />
-              ))}
-            </div>
-            <span className="text-xs font-semibold text-neutral-800">
-              5.0 on Google Reviews
-            </span>
-          </a>
 
           {/* Section Heading */}
           <h2 className="mt-4 font-caterina text-3xl sm:text-4xl md:text-5xl uppercase tracking-tight text-[#161616]">
@@ -54,17 +33,8 @@ export default function ReviewWallSection() {
               <Icon icon="logos:google-icon" className="h-4 w-4" />
               <span>Drop us a Google review</span>
             </a>
-
-            <a
-              href={googleReviewsUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 rounded-full border border-neutral-300 bg-white px-4 py-2.5 text-xs font-medium uppercase tracking-wider text-neutral-700 transition-colors hover:bg-neutral-50 hover:text-black"
-            >
-              <span>View all on Google</span>
-              <Icon icon="material-symbols:arrow-outward-rounded" className="h-3.5 w-3.5" />
-            </a>
           </div>
+
         </div>
 
         {/* Responsive Bento Grid (Tablet 2-Col, Desktop 3-Col with 2-Col Spans) */}
