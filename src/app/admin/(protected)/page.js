@@ -10,7 +10,6 @@ async function getDashboardStats() {
       Project.countDocuments({ isPublished: true }),
       Project.countDocuments({ tag: "residential" }),
       Project.countDocuments({ tag: "commercial" }),
-      Project.countDocuments({ tag: "hotel" }),
     ])
 
   return {
@@ -23,7 +22,6 @@ async function getDashboardStats() {
     byTag: {
       residential: residentialCount,
       commercial: commercialCount,
-      hotel: hotelCount,
     },
   }
 }
@@ -49,7 +47,7 @@ export default async function AdminPage() {
           Overview of all projects currently in your admin.
         </p>
 
-        <div className="mt-4 grid gap-4 md:grid-cols-4">
+        <div className="mt-4 grid gap-4 md:grid-cols-3">
           {/* Total projects card */}
           <article className="rounded-xl border border-slate-200 bg-slate-50/60 p-4">
             <p className="text-sm font-medium uppercase tracking-wide text-slate-500">

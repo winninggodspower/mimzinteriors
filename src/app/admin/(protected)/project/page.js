@@ -15,11 +15,15 @@ import Link from "next/link"
 
 function TagBadge({ tag }) {
   const styles = {
+    residential: "bg-emerald-100 text-emerald-800 border-emerald-300",
+    commercial: "bg-blue-100 text-blue-800 border-blue-300",
     home: "bg-emerald-100 text-emerald-800 border-emerald-300",
     office: "bg-blue-100 text-blue-800 border-blue-300",
     hotel: "bg-purple-100 text-purple-800 border-purple-300",
   }
   const labels = {
+    residential: "🏠 Residential",
+    commercial: "🏢 Commercial",
     home: "🏠 Home",
     office: "🏢 Office",
     hotel: "🏨 Hotel",
