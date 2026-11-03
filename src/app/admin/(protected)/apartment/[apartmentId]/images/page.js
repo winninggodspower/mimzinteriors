@@ -39,6 +39,7 @@ export default async function AdminApartmentImagesPage({ params }) {
           entityId={data.apartment.id}
           entityIdField="apartmentId"
           entityLabel="Apartment"
+          cloudinaryFolder="mimzinteriors/apartments"
         />
       </section>
 

@@ -23,6 +23,7 @@ export default async function AdminAccesoriesPage() {
           entityIdField="accessoryGroupId"
           entityLabel="Accessory"
           showLayoutFields={false}
+          cloudinaryFolder="mimzinteriors/accessories"
         />
       </section>
 

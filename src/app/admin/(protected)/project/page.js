@@ -50,6 +50,7 @@ export default async function AdminProjectPage() {
         titlePlaceholder="Project Ivory"
         descriptionPlaceholder="Write a short project description"
         submitLabel="Upload Project"
+        cloudinaryFolder="mimzinteriors/projects"
       />
 
       <section className="rounded-2xl border border-[#B58A2A]/25 bg-white p-6 shadow-sm">

@@ -8,8 +8,7 @@ import ApartmentMedia from "@/models/apartmentMedia"
 import {
   destroyCloudinaryImage,
   getSafeOrderStart,
-  getValidImageFiles,
-  uploadImageToCloudinary,
+  getUploadedImages,
   VALID_MEDIA_SLOTS,
 } from "@/lib/cloudinary"
 
@@ -44,18 +43,13 @@ export async function getAdminApartments() {
 export async function createApartmentAction(formData) {
   const title = String(formData.get("title") || "").trim()
   const description = String(formData.get("description") || "").trim()
-  const image = formData.get("image")
 
   if (!title || !description) {
     throw new Error("Title and description are required")
   }
 
-  if (!(image instanceof File) || image.size === 0) {
-    throw new Error("Apartment image is required")
-  }
-
+  const [uploaded] = getUploadedImages(formData, APARTMENT_CLOUDINARY_FOLDER)
   await dbConnect()
-  const uploaded = await uploadImageToCloudinary(image, APARTMENT_CLOUDINARY_FOLDER)
 
   await Apartment.create({
     title,
@@ -91,7 +85,7 @@ export async function createApartmentFormAction(previousState, formData) {
 export async function uploadApartmentMediaAction(formData) {
   const apartmentId = String(formData.get("apartmentId") || "").trim()
   const slot = String(formData.get("slot") || "column").trim().toLowerCase()
-  const files = getValidImageFiles(formData)
+  const uploadedResults = getUploadedImages(formData, APARTMENT_CLOUDINARY_FOLDER)
   const orderStart = getSafeOrderStart(formData.get("orderStart"))
 
   if (!apartmentId) {
@@ -102,15 +96,7 @@ export async function uploadApartmentMediaAction(formData) {
     throw new Error("Invalid media slot")
   }
 
-  if (files.length === 0) {
-    throw new Error("Select at least one image")
-  }
-
   await dbConnect()
-
-  const uploadedResults = await Promise.all(
-    files.map((file) => uploadImageToCloudinary(file, APARTMENT_CLOUDINARY_FOLDER)),
-  )
 
   const mediaDocuments = uploadedResults.map((uploaded, index) => ({
     apartmentId,

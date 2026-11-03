@@ -15,6 +15,7 @@ export default async function AdminApartmentPage() {
   return (
     <div className="space-y-6">
       <CatalogItemUploadForm
+        cloudinaryFolder="mimzinteriors/apartments"
         action={createApartmentFormAction}
         entityLabel="Apartment"
         heading="Apartment Upload"

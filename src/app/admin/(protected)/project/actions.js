@@ -8,8 +8,7 @@ import ProjectMedia from "@/models/projectMedia"
 import {
   destroyCloudinaryImage,
   getSafeOrderStart,
-  getValidImageFiles,
-  uploadImageToCloudinary,
+  getUploadedImages,
   VALID_MEDIA_SLOTS,
 } from "@/lib/cloudinary"
 
@@ -68,18 +67,13 @@ export async function createProjectAction(formData) {
   const title = String(formData.get("title") || "").trim()
   const description = String(formData.get("description") || "").trim()
   const tag = String(formData.get("tag") || "residential").trim()
-  const image = formData.get("image")
 
   if (!title || !description) {
     throw new Error("Title and description are required")
   }
 
-  if (!(image instanceof File) || image.size === 0) {
-    throw new Error("Project image is required")
-  }
-
+  const [uploaded] = getUploadedImages(formData, PROJECT_CLOUDINARY_FOLDER)
   await dbConnect()
-  const uploaded = await uploadImageToCloudinary(image, PROJECT_CLOUDINARY_FOLDER)
 
   await Project.create({
     title,
@@ -118,7 +112,7 @@ export async function createProjectFormAction(previousState, formData) {
 export async function uploadProjectMediaAction(formData) {
   const projectId = String(formData.get("projectId") || "").trim()
   const slot = String(formData.get("slot") || "column").trim().toLowerCase()
-  const files = getValidImageFiles(formData)
+  const uploadedResults = getUploadedImages(formData, PROJECT_CLOUDINARY_FOLDER)
 
   if (!projectId) {
     throw new Error("Project id is required")
@@ -128,17 +122,9 @@ export async function uploadProjectMediaAction(formData) {
     throw new Error("Invalid media slot")
   }
 
-  if (files.length === 0) {
-    throw new Error("Select at least one image")
-  }
-
   const orderStart = getSafeOrderStart(formData.get("orderStart"))
 
   await dbConnect()
-
-  const uploadedResults = await Promise.all(
-    files.map((file) => uploadImageToCloudinary(file, PROJECT_CLOUDINARY_FOLDER)),
-  )
 
   const mediaDocuments = uploadedResults.map((uploaded, index) => ({
     projectId,

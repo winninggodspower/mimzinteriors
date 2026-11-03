@@ -6,8 +6,7 @@ import dbConnect from "@/lib/mongoose"
 import AccessoryMedia from "@/models/accessoryMedia"
 import {
   destroyCloudinaryImage,
-  getValidImageFiles,
-  uploadImageToCloudinary,
+  getUploadedImages,
 } from "@/lib/cloudinary"
 
 const ACCESSORIES_CLOUDINARY_FOLDER = "mimzinteriors/accessories"
@@ -26,17 +25,8 @@ export async function getAdminAccessoryImages() {
 }
 
 export async function uploadAccessoryMediaAction(formData) {
-  const files = getValidImageFiles(formData)
-
-  if (files.length === 0) {
-    throw new Error("Select at least one image")
-  }
-
+  const uploadedResults = getUploadedImages(formData, ACCESSORIES_CLOUDINARY_FOLDER)
   await dbConnect()
-
-  const uploadedResults = await Promise.all(
-    files.map((file) => uploadImageToCloudinary(file, ACCESSORIES_CLOUDINARY_FOLDER)),
-  )
 
   const mediaDocuments = uploadedResults.map((uploaded) => ({
     imageUrl: uploaded.secure_url,

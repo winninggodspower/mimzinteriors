@@ -40,6 +40,7 @@ export default async function AdminProjectImagesPage({ params }) {
           entityIdField="projectId"
           entityLabel="Project"
           allowedSlots={["row", "column"]}
+          cloudinaryFolder="mimzinteriors/projects"
         />
       </section>
 

@@ -1,4 +1,5 @@
 import { v2 as cloudinary } from "cloudinary"
+import { getImageUploadError } from "./upload-limits"
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -44,6 +45,40 @@ export function getValidImageFiles(formData, fieldName = "images") {
   return formData
     .getAll(fieldName)
     .filter((file) => file instanceof File && file.size > 0)
+}
+
+export function validateImageFiles(files) {
+  const errorMessage = getImageUploadError(files)
+
+  if (errorMessage) {
+    throw new Error(errorMessage)
+  }
+}
+
+export function getUploadedImages(formData, expectedFolder) {
+  let uploadedImages
+
+  try {
+    uploadedImages = JSON.parse(String(formData.get("uploadedImages") || "[]"))
+  } catch {
+    throw new Error("Invalid uploaded image data")
+  }
+
+  if (
+    !Array.isArray(uploadedImages) ||
+    uploadedImages.length === 0 ||
+    uploadedImages.some(
+      (image) =>
+        !image?.secure_url ||
+        !image?.public_id ||
+        !image.public_id.startsWith(`${expectedFolder}/`) ||
+        !image.secure_url.includes("res.cloudinary.com/"),
+    )
+  ) {
+    throw new Error("Upload at least one valid image")
+  }
+
+  return uploadedImages
 }
 
 export function getSafeOrderStart(value) {

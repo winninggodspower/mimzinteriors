@@ -4,6 +4,8 @@ import { useActionState, useEffect, useMemo, useRef, useState } from "react"
 import { useFormStatus } from "react-dom"
 import { useForm, useWatch } from "react-hook-form"
 import { ChevronDown, ChevronUp, ImagePlus, Loader2 } from "lucide-react"
+import { getImageUploadError } from "@/lib/upload-limits"
+import { uploadImagesDirectly } from "../lib/direct-upload"
 
 const initialState = {
   status: "idle",
@@ -11,17 +13,18 @@ const initialState = {
   resetToken: 0,
 }
 
-function SubmitButton({ idleLabel, pendingLabel }) {
+function SubmitButton({ idleLabel, pendingLabel, disabled = false }) {
   const { pending } = useFormStatus()
+  const isDisabled = pending || disabled
 
   return (
     <button
       type="submit"
-      disabled={pending}
+      disabled={isDisabled}
       className="mt-2 inline-flex w-fit items-center gap-2 rounded-xl bg-[#1A1205] px-5 py-3 font-medium text-[#F4D891] transition hover:bg-[#2A1B08] disabled:cursor-not-allowed disabled:opacity-70"
     >
-      {pending ? <Loader2 className="h-4 w-4 animate-spin" /> : null}
-      {pending ? pendingLabel : idleLabel}
+      {isDisabled ? <Loader2 className="h-4 w-4 animate-spin" /> : null}
+      {isDisabled ? pendingLabel : idleLabel}
     </button>
   )
 }
@@ -37,9 +40,12 @@ export default function CatalogItemUploadForm({
   descriptionPlaceholder,
   submitLabel,
   submittingLabel,
+  cloudinaryFolder,
 }) {
   const [isOpen, setIsOpen] = useState(false)
   const [previewUrl, setPreviewUrl] = useState("")
+  const [fileError, setFileError] = useState("")
+  const [isUploading, setIsUploading] = useState(false)
   const formRef = useRef(null)
   const fileInputRef = useRef(null)
   const previewUrlRef = useRef("")
@@ -86,6 +92,7 @@ export default function CatalogItemUploadForm({
 
   useEffect(() => {
     const file = watchedImage?.[0]
+    setFileError(file ? getImageUploadError([file]) || "" : "")
 
     if (!file) {
       if (previewUrlRef.current) {
@@ -136,7 +143,42 @@ export default function CatalogItemUploadForm({
       </div>
 
       {isOpen ? (
-        <form ref={formRef} action={formAction} className="mt-6 grid gap-4">
+        <form
+          ref={formRef}
+          action={formAction}
+          onSubmit={async (event) => {
+            event.preventDefault()
+            const form = event.currentTarget
+            const file = watchedImage?.[0]
+            const errorMessage = file ? getImageUploadError([file]) : null
+
+            if (errorMessage) {
+              setFileError(errorMessage)
+              return
+            }
+
+            if (!cloudinaryFolder || !file) {
+              setFileError("Select an image.")
+              return
+            }
+
+            setFileError("")
+            setIsUploading(true)
+
+            try {
+              const [uploadedImage] = await uploadImagesDirectly([file], cloudinaryFolder)
+              const formData = new FormData(form)
+              formData.delete("image")
+              formData.append("uploadedImages", JSON.stringify([uploadedImage]))
+              formAction(formData)
+            } catch (error) {
+              setFileError(error?.message || "Failed to upload image.")
+            } finally {
+              setIsUploading(false)
+            }
+          }}
+          className="mt-6 grid gap-4"
+        >
           <div className="grid gap-2">
             <label htmlFor={`${entityLabel.toLowerCase()}-title`} className="text-sm font-medium text-slate-700">
               Title
@@ -229,11 +271,17 @@ export default function CatalogItemUploadForm({
             </button>
           </div>
 
-          {state?.message ? (
+          {fileError ? <p className="text-sm text-red-600">{fileError}</p> : null}
+
+          {state?.message && !fileError ? (
             <p className={`text-sm ${state.status === "error" ? "text-red-600" : "text-emerald-600"}`}>{state.message}</p>
           ) : null}
 
-          <SubmitButton idleLabel={resolvedSubmitLabel} pendingLabel={resolvedSubmittingLabel} />
+          <SubmitButton
+            idleLabel={resolvedSubmitLabel}
+            pendingLabel={isUploading ? "Uploading image..." : resolvedSubmittingLabel}
+            disabled={isUploading}
+          />
         </form>
       ) : null}
     </section>
