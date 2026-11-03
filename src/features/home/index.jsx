@@ -86,7 +86,7 @@ export default function HomeFeature() {
               loop
               playsInline
               preload="none"
-              poster="/hero.png"
+              poster="/Screenshot-banner.png"
               className="
                 absolute inset-0 h-full w-full 
                 object-cover object-center 
@@ -94,7 +94,7 @@ export default function HomeFeature() {
                 will-change-transform
               "
             >
-              <source src="/videos/web_hero.mp4" type="video/mp4" />
+              <source src="/videos/Ilovenew-hero.mp4" type="video/mp4" />
             </video>
             <div className="absolute inset-0 bg-black/5" />
           </motion.div>
